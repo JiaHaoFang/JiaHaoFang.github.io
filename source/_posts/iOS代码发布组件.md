@@ -2,7 +2,7 @@
 title: iOS代码发布为组件
 date: 2022-02-21 17:16:45
 tags: [iOS, Cocoapods]
-Categories: [code]
+categories: [code]
 description: 
 ---
 
