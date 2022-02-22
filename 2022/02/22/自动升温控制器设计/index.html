@@ -20,30 +20,36 @@
     var CONFIG = {"hostname":"jiahaofang.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Bravo!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="阿告的窝">
-<meta property="og:url" content="https://jiahaofang.github.io/index.html">
+  <meta name="description" content="version: v 1.0.0 Last Edit: 20200813 Members: Stephen Fang, Jacky Wu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自动升温控制器设计">
+<meta property="og:url" content="https://jiahaofang.github.io/2022/02/22/%E8%87%AA%E5%8A%A8%E5%8D%87%E6%B8%A9%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AE%BE%E8%AE%A1/index.html">
 <meta property="og:site_name" content="阿告的窝">
-<meta property="og:description" content="Bravo!">
+<meta property="og:description" content="version: v 1.0.0 Last Edit: 20200813 Members: Stephen Fang, Jacky Wu">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jiahaofang.github.io/2022/02/22/%E8%87%AA%E5%8A%A8%E5%8D%87%E6%B8%A9%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AE%BE%E8%AE%A1/自动升温控制器设计/image-中间微分反馈控制器框图.png">
+<meta property="article:published_time" content="2022-02-22T08:37:37.000Z">
+<meta property="article:modified_time" content="2022-02-22T08:40:28.955Z">
 <meta property="article:author" content="阿告今天学习了吗">
+<meta property="article:tag" content="pid">
+<meta property="article:tag" content="控制器设计">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jiahaofang.github.io/2022/02/22/%E8%87%AA%E5%8A%A8%E5%8D%87%E6%B8%A9%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AE%BE%E8%AE%A1/自动升温控制器设计/image-中间微分反馈控制器框图.png">
 
-<link rel="canonical" href="https://jiahaofang.github.io/">
+<link rel="canonical" href="https://jiahaofang.github.io/2022/02/22/%E8%87%AA%E5%8A%A8%E5%8D%87%E6%B8%A9%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AE%BE%E8%AE%A1/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>阿告的窝</title>
+  <title>自动升温控制器设计 | 阿告的窝</title>
   
 
 
@@ -156,9 +162,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -174,10 +181,9 @@
       <meta itemprop="name" content="阿告的窝">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/22/%E8%87%AA%E5%8A%A8%E5%8D%87%E6%B8%A9%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">自动升温控制器设计</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          自动升温控制器设计
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -210,259 +216,121 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <blockquote>
+        <blockquote>
 <p>version: v 1.0.0</p>
 <p>Last Edit: 20200813</p>
 <p>Members: Stephen Fang, Jacky Wu</p>
 </blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/02/22/%E8%87%AA%E5%8A%A8%E5%8D%87%E6%B8%A9%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AE%BE%E8%AE%A1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
+<h2 id="1-控制器"><a href="#1-控制器" class="headerlink" title="1 控制器"></a>1 控制器</h2><h3 id="1-1-预设升温曲线"><a href="#1-1-预设升温曲线" class="headerlink" title="1.1 预设升温曲线"></a>1.1 预设升温曲线</h3><ul>
+<li><p>期望温度输入曲线为一次函数曲线</p>
+<ul>
+<li><p>控制时间为40分钟左右，控制温度幅度约为40℃到80℃．</p>
+</li>
+<li><p>曲线斜率<br>$$<br>k&#x3D;\frac{80℃-40℃}{40\min}&#x3D;1 ℃&#x2F;\min<br>$$<br>根据后续实验，该斜率值修正为1.1℃&#x2F;min，后续记该斜率为$slope &#x3D; 1.1℃$．</p>
+</li>
+<li><p>截距$b&#x3D;0$，即在接管控制之后期望温度曲线为正比例函数．</p>
+</li>
+</ul>
+</li>
+<li><p>控制方式</p>
+<ul>
+<li>雷达启动初期，可以利用雷达自热升温．</li>
+<li>当雷达自热升温曲线较为平缓后，控制器接管控制．</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-设置输出"><a href="#1-2-设置输出" class="headerlink" title="1.2 设置输出"></a>1.2 设置输出</h3><ul>
+<li>通过串口通讯程序(driver)实现控制器与外部硬件(风扇)的通讯．</li>
+<li>根据已有驱动代码，driver的接口为占空比，应将控制器输出转化为占空比输出．</li>
+<li>通过继电器对风扇进行通断控制，模拟PWM输出，实现输出功率的控制．</li>
+</ul>
+<h3 id="1-3-控制对象"><a href="#1-3-控制对象" class="headerlink" title="1.3 控制对象"></a>1.3 控制对象</h3><ul>
+<li><p>雷达的温度传感器在雷达内部，外界加热通过热风作用在雷达的金属外壳上，热量传递需要时间，并且系统惯性较大．</p>
+</li>
+<li><p>将该温度控制对象抽象为一个带有大时滞环节的一阶惯性环节，频域表达式：<br>$$<br>G(s)&#x3D;G_p(s)\cdot e^{-\tau s}&#x3D;\frac K{Ts+1}\cdot e^{-\tau s}<br>$$<br>其中$tau&#x2F;T&gt;0.5$.</p>
+</li>
+<li><p>考虑到该对象时域表达式较复杂且各参数与实验环境相关，波动较大，所以不建模，实地测量调参</p>
+</li>
+</ul>
+<h3 id="1-4-控制器设计"><a href="#1-4-控制器设计" class="headerlink" title="1.4 控制器设计"></a>1.4 控制器设计</h3><ul>
+<li><p>采用位置式PD控制，考虑到对象类型，可以采用中间微分反馈方案</p>
+<ul>
+<li><p>中间微分</p>
+<img src="自动升温控制器设计/image-中间微分反馈控制器框图.png" alt="中间微分反馈控制器框图" style="zoom:50%;" />
+</li>
+<li><p>离散时域表达式：<br>$$<br>u(k)&#x3D;K_p\cdot e(k)-K_d \cdot [y (k)-y(k-1)]<br>$$</p>
+</li>
+<li><p>考虑到该系统需要跟踪单位速度曲线，且为了避免数据波动对微分的影响，时域表达式修正为：<br>$$<br>u(k)&#x3D;K_p\cdot e(k)-K_d \cdot [(y (k)-y(k-T))\frac{1\min}{T}-target_slope]<br>$$<br>或写作：<br>$$<br>u(k)&#x3D;K_p\cdot e(k)-K_d \cdot [slope-target_slope]<br>$$</p>
+<p>其中$target_slope&#x3D;1.1$为预设曲线的斜率，T为一个微分时间间隔．</p>
+</li>
+<li><p>设置控制器工作频率为三秒钟，保证控制较为平滑</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-5-参数设置"><a href="#1-5-参数设置" class="headerlink" title="1.5 参数设置"></a>1.5 参数设置</h3><ul>
+<li><p>比例部分</p>
+<ul>
+<li><p>经过实际测量，系统处于稳态时，实际温度与期望温度之差保持在±1℃．</p>
+</li>
+<li><p>当误差为0.5℃时，使控制器的输出为100％<br>$$<br>max[e(k)]\cdot K_p-0&#x3D; output<br>\ \Downarrow\　0.5 \cdot K_P&#x3D;100%<br>\　\Downarrow　\<br>K_p&#x3D;2<br>$$</p>
+</li>
+<li><p>可以得出Kp的值在2左右．</p>
+</li>
+</ul>
+</li>
+<li><p>微分部分</p>
+<ul>
+<li><p>考虑到系统特性，希望微分部分作用效果较强，能够提前预测系统接下来的温度走向．</p>
+</li>
+<li><p>经过实际测量，控制器开启后的升温曲线斜率与期望斜率之差保持在±1℃&#x2F;min之内，当升温较为稳定时，斜率之差保持在±0.5℃&#x2F;min之内．为了让控制器对温度斜率误差较敏感．令斜率误差为0.5℃&#x2F;min时（假定比例部分误差为０）控制器输出为50％：<br>$$<br>0-max[slope-target_slope]\cdot K_d&#x3D;output<br>\\Downarrow\<br>0.5\cdot K_d&#x3D;50%<br>\\Downarrow\<br>K_d &#x3D; 1<br>$$</p>
+</li>
+<li><p>可以得出Kd的值在1左右</p>
+</li>
+<li><p>另外，考虑到系统跟踪速度曲线较为困难，微分部分仅在升温曲线斜率小于期望斜率时开启．<br>$$<br>output_d&#x3D;<br>\begin{cases}<br>(target_slope－slope)\cdot K_d&amp;,slope&lt;target_slope<br>\<br>0&amp;,slope≥target_slope<br>\end{cases}<br>$$</p>
+</li>
+<li><p>微分周期问题</p>
+<ul>
+<li><p>微分周期应该尽量小，以尽量逼近实际升温曲线斜率</p>
+</li>
+<li><p>由于温度输入为离散信号，且部分雷达温度传感器精度较低，微分周期应该大于一定值以避免误差</p>
+</li>
+<li><p>目前暂定微分周期为15s，该数据适用于16线，32线，128线雷达．但由于MEMS和bpearl雷达的传感器温度较低，可将该周期值修正为30-60s<br>$$<br>T&#x3D;<br>\begin{cases}<br>15s&amp;,Lidar-16,32,128<br>\<br>30s-60s &amp;,Lidar-mems,bp<br>\end{cases}<br>$$</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/pid/" rel="tag"># pid</a>
+              <a href="/tags/%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AE%BE%E8%AE%A1/" rel="tag"># 控制器设计</a>
+          </div>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jiahaofang.github.io/2022/02/22/Hexo%E7%9B%B8%E5%85%B3%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar/cat.jpeg">
-      <meta itemprop="name" content="阿告今天学习了吗">
-      <meta itemprop="description" content="Bravo!">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="阿告的窝">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/22/Hexo%E7%9B%B8%E5%85%B3%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">Hexo相关记录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-02-22 13:22:06 / 修改时间：14:47:36" itemprop="dateCreated datePublished" datetime="2022-02-22T13:22:06+08:00">2022-02-22</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index"><span itemprop="name">code</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>个人记录向博客，记录遇到的各种问题</p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/02/22/Hexo%E7%9B%B8%E5%85%B3%E8%AE%B0%E5%BD%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jiahaofang.github.io/2022/02/21/iOS%E4%BB%A3%E7%A0%81%E5%8F%91%E5%B8%83%E7%BB%84%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar/cat.jpeg">
-      <meta itemprop="name" content="阿告今天学习了吗">
-      <meta itemprop="description" content="Bravo!">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="阿告的窝">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/21/iOS%E4%BB%A3%E7%A0%81%E5%8F%91%E5%B8%83%E7%BB%84%E4%BB%B6/" class="post-title-link" itemprop="url">iOS代码发布为组件</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-02-21 17:16:45" itemprop="dateCreated datePublished" datetime="2022-02-21T17:16:45+08:00">2022-02-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-02-22 14:58:33" itemprop="dateModified" datetime="2022-02-22T14:58:33+08:00">2022-02-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index"><span itemprop="name">code</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>参考：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/103a6f0bf3a4">https://www.jianshu.com/p/103a6f0bf3a4</a></p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/02/21/iOS%E4%BB%A3%E7%A0%81%E5%8F%91%E5%B8%83%E7%BB%84%E4%BB%B6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/02/22/Hexo%E7%9B%B8%E5%85%B3%E8%AE%B0%E5%BD%95/" rel="prev" title="Hexo相关记录">
+      <i class="fa fa-chevron-left"></i> Hexo相关记录
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jiahaofang.github.io/2022/02/21/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar/cat.jpeg">
-      <meta itemprop="name" content="阿告今天学习了吗">
-      <meta itemprop="description" content="Bravo!">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="阿告的窝">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/21/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-02-21 17:04:04" itemprop="dateCreated datePublished" datetime="2022-02-21T17:04:04+08:00">2022-02-21</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/02/21/hello-world/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
   
 
 
@@ -515,6 +383,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">1 控制器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E9%A2%84%E8%AE%BE%E5%8D%87%E6%B8%A9%E6%9B%B2%E7%BA%BF"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 预设升温曲线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E8%AE%BE%E7%BD%AE%E8%BE%93%E5%87%BA"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 设置输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E6%8E%A7%E5%88%B6%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 控制对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 控制器设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 参数设置</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
