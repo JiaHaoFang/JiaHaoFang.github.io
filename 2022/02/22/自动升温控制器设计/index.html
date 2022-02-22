@@ -230,9 +230,11 @@
 <ul>
 <li><p>控制时间为40分钟左右，控制温度幅度约为40℃到80℃．</p>
 </li>
-<li><p>曲线斜率<br>$$<br>k&#x3D;\frac{80℃-40℃}{40\min}&#x3D;1 ℃&#x2F;\min<br>$$<br>根据后续实验，该斜率值修正为1.1℃&#x2F;min，后续记该斜率为$slope &#x3D; 1.1℃$．</p>
+<li><p>曲线斜率</p>
+<script type="math/tex; mode=display">
+k=\frac{80℃-40℃}{40\min}=1 ℃/\min</script><p>根据后续实验，该斜率值修正为1.1℃/min，后续记该斜率为$slope = 1.1℃$．</p>
 </li>
-<li><p>截距$b&#x3D;0$，即在接管控制之后期望温度曲线为正比例函数．</p>
+<li><p>截距$b=0$，即在接管控制之后期望温度曲线为正比例函数．</p>
 </li>
 </ul>
 </li>
@@ -251,7 +253,9 @@
 <h3 id="1-3-控制对象"><a href="#1-3-控制对象" class="headerlink" title="1.3 控制对象"></a>1.3 控制对象</h3><ul>
 <li><p>雷达的温度传感器在雷达内部，外界加热通过热风作用在雷达的金属外壳上，热量传递需要时间，并且系统惯性较大．</p>
 </li>
-<li><p>将该温度控制对象抽象为一个带有大时滞环节的一阶惯性环节，频域表达式：<br>$$<br>G(s)&#x3D;G_p(s)\cdot e^{-\tau s}&#x3D;\frac K{Ts+1}\cdot e^{-\tau s}<br>$$<br>其中$tau&#x2F;T&gt;0.5$.</p>
+<li><p>将该温度控制对象抽象为一个带有大时滞环节的一阶惯性环节，频域表达式：</p>
+<script type="math/tex; mode=display">
+G(s)=G_p(s)\cdot e^{-\tau s}=\frac K{Ts+1}\cdot e^{-\tau s}</script><p>其中$tau/T&gt;0.5$.</p>
 </li>
 <li><p>考虑到该对象时域表达式较复杂且各参数与实验环境相关，波动较大，所以不建模，实地测量调参</p>
 </li>
@@ -260,47 +264,75 @@
 <li><p>采用位置式PD控制，考虑到对象类型，可以采用中间微分反馈方案</p>
 <ul>
 <li><p>中间微分</p>
-<img src="自动升温控制器设计/image-中间微分反馈控制器框图.png" alt="中间微分反馈控制器框图" style="zoom:50%;" />
+<p><img src="自动升温控制器设计/image-中间微分反馈控制器框图.png" alt="中间微分反馈控制器框图" style="zoom:50%;" /></p>
 </li>
-<li><p>离散时域表达式：<br>$$<br>u(k)&#x3D;K_p\cdot e(k)-K_d \cdot [y (k)-y(k-1)]<br>$$</p>
-</li>
-<li><p>考虑到该系统需要跟踪单位速度曲线，且为了避免数据波动对微分的影响，时域表达式修正为：<br>$$<br>u(k)&#x3D;K_p\cdot e(k)-K_d \cdot [(y (k)-y(k-T))\frac{1\min}{T}-target_slope]<br>$$<br>或写作：<br>$$<br>u(k)&#x3D;K_p\cdot e(k)-K_d \cdot [slope-target_slope]<br>$$</p>
-<p>其中$target_slope&#x3D;1.1$为预设曲线的斜率，T为一个微分时间间隔．</p>
-</li>
-<li><p>设置控制器工作频率为三秒钟，保证控制较为平滑</p>
-</li>
+<li><p>离散时域表达式：</p>
+<script type="math/tex; mode=display">
+u(k)=K_p\cdot e(k)-K_d \cdot [y (k)-y(k-1)]</script></li>
+<li><p>考虑到该系统需要跟踪单位速度曲线，且为了避免数据波动对微分的影响，时域表达式修正为：</p>
+<script type="math/tex; mode=display">
+u(k)=K_p\cdot e(k)-K_d \cdot [(y (k)-y(k-T))\frac{1\min}{T}-target\_slope]</script><p>或写作：</p>
+<script type="math/tex; mode=display">
+u(k)=K_p\cdot e(k)-K_d \cdot [slope-target\_slope]</script></li>
 </ul>
 </li>
+</ul>
+<pre><code>其中$target\_slope=1.1$为预设曲线的斜率，T为一个微分时间间隔．
+</code></pre><ul>
+<li>设置控制器工作频率为三秒钟，保证控制较为平滑</li>
 </ul>
 <h3 id="1-5-参数设置"><a href="#1-5-参数设置" class="headerlink" title="1.5 参数设置"></a>1.5 参数设置</h3><ul>
 <li><p>比例部分</p>
 <ul>
 <li><p>经过实际测量，系统处于稳态时，实际温度与期望温度之差保持在±1℃．</p>
 </li>
-<li><p>当误差为0.5℃时，使控制器的输出为100％<br>$$<br>max[e(k)]\cdot K_p-0&#x3D; output<br>\ \Downarrow\　0.5 \cdot K_P&#x3D;100%<br>\　\Downarrow　\<br>K_p&#x3D;2<br>$$</p>
-</li>
+<li><p>当误差为0.5℃时，使控制器的输出为100％</p>
+<script type="math/tex; mode=display">
+max[e(k)]\cdot K_p-0= output
+\\ \Downarrow\\　0.5 \cdot K_P=100\%
+\\　\Downarrow　\\
+K_p=2</script></li>
 <li><p>可以得出Kp的值在2左右．</p>
 </li>
 </ul>
 </li>
+</ul>
+<ul>
 <li><p>微分部分</p>
 <ul>
 <li><p>考虑到系统特性，希望微分部分作用效果较强，能够提前预测系统接下来的温度走向．</p>
 </li>
-<li><p>经过实际测量，控制器开启后的升温曲线斜率与期望斜率之差保持在±1℃&#x2F;min之内，当升温较为稳定时，斜率之差保持在±0.5℃&#x2F;min之内．为了让控制器对温度斜率误差较敏感．令斜率误差为0.5℃&#x2F;min时（假定比例部分误差为０）控制器输出为50％：<br>$$<br>0-max[slope-target_slope]\cdot K_d&#x3D;output<br>\\Downarrow\<br>0.5\cdot K_d&#x3D;50%<br>\\Downarrow\<br>K_d &#x3D; 1<br>$$</p>
-</li>
+<li><p>经过实际测量，控制器开启后的升温曲线斜率与期望斜率之差保持在±1℃/min之内，当升温较为稳定时，斜率之差保持在±0.5℃/min之内．为了让控制器对温度斜率误差较敏感．令斜率误差为0.5℃/min时（假定比例部分误差为０）控制器输出为50％：</p>
+<script type="math/tex; mode=display">
+0-max[slope-target\_slope]\cdot K_d=output
+\\\Downarrow\\
+0.5\cdot K_d=50\%
+\\\Downarrow\\
+K_d = 1</script></li>
 <li><p>可以得出Kd的值在1左右</p>
 </li>
-<li><p>另外，考虑到系统跟踪速度曲线较为困难，微分部分仅在升温曲线斜率小于期望斜率时开启．<br>$$<br>output_d&#x3D;<br>\begin{cases}<br>(target_slope－slope)\cdot K_d&amp;,slope&lt;target_slope<br>\<br>0&amp;,slope≥target_slope<br>\end{cases}<br>$$</p>
-</li>
+<li><p>另外，考虑到系统跟踪速度曲线较为困难，微分部分仅在升温曲线斜率小于期望斜率时开启．</p>
+<script type="math/tex; mode=display">
+output_d=
+\begin{cases}
+(target\_slope－slope)\cdot K_d&,slope<target\_slope
+\\
+0&,slope≥target\_slope
+\end{cases}</script></li>
 <li><p>微分周期问题</p>
 <ul>
 <li><p>微分周期应该尽量小，以尽量逼近实际升温曲线斜率</p>
 </li>
 <li><p>由于温度输入为离散信号，且部分雷达温度传感器精度较低，微分周期应该大于一定值以避免误差</p>
 </li>
-<li><p>目前暂定微分周期为15s，该数据适用于16线，32线，128线雷达．但由于MEMS和bpearl雷达的传感器温度较低，可将该周期值修正为30-60s<br>$$<br>T&#x3D;<br>\begin{cases}<br>15s&amp;,Lidar-16,32,128<br>\<br>30s-60s &amp;,Lidar-mems,bp<br>\end{cases}<br>$$</p>
-</li>
+<li><p>目前暂定微分周期为15s，该数据适用于16线，32线，128线雷达．但由于MEMS和bpearl雷达的传感器温度较低，可将该周期值修正为30-60s</p>
+<script type="math/tex; mode=display">
+T=
+\begin{cases}
+15s&,Lidar-16,32,128
+\\
+30s-60s &,Lidar-mems,bp
+\end{cases}</script></li>
 </ul>
 </li>
 </ul>
@@ -517,6 +549,8 @@ if (document.querySelectorAll('pre.mermaid').length) {
 }
 </script>
 
+
+  
 
   
 
