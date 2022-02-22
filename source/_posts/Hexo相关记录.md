@@ -29,6 +29,14 @@ npm install hexo-excerpt --save
 
 
 
+## 添加主题配置
+
+```bash
+git clone https://github.com/theme-next/hexo-theme-next.git themes/next
+```
+
+
+
 ## 添加Latex配置
 
 * 还没有遇到，给你留个位置
