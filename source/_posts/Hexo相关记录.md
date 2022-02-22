@@ -2,7 +2,7 @@
 title: Hexo相关记录
 date: 2022-02-22 13:22:06
 tags: [Hexo, git]
-categories: [code]
+categories: [笔记]
 ---
 
 > 个人记录向博客，记录遇到的各种问题
@@ -25,6 +25,10 @@ git clone https://github.com/JiaHaoFang/JiaHaoFang.github.io.git
 npm install hexo
 npm install hexo-deployer-git -save
 npm install hexo-excerpt --save
+# 图片链接
+npm install hexo-image-link --save 
+# markdown语法支持
+npm i @upupming/hexo-renderer-markdown-it-plus --save
 ```
 
 
