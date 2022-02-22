@@ -1,14 +1,10 @@
 ---
 title: iOS代码发布为组件
 date: 2022-02-21 17:16:45
-tags:
+tags: [iOS, Cocoapods]
+Categories: [code]
+description: 
 ---
-
-# 将代码作为组件发布
-
-[TOC]
-
-
 
 > 参考：https://www.jianshu.com/p/103a6f0bf3a4
 

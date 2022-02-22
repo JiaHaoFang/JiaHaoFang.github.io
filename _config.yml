@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title:  阿告的窝
 subtitle: ''
-description: ''
+description: Bravo!
 keywords:
-author: 阿告
+author: 阿告今天学习了吗
 language: en
 timezone: ''
 
@@ -98,7 +98,7 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 ## https://github.com/fi3ework/hexo-theme-archer
-theme: archer
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
@@ -127,3 +127,11 @@ jsonContent:
     excerpt: false
     categories: true
     tags: true
+
+# Automatically Excerpt (Not recommend).
+# Use <!-- more --> in the post to control excerpt accurately.
+excerpt:
+  depth: 1  #按层来算，也就是按代码块来算
+  excerpt_excludes: []
+  more_excludes: []
+  hideWholePostExcerpts: true
