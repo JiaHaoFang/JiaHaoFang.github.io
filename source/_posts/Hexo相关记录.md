@@ -23,12 +23,18 @@ git clone https://github.com/JiaHaoFang/JiaHaoFang.github.io.git
 
 ```bash
 npm install hexo
+# git支持
 npm install hexo-deployer-git -save
+# 显示摘要
 npm install hexo-excerpt --save
 # 图片链接
 npm install hexo-image-link --save 
 # markdown语法支持
+npm uni hexo-renderer-marked --save
 npm i @upupming/hexo-renderer-markdown-it-plus --save
+# 添加文章置顶功能，未使用
+npm uninstall hexo-generator-index --save
+npm install hexo-generator-index-pin-top --save
 ```
 
 
