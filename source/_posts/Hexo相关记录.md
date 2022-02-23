@@ -19,31 +19,84 @@ git clone https://github.com/JiaHaoFang/JiaHaoFang.github.io.git
 
 2. 配置环境
 
-​		配置环境完成即可继续使用：
-
 ```bash
+# 安装hexo
 npm install hexo
 # git支持
 npm install hexo-deployer-git -save
+```
+
+
+
+## 添加next主题配置
+
+```bash
+git clone https://github.com/theme-next/hexo-theme-next.git themes/next
+```
+
+
+
+## 显示摘要
+
+```shell
 # 显示摘要
 npm install hexo-excerpt --save
-# 图片链接
-npm install hexo-image-link --save 
+```
+
+
+
+## 用typora写作
+
+### markdown语法支持
+
+​		使用typora作为语法编辑器，使用插件使网页能够支持markdown的编辑格式
+
+	1. 安装库
+
+```bash
 # markdown语法支持
 npm uni hexo-renderer-marked --save
 npm i @upupming/hexo-renderer-markdown-it-plus --save
+```
+
+2. 使用
+
+​	在hexo站点配置文件_config.yml中添加如下配置，[详细配置](https://github.com/CHENXCHEN/hexo-renderer-markdown-it-plus):
+
+```yaml
+# Markdown config
+markdown_it_plus:
+    highlight: true
+    html: true
+    xhtmlOut: true
+    breaks: true
+    langPrefix:
+    linkify: true
+    typographer:
+    quotes: “”‘’
+    pre_class: highlight
+```
+
+### 图片链接
+
+​		为了与typora写作，使网页能够直接渲染typora编辑的markdown文档，需要在typora中设置图片保存在./$${filename}下，安装该插件即可（该插件md写着是为了与typora共同使用而开发）
+
+```shell
+# 图片链接
+npm install hexo-image-link --save 
+```
+
+
+
+## 文章置顶
+
+```shell
 # 添加文章置顶功能，未使用
 npm uninstall hexo-generator-index --save
 npm install hexo-generator-index-pin-top --save
 ```
 
-
-
-## 添加主题配置
-
-```bash
-git clone https://github.com/theme-next/hexo-theme-next.git themes/next
-```
+安装后在文章顶部增加字段`top: true`即可
 
 
 
@@ -95,3 +148,87 @@ git clone https://github.com/theme-next/hexo-theme-next.git themes/next
 <!--添加运行时间-->
 ```
 
+
+
+## NexT8动画背景Canvas Nest和three配置
+
+### 安装库
+
+```shell
+# Canvas-nest:
+cd themes/next
+git clone https://github.com/theme-next/theme-next-canvas-nest source/lib/canvas-nest
+git clone https://github.com/theme-next/theme-next-three source/lib/three
+```
+
+### 使用
+
+#### 方式一
+
+`next`主题的`_config.yml`找到`canvas_ribbon`，在下面添加`Canvas-nest`动画的配置，`three`动画配置自带了，要启用哪个就将`enable`置为`true`。
+
+```yaml
+# JavaScript 3D library.
+# Dependencies: https://github.com/next-theme/theme-next-three
+three:
+  enable: false
+  three_waves: true
+  canvas_lines: true
+  canvas_sphere: true
+
+# Canvas ribbon
+# For more information: https://github.com/hustcc/ribbon.js
+canvas_ribbon:
+  enable: false
+  size: 300 # The width of the ribbon
+  alpha: 0.6 # The transparency of the ribbon
+  zIndex: -1 # The display level of the ribbon
+
+# Canvas-nest
+# Dependencies: https://github.com/theme-next/theme-next-canvas-nest
+canvas_nest:
+  enable: true
+  onmobile: true # display on mobile or not
+  color: "0,0,255" # RGB values, use ',' to separate
+  opacity: 0.5 # the opacity of line: 0~1
+  zIndex: -1 # z-index property of the background
+  count: 99 # the number of lines
+```
+
+#### 方式二
+
+`canvas_nest`另外还需要多一些配置，参考canvas_nest的github仓库[README](https://github.com/theme-next/theme-next-canvas-nest/blob/master/README.md):
+
+1. hexo目录下操作如下：
+
+	```shell
+	cd source
+	mkdir _data
+	```
+
+2. 创建`footer.swig`文件，添加内容
+
+	```javascript
+	<script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+	```
+
+3. 然后在`next`主题下的`_config.yml`中找到`custom_file_path`添加一行配置`footer: source/_data/footer.swig`
+
+	```yaml
+	# Define custom file paths.
+	# Create your custom files in site directory `source/_data` and uncomment needed files below.
+	custom_file_path:
+	  #head: source/_data/head.njk
+	  #header: source/_data/header.njk
+	  #sidebar: source/_data/sidebar.njk
+	  #postMeta: source/_data/post-meta.njk
+	  #postBodyEnd: source/_data/post-body-end.njk
+	  #footer: source/_data/footer.njk
+	  footer: source/_data/footer.swig
+	  #bodyEnd: source/_data/body-end.njk
+	  #variable: source/_data/variables.styl
+	  #mixin: source/_data/mixins.styl
+	  #style: source/_data/styles.styl
+	```
+
+> 如果同时使用方式1+2，会出现两套canvas_nest的动态背景
