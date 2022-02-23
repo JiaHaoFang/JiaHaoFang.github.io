@@ -232,3 +232,72 @@ canvas_nest:
 	```
 
 > 如果同时使用方式1+2，会出现两套canvas_nest的动态背景
+
+
+
+## 搜索引擎支持
+
+### 各搜索引擎网站管理员中心
+
+* Google：https://www.google.com/webmasters/tools
+* bing：https://www.bing.com/webmasters/home
+* 百度：不要sb
+
+### 向搜索引擎提交站点
+
+> 以Google为例，用HTML Meta标签的方法
+
+​		~~Next 主题下，页面的 header 设置在`themes/next/layout/_partials/head.swig`内。默认也给我们提供了模板，感谢[开发者 iissnan](https://link.jianshu.com?t=https://github.com/iissnan)。我们只需要把下面标签补全即可~~
+
+```html
+{%- if theme.google_site_verification %}
+  <meta name="google-site-verification" content="JXha4BvTgO89eWQaKW-9LD0MGEUp-Q4OtE3QLHZWvAs" />
+{%- endif %}
+{%- if theme.bing_site_verification %}
+  <meta name="msvalidate.01" content="24EA09381FB8FF1E61E8AB18C3807D81" />
+{%- endif %}
+```
+
+~~同时，在`themes/next/_config.yml`中将`google-site-verification`和`baidu_site_verification`的值设置为`true`即可。~~
+
+​		next主题有更好的配置方式，千万不要采用修改head.swig文件的方法，不然在升级NexT版本时会遇到很多不必要的麻烦。修改`themes/next/_config.yml`文件：
+
+```yaml
+# Google Webmaster tools verification.
+# See: https://www.google.com/webmasters
+google_site_verification: xxxxxxxxxx
+```
+
+### 提交网站地图
+
+> 提交网站地图加快索引
+
+1. 安装插件sitemap
+
+	```shell
+	npm install hexo-generator-sitemap –save
+	```
+
+	在`themes/next/_config.yml`中修改：
+
+	```yaml
+	menu:
+	  home: / || fa fa-home
+	  tags: /tags/ || fa fa-tags
+	  categories: /categories/ || fa fa-th
+	  archives: /archives/ || fa fa-archive
+	  about: /about/ || fa fa-user
+	  #schedule: /schedule/ || fa fa-calendar
+	  sitemap: /sitemap.xml || fa fa-sitemap
+	  #commonweal: /404/ || fa fa-heartbeat
+	```
+
+​		生成静态网页，上传，然后在对应搜索引擎的webmasters中添加站点地图的地址即可
+
+### 验证是否被检索
+
+​		以GitHub Pages为例，新建的GitHub Pages是没有被谷歌检索的。在谷歌搜索栏中输入如下信息进行检索：
+
+```html
+site: jiahaofang.github.io
+```

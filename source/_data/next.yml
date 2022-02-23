@@ -122,7 +122,7 @@ menu:
   archives: /archives/ || fa fa-archive
   about: /about/ || fa fa-user
   #schedule: /schedule/ || fa fa-calendar
-  #sitemap: /sitemap.xml || fa fa-sitemap
+  sitemap: /sitemap.xml || fa fa-sitemap
   #commonweal: /404/ || fa fa-heartbeat
 
 # Enable / Disable menu icons / item badges.
@@ -465,11 +465,11 @@ exturl: false
 
 # Google Webmaster tools verification.
 # See: https://www.google.com/webmasters
-google_site_verification:
+google_site_verification: JXha4BvTgO89eWQaKW-9LD0MGEUp-Q4OtE3QLHZWvAs
 
 # Bing Webmaster tools verification.
 # See: https://www.bing.com/webmaster
-bing_site_verification:
+bing_site_verification: 24EA09381FB8FF1E61E8AB18C3807D81
 
 # Yandex Webmaster tools verification.
 # See: https://webmaster.yandex.ru
