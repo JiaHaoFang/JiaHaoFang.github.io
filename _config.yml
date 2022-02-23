@@ -117,18 +117,12 @@ excerpt:
 
 # Markdown config
 markdown_it_plus:
-  render:
-    html: true						
-    xhtmlOut: false
+    highlight: true
+    html: true
+    xhtmlOut: true
     breaks: true
+    langPrefix:
     linkify: true
-    typographer: true
-    quotes: '“”‘’'
-  plugins:
-  anchors:	
-    level: 2
-    collisionSuffix: 'v'
-    permalink: true
-    permalinkClass: header-anchor
-    permalinkSide: 'left'
-    permalinkSymbol: ¶
+    typographer:
+    quotes: “”‘’
+    pre_class: highlight
