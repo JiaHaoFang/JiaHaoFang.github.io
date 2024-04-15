@@ -25,7 +25,7 @@ categories: [笔记]
 
 	
 
-* 用来存放组件的仓库，相当于VeSyncRepo、CocoaPods/Spec，是自己私有的组件仓库，用来存放.podspec文件；
+* 用来存放组件的仓库，相当于xxxRepo、CocoaPods/Spec，是自己私有的组件仓库，用来存放.podspec文件；
 
 	```
 	https://github.com/JiaHaoFang/SFPodRepo.git
@@ -44,7 +44,7 @@ categories: [笔记]
 
 ### 2.1 创建私有Repo目录
 
-* 在～/.cocoapods/repo中能看到本地有的repo仓库，其中cocoapods为官方仓库，trunk也是官方仓库（历史遗留问题）；VeSyncRepo为公司私有仓库。
+* 在～/.cocoapods/repo中能看到本地有的repo仓库，其中cocoapods为官方仓库，trunk也是官方仓库（历史遗留问题）；xxxRepo为公司私有仓库。
 
 * 该步骤将创建私人仓库SFRepo，作用类似上文的官方仓库，后续将用来存放个人的组件。
 
