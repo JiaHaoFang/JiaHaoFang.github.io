@@ -101,6 +101,22 @@
 <h3 id="验证是否被检索"><a class="markdownIt-Anchor" href="#验证是否被检索"></a> 验证是否被检索</h3>
 <p>​		以GitHub Pages为例，新建的GitHub Pages是没有被谷歌检索的。在谷歌搜索栏中输入如下信息进行检索：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line">site: jiahaofang.github.io</span><br></pre></td></tr></table></figure>
+<h2 id="本地搜索功能"><a class="markdownIt-Anchor" href="#本地搜索功能"></a> 本地搜索功能</h2>
+<ol>
+<li>在根目录执行命令</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>
+<p>配置 hexo 的<code>_config.yml</code>文件<br />
+在文件末尾新增配置项</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">search:</span></span><br><span class="line"> 		<span class="attr">path:</span> <span class="string">search.xml</span></span><br><span class="line"> 		<span class="attr">field:</span> <span class="string">post</span></span><br><span class="line"> 		<span class="attr">format:</span> <span class="string">html</span></span><br><span class="line"> 		<span class="attr">limit:</span> <span class="number">10000</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>配置 <code>NexT</code> 主题的 <code>_config.yml</code>（根据 next 文档，应为<code>/_config.next.yml</code>）</p>
+ <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Local search</span></span><br><span class="line"><span class="attr">local_search:</span></span><br><span class="line"> 		<span class="attr">enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>笔记</category>
