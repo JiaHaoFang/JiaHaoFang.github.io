@@ -17,7 +17,6 @@ description: hexo搭建过程和问题记录
 	```
 
 1. 配置环境
-
 	```bash
 	# 安装hexo
 	npm install hexo
@@ -26,34 +25,30 @@ description: hexo搭建过程和问题记录
 	```
 
 ## 添加next主题配置
-
-	```bash
-	git clone https://github.com/theme-next/hexo-theme-next.git themes/next
-	```
+```bash
+git clone https://github.com/theme-next/hexo-theme-next.git themes/next
+```
 
 ## 显示摘要
-
-	```shell
-	# 显示摘要
-	npm install hexo-excerpt --save
-	```
+```shell
+# 显示摘要
+npm install hexo-excerpt --save
+```
 
 ## 用typora写作
 ### markdown语法支持
+使用typora作为语法编辑器，使用插件使网页能够支持markdown的编辑格式
 
-​		使用typora作为语法编辑器，使用插件使网页能够支持markdown的编辑格式
+1. 安装库
 
-	1. 安装库
-
-```bash
-# markdown语法支持
-npm uni hexo-renderer-marked --save
-npm i @upupming/hexo-renderer-markdown-it-plus --save
-```
+	```bash
+	# markdown语法支持
+	npm uni hexo-renderer-marked --save
+	npm i @upupming/hexo-renderer-markdown-it-plus --save
+	```
 
 2. 使用
-
-​	在hexo站点配置文件_config.yml中添加如下配置，[详细配置](https://github.com/CHENXCHEN/hexo-renderer-markdown-it-plus):
+   在hexo站点配置文件_config.yml中添加如下配置，[详细配置](https://github.com/CHENXCHEN/hexo-renderer-markdown-it-plus):
 
 	```yaml
 	# Markdown config
@@ -70,31 +65,24 @@ npm i @upupming/hexo-renderer-markdown-it-plus --save
 	```
 
 ### 图片链接
-	为了与typora写作，使网页能够直接渲染typora编辑的markdown文档，需要在typora中设置图片保存在./$${filename}下，安装该插件即可（该插件md写着是为了与typora共同使用而开发）
-	```shell
-	# 图片链接
-	npm install hexo-image-link --save 
-	```
-
-
+为了与typora写作，使网页能够直接渲染typora编辑的markdown文档，需要在typora中设置图片保存在./$${filename}下，安装该插件即可（该插件md写着是为了与typora共同使用而开发）
+```shell
+# 图片链接
+npm install hexo-image-link --save 
+```
 
 ## 文章置顶
-	```shell
-	# 添加文章置顶功能，未使用
-	npm uninstall hexo-generator-index --save
-	npm install hexo-generator-index-pin-top --save
-	```
-
+```shell
+# 添加文章置顶功能，未使用
+npm uninstall hexo-generator-index --save
+npm install hexo-generator-index-pin-top --save
+```
 安装后在文章顶部增加字段`top: true`即可
-
-
 
 ## 页脚增加网站运行时间统计(NexT8.0 以下)
 
 1. 找到 `\themes\next\layout\_partials\` 下面的 `footer.swig` 文件
 2. 在合适的位置添加下面代码（通过运行调试，查看运行时间出现的位置）（45行）
-
-
 	```JavaScript
 	<!--添加运行时间-->
 	<span id="sitetime"></span>
@@ -140,7 +128,8 @@ npm i @upupming/hexo-renderer-markdown-it-plus --save
 
 ## 页脚增加网站运行时间统计(NexT8.0 以上)
 
-修改 `themes/next/layout/_partials/footer.njk`，在末尾加入如下代码：
+1. 找到 `themes/next/layout/_partials/footer.njk`文件
+2. 在末尾加入以下代码
 
 	```JavaScript
 	<!-- <br /> -->
@@ -167,70 +156,52 @@ npm i @upupming/hexo-renderer-markdown-it-plus --save
 	```
 
 ## 搜索引擎支持
-### 各搜索引擎网站管理员中心
+1. 各搜索引擎网站管理员中心
 
-* Google：https://www.google.com/webmasters/tools
-* bing：https://www.bing.com/webmasters/home
-* 百度：不要sb
+   * Google：https://www.google.com/webmasters/tools
+   * bing：https://www.bing.com/webmasters/home
 
-### 向搜索引擎提交站点
-
-> 以Google为例，用HTML Meta标签的方法
-
-​		~~Next 主题下，页面的 header 设置在`themes/next/layout/_partials/head.swig`内。默认也给我们提供了模板，感谢[开发者 iissnan](https://link.jianshu.com?t=https://github.com/iissnan)。我们只需要把下面标签补全即可~~
-
-	```html
-	{%- if theme.google_site_verification %}
-	<meta name="google-site-verification" content="JXha4BvTgO89eWQaKW-9LD0MGEUp-Q4OtE3QLHZWvAs" />
-	{%- endif %}
-	{%- if theme.bing_site_verification %}
-	<meta name="msvalidate.01" content="24EA09381FB8FF1E61E8AB18C3807D81" />
-	{%- endif %}
-	```
-
-~~同时，在`themes/next/_config.yml`中将`google-site-verification`和`baidu_site_verification`的值设置为`true`即可。~~
-
-​		next主题有更好的配置方式，千万不要采用修改head.swig文件的方法，不然在升级NexT版本时会遇到很多不必要的麻烦。修改`themes/next/_config.yml`文件：
-
+2. 向搜索引擎提交站点
+	> 以Google为例
+	
+	修改`themes/next/_config.yml`文件：
 	```yaml
 	# Google Webmaster tools verification.
 	# See: https://www.google.com/webmasters
 	google_site_verification: xxxxxxxxxx
 	```
 
-### 提交网站地图
+3. 提交网站地图
+	> 提交网站地图加快索引
 
-> 提交网站地图加快索引
+   1. 安装插件sitemap
 
-1. 安装插件sitemap
+		```shell
+		npm install hexo-generator-sitemap –save
+		```
 
-	```shell
-	npm install hexo-generator-sitemap –save
+	2. 在`themes/next/_config.yml`中修改：
+
+		```yaml
+		menu:
+		home: / || fa fa-home
+		tags: /tags/ || fa fa-tags
+		categories: /categories/ || fa fa-th
+		archives: /archives/ || fa fa-archive
+		about: /about/ || fa fa-user
+		#schedule: /schedule/ || fa fa-calendar
+		sitemap: /sitemap.xml || fa fa-sitemap
+		#commonweal: /404/ || fa fa-heartbeat
+		```
+
+    3. 生成静态网页，上传，然后在对应搜索引擎的webmasters中添加站点地图的地址即可
+
+4. 验证是否被检索
+	以GitHub Pages为例，新建的GitHub Pages是没有被谷歌检索的。在谷歌搜索栏中输入如下信息进行检索：
+
+	```html
+	site: jiahaofang.github.io
 	```
-
-	在`themes/next/_config.yml`中修改：
-
-	```yaml
-	menu:
-	  home: / || fa fa-home
-	  tags: /tags/ || fa fa-tags
-	  categories: /categories/ || fa fa-th
-	  archives: /archives/ || fa fa-archive
-	  about: /about/ || fa fa-user
-	  #schedule: /schedule/ || fa fa-calendar
-	  sitemap: /sitemap.xml || fa fa-sitemap
-	  #commonweal: /404/ || fa fa-heartbeat
-	```
-
-​		生成静态网页，上传，然后在对应搜索引擎的webmasters中添加站点地图的地址即可
-
-### 验证是否被检索
-
-​		以GitHub Pages为例，新建的GitHub Pages是没有被谷歌检索的。在谷歌搜索栏中输入如下信息进行检索：
-
-```html
-site: jiahaofang.github.io
-```
 
 ## 本地搜索功能
 1. 在根目录执行命令
