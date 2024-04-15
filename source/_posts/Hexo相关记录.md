@@ -328,3 +328,26 @@ google_site_verification: xxxxxxxxxx
 ```html
 site: jiahaofang.github.io
 ```
+
+## 本地搜索功能
+1. 在根目录执行命令
+``` bash
+npm install hexo-generator-searchdb --save
+```
+
+2. 配置 hexo 的`_config.yml`文件
+   在文件末尾新增配置项
+   ```yaml
+	search:
+  		path: search.xml
+  		field: post
+  		format: html
+  		limit: 10000
+   	```
+
+3. 配置 `NexT` 主题的 `_config.yml`（根据 next 文档，应为`/_config.next.yml`）
+	```yaml
+	# Local search
+	local_search:
+  		enable: true
+   	```

@@ -127,3 +127,10 @@ markdown_it_plus:
     typographer:
     quotes: “”‘’
     pre_class: highlight
+
+# Local Search
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
