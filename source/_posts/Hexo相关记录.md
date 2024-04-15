@@ -99,12 +99,13 @@ npm install hexo-generator-index-pin-top --save
 
 
 
-## 页脚增加网站运行时间统计
+## 页脚增加网站运行时间统计(NexT8.0 以下)
 
 1. 找到 `\themes\next\layout\_partials\` 下面的 `footer.swig` 文件
 2. 在合适的位置添加下面代码（通过运行调试，查看运行时间出现的位置）（45行）
 
-```javascript
+
+```JavaScript
 <!--添加运行时间-->
 <span id="sitetime"></span>
 <script language=javascript>
@@ -147,6 +148,33 @@ npm install hexo-generator-index-pin-top --save
 <!--添加运行时间-->
 ```
 
+## 页脚增加网站运行时间统计(NexT8.0 以上)
+
+修改 `themes/next/layout/_partials/footer.njk`，在末尾加入如下代码：
+
+```JavaScript
+<!-- <br /> -->
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<!-- <span id="times">载入时分秒...</span> -->
+<script>
+var now = new Date();
+function createtime() {
+    var grt= new Date("02/21/2022 13:30:00");//(2022,02,21,13,30,00)
+    now.setTime(now.getTime()+250);
+    days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+    hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+    if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+    mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+    seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+    snum = Math.round(seconds);
+    if(String(snum).length ==1 ){snum = "0" + snum;}
+    // var times = document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+}
+setInterval("createtime()",250);
+</script>
+```
 
 
 ## NexT8动画背景Canvas Nest和three配置
