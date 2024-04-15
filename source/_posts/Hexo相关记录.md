@@ -3,9 +3,8 @@ title: Hexo相关记录
 date: 2022-02-22 13:22:06
 tags: [Hexo, git]
 categories: [笔记]
+description: hexo搭建过程和问题记录
 ---
-
-> 个人记录向博客，记录遇到的各种问题
 
 ## 使用git分支保存源码
 

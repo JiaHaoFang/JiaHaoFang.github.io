@@ -3,11 +3,8 @@ title: iOS代码发布为组件
 date: 2022-02-21 17:16:45
 tags: [iOS, Cocoapods]
 categories: [笔记]
+description: 使用 Cocoapods 发布代码作为组件
 ---
-
-> 参考：https://www.jianshu.com/p/103a6f0bf3a4
-
-> PS：本示例的命名不太规范
 
 ## 1 前期准备
 
@@ -161,3 +158,7 @@ categories: [笔记]
 * 执行 pod install
 
 * 运行代码
+
+> 参考资料：https://www.jianshu.com/p/103a6f0bf3a4
+
+
