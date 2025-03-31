@@ -43,6 +43,16 @@ module.exports = {
       outputDir: './source/_posts',
       filename: 'title',
       format: 'markdown',
+      frontMatter: {
+        enable: true,
+        include: [], // 只输出include包含的属性
+        exclude: [], // 不输出exclude包含的属性
+        default:{
+          title: 'test',
+          categories: 'default',
+          author: 'Agao'
+        }
+      }
     },
     halo: {
       endpoint: process.env.HALO_ENDPOINT,
