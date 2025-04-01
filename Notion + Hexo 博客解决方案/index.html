@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="JXha4BvTgO89eWQaKW-9LD0MGEUp-Q4OtE3QLHZWvAs">
+  <meta name="msvalidate.01" content="24EA09381FB8FF1E61E8AB18C3807D81">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jiahaofang.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"style":null,"show_result":true},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="使用 Notion + Hexo 开发，通过Slack + Pipedream + GitHub Action + Elog 部署的个人博客解决方案">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notion + Hexo 博客解决方案">
+<meta property="og:url" content="https://jiahaofang.github.io/Notion%20+%20Hexo%20%E5%8D%9A%E5%AE%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.html">
+<meta property="og:site_name" content="阿告今天学习了吗">
+<meta property="og:description" content="使用 Notion + Hexo 开发，通过Slack + Pipedream + GitHub Action + Elog 部署的个人博客解决方案">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jiahaofang.github.io/images/e2615f760424eea3212a9e6c8e86e975.png">
+<meta property="og:image" content="https://jiahaofang.github.io/images/a4f3f89e1b452b4fbea77694e2b16f4a.png">
+<meta property="og:image" content="https://jiahaofang.github.io/images/6f87e4e694d8503977ee727ea0e218df.png">
+<meta property="og:image" content="https://jiahaofang.github.io/images/8a8b173ff36627dd043c73e58ac6595b.png">
+<meta property="og:image" content="https://jiahaofang.github.io/images/59b7ae74bc93604dd2cd965ff8239753.png">
+<meta property="og:image" content="https://jiahaofang.github.io/images/a09959b6d8f342693a06ee57658afcf6.png">
+<meta property="og:image" content="https://jiahaofang.github.io/images/5802157622609c6c80ad2244909257c1.png">
+<meta property="og:image" content="https://jiahaofang.github.io/images/b77409d352c2cd6111fc1210c95af271.png">
+<meta property="og:image" content="https://jiahaofang.github.io/images/28846230c321742e37208feb17a242f6.png">
+<meta property="og:image" content="https://jiahaofang.github.io/images/e6b5dc60ca2aafd8b83df5ccfeff4a38.png">
+<meta property="og:image" content="https://jiahaofang.github.io/images/c71d6f68e237f4b427b9e601bad2b87e.png">
+<meta property="og:image" content="https://jiahaofang.github.io/images/e5c43682a02030bda9bbf86b9f2f1360.png">
+<meta property="og:image" content="https://jiahaofang.github.io/images/3cbfc8ba00c1137d28e401d6f77590b6.png">
+<meta property="og:image" content="https://jiahaofang.github.io/images/c79c2a64e8754ddeef1a90f574ed7dd6.png">
+<meta property="og:image" content="https://jiahaofang.github.io/images/e3ab807c4efc51d6e852c495e0985f98.png">
+<meta property="og:image" content="https://jiahaofang.github.io/images/9c168243848442a2eeb1bcbac9b18212.png">
+<meta property="og:image" content="https://jiahaofang.github.io/images/84837c7b86fe27b83755de83784d1a5d.png">
+<meta property="og:image" content="https://jiahaofang.github.io/images/c5a6191c9835210b1a20d1b9592961f1.png">
+<meta property="article:published_time" content="2025-04-01T18:12:00.000Z">
+<meta property="article:modified_time" content="2025-04-01T20:16:00.000Z">
+<meta property="article:author" content="阿告2426">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="elog">
+<meta property="article:tag" content="notion">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jiahaofang.github.io/images/e2615f760424eea3212a9e6c8e86e975.png">
+
+
+<link rel="canonical" href="https://jiahaofang.github.io/Notion%20+%20Hexo%20%E5%8D%9A%E5%AE%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiahaofang.github.io/Notion%20+%20Hexo%20%E5%8D%9A%E5%AE%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/","path":"Notion + Hexo 博客解决方案/","title":"Notion + Hexo 博客解决方案"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Notion + Hexo 博客解决方案 | 阿告今天学习了吗</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">阿告今天学习了吗</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E4%BD%9C%E5%BC%80%E5%8F%91"><span class="nav-number">1.</span> <span class="nav-text"> 创作&amp;开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#notion"><span class="nav-number">1.1.</span> <span class="nav-text"> Notion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo"><span class="nav-number">1.2.</span> <span class="nav-text"> Hexo</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cicd"><span class="nav-number">2.</span> <span class="nav-text"> CI&#x2F;CD</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#slack"><span class="nav-number">2.1.</span> <span class="nav-text"> Slack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#notion-2"><span class="nav-number">2.2.</span> <span class="nav-text"> Notion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pipedream"><span class="nav-number">2.3.</span> <span class="nav-text"> Pipedream</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#elog-github-action"><span class="nav-number">2.4.</span> <span class="nav-text"> Elog + Github Action</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E6%95%88%E6%9E%9C"><span class="nav-number">2.5.</span> <span class="nav-text"> 执行效果</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="阿告2426"
+      src="/cat.jpeg">
+  <p class="site-author-name" itemprop="name">阿告2426</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/JiaHaoFang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;JiaHaoFang" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:473993067@qq.com" title="E-Mail → mailto:473993067@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiahaofang.github.io/Notion%20+%20Hexo%20%E5%8D%9A%E5%AE%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/cat.jpeg">
+      <meta itemprop="name" content="阿告2426">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿告今天学习了吗">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Notion + Hexo 博客解决方案 | 阿告今天学习了吗">
+      <meta itemprop="description" content="使用 Notion + Hexo 开发，通过Slack + Pipedream + GitHub Action + Elog 部署的个人博客解决方案">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Notion + Hexo 博客解决方案
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-04-01 18:12:00 / 修改时间：20:16:00" itemprop="dateCreated datePublished" datetime="2025-04-01T18:12:00+00:00">2025-04-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Blog/" itemprop="url" rel="index"><span itemprop="name">Blog</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">使用 Notion + Hexo 开发，通过Slack + Pipedream + GitHub Action + Elog 部署的个人博客解决方案</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="创作开发"><a class="markdownIt-Anchor" href="#创作开发"></a> 创作&amp;开发</h1>
+<h2 id="notion"><a class="markdownIt-Anchor" href="#notion"></a> Notion</h2>
+<ul>
+<li>
+<p>使用 notion 进行内容创作</p>
+</li>
+<li>
+<p>使用 notion database 进行知识库整理</p>
+<p>本文使用 hexo 平台，可参考<a target="_blank" rel="noopener" href="https://1874.notion.site/867486af567f4a8897427b15ffd10b3c?v=a25aec8e27d5415e8605e43034f822bd"><strong>elog-hexo-template</strong></a> 创建数据库副本或增加必要属性到已有 Notion 数据库</p>
+<p><img src="../images/e2615f760424eea3212a9e6c8e86e975.png" alt="image.png" /></p>
+</li>
+</ul>
+<h2 id="hexo"><a class="markdownIt-Anchor" href="#hexo"></a> Hexo</h2>
+<blockquote>
+<p>使用 Hexo 进行博客开发</p>
+</blockquote>
+<ul>
+<li>
+<p>使用git分支保存源码</p>
+<p>因Github Page要求使用master分支作为发布网站的源代码，我们只能用master分支来保存hexo生成的静态网页，对于博客源码，可以新建一个source分支来存储。在github上打开Pages对应的仓库，也就是以”<a target="_blank" rel="noopener" href="http://username.github.io/">username.github.io</a>”命名的仓库，然后建立一个source分支，仓库的默认分支改为保存源码的source分支，这样通过<code>git clone</code>拉取的就是source分支代码了。</p>
+</li>
+<li>
+<p>根据自己喜好配置 Hexo</p>
+<p>这里可以自行搜索，也可以参考《Hexo 相关记录》一文</p>
+</li>
+<li>
+<p>仓库源码大致目录结构如下</p>
+  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">.</span></span><br><span class="line"><span class="string">├──</span> <span class="string">README.md</span></span><br><span class="line"><span class="string">├──</span> <span class="string">_config.landscape.yml</span></span><br><span class="line"><span class="string">├──</span> <span class="string">_config.next.yml</span></span><br><span class="line"><span class="string">├──</span> <span class="string">_config.yml</span></span><br><span class="line"><span class="string">├──</span> <span class="string">db.json</span></span><br><span class="line"><span class="string">├──</span> <span class="string">elog.cache.json</span></span><br><span class="line"><span class="string">├──</span> <span class="string">elog.config.js</span></span><br><span class="line"><span class="string">├──</span> <span class="string">hexo.sh</span></span><br><span class="line"><span class="string">├──</span> <span class="string">node_modules</span></span><br><span class="line"><span class="string">├──</span> <span class="string">package-lock.json</span></span><br><span class="line"><span class="string">├──</span> <span class="string">package.json</span></span><br><span class="line"><span class="string">├──</span> <span class="string">public</span></span><br><span class="line"><span class="string">├──</span> <span class="string">scaffolds</span></span><br><span class="line"><span class="string">├──</span> <span class="string">source</span></span><br><span class="line"><span class="string">├──</span> <span class="string">themes</span></span><br><span class="line"><span class="string">└──</span> <span class="string">time.txt</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="cicd"><a class="markdownIt-Anchor" href="#cicd"></a> CI/CD</h1>
+<blockquote>
+<p>本项目持续集成的路径为：notion ⇒ slack ⇒ pipedream ⇒ elog + github action</p>
+</blockquote>
+<h2 id="slack"><a class="markdownIt-Anchor" href="#slack"></a> Slack</h2>
+<ol>
+<li>注册 <a href="%5Bhttps://slack.com/%5D(https://slack.com/)">Slack</a></li>
+</ol>
+<p>注册完成后创建工作区</p>
+<pre><code>![image.png](../images/39b5b6f7aff90d3a40276068bc36f00e.png)
+</code></pre>
+<ol>
+<li>
+<p>创建频道（channel）</p>
+<p><img src="../images/a4f3f89e1b452b4fbea77694e2b16f4a.png" alt="image.png" /></p>
+</li>
+<li>
+<p>添加应用 Notion</p>
+<p><img src="../images/6f87e4e694d8503977ee727ea0e218df.png" alt="image.png" /></p>
+</li>
+<li>
+<p>全部创建完成后如图</p>
+<p><img src="../images/8a8b173ff36627dd043c73e58ac6595b.png" alt="image.png" /></p>
+</li>
+</ol>
+<h2 id="notion-2"><a class="markdownIt-Anchor" href="#notion-2"></a> Notion</h2>
+<ol>
+<li>
+<p>创建 automation，设置触发器</p>
+<p>在数据库页面点击闪电按钮，可以创建 <code>automation</code> ，增加触发器以及执行器</p>
+<p><img src="../images/59b7ae74bc93604dd2cd965ff8239753.png" alt="image.png" /></p>
+<p>根据自己喜好设置触发器，设置完成后如下</p>
+<p><img src="../images/a09959b6d8f342693a06ee57658afcf6.png" alt="image.png" /></p>
+</li>
+</ol>
+<h2 id="pipedream"><a class="markdownIt-Anchor" href="#pipedream"></a> Pipedream</h2>
+<ol>
+<li>
+<p>注册</p>
+</li>
+<li>
+<p>创建 Project</p>
+<p><img src="../images/5802157622609c6c80ad2244909257c1.png" alt="image.png" /></p>
+</li>
+<li>
+<p>创建 workflow</p>
+<p>在 project 下创建workflow</p>
+<p><img src="../images/b77409d352c2cd6111fc1210c95af271.png" alt="image.png" /></p>
+</li>
+<li>
+<p>设置 workflow</p>
+</li>
+</ol>
+<p>设置 workflow，触发器选择 Slack，选择<code>New Message In Channels</code> ，按照如下设置</p>
+<pre><code>![image.png](../images/51ef693bc2dab2a08feb5d373debb903.png)
+
+
+![image.png](../images/69e9cb0f6c83874a2091e07a199b5f5b.png)
+</code></pre>
+<ol>
+<li>
+<p>增加 Python step</p>
+<p>增加一个 Python Step，代码如下所示</p>
+<p><img src="../images/28846230c321742e37208feb17a242f6.png" alt="image.png" /></p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">handler</span>(<span class="params">pd: <span class="string">&quot;pidedream&quot;</span></span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line"></span><br><span class="line">        token = os.environ[<span class="string">&#x27;GITHUB_TOKEN&#x27;</span>]</span><br><span class="line">        user = <span class="string">&quot;github_username&quot;</span></span><br><span class="line">        repo = <span class="string">&quot;github_repo&quot;</span></span><br><span class="line">        event_type = <span class="string">&quot;deploy&quot;</span></span><br><span class="line">        headers = &#123;</span><br><span class="line">            <span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;@elog/serverless-api&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Accept&quot;</span>: <span class="string">&#x27;*/*&#x27;</span>,</span><br><span class="line">            <span class="string">&quot;Authorization&quot;</span>: <span class="string">f&quot;token <span class="subst">&#123;token&#125;</span>&quot;</span>,</span><br><span class="line">        &#125;</span><br><span class="line">        response = requests.post(</span><br><span class="line">            <span class="string">f&quot;https://api.github.com/repos/<span class="subst">&#123;user&#125;</span>/<span class="subst">&#123;repo&#125;</span>/dispatches&quot;</span>,</span><br><span class="line">            headers=headers,</span><br><span class="line">            data=json.dumps(&#123;<span class="string">&quot;event_type&quot;</span>: event_type&#125;)</span><br><span class="line">        )</span><br><span class="line">        <span class="comment"># response.raise_for_status()</span></span><br><span class="line">        <span class="built_in">print</span>(response.text, response.json())</span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="string">&quot;message&quot;</span>: response.json() <span class="keyword">or</span> <span class="string">&#x27;Success!&#x27;</span>&#125;</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(e)</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>设置完成后如图所示</p>
+<p><img src="../images/e6b5dc60ca2aafd8b83df5ccfeff4a38.png" alt="image.png" /></p>
+</li>
+<li>
+<p>配置环境变量，用于 code 中使用，在环境中通过 <code>os.environ['your_token']</code>来使用</p>
+<p><img src="../images/c71d6f68e237f4b427b9e601bad2b87e.png" alt="image.png" /></p>
+</li>
+</ol>
+<h2 id="elog-github-action"><a class="markdownIt-Anchor" href="#elog-github-action"></a> Elog + Github Action</h2>
+<ol>
+<li>
+<p>在博客文件夹根目录配置 Elog</p>
+<p>参考<a href="%5Bhttps://elog.1874.cool/notion/start%5D(https://elog.1874.cool/notion/start)">官方文档</a>进行操作，其余相关配置以官方文档为准。</p>
+</li>
+<li>
+<p>项目添加 workflow 配置</p>
+<p>在项目文件夹根目录增加 github actions 相关配置文件<code>.github/workflows/</code><strong><code>main.yaml</code></strong></p>
+ <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Deploy</span> <span class="string">To</span> <span class="string">Github</span> <span class="string">Pages</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="comment"># 允许手动push触发</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">    <span class="comment"># 存放源码的分支</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">master</span></span><br><span class="line">  <span class="comment"># 允许外部仓库事件触发</span></span><br><span class="line">  <span class="attr">repository_dispatch:</span></span><br><span class="line">    <span class="attr">types:</span></span><br><span class="line">  <span class="comment"># api中的event_type就是这个</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">deploy</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">build:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">检查分支</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@master</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">安装node环境</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/setup-node@master</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">node-version:</span> <span class="string">&quot;16.x&quot;</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">安装依赖</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          export TZ=&#x27;Asia/Shanghai&#x27;</span></span><br><span class="line"><span class="string">          npm install --prod</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">拉取语雀/Notion的文章</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">          <span class="comment"># 语雀相关环境变量</span></span><br><span class="line">          <span class="attr">YUQUE_TOKEN:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.YUQUE_TOKEN</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">YUQUE_LOGIN:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.YUQUE_LOGIN</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">YUQUE_REPO:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.YUQUE_REPO</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="comment"># Notion相关环境变量</span></span><br><span class="line">          <span class="attr">NOTION_TOKEN:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.NOTION_TOKEN</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">NOTION_DATABASE_ID:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.NOTION_DATABASE_ID</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="comment"># 图床相关环境变量，以腾讯云COS为例</span></span><br><span class="line">          <span class="attr">COS_SECRET_ID:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.COS_SECRET_ID</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">COS_SECRET_KEY:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.COS_SECRET_KEY</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">COS_IMAGE_BUCKET:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.COS_IMAGE_BUCKET</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">COS_IMAGE_REGION:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.COS_IMAGE_REGION</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          # 对应package.json中的script.sync</span></span><br><span class="line"><span class="string">          npm run sync</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">配置Git用户名邮箱</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          git config --global user.name &quot;xxx&quot;</span></span><br><span class="line"><span class="string">          git config --global user.email &quot;xxx@xx.com&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">提交yuque拉取的文章到GitHub仓库</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          echo `date +&quot;%Y-%m-%d %H:%M:%S&quot;` begin &gt; time.txt</span></span><br><span class="line"><span class="string">          git add .</span></span><br><span class="line"><span class="string">          git commit -m &quot;更新文档&quot; -a</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">推送文章到仓库</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">ad-m/github-push-action@master</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">github_token:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.GITHUB_TOKEN</span> <span class="string">&#125;&#125;</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">生成静态文件</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          # 对应package.json中的script.build</span></span><br><span class="line"><span class="string">          npm run build</span></span><br><span class="line"><span class="string"></span>          </span><br><span class="line">      </span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">部署到Github</span> <span class="string">Pages</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">peaceiris/actions-gh-pages@v4</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">	        <span class="comment"># 这里使用 github token</span></span><br><span class="line">          <span class="attr">personal_token:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.GITHUB_TOKEN</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="comment"># hexo 设置为这个路径</span></span><br><span class="line">          <span class="attr">publish_dir:</span> <span class="string">./public</span></span><br><span class="line">          <span class="attr">external_repository:</span> <span class="string">JiaHaoFang/JiaHaoFang.github.io</span></span><br><span class="line">          <span class="comment"># 存放 github page 静态文件的分支</span></span><br><span class="line">          <span class="attr">publish_branch:</span> <span class="string">master</span></span><br><span class="line">          <span class="attr">commit_message:</span> <span class="string">$&#123;&#123;</span> <span class="string">github.event.head_commit.message</span> <span class="string">&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>添加环境变量</p>
+<p>根据 Elog 文档获取对应的环境变量，添加到 github 仓库设置</p>
+<p><img src="../images/e5c43682a02030bda9bbf86b9f2f1360.png" alt="image.png" /></p>
+</li>
+<li>
+<p>配置Actions 执行权限</p>
+<p>在仓库的 Settings-Actions-Genaral-Workflow permissions 中配置执行权限</p>
+<p><img src="../images/3cbfc8ba00c1137d28e401d6f77590b6.png" alt="image.png" /></p>
+</li>
+<li>
+<p>Github Page 设置</p>
+<p>设置 Github Page 的部署分支（区分与源代码分支），这里本人使用 master 部署静态页面，使用 source 分支存放源码</p>
+<p><img src="../images/c79c2a64e8754ddeef1a90f574ed7dd6.png" alt="image.png" /></p>
+</li>
+</ol>
+<h2 id="执行效果"><a class="markdownIt-Anchor" href="#执行效果"></a> 执行效果</h2>
+<ul>
+<li>
+<p>Slack</p>
+<p><img src="../images/e3ab807c4efc51d6e852c495e0985f98.png" alt="image.png" /></p>
+</li>
+<li>
+<p>pipedream</p>
+</li>
+</ul>
+<p><img src="../images/9c168243848442a2eeb1bcbac9b18212.png" alt="image.png" /></p>
+<ul>
+<li>
+<p>Github Actions</p>
+<p><img src="../images/84837c7b86fe27b83755de83784d1a5d.png" alt="image.png" /></p>
+<p><img src="../images/c5a6191c9835210b1a20d1b9592961f1.png" alt="image.png" /></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>阿告2426
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://jiahaofang.github.io/Notion%20+%20Hexo%20%E5%8D%9A%E5%AE%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="Notion + Hexo 博客解决方案">https://jiahaofang.github.io/Notion + Hexo 博客解决方案/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/hexo/" rel="tag"># hexo</a>
+              <a href="/tags/elog/" rel="tag"># elog</a>
+              <a href="/tags/notion/" rel="tag"># notion</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/iOS%E4%BB%A3%E7%A0%81%E5%8F%91%E5%B8%83%E4%B8%BA%E7%BB%84%E4%BB%B6/" rel="prev" title="iOS代码发布为组件">
+                  <i class="fa fa-angle-left"></i> iOS代码发布为组件
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/%E5%BD%93%E6%88%91%E4%BB%AC%E5%9C%A8%E8%B0%88%E8%AE%BADarkMode%E6%97%B6%E6%88%91%E4%BB%AC%E5%9C%A8%E8%B0%88%E8%AE%BA%E4%BB%80%E4%B9%88/" rel="next" title="当我们在谈论DarkMode时我们在谈论什么">
+                  当我们在谈论DarkMode时我们在谈论什么 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-pen"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">阿告2426</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":"dark","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.min.js","integrity":"sha256-TtLOdUA8mstPoO6sGvHIGx2ceXrrX4KgIItO06XOn8A="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","mhchem":false,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
