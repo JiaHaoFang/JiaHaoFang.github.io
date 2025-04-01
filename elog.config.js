@@ -82,9 +82,9 @@ module.exports = {
     enable: true,
     platform: 'local',
     local: {
-      outputDir: './docs/images',
+      outputDir: './source/images',
       prefixKey: '/images',
-      pathFollowDoc: false,
+      pathFollowDoc: true,
     },
     oss: {
       secretId: process.env.OSS_SECRET_ID,
