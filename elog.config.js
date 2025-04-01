@@ -75,7 +75,7 @@ module.exports = {
     }
   },
   image: {
-    enable: false,
+    enable: true,
     platform: 'local',
     local: {
       outputDir: './docs/images',
