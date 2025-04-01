@@ -1,0 +1,1835 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hexo相关记录</title>
+    <url>/Hexo%E7%9B%B8%E5%85%B3%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h2 id="使用git分支保存源码"><a class="markdownIt-Anchor" href="#使用git分支保存源码"></a> 使用git分支保存源码</h2>
+<ol>
+<li>
+<p>拉取分支</p>
+<p>因Github Page要求使用master分支作为发布网站的源代码，我们只能用master分支来保存hexo生成的静态网页，对于博客源码，可以新建一个source分支来存储。在github上打开Pages对应的仓库，也就是以”<a href="http://username.github.io">username.github.io</a>”命名的仓库，然后建立一个source分支，仓库的默认分支改为保存源码的source分支，这样通过<code>git clone</code>拉取的就是source分支代码了。</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/JiaHaoFang/JiaHaoFang.github.io.git</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>配置环境</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安装hexo</span></span><br><span class="line">npm install hexo</span><br><span class="line"><span class="comment"># git支持</span></span><br><span class="line">npm install hexo-deployer-git -save</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="添加next主题配置"><a class="markdownIt-Anchor" href="#添加next主题配置"></a> 添加next主题配置</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next.git themes/next</span><br></pre></td></tr></table></figure>
+<h2 id="显示摘要"><a class="markdownIt-Anchor" href="#显示摘要"></a> 显示摘要</h2>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">显示摘要</span></span><br><span class="line">npm install hexo-excerpt --save</span><br></pre></td></tr></table></figure>
+<h2 id="用typora写作"><a class="markdownIt-Anchor" href="#用typora写作"></a> 用typora写作</h2>
+<h3 id="markdown语法支持"><a class="markdownIt-Anchor" href="#markdown语法支持"></a> markdown语法支持</h3>
+<p>使用typora作为语法编辑器，使用插件使网页能够支持markdown的编辑格式</p>
+<ol>
+<li>
+<p>安装库</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># markdown语法支持</span></span><br><span class="line">npm uni hexo-renderer-marked --save</span><br><span class="line">npm i @upupming/hexo-renderer-markdown-it-plus --save</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>使用<br />
+在hexo站点配置文件_config.yml中添加如下配置，<a href="https://github.com/CHENXCHEN/hexo-renderer-markdown-it-plus">详细配置</a>:</p>
+ <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Markdown config</span></span><br><span class="line"><span class="attr">markdown_it_plus:</span></span><br><span class="line">	<span class="attr">highlight:</span> <span class="literal">true</span></span><br><span class="line">	<span class="attr">html:</span> <span class="literal">true</span></span><br><span class="line">	<span class="attr">xhtmlOut:</span> <span class="literal">true</span></span><br><span class="line">	<span class="attr">breaks:</span> <span class="literal">true</span></span><br><span class="line">	<span class="attr">langPrefix:</span></span><br><span class="line">	<span class="attr">linkify:</span> <span class="literal">true</span></span><br><span class="line">	<span class="attr">typographer:</span></span><br><span class="line">	<span class="attr">quotes:</span> <span class="string">“”‘’</span></span><br><span class="line">	<span class="attr">pre_class:</span> <span class="string">highlight</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="图片链接"><a class="markdownIt-Anchor" href="#图片链接"></a> 图片链接</h3>
+<p>为了与typora写作，使网页能够直接渲染typora编辑的markdown文档，需要在typora中设置图片保存在./$${filename}下，安装该插件即可（该插件md写着是为了与typora共同使用而开发）</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">图片链接</span></span><br><span class="line">npm install hexo-image-link --save </span><br></pre></td></tr></table></figure>
+<h2 id="文章置顶"><a class="markdownIt-Anchor" href="#文章置顶"></a> 文章置顶</h2>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加文章置顶功能，未使用</span></span><br><span class="line">npm uninstall hexo-generator-index --save</span><br><span class="line">npm install hexo-generator-index-pin-top --save</span><br></pre></td></tr></table></figure>
+<p>安装后在文章顶部增加字段<code>top: true</code>即可</p>
+<h2 id="页脚增加网站运行时间统计next80-以下"><a class="markdownIt-Anchor" href="#页脚增加网站运行时间统计next80-以下"></a> 页脚增加网站运行时间统计(NexT8.0 以下)</h2>
+<ol>
+<li>找到 <code>\themes\next\layout\_partials\</code> 下面的 <code>footer.swig</code> 文件</li>
+<li>在合适的位置添加下面代码（通过运行调试，查看运行时间出现的位置）（45行） <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;!--添加运行时间--&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;sitetime&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">language</span>=<span class="string">javascript</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">	<span class="keyword">function</span> <span class="title function_">siteTime</span>(<span class="params"></span>)&#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">		<span class="variable language_">window</span>.<span class="built_in">setTimeout</span>(<span class="string">&quot;siteTime()&quot;</span>, <span class="number">1000</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">		<span class="keyword">var</span> seconds = <span class="number">1000</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">		<span class="keyword">var</span> minutes = seconds * <span class="number">60</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">		<span class="keyword">var</span> hours = minutes * <span class="number">60</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">		<span class="keyword">var</span> days = hours * <span class="number">24</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">		<span class="keyword">var</span> years = days * <span class="number">365</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">		<span class="keyword">var</span> today = <span class="keyword">new</span> <span class="title class_">Date</span>();</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">		<span class="keyword">var</span> todayYear = today.<span class="title function_">getFullYear</span>();</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">		<span class="keyword">var</span> todayMonth = today.<span class="title function_">getMonth</span>()+<span class="number">1</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">		<span class="keyword">var</span> todayDate = today.<span class="title function_">getDate</span>();</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">		<span class="keyword">var</span> todayHour = today.<span class="title function_">getHours</span>();</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">		<span class="keyword">var</span> todayMinute = today.<span class="title function_">getMinutes</span>();</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">		<span class="keyword">var</span> todaySecond = today.<span class="title function_">getSeconds</span>();</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">		<span class="comment">/* </span></span></span></span><br><span class="line"><span class="comment"><span class="language-javascript"><span class="language-xml">		Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)</span></span></span></span><br><span class="line"><span class="comment"><span class="language-javascript"><span class="language-xml">		year - 作为date对象的年份，为4位年份值</span></span></span></span><br><span class="line"><span class="comment"><span class="language-javascript"><span class="language-xml">		month - 0-11之间的整数，做为date对象的月份</span></span></span></span><br><span class="line"><span class="comment"><span class="language-javascript"><span class="language-xml">		day - 1-31之间的整数，做为date对象的天数</span></span></span></span><br><span class="line"><span class="comment"><span class="language-javascript"><span class="language-xml">		hours - 0(午夜24点)-23之间的整数，做为date对象的小时数</span></span></span></span><br><span class="line"><span class="comment"><span class="language-javascript"><span class="language-xml">		minutes - 0-59之间的整数，做为date对象的分钟数</span></span></span></span><br><span class="line"><span class="comment"><span class="language-javascript"><span class="language-xml">		seconds - 0-59之间的整数，做为date对象的秒数</span></span></span></span><br><span class="line"><span class="comment"><span class="language-javascript"><span class="language-xml">		microseconds - 0-999之间的整数，做为date对象的毫秒数</span></span></span></span><br><span class="line"><span class="comment"><span class="language-javascript"><span class="language-xml">		*/</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">		<span class="keyword">var</span> t1 = <span class="title class_">Date</span>.<span class="title function_">UTC</span>(<span class="number">2022</span>,<span class="number">02</span>,<span class="number">21</span>,<span class="number">13</span>,<span class="number">30</span>,<span class="number">00</span>); <span class="comment">//北京时间2018-2-13 00:00:00</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">		<span class="keyword">var</span> t2 = <span class="title class_">Date</span>.<span class="title function_">UTC</span>(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">		<span class="keyword">var</span> diff = t2-t1;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">		<span class="keyword">var</span> diffYears = <span class="title class_">Math</span>.<span class="title function_">floor</span>(diff/years);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">		<span class="keyword">var</span> diffDays = <span class="title class_">Math</span>.<span class="title function_">floor</span>((diff/days)-diffYears*<span class="number">365</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">		<span class="keyword">var</span> diffHours = <span class="title class_">Math</span>.<span class="title function_">floor</span>((diff-(diffYears*<span class="number">365</span>+diffDays)*days)/hours);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">		<span class="keyword">var</span> diffMinutes = <span class="title class_">Math</span>.<span class="title function_">floor</span>((diff-(diffYears*<span class="number">365</span>+diffDays)*days-diffHours*hours)/minutes);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">		<span class="keyword">var</span> diffSeconds = <span class="title class_">Math</span>.<span class="title function_">floor</span>((diff-(diffYears*<span class="number">365</span>+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">		<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;sitetime&quot;</span>).<span class="property">innerHTML</span>=<span class="string">&quot; 已运行&quot;</span>+<span class="comment">/*diffYears+&quot; 年 &quot;+*/</span>diffDays+<span class="string">&quot; 天 &quot;</span>+diffHours+<span class="string">&quot; 小时 &quot;</span>+diffMinutes+<span class="string">&quot; 分钟 &quot;</span>+diffSeconds+<span class="string">&quot; 秒&quot;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">	&#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">	<span class="title function_">siteTime</span>();</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;!--添加运行时间--&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="页脚增加网站运行时间统计next80-以上"><a class="markdownIt-Anchor" href="#页脚增加网站运行时间统计next80-以上"></a> 页脚增加网站运行时间统计(NexT8.0 以上)</h2>
+<ol>
+<li>
+<p>找到 <code>themes/next/layout/_partials/footer.njk</code>文件</p>
+</li>
+<li>
+<p>在末尾加入以下代码</p>
+ <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;!-- <span class="language-xml"><span class="tag">&lt;<span class="name">br</span> /&gt;</span></span> --&gt;</span><br><span class="line">&lt;!-- 网站运行时间的设置 --&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;timeDate&quot;</span>&gt;</span>载入天数...<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">&lt;!-- <span class="language-xml"><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;times&quot;</span>&gt;</span>载入时分秒...<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span> --&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">var</span> now = <span class="keyword">new</span> <span class="title class_">Date</span>();</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">function</span> <span class="title function_">createtime</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">	<span class="keyword">var</span> grt= <span class="keyword">new</span> <span class="title class_">Date</span>(<span class="string">&quot;02/21/2022 13:30:00&quot;</span>);<span class="comment">//(2022,02,21,13,30,00)</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">	now.<span class="title function_">setTime</span>(now.<span class="title function_">getTime</span>()+<span class="number">250</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">	days = (now - grt ) / <span class="number">1000</span> / <span class="number">60</span> / <span class="number">60</span> / <span class="number">24</span>; dnum = <span class="title class_">Math</span>.<span class="title function_">floor</span>(days);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">	hours = (now - grt ) / <span class="number">1000</span> / <span class="number">60</span> / <span class="number">60</span> - (<span class="number">24</span> * dnum); hnum = <span class="title class_">Math</span>.<span class="title function_">floor</span>(hours);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">	<span class="keyword">if</span>(<span class="title class_">String</span>(hnum).<span class="property">length</span> ==<span class="number">1</span> )&#123;hnum = <span class="string">&quot;0&quot;</span> + hnum;&#125; minutes = (now - grt ) / <span class="number">1000</span> /<span class="number">60</span> - (<span class="number">24</span> * <span class="number">60</span> * dnum) - (<span class="number">60</span> * hnum);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">	mnum = <span class="title class_">Math</span>.<span class="title function_">floor</span>(minutes); <span class="keyword">if</span>(<span class="title class_">String</span>(mnum).<span class="property">length</span> ==<span class="number">1</span> )&#123;mnum = <span class="string">&quot;0&quot;</span> + mnum;&#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">	seconds = (now - grt ) / <span class="number">1000</span> - (<span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span> * dnum) - (<span class="number">60</span> * <span class="number">60</span> * hnum) - (<span class="number">60</span> * mnum);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">	snum = <span class="title class_">Math</span>.<span class="title function_">round</span>(seconds);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">	<span class="keyword">if</span>(<span class="title class_">String</span>(snum).<span class="property">length</span> ==<span class="number">1</span> )&#123;snum = <span class="string">&quot;0&quot;</span> + snum;&#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">	<span class="comment">// var times = document.getElementById(&quot;times&quot;).innerHTML = hnum + &quot; 小时 &quot; + mnum + &quot; 分 &quot; + snum + &quot; 秒&quot;;</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">	<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;timeDate&quot;</span>).<span class="property">innerHTML</span> = <span class="string">&quot;本站已安全运行 &quot;</span>+dnum+<span class="string">&quot; 天 &quot;</span>+hnum + <span class="string">&quot; 小时 &quot;</span> + mnum + <span class="string">&quot; 分 &quot;</span> + snum + <span class="string">&quot; 秒&quot;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="built_in">setInterval</span>(<span class="string">&quot;createtime()&quot;</span>,<span class="number">250</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="搜索引擎支持"><a class="markdownIt-Anchor" href="#搜索引擎支持"></a> 搜索引擎支持</h2>
+<ol>
+<li>
+<p>各搜索引擎网站管理员中心</p>
+<ul>
+<li>Google：<a href="https://www.google.com/webmasters/tools">https://www.google.com/webmasters/tools</a></li>
+<li>bing：<a href="https://www.bing.com/webmasters/home">https://www.bing.com/webmasters/home</a></li>
+</ul>
+</li>
+<li>
+<p>向搜索引擎提交站点</p>
+<blockquote>
+<p>以Google为例</p>
+</blockquote>
+<p>修改<code>themes/next/_config.yml</code>文件：</p>
+ <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Google Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://www.google.com/webmasters</span></span><br><span class="line"><span class="attr">google_site_verification:</span> <span class="string">xxxxxxxxxx</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>提交网站地图</p>
+<blockquote>
+<p>提交网站地图加快索引</p>
+</blockquote>
+<ol>
+<li>
+<p>安装插件sitemap</p>
+  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-sitemap –save</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>在<code>themes/next/_config.yml</code>中修改：</p>
+ <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line"><span class="attr">home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-home</span></span><br><span class="line"><span class="attr">tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-tags</span></span><br><span class="line"><span class="attr">categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-th</span></span><br><span class="line"><span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-archive</span></span><br><span class="line"><span class="attr">about:</span> <span class="string">/about/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-user</span></span><br><span class="line"><span class="comment">#schedule: /schedule/ || fa fa-calendar</span></span><br><span class="line"><span class="attr">sitemap:</span> <span class="string">/sitemap.xml</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-sitemap</span></span><br><span class="line"><span class="comment">#commonweal: /404/ || fa fa-heartbeat</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>生成静态网页，上传，然后在对应搜索引擎的webmasters中添加站点地图的地址即可</p>
+</li>
+</ol>
+</li>
+<li>
+<p>验证是否被检索<br />
+以GitHub Pages为例，新建的GitHub Pages是没有被谷歌检索的。在谷歌搜索栏中输入如下信息进行检索：</p>
+ <figure class="highlight html"><table><tr><td class="code"><pre><span class="line">site: jiahaofang.github.io</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="本地搜索功能"><a class="markdownIt-Anchor" href="#本地搜索功能"></a> 本地搜索功能</h2>
+<ol>
+<li>
+<p>在根目录执行命令</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>配置 hexo 的<code>_config.yml</code>文件<br />
+在文件末尾新增配置项</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">search:</span></span><br><span class="line"> 		<span class="attr">path:</span> <span class="string">search.xml</span></span><br><span class="line"> 		<span class="attr">field:</span> <span class="string">post</span></span><br><span class="line"> 		<span class="attr">format:</span> <span class="string">html</span></span><br><span class="line"> 		<span class="attr">limit:</span> <span class="number">10000</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>配置 <code>NexT</code> 主题的 <code>_config.yml</code>（根据 next 文档，应为<code>/_config.next.yml</code>）</p>
+ <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Local search</span></span><br><span class="line"><span class="attr">local_search:</span></span><br><span class="line"> 		<span class="attr">enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Notion + Hexo + GitHub Actions + Vercel 博客解决方案</title>
+    <url>//notion-hexo/</url>
+    <content><![CDATA[<h1 id="博客工具"><a class="markdownIt-Anchor" href="#博客工具"></a> 博客工具</h1>
+<ul>
+<li>写作平台：Notion</li>
+<li>博客平台：<a href="https://hexo.io/">Hexo</a></li>
+<li>博客主题：<a href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly@4.10.0</a></li>
+<li>博客文档同步：<a href="https://github.com/LetTTGACO/elog">Elog</a></li>
+<li>部署平台：Vercel</li>
+<li>博客仓库：<a href="https://github.com/LetTTGACO/notion-hexo">https://github.com/LetTTGACO/notion-hexo</a></li>
+</ul>
+<h1 id="博客搭建指南"><a class="markdownIt-Anchor" href="#博客搭建指南"></a> 博客搭建指南</h1>
+<h2 id="fork模板仓库"><a class="markdownIt-Anchor" href="#fork模板仓库"></a> Fork模板仓库</h2>
+<p><a href="https://github.com/elog-x/notion-hexo/fork">点击 Fork</a> 该模板仓库到个人 Github 账号仓库下并 clone 到本地</p>
+<h2 id="安装依赖"><a class="markdownIt-Anchor" href="#安装依赖"></a> 安装依赖</h2>
+<p>在项目根目录下运行命令安装依赖</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<h2 id="新建-elog-本地调试文件"><a class="markdownIt-Anchor" href="#新建-elog-本地调试文件"></a> 新建 Elog 本地调试文件</h2>
+<p>在项目根目录中复制<code>.elog.example.env</code>文件并改名为<code>.elog.env</code>，此文件将用于本地同步Notion 文档</p>
+<h2 id="配置-notion-关键信息"><a class="markdownIt-Anchor" href="#配置-notion-关键信息"></a> 配置 Notion 关键信息</h2>
+<p>按照<a href="https://elog.1874.cool/notion/gvnxobqogetukays#notion">文档提示</a>配置 Notion 并获取 <code>token</code> 和 <code>databaseId</code>，在本地<code>.elog.env</code>中写入</p>
+<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">NOTION_TOKEN=获取的token</span><br><span class="line">NOTION_DATABASE_ID=获取的databaseId</span><br></pre></td></tr></table></figure>
+<h2 id="本地调试"><a class="markdownIt-Anchor" href="#本地调试"></a> 本地调试</h2>
+<p>在项目根目录运行同步命令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm run sync:local</span><br></pre></td></tr></table></figure>
+<h2 id="启动-hexo"><a class="markdownIt-Anchor" href="#启动-hexo"></a> 启动 Hexo</h2>
+<p>在项目根目录运行hexo启动命令，会自动打开本地博客</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm run server</span><br></pre></td></tr></table></figure>
+<h2 id="配置-hexo-博客"><a class="markdownIt-Anchor" href="#配置-hexo-博客"></a> 配置 Hexo 博客</h2>
+<p>根据 <a href="https://hexo.io/">Hexo</a> 文档和 <a href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a> 主题配置文档，配置你的博客直到你满意为主，你也可以换别的主题，这里不做演示</p>
+<h2 id="提交代码到-github"><a class="markdownIt-Anchor" href="#提交代码到-github"></a> 提交代码到 github</h2>
+<p>本地访问没问题直接提交所有文件到 Github 仓库即可</p>
+<h2 id="部署到-vercel"><a class="markdownIt-Anchor" href="#部署到-vercel"></a> 部署到 Vercel</h2>
+<p>注册 Vercel 账号并绑定 Github，在 Vercel 导入 该项目，Vercel 会自动识别出该 Hexo 项目，不需要改动，直接选择 Deploy 部署。部署完成会有一个 Vercel 临时域名，你也可以绑定自己的域名。</p>
+<p><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/809b2785-2afd-42d1-9139-e6f17eaa52c1/4467a32f-6a3d-4c4b-ab8c-ca3e42860df8/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466X7HHJHVE%2F20250401%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20250401T043815Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEsaCXVzLXdlc3QtMiJGMEQCIFwXM1FQ3ftSnS8pv6W%2FiNrTxwKwvcmL03X9dBI6%2Fl6TAiBKTEtziaGLnp6L5bgMLQ6hy3jHV3jSjk5QwQSTZWhhzSqIBAi0%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMgE%2BbrlzTUphUPNpUKtwDVQeF2FxCFWP46PU2A7p8Ik4LuKP4Wb9M477yRPMEp2NSvwrR%2Bx%2FYmnMaBbtQFV8HD%2FrPzPqHBh5Ov3MAHtvqXcAK9kEj0MM7o7dqpTn%2FHVo0bR%2BMC40kukkj7buqqETZkkeRfcgb7x4AbdUC7bMpxBafQTqPW505KaLhZOGFHRh2VhPRhQsFi9bKFRbF5I9%2FfLYnWGH%2BSC0RUXT%2B1z2ZIXwCHS7Wp%2BiCJzkLn14hHN%2FPwHnvyKjVPoRzRlAdJD0XjNwpuHis30ro7EG03%2BHFKlLHcXeDaxFaFfhZNXrElwpmdXZ2MPXNlSq4eE1uX4H6VSXQMSa9EWQaQ5e3iR52Ir0k%2BBhox3H3uwICW%2BLtTd5NLqEi9MvrwBX05OS1sEVFUeiutlZbLUs5mWVtNohB8IExOz4vv8Aubt8ebIt%2Fk6Ip9mc2%2BPQ7eZhsRTVsKvkgpQdvIWVHdtEJQ1HpfgIcBpaVwrPj%2FuvU67jBauhOjtWkcn%2BxjFgn4NAqdhobHQzUaLbSFZOvKslruvwvza7e90N90wsX6g7Qpcl7PgqGQqeaOpjBR8%2F3VYAu%2BOUKkuwFkOG655OAxw%2Bp%2B%2BQ1ahmECSn8PTFY6aLNSVR17sT84weF9O0Rni%2BnEaYmbEMwrKStvwY6pgFr27tihkKh7BWZRWQls4N2UIQ61LIyAZAXXv4UkTAIAcgzjUl5dVwEelp%2BHsCdSVqE3ypg4yjjh0oDVw6lqp6jMTw6fjZi2s%2FBUHnNIKSPy4MhgwqH4t2alui1eB6t6wQagD6vqmbMdSK%2FvtQs4k2hbuUDPa4f2HzKvsifiC%2FJNHZnZmq3fSvn5q66UhhnapV6JilBnGmjXki5G6bQ%2BS%2B9lPVFKZqk&amp;X-Amz-Signature=fd857de88a90445b95dd66441eccb30e9a5b8fa74feeb9a34e844a7ea264933d&amp;X-Amz-SignedHeaders=host&amp;x-id=GetObject" alt="Untitled.png" /></p>
+<p><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/809b2785-2afd-42d1-9139-e6f17eaa52c1/3daedef9-b516-40e6-8c80-80bff543d62c/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466X7HHJHVE%2F20250401%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20250401T043815Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEsaCXVzLXdlc3QtMiJGMEQCIFwXM1FQ3ftSnS8pv6W%2FiNrTxwKwvcmL03X9dBI6%2Fl6TAiBKTEtziaGLnp6L5bgMLQ6hy3jHV3jSjk5QwQSTZWhhzSqIBAi0%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMgE%2BbrlzTUphUPNpUKtwDVQeF2FxCFWP46PU2A7p8Ik4LuKP4Wb9M477yRPMEp2NSvwrR%2Bx%2FYmnMaBbtQFV8HD%2FrPzPqHBh5Ov3MAHtvqXcAK9kEj0MM7o7dqpTn%2FHVo0bR%2BMC40kukkj7buqqETZkkeRfcgb7x4AbdUC7bMpxBafQTqPW505KaLhZOGFHRh2VhPRhQsFi9bKFRbF5I9%2FfLYnWGH%2BSC0RUXT%2B1z2ZIXwCHS7Wp%2BiCJzkLn14hHN%2FPwHnvyKjVPoRzRlAdJD0XjNwpuHis30ro7EG03%2BHFKlLHcXeDaxFaFfhZNXrElwpmdXZ2MPXNlSq4eE1uX4H6VSXQMSa9EWQaQ5e3iR52Ir0k%2BBhox3H3uwICW%2BLtTd5NLqEi9MvrwBX05OS1sEVFUeiutlZbLUs5mWVtNohB8IExOz4vv8Aubt8ebIt%2Fk6Ip9mc2%2BPQ7eZhsRTVsKvkgpQdvIWVHdtEJQ1HpfgIcBpaVwrPj%2FuvU67jBauhOjtWkcn%2BxjFgn4NAqdhobHQzUaLbSFZOvKslruvwvza7e90N90wsX6g7Qpcl7PgqGQqeaOpjBR8%2F3VYAu%2BOUKkuwFkOG655OAxw%2Bp%2B%2BQ1ahmECSn8PTFY6aLNSVR17sT84weF9O0Rni%2BnEaYmbEMwrKStvwY6pgFr27tihkKh7BWZRWQls4N2UIQ61LIyAZAXXv4UkTAIAcgzjUl5dVwEelp%2BHsCdSVqE3ypg4yjjh0oDVw6lqp6jMTw6fjZi2s%2FBUHnNIKSPy4MhgwqH4t2alui1eB6t6wQagD6vqmbMdSK%2FvtQs4k2hbuUDPa4f2HzKvsifiC%2FJNHZnZmq3fSvn5q66UhhnapV6JilBnGmjXki5G6bQ%2BS%2B9lPVFKZqk&amp;X-Amz-Signature=a1b3d602fa6419eb486965b4b06bfbcde1cbc37af8bef18db9254c5e7811241b&amp;X-Amz-SignedHeaders=host&amp;x-id=GetObject" alt="Untitled.png" /></p>
+<h2 id="配置-github-actions-权限"><a class="markdownIt-Anchor" href="#配置-github-actions-权限"></a> 配置 Github Actions 权限</h2>
+<p>在 Github 仓库的设置中找到 <code>Actions-General</code>，打开流水线写入权限<code>Workflow permissions</code></p>
+<p><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/809b2785-2afd-42d1-9139-e6f17eaa52c1/655e63eb-9fca-4856-ad6d-9deb87907f4a/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466X7HHJHVE%2F20250401%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20250401T043815Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEsaCXVzLXdlc3QtMiJGMEQCIFwXM1FQ3ftSnS8pv6W%2FiNrTxwKwvcmL03X9dBI6%2Fl6TAiBKTEtziaGLnp6L5bgMLQ6hy3jHV3jSjk5QwQSTZWhhzSqIBAi0%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMgE%2BbrlzTUphUPNpUKtwDVQeF2FxCFWP46PU2A7p8Ik4LuKP4Wb9M477yRPMEp2NSvwrR%2Bx%2FYmnMaBbtQFV8HD%2FrPzPqHBh5Ov3MAHtvqXcAK9kEj0MM7o7dqpTn%2FHVo0bR%2BMC40kukkj7buqqETZkkeRfcgb7x4AbdUC7bMpxBafQTqPW505KaLhZOGFHRh2VhPRhQsFi9bKFRbF5I9%2FfLYnWGH%2BSC0RUXT%2B1z2ZIXwCHS7Wp%2BiCJzkLn14hHN%2FPwHnvyKjVPoRzRlAdJD0XjNwpuHis30ro7EG03%2BHFKlLHcXeDaxFaFfhZNXrElwpmdXZ2MPXNlSq4eE1uX4H6VSXQMSa9EWQaQ5e3iR52Ir0k%2BBhox3H3uwICW%2BLtTd5NLqEi9MvrwBX05OS1sEVFUeiutlZbLUs5mWVtNohB8IExOz4vv8Aubt8ebIt%2Fk6Ip9mc2%2BPQ7eZhsRTVsKvkgpQdvIWVHdtEJQ1HpfgIcBpaVwrPj%2FuvU67jBauhOjtWkcn%2BxjFgn4NAqdhobHQzUaLbSFZOvKslruvwvza7e90N90wsX6g7Qpcl7PgqGQqeaOpjBR8%2F3VYAu%2BOUKkuwFkOG655OAxw%2Bp%2B%2BQ1ahmECSn8PTFY6aLNSVR17sT84weF9O0Rni%2BnEaYmbEMwrKStvwY6pgFr27tihkKh7BWZRWQls4N2UIQ61LIyAZAXXv4UkTAIAcgzjUl5dVwEelp%2BHsCdSVqE3ypg4yjjh0oDVw6lqp6jMTw6fjZi2s%2FBUHnNIKSPy4MhgwqH4t2alui1eB6t6wQagD6vqmbMdSK%2FvtQs4k2hbuUDPa4f2HzKvsifiC%2FJNHZnZmq3fSvn5q66UhhnapV6JilBnGmjXki5G6bQ%2BS%2B9lPVFKZqk&amp;X-Amz-Signature=a3ec2369ba1751a9a257bf3d818680d78c8af6b1a8963aef379f6ec6737f79ea&amp;X-Amz-SignedHeaders=host&amp;x-id=GetObject" alt="Untitled.png" /></p>
+<h2 id="配置环境变量"><a class="markdownIt-Anchor" href="#配置环境变量"></a> 配置环境变量</h2>
+<p>在本地运行时，用的是<code>.elog.env</code>文件中定义的 Notion 账号信息，而在 Github Actions 时，需要提前配置环境变量。</p>
+<p>在 Github 仓库的设置中找到 <code>Secrets and variables</code>，新增仓库的环境变量<code>NOTION_DATABASE_ID</code>和<code>NOTION_TOKEN</code>和<code>.elog.env</code>保持一致即可</p>
+<p><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/809b2785-2afd-42d1-9139-e6f17eaa52c1/00308cea-f5bb-4345-bc1d-7fce622ee54a/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466X7HHJHVE%2F20250401%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20250401T043815Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEsaCXVzLXdlc3QtMiJGMEQCIFwXM1FQ3ftSnS8pv6W%2FiNrTxwKwvcmL03X9dBI6%2Fl6TAiBKTEtziaGLnp6L5bgMLQ6hy3jHV3jSjk5QwQSTZWhhzSqIBAi0%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMgE%2BbrlzTUphUPNpUKtwDVQeF2FxCFWP46PU2A7p8Ik4LuKP4Wb9M477yRPMEp2NSvwrR%2Bx%2FYmnMaBbtQFV8HD%2FrPzPqHBh5Ov3MAHtvqXcAK9kEj0MM7o7dqpTn%2FHVo0bR%2BMC40kukkj7buqqETZkkeRfcgb7x4AbdUC7bMpxBafQTqPW505KaLhZOGFHRh2VhPRhQsFi9bKFRbF5I9%2FfLYnWGH%2BSC0RUXT%2B1z2ZIXwCHS7Wp%2BiCJzkLn14hHN%2FPwHnvyKjVPoRzRlAdJD0XjNwpuHis30ro7EG03%2BHFKlLHcXeDaxFaFfhZNXrElwpmdXZ2MPXNlSq4eE1uX4H6VSXQMSa9EWQaQ5e3iR52Ir0k%2BBhox3H3uwICW%2BLtTd5NLqEi9MvrwBX05OS1sEVFUeiutlZbLUs5mWVtNohB8IExOz4vv8Aubt8ebIt%2Fk6Ip9mc2%2BPQ7eZhsRTVsKvkgpQdvIWVHdtEJQ1HpfgIcBpaVwrPj%2FuvU67jBauhOjtWkcn%2BxjFgn4NAqdhobHQzUaLbSFZOvKslruvwvza7e90N90wsX6g7Qpcl7PgqGQqeaOpjBR8%2F3VYAu%2BOUKkuwFkOG655OAxw%2Bp%2B%2BQ1ahmECSn8PTFY6aLNSVR17sT84weF9O0Rni%2BnEaYmbEMwrKStvwY6pgFr27tihkKh7BWZRWQls4N2UIQ61LIyAZAXXv4UkTAIAcgzjUl5dVwEelp%2BHsCdSVqE3ypg4yjjh0oDVw6lqp6jMTw6fjZi2s%2FBUHnNIKSPy4MhgwqH4t2alui1eB6t6wQagD6vqmbMdSK%2FvtQs4k2hbuUDPa4f2HzKvsifiC%2FJNHZnZmq3fSvn5q66UhhnapV6JilBnGmjXki5G6bQ%2BS%2B9lPVFKZqk&amp;X-Amz-Signature=0d6700ea24fe4e364d35f4c39b2852b411414e54f77aa934576edfe94478b299&amp;X-Amz-SignedHeaders=host&amp;x-id=GetObject" alt="Untitled.png" /></p>
+<h2 id="自动化部署"><a class="markdownIt-Anchor" href="#自动化部署"></a> 自动化部署</h2>
+<p>当在 Notion 中改动文档后，手动/自动触发 Github Actions流水线，会重新从 Notion 增量拉取文档，自动提交代码到 Github 仓库。</p>
+<p>Vercel 会实时监测仓库代码，当有新的提交时都会重新部署博客。如此就实现了自动化部署博客。</p>
+<p>整个流程的关键点就在于：如何手动/自动触发 Github Actions</p>
+<p>在项目.<code>github/workflows/sync.yaml</code>中已经配置了外部 API 触发 Github Actions 事件，所以只需要调用 API 触发流水线即可。</p>
+<h3 id="手动触发"><a class="markdownIt-Anchor" href="#手动触发"></a> 手动触发</h3>
+<p>为了方便，这里提供一个部署在 Vercel 的免费公用的<a href="https://github.com/elog-x/serverless-api"><strong>ServerlessAPI</strong></a>，只需要配置好 URL 参数并浏览器访问即可触发流水线</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">https://serverless-api-elog.vercel.app/api/github?user=xxx&amp;repo=xxx&amp;event_type=deploy&amp;token=xxx</span><br></pre></td></tr></table></figure>
+<h3 id="自动触发"><a class="markdownIt-Anchor" href="#自动触发"></a> 自动触发</h3>
+<p>可在 Notion 中结合 Slack 触发，<a href="https://elog.1874.cool/notion/vy55q9xwlqlsfrvk">参考教程</a>，这里就不做进一步演示了</p>
+<h1 id="自定义-elog-配置"><a class="markdownIt-Anchor" href="#自定义-elog-配置"></a> 自定义 Elog 配置</h1>
+<p>如果想自定义 Elog 配置，可访问 <a href="https://elog.1874.cool/">Elog 文档</a></p>
+<h1 id="博客示例"><a class="markdownIt-Anchor" href="#博客示例"></a> 博客示例</h1>
+<p>示例仓库：<a href="https://github.com/LetTTGACO/notion-hexo">https://github.com/LetTTGACO/notion-hexo</a></p>
+<p>博客示例地址：<a href="https://notion-hexo.vercel.app/">https://notion-hexo.vercel.app</a></p>
+]]></content>
+      <categories>
+        <category>博客折腾手册</category>
+      </categories>
+      <tags>
+        <tag>elog</tag>
+        <tag>notion</tag>
+        <tag>hexo</tag>
+        <tag>blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Notion-Hexo 的 Elog 配置详解</title>
+    <url>//notion-notice/</url>
+    <content><![CDATA[<h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
+<p>在使用 Elog 同步Notion 上的文档时，因为是将富文本向下转成 markdown，会有很多样式损失。这是由于 markdown 样式集合＜ Notion 样式集合。所以在 Notion 上书写时，得按照 markdown 支持的样式进行写作。</p>
+<blockquote>
+<p>可以在<a href="/notion-example/">这里</a> 看到 Notion 文档被导出为 markdown 时的样式损失程度</p>
+</blockquote>
+<p>如果你不能接受样式损失，可能 markdown 并不适合你，隔壁 <a href="https://github.com/tangly1024/NotionNext">NotionNext</a> 可能更适合你搭建博客。</p>
+<h1 id="notion-格式注意点"><a class="markdownIt-Anchor" href="#notion-格式注意点"></a> Notion 格式注意点</h1>
+<h3 id="不要使用-markdown-不支持的样式语法"><a class="markdownIt-Anchor" href="#不要使用-markdown-不支持的样式语法"></a> 不要使用 markdown 不支持的样式/语法</h3>
+<p>例如字体颜色、多级折叠块、书签、数据库、嵌入等。导出为 markdown 都不能正常展示。</p>
+<h3 id="适当使用-markdown-形式的超链接"><a class="markdownIt-Anchor" href="#适当使用-markdown-形式的超链接"></a> 适当使用 markdown 形式的超链接</h3>
+<p>在文档中使用markdown 形式的超链接可以解决部分路由问题，例如链接Notion文档的超链接会被自动处理为非完整路径，或者手动链接到某个相对路由，可以使用以下方式解决</p>
+<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">// 使用[]() markdown 超链接语法</span><br><span class="line">点击 [下一篇](/notion/deploy-platform) 继续配置部署平台</span><br></pre></td></tr></table></figure>
+<h3 id="请勿上传视频-文件到-notion-文档"><a class="markdownIt-Anchor" href="#请勿上传视频-文件到-notion-文档"></a> 请勿上传视频、文件到 Notion 文档</h3>
+<p>Elog 还暂不支持将Notion 中的视频、文件暂不支持上传到图床。如果下载到本地，短期内能访问，但因为 notion 的链接具有时效性，一般是一个小时，之后就不能查看了。</p>
+<h1 id="elog-配置详解"><a class="markdownIt-Anchor" href="#elog-配置详解"></a> Elog 配置详解</h1>
+<p>参考<a href="https://elog.1874.cool/">Elog 文档</a>，本博客的 Elog 的配置如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">write</span>: &#123;</span><br><span class="line">    <span class="attr">platform</span>: <span class="string">&#x27;notion&#x27;</span>,</span><br><span class="line">    <span class="attr">notion</span>: &#123;</span><br><span class="line">      <span class="attr">token</span>: process.<span class="property">env</span>.<span class="property">NOTION_TOKEN</span>,</span><br><span class="line">      <span class="attr">databaseId</span>: process.<span class="property">env</span>.<span class="property">NOTION_DATABASE_ID</span>,</span><br><span class="line">      <span class="attr">filter</span>: &#123; <span class="attr">property</span>: <span class="string">&#x27;status&#x27;</span>, <span class="attr">select</span>: &#123; <span class="attr">equals</span>: <span class="string">&#x27;已发布&#x27;</span> &#125;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">deploy</span>: &#123;</span><br><span class="line">    <span class="attr">platform</span>: <span class="string">&#x27;local&#x27;</span>,</span><br><span class="line">    <span class="attr">local</span>: &#123;</span><br><span class="line">      <span class="attr">outputDir</span>: <span class="string">&#x27;./source/_posts&#x27;</span>,</span><br><span class="line">      <span class="attr">filename</span>: <span class="string">&#x27;title&#x27;</span>,</span><br><span class="line">      <span class="attr">format</span>: <span class="string">&#x27;markdown&#x27;</span>,</span><br><span class="line">      <span class="attr">frontMatter</span>: &#123;</span><br><span class="line">        <span class="attr">enable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">include</span>: [<span class="string">&#x27;categories&#x27;</span>, <span class="string">&#x27;tags&#x27;</span>, <span class="string">&#x27;title&#x27;</span>, <span class="string">&#x27;date&#x27;</span>, <span class="string">&#x27;updated&#x27;</span>, <span class="string">&#x27;permalink&#x27;</span>, <span class="string">&#x27;cover&#x27;</span>, <span class="string">&#x27;description&#x27;</span>]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">formatExt</span>: <span class="string">&#x27;./format-image.js&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">image</span>: &#123;</span><br><span class="line">    <span class="attr">enable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">platform</span>: <span class="string">&#x27;local&#x27;</span>,</span><br><span class="line">    <span class="attr">local</span>: &#123;</span><br><span class="line">      <span class="attr">outputDir</span>: <span class="string">&#x27;./source/images&#x27;</span>,</span><br><span class="line">      <span class="attr">prefixKey</span>: <span class="string">&#x27;/images&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="notion-配置"><a class="markdownIt-Anchor" href="#notion-配置"></a> Notion 配置</h2>
+<p><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/809b2785-2afd-42d1-9139-e6f17eaa52c1/37f1ce20-a930-40df-8bf2-e65ba2ceff0d/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466UGF2QTHD%2F20250331%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20250331T162953Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEEaCXVzLXdlc3QtMiJHMEUCIBRMroQqHfdYIoMB8UX0vVMMPIHZHsit2cxBMLKNnWvgAiEA8A85JIQX268ogRSn8XiVI32YcB67CAGmGPkuxlloWQoqiAQIqf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDLYaCIztOyANzQXHmSrcA1rU8Gj0oaebutc%2Bo%2BmVFtRiD9VxTDYLaDFrTvEihj8bx8taqYTd6ZV6PWag27zgOYYRZtH9I%2BHk1WAQBljW2fePcm5tpxHfTs6rWAE6UK0R1XSYzIUdc7Al3T47VlpdFIzmJTcOafJTHZvaW9ZoxYk03JPnm9XoKnprIib4M%2BLOLX1gMeoIeotnGUweUtB2RIrPUSPZIARZsaZKAJFBqMKS0xBIiIZGy2FY%2BQXpFb4y38rbBwMsdmP4nygs8QDclzeWM2fAnZj%2BWA3JJ2alMGWgtKV4lXemQH6Gb%2F9yPjsesKaC3c6Yg0%2FvA4x91M%2FSjLDNqHMpLWDfD9uakazazPJ1YNq3s5o%2FEaLwftDrFTNhiYHvSYi%2Fdc0DR1h39WqSbjHUqL%2BnvK0wQeGuSvBuTDq0XSKCSqcmFSBRzEo2T2Urz6HSgmjmIm6bgw%2FdNqo3%2Fx21pKhZj4OgjFaYJV6UFg7RIBb3oJqfefSwCMJgReJ3KNX8bw%2F3lXw2v%2F%2BfOEmkOO1OIBEsgQGjmh1n2p829VSAPZPnhohxKtt77DviUviKSNjslTKydxJHn4TXO6zQqjm%2BH4Mhr9wfbStjV2LW3K6IwEV9ej5XYdEq%2FElIbWGsWLZfLh94n7Oof9zjMPaBq78GOqUBujjh62nd3urre%2FhyboD02OhX6BpoTt7HgO7PVPdsOYYUjreOyX2i5OTS8iTHAwxjIZd9ouU9HiEG%2FxkhoBc5qHr5ORhQ2u1cGjwGZmk8CBrFqHR5ctxnaNBWn%2FhntFHY91z5LUI6BnbxvnOqttN2k5BBwD8WZjJncVcL4QqMZ2Dm87PgMrtCXFLUhocVlW5SadU7mYFbsMTP2cgDYbKlSTCQSZT5&amp;X-Amz-Signature=ce94dc797314523cb9240fe38fca82d579edcf44492195860ce944cc3d70c80d&amp;X-Amz-SignedHeaders=host&amp;x-id=GetObject" alt="Untitled.png" /></p>
+<p>根据 <a href="https://hexo.io/zh-cn/docs/front-matter">Hexo 的 FrontMatter 配置文档</a>，和 <a href="https://butterfly.js.org/posts/dc584b87/?highlight=front%20matter#Post-Front-matter">Butterfly主题的 FrontMatter 配置文档</a>，可以将需要的参数作为 notion 数据库的字段来设置。一般来说，主题的 FrontMatter 为 Hexo在一些基础字段是共用的。</p>
+<ul>
+<li><code>permalink</code>为文档的永久链接，例如<code>https://notion-hexo.vercel.app/notion-hexo/</code>，注意记得在结尾加上<code>/</code></li>
+<li><code>categories</code>为文档的分类</li>
+<li><code>tags</code> 为文档的标签</li>
+<li><code>description</code>为主题配置中可选的文档描述</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="attr">notion</span>: &#123;</span><br><span class="line">  <span class="attr">token</span>: process.<span class="property">env</span>.<span class="property">NOTION_TOKEN</span>,</span><br><span class="line">  <span class="attr">databaseId</span>: process.<span class="property">env</span>.<span class="property">NOTION_DATABASE_ID</span>,</span><br><span class="line">  <span class="attr">filter</span>: &#123; <span class="attr">property</span>: <span class="string">&#x27;status&#x27;</span>, <span class="attr">select</span>: &#123; <span class="attr">equals</span>: <span class="string">&#x27;已发布&#x27;</span> &#125;&#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>token</code>为 Notion Token，可从<a href="https://elog.1874.cool/notion/gvnxobqogetukays#token-1">此处</a>获取</li>
+<li><code>databaseId</code>为数据库的 ID，可从<a href="https://elog.1874.cool/notion/gvnxobqogetukays#databaseid">此处</a>获取</li>
+<li><code>filter</code>表示 Elog 将下载 notion 数据库属性为<code>status=已发布</code>的文档</li>
+</ul>
+<h2 id="本地配置"><a class="markdownIt-Anchor" href="#本地配置"></a> 本地配置</h2>
+<p><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/809b2785-2afd-42d1-9139-e6f17eaa52c1/804acc7d-2f1b-4daa-95f1-5dcbd316fe76/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466UGF2QTHD%2F20250331%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20250331T162953Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEEaCXVzLXdlc3QtMiJHMEUCIBRMroQqHfdYIoMB8UX0vVMMPIHZHsit2cxBMLKNnWvgAiEA8A85JIQX268ogRSn8XiVI32YcB67CAGmGPkuxlloWQoqiAQIqf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDLYaCIztOyANzQXHmSrcA1rU8Gj0oaebutc%2Bo%2BmVFtRiD9VxTDYLaDFrTvEihj8bx8taqYTd6ZV6PWag27zgOYYRZtH9I%2BHk1WAQBljW2fePcm5tpxHfTs6rWAE6UK0R1XSYzIUdc7Al3T47VlpdFIzmJTcOafJTHZvaW9ZoxYk03JPnm9XoKnprIib4M%2BLOLX1gMeoIeotnGUweUtB2RIrPUSPZIARZsaZKAJFBqMKS0xBIiIZGy2FY%2BQXpFb4y38rbBwMsdmP4nygs8QDclzeWM2fAnZj%2BWA3JJ2alMGWgtKV4lXemQH6Gb%2F9yPjsesKaC3c6Yg0%2FvA4x91M%2FSjLDNqHMpLWDfD9uakazazPJ1YNq3s5o%2FEaLwftDrFTNhiYHvSYi%2Fdc0DR1h39WqSbjHUqL%2BnvK0wQeGuSvBuTDq0XSKCSqcmFSBRzEo2T2Urz6HSgmjmIm6bgw%2FdNqo3%2Fx21pKhZj4OgjFaYJV6UFg7RIBb3oJqfefSwCMJgReJ3KNX8bw%2F3lXw2v%2F%2BfOEmkOO1OIBEsgQGjmh1n2p829VSAPZPnhohxKtt77DviUviKSNjslTKydxJHn4TXO6zQqjm%2BH4Mhr9wfbStjV2LW3K6IwEV9ej5XYdEq%2FElIbWGsWLZfLh94n7Oof9zjMPaBq78GOqUBujjh62nd3urre%2FhyboD02OhX6BpoTt7HgO7PVPdsOYYUjreOyX2i5OTS8iTHAwxjIZd9ouU9HiEG%2FxkhoBc5qHr5ORhQ2u1cGjwGZmk8CBrFqHR5ctxnaNBWn%2FhntFHY91z5LUI6BnbxvnOqttN2k5BBwD8WZjJncVcL4QqMZ2Dm87PgMrtCXFLUhocVlW5SadU7mYFbsMTP2cgDYbKlSTCQSZT5&amp;X-Amz-Signature=8949d67a28fd4d088596ebcf14a98ab16d0ee439980984696f0aeff8aa899cb6&amp;X-Amz-SignedHeaders=host&amp;x-id=GetObject" alt="Untitled.png" /></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="attr">local</span>: &#123;</span><br><span class="line">  <span class="attr">outputDir</span>: <span class="string">&#x27;./source/_posts&#x27;</span>,</span><br><span class="line">  <span class="attr">filename</span>: <span class="string">&#x27;title&#x27;</span>,</span><br><span class="line">  <span class="attr">format</span>: <span class="string">&#x27;markdown&#x27;</span>,</span><br><span class="line">  <span class="attr">frontMatter</span>: &#123;</span><br><span class="line">    <span class="attr">enable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">include</span>: [<span class="string">&#x27;categories&#x27;</span>, <span class="string">&#x27;tags&#x27;</span>, <span class="string">&#x27;title&#x27;</span>, <span class="string">&#x27;date&#x27;</span>, <span class="string">&#x27;updated&#x27;</span>, <span class="string">&#x27;permalink&#x27;</span>, <span class="string">&#x27;cover&#x27;</span>, <span class="string">&#x27;description&#x27;</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">formatExt</span>: <span class="string">&#x27;./format-image.js&#x27;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>outputDir</code>表示文档的存放位置为项目根目录下的<code>source/_posts</code>文件夹中</li>
+<li><code>filename</code>表示文档将以数据库的 <code>title</code> 字段命名，也就是文档名</li>
+<li><code>format</code>表示文档将以 markdown 的形式保存</li>
+<li><code>frontMatter.enable</code>表示在 markdown 文档开头添加 Front Matter</li>
+<li><code>frontMatter.include</code>表示只输出数组中存在的字段，数据库的其他字段忽略</li>
+<li><code>formatExt=./format-image.js</code>表示将使用自定义文档插件，插件路径为项目根目录下的<code>format-image.js</code>文件</li>
+</ul>
+<h3 id="format-imagejs"><a class="markdownIt-Anchor" href="#format-imagejs"></a> format-image.js</h3>
+<p>该文档插件的作用就是将 notion 文档最上面的<code>封面图 cover</code>，也下载到本地，并替换为本地图片链接</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; matterMarkdownAdapter &#125; = <span class="built_in">require</span>(<span class="string">&#x27;@elog/cli&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 自定义文档插件</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">DocDetail</span>&#125; doc doc的类型定义为 DocDetail</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">ImageClient</span>&#125; imageClient 图床下载器</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">Promise&lt;DocDetail&gt;</span>&#125; 返回处理后的文档对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">format</span> = <span class="keyword">async</span> (<span class="params">doc, imageClient</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> cover = doc.<span class="property">properties</span>.<span class="property">cover</span></span><br><span class="line">  <span class="keyword">if</span> (imageClient)  &#123;</span><br><span class="line">    <span class="comment">// 只有启用图床平台image.enable=true时，imageClient才能用，否则请自行实现图片上传</span></span><br><span class="line">    <span class="keyword">const</span> url = <span class="keyword">await</span> imageClient.<span class="title function_">uploadImageFromUrl</span>(cover, doc)</span><br><span class="line">    <span class="comment">// cover链接替换为本地图片</span></span><br><span class="line">    doc.<span class="property">properties</span>.<span class="property">cover</span> = url</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 将文档内容格式化为带有 Front Matter 的 markdown</span></span><br><span class="line">  doc.<span class="property">body</span> = <span class="title function_">matterMarkdownAdapter</span>(doc);</span><br><span class="line">  <span class="comment">// 返回整个文档对象</span></span><br><span class="line">  <span class="keyword">return</span> doc;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">// 必须要暴露此方法</span></span><br><span class="line">  format,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="图床配置"><a class="markdownIt-Anchor" href="#图床配置"></a> 图床配置</h2>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="attr">local</span>: &#123;</span><br><span class="line">  <span class="attr">outputDir</span>: <span class="string">&#x27;./source/images&#x27;</span>,</span><br><span class="line">  <span class="attr">prefixKey</span>: <span class="string">&#x27;/images&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>outputDir</code>表示图片的存放位置为项目根目录下的<code>source/images</code>文件夹中</li>
+<li><code>prefixKey=/images</code>表示图片的统一前缀为<code>/images</code>，因为 Hexo 会将<code>source/images</code>文件夹视为<a href="https://hexo.io/zh-cn/docs/asset-folders">静态资源根目录</a>，统一将图片放在这里，并指定图片前缀，Hexo 才能找到此图片</li>
+</ul>
+<h2 id="更多-elog-配置详情请阅读-elog-文档"><a class="markdownIt-Anchor" href="#更多-elog-配置详情请阅读-elog-文档"></a> 更多 Elog 配置详情，请阅读 <a href="https://elog.1874.cool/">Elog 文档</a></h2>
+]]></content>
+      <categories>
+        <category>Elog-Notion</category>
+      </categories>
+      <tags>
+        <tag>elog</tag>
+        <tag>notion</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Notion示例文章</title>
+    <url>//notion-example/</url>
+    <content><![CDATA[<h1 id="notion-markdown"><a class="markdownIt-Anchor" href="#notion-markdown"></a> Notion-Markdown</h1>
+<p><a href="https://1874.notion.site/Notion-0658ee89cadf4d0e9b6adfbb1d953c70">Notion示例文章源地址</a></p>
+<h2 id="行内样式"><a class="markdownIt-Anchor" href="#行内样式"></a> 行内样式</h2>
+<ul>
+<li><strong>加粗</strong></li>
+</ul>
+<p><em>斜体</em></p>
+<p><u>下划线</u></p>
+<p>删除线</p>
+<p>行内代码 <code>const a = 123</code></p>
+<p>行内公式，在Vitepress会报错，不做演示</p>
+<p>红色的文字</p>
+<p>蓝色的文字背景</p>
+<p>绿色的块背景</p>
+<h2 id="basic-block基本块"><a class="markdownIt-Anchor" href="#basic-block基本块"></a> Basic block（基本块）</h2>
+<h2 id="notion示例文章的子页面"><a class="markdownIt-Anchor" href="#notion示例文章的子页面"></a> Notion示例文章的子页面</h2>
+<p>Notion示例文章的子页面</p>
+<table>
+<thead>
+<tr>
+<th>表格标题</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>测试1</td>
+<td>啊大大</td>
+</tr>
+<tr>
+<td>测试2</td>
+<td><code>const a = 123</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>无序列表</li>
+</ul>
+<ol>
+<li>有序列表：事物按规律变化，也有一种不可避免的性质．这种性质就叫做<strong>必然性</strong>
+<ol>
+<li>事物的必然性，是事物本身的性质（我们反对宿命论的是其认为这一切是受神明的支配，而不是反对事物发展中存在的不可避免的性质的事实）
+<ol>
+<li>第三级别列表</li>
+<li>第三级别列表</li>
+</ol>
+</li>
+<li>其决定于它自己本身发展的情况和周围的条件
+<ol>
+<li>第三级别列表
+<ol>
+<li>第三级别列表</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<details>
+<summary>折叠块：点击展开【一级】</summary>
+<details>
+<summary>点击展开【二级】</summary>
+<details>
+<summary>点击展开【三级】</summary>
+<p>内容文本</p>
+</details>
+</details>
+</details>
+<p>123</p>
+<blockquote>
+<p>引用块<br />
+引用换行<br />
+引用换行<br />
+引用 2<br />
+引用 2 换行</p>
+</blockquote>
+<hr />
+<blockquote>
+<p>👏 标注文本：<strong>Elog 0.4.0-beta.7 发布了！</strong><br />
+开放式跨平台博客解决方案，随意组合写作平台和部署平台</p>
+<p>帮助导航👇<br />
+❓ <a href="https://elog.1874.cool/notion/introduce">Elog能干什么</a><br />
+🚀 <a href="https://elog.1874.cool/notion/start">快速开始</a></p>
+</blockquote>
+<h2 id="media媒体"><a class="markdownIt-Anchor" href="#media媒体"></a> Media（媒体）</h2>
+<p><img src="https://image.1874.cool/moon/cover.JPG" alt="cover.JPG" /></p>
+<p><a href="https://elog.1874.cool">bookmark</a></p>
+<p><a href="https://prod-files-secure.s3.us-west-2.amazonaws.com/809b2785-2afd-42d1-9139-e6f17eaa52c1/5999649b-7796-46a0-abd4-2e17b7b607ab/46_1677164223.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466XTBCXFSL%2F20250331%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20250331T162952Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEEaCXVzLXdlc3QtMiJGMEQCIFzUpRwsslVtF7DxooUcoc3WSzGzslwTb6SQ84YSmzU8AiB9wsaH6agD1SJCcbI8D%2FSd6p3Wnxqr4H6CBp5nSz%2Bd9iqIBAip%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMhaes09lcP%2Fzoh1GrKtwDwevbGjzU9PY%2BTvmi3IzMkntpiZW8%2B7iPviqavQdsB12yXHWZ8y%2Fz83XRsSuSQvCuUf5R70%2Fp3AFrTYgOhQRJl%2B93XbjWhBFacYZUfls9kY4gbm97%2BHOFzKI4T%2FkRsemsQYdfmEAdpMExyPLANVX9jVXFN20Rr6xXYMeExQVkZwrBfFussNtieb3CV5lpYBhQ3dWSM43E%2B9jDfD3DFmyWMzXcYwQ5KsshA8SLRxe0Ongo3qwC3%2Bu1iJHVhdBYgRmnvOBnqu8aSvEcV%2FHRH44W54LpDNwBnFVum9g4cKPpVQtV3t9NB9poWs7Q9yfwcjBe90owzpWDOgu%2BPFJrRMo9c%2Beyx%2BhbtsxH7Lldiwh6aN0RRW3tpvv48eaOu8UiX3vwlF2Bc48F07aL7os3kRcq3ziulXFRKfPKgBRE6iyrsgOhzm7Td9feej%2FHGf6eD6KQ47WvBBuLa1HhrL7%2B73nt68Nrh3oH86An5uYpc7C1hjQnEz1iHbu%2Bl%2BI42cel9NP3mDmqugztzoQpz2sF%2Fs%2Bt5u2EXvBZphguhski1n5%2BczAqunVa%2BGoTx7ROF580hIegFnMgs3YY7fnrF7fnIZD4RPwYzXX3yXEhDPIspm2QgTRsQqwyfsEUkq3qUgwwxYGrvwY6pgGXD8hayZWMMl%2FPFZOk2zRyXcFii4E0641hmHtt9q80Y8Sr%2FAYphxaetkPyHPq0x31iWljwRTkGxWgOg2bs%2FCoCbmbyjD%2BMEP7fH23uuEKmYUgMNKWcOUwCHrHG%2BHJVCL3eqaWc1SjxALgPGfhS0Ec8ri5Dy2KaiutoOHPMW4DHoAvCUEvMxOzbR%2BsbNZ5xqaI83ktg4jmkh8xWm%2FziuOsrVKc0r0GL&amp;X-Amz-Signature=1413e9207da68d02eb175a7cdd2e0cc48c0b55d7c535c1f10adf06b0b1e770ce&amp;X-Amz-SignedHeaders=host&amp;x-id=GetObject">46_1677164223.mp4</a></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pwd=<span class="string">&#x27;123456&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;password=<span class="subst">&#123;pwd!r&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## output:</span></span><br><span class="line"><span class="comment">#password=&#x27;123456&#x27;</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://prod-files-secure.s3.us-west-2.amazonaws.com/809b2785-2afd-42d1-9139-e6f17eaa52c1/753c8245-2aea-45de-8a5a-509c105f6236/example.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466XTBCXFSL%2F20250331%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20250331T162952Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEEaCXVzLXdlc3QtMiJGMEQCIFzUpRwsslVtF7DxooUcoc3WSzGzslwTb6SQ84YSmzU8AiB9wsaH6agD1SJCcbI8D%2FSd6p3Wnxqr4H6CBp5nSz%2Bd9iqIBAip%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMhaes09lcP%2Fzoh1GrKtwDwevbGjzU9PY%2BTvmi3IzMkntpiZW8%2B7iPviqavQdsB12yXHWZ8y%2Fz83XRsSuSQvCuUf5R70%2Fp3AFrTYgOhQRJl%2B93XbjWhBFacYZUfls9kY4gbm97%2BHOFzKI4T%2FkRsemsQYdfmEAdpMExyPLANVX9jVXFN20Rr6xXYMeExQVkZwrBfFussNtieb3CV5lpYBhQ3dWSM43E%2B9jDfD3DFmyWMzXcYwQ5KsshA8SLRxe0Ongo3qwC3%2Bu1iJHVhdBYgRmnvOBnqu8aSvEcV%2FHRH44W54LpDNwBnFVum9g4cKPpVQtV3t9NB9poWs7Q9yfwcjBe90owzpWDOgu%2BPFJrRMo9c%2Beyx%2BhbtsxH7Lldiwh6aN0RRW3tpvv48eaOu8UiX3vwlF2Bc48F07aL7os3kRcq3ziulXFRKfPKgBRE6iyrsgOhzm7Td9feej%2FHGf6eD6KQ47WvBBuLa1HhrL7%2B73nt68Nrh3oH86An5uYpc7C1hjQnEz1iHbu%2Bl%2BI42cel9NP3mDmqugztzoQpz2sF%2Fs%2Bt5u2EXvBZphguhski1n5%2BczAqunVa%2BGoTx7ROF580hIegFnMgs3YY7fnrF7fnIZD4RPwYzXX3yXEhDPIspm2QgTRsQqwyfsEUkq3qUgwwxYGrvwY6pgGXD8hayZWMMl%2FPFZOk2zRyXcFii4E0641hmHtt9q80Y8Sr%2FAYphxaetkPyHPq0x31iWljwRTkGxWgOg2bs%2FCoCbmbyjD%2BMEP7fH23uuEKmYUgMNKWcOUwCHrHG%2BHJVCL3eqaWc1SjxALgPGfhS0Ec8ri5Dy2KaiutoOHPMW4DHoAvCUEvMxOzbR%2BsbNZ5xqaI83ktg4jmkh8xWm%2FziuOsrVKc0r0GL&amp;X-Amz-Signature=1b9389d07ff9c09abee6fc4ea1c8bc64474ecba5d888807818c2246efdc040ac&amp;X-Amz-SignedHeaders=host&amp;x-id=GetObject">example.txt</a></p>
+<h2 id="database数据库"><a class="markdownIt-Anchor" href="#database数据库"></a> DataBase（数据库）</h2>
+<p>数据库</p>
+<h2 id="ai-block"><a class="markdownIt-Anchor" href="#ai-block"></a> AI block</h2>
+<p>API不支持，会报错<code>Block type ai_block is not supported via the API.</code></p>
+<h2 id="advanced-block高级块"><a class="markdownIt-Anchor" href="#advanced-block高级块"></a> Advanced block（高级块）</h2>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><mi>f</mi><mrow><mo fence="true">(</mo><msup><mrow><mo fence="true">[</mo><mfrac><mrow><mn>1</mn><mo>+</mo><mo stretchy="false">{</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">}</mo></mrow><mrow><mrow><mo fence="true">(</mo><mfrac><mi>x</mi><mi>y</mi></mfrac><mo>+</mo><mfrac><mi>y</mi><mi>x</mi></mfrac><mo fence="true">)</mo></mrow><mo stretchy="false">(</mo><mi>u</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mfrac><mo>+</mo><mi>a</mi><mo fence="true">]</mo></mrow><mrow><mn>3</mn><mi mathvariant="normal">/</mi><mn>2</mn></mrow></msup><mo fence="true">)</mo></mrow></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(行标)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">f\left(\left[\frac{1+\{x, y\}}{\left(\frac{x}{y}+\frac{y}{x}\right)(u+1)}+a\right]^{3 / 2}\right)\tag{行标}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:4.200049999999999em;vertical-align:-1.850025em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.3500249999999996em;"><span style="top:-1.9499950000000004em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎝</span></span></span><span style="top:-3.1050050000000002em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎜</span></span></span><span style="top:-4.350025em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎛</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.850025em;"><span></span></span></span></span></span></span><span class="minner"><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05002em;"><span style="top:-2.2500000000000004em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎣</span></span></span><span style="top:-4.05002em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎡</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55002em;"><span></span></span></span></span></span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.11em;"><span class="pstrut" style="height:3.15em;"></span><span class="mord"><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size2">(</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.695392em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">y</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.481108em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7475em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.446108em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">y</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size2">)</span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mopen">(</span><span class="mord mathdefault">u</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span><span style="top:-3.38em;"><span class="pstrut" style="height:3.15em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.827em;"><span class="pstrut" style="height:3.15em;"></span><span class="mord"><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mopen">{</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">}</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.69002em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault">a</span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05002em;"><span style="top:-2.2500000000000004em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎦</span></span></span><span style="top:-4.05002em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎤</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55002em;"><span></span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:2.3279199999999998em;"><span style="top:-4.5029200000000005em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span><span class="mord mtight">/</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.3500249999999996em;"><span style="top:-1.9499950000000004em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎠</span></span></span><span style="top:-3.1050050000000002em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎟</span></span></span><span style="top:-4.350025em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎞</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.850025em;"><span></span></span></span></span></span></span></span></span><span class="tag"><span class="strut" style="height:4.200049999999999em;vertical-align:-1.850025em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord cjk_fallback">行</span><span class="mord cjk_fallback">标</span></span><span class="mord">)</span></span></span></span></span></span></p>
+<p>Notion示例文章的同步块</p>
+<h1 id="折叠一级标题"><a class="markdownIt-Anchor" href="#折叠一级标题"></a> 折叠一级标题</h1>
+<pre><code>## 折叠二级标题
+
+
+    折叠内容
+</code></pre>
+<p>两列分栏（左）</p>
+<ul>
+<li>[ ] 左侧书写</li>
+</ul>
+<p>两列分栏（右）</p>
+<ul>
+<li>[ ] 右侧书写</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph LR;</span><br><span class="line">Mermaid思维导图--&gt;思维导图</span><br><span class="line">Mermaid思维导图--&gt;研发</span><br></pre></td></tr></table></figure>
+<p>@Anonymous</p>
+<p><a href="https://www.notion.so/f478ef37c82a41f1b7a59c195b043831">Untitled</a></p>
+<p>2023-04-26</p>
+<p>🚀🔥🐸</p>
+<h2 id="embeds嵌入"><a class="markdownIt-Anchor" href="#embeds嵌入"></a> Embeds（嵌入）</h2>
+<p>嵌入网页</p>
+<p><a href="https://elog.1874.cool">embed</a></p>
+]]></content>
+      <categories>
+        <category>Elog-Notion</category>
+      </categories>
+      <tags>
+        <tag>notion</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Test</title>
+    <url>/Test/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/general_psychology/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h1 id="普通心理学"><a class="markdownIt-Anchor" href="#普通心理学"></a> 普通心理学</h1>
+<blockquote>
+<p>source: BV1Fy4y1i79C</p>
+<p>参考教材</p>
+<p>《普通心理学》第4版 彭聃龄，北京师范大学出版社</p>
+<p>《津巴多普通心理学》菲利普·津巴多，中国人民大学出版社</p>
+</blockquote>
+<blockquote>
+<p>推荐书目</p>
+<p>《心理学与生活》菲利普·津巴多，人民邮电出版</p>
+<p>《心理学的故事》墨顿·亨特 李斯，海南出版社</p>
+<p>《改变心理学的40项研究》 白学军，中国轻工业出版社</p>
+<p>《登天的感觉》——以案例的方式讲心理咨询</p>
+</blockquote>
+<h1 id=""><a class="markdownIt-Anchor" href="#"></a> </h1>
+<h2 id="心理学的研究对象-方法"><a class="markdownIt-Anchor" href="#心理学的研究对象-方法"></a> 心理学的研究对象、方法</h2>
+<ul>
+<li>心理学研究什么？心理现象 + 行为</li>
+<li>心理学更多从个体角度研究心理（个体心理）</li>
+</ul>
+<h3 id="心理现象"><a class="markdownIt-Anchor" href="#心理现象"></a> 心理现象</h3>
+<blockquote>
+<p>人脑对现实生活的主观反应</p>
+</blockquote>
+<ul>
+<li>
+<p>什么方面、角度研究心理现象？个体的角度——<strong>个体心理</strong> / 个人受别人影响的角度——<strong>社会心理</strong>。</p>
+</li>
+<li>
+<p>个体心理</p>
+<ul>
+<li>认知——信息加工系统
+<ul>
+<li>获得知识、应用知识的过程，接收信息、信息加工、支配行为</li>
+<li>感觉、知觉、注意、记忆、思维、语言</li>
+</ul>
+</li>
+<li>动机和情绪——心理和行为调节与控制的系统
+<ul>
+<li>目的、为什么</li>
+</ul>
+<blockquote>
+<p>上面两者强调心理共性的研究</p>
+</blockquote>
+</li>
+<li>能力和人格——心理特性系统
+<ul>
+<li>强调个体差异</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>社会心理</p>
+<blockquote>
+<p>研究个体与他人互动时产生的<strong>心理现象</strong></p>
+</blockquote>
+<ul>
+<li>社会促进现象：由于他人在场促进了个体竞争动机的现象</li>
+<li>社会堕化现象：群体在一起的时候，个人付出的努力比单独完成时偏少的现象</li>
+<li>旁观者效应：吉诺维斯案件 -&gt; 责任分散</li>
+<li>从众心理：哄抢葡萄（坏的）；选择人多的餐厅吃饭（好的）</li>
+<li>去个性化：个体淹没到群体当中，自我责任感丧失</li>
+</ul>
+<blockquote>
+<p>研究人的<strong>思想、情感和行为</strong>，怎样受到真实或想象的他人存在的影响</p>
+</blockquote>
+<ul>
+<li>社会知觉</li>
+<li>人际吸引</li>
+</ul>
+</li>
+</ul>
+<h3 id="行为"><a class="markdownIt-Anchor" href="#行为"></a> 行为</h3>
+<blockquote>
+<p>在主客观因素下可以观察到的外部活动</p>
+</blockquote>
+<ul>
+<li>联系
+<ul>
+<li>心理支配行为</li>
+<li>行为反推心理</li>
+</ul>
+</li>
+</ul>
+<h2 id="现代心理学的门类"><a class="markdownIt-Anchor" href="#现代心理学的门类"></a> 现代心理学的门类</h2>
+<ul>
+<li>理论心理学：发展*，学习*，认知*，人格*，社会*，变态*，生理*，实验*，比较*（动物*）等</li>
+<li>应用心理学：教育*，咨询*，临床*，犯罪*，工业*（包括管理*，工程*），医学*，广告*，健康*，心理测量学等</li>
+</ul>
+<h2 id="心理学研究的目标"><a class="markdownIt-Anchor" href="#心理学研究的目标"></a> 心理学研究的目标</h2>
+<ul>
+<li>描述：描述这种现象是什么</li>
+<li>解释：为什么会出现这种现象</li>
+<li>预测：做出预测</li>
+<li>控制：控制心理和行为</li>
+</ul>
+<h2 id="心理学的应用"><a class="markdownIt-Anchor" href="#心理学的应用"></a> 心理学的应用</h2>
+<h2 id="心理学的研究方法"><a class="markdownIt-Anchor" href="#心理学的研究方法"></a> 心理学的研究方法</h2>
+<blockquote>
+<p>原则：客观、实事求是</p>
+</blockquote>
+<p>基本方法：</p>
+<ul>
+<li>观察法
+<ul>
+<li>优点：保持心理的自然性，结果比较真实</li>
+<li>缺点：结果有时候难以检验和证实；受研究者主观因素影响大，易产生观察者偏见；不能得出确切的因果关系</li>
+</ul>
+</li>
+<li>实验法：在控制的条件下，研究者有系统的操作自变量，然后观察自变量和因变量之间关系的一种方法
+<ul>
+<li>实验室实验 &amp; 自然实验</li>
+<li>被试内设计 &amp; 被试间设计</li>
+<li>常用因变量: 反应时RT</li>
+<li>优点
+<ul>
+<li>容易解释事物的因果关系</li>
+<li>可以重复、可检验</li>
+<li>数量化指标明确</li>
+</ul>
+</li>
+<li>缺点
+<ul>
+<li>推广时难以保证有效性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>心理测验法（量表）
+<ul>
+<li>智力测验、人格测验、职业能力倾向测验</li>
+<li>文字测验、非文字测验（图形）</li>
+<li>衡量测验的标准：信度——可靠程度、效度——是否有效地测量了你要测量的东西（心理测量学）</li>
+</ul>
+</li>
+<li>个案法</li>
+<li>调查法</li>
+</ul>
+<h2 id="心理学的过去和现在"><a class="markdownIt-Anchor" href="#心理学的过去和现在"></a> 心理学的过去和现在</h2>
+<blockquote>
+<p>心理学史</p>
+</blockquote>
+<ul>
+<li>19世纪末成为一门独立的科学</li>
+<li>心理学有漫长的过去，但只有短暂的历史</li>
+<li>现代心理学的诞生离不开近代哲学思潮和实验生理学的影响</li>
+</ul>
+<h3 id="19世纪末-20世纪初的西方心理学派别"><a class="markdownIt-Anchor" href="#19世纪末-20世纪初的西方心理学派别"></a> 19世纪末、20世纪初的西方心理学派别</h3>
+<ul>
+<li>
+<p>构造主义学派（关注结构）：研究人的直接的经验，即意识（心理）</p>
+</li>
+<li>
+<p>机能主义学派（关注功能）</p>
+<ul>
+<li>研究意识或心理的作用和功能</li>
+<li>意识不是个别元素的集合，是连续的整体，意识的功能在于使有机体适应环境</li>
+</ul>
+</li>
+<li>
+<p>格式塔心理学派（关注整体）：</p>
+<ul>
+<li>研究意识的科学</li>
+<li>心理是一个整体，整体不等于部分之和，整体大于部分之和</li>
+</ul>
+</li>
+<li>
+<p>行为主义学派（关注行为）</p>
+<ul>
+<li>《行为主义的心理学》系统阐述了行为主义的理论体系</li>
+<li>1913年 - 20世纪50年代</li>
+<li>激进的行为主义：华生
+<ul>
+<li>研究外显的行为、决定行为的因素</li>
+<li>行为是有机体适应环境的活动，引发活动的是刺激，心理学是研究刺激-反应的科学</li>
+<li>个体行为的环境决定论（后天经验决定行为）</li>
+<li>反对使用内省，使用实验的方式进行研究</li>
+</ul>
+</li>
+<li>新行为主义：斯金纳、托尔曼
+<ul>
+<li>承认内部心理活动对行为的作用， 承认S-R之间存在一个中间变量O-有机体</li>
+<li>操作型条件反射（斯金纳，“斯金纳箱”）</li>
+<li>学习即行为反应发生概率的变化（行为的结果影响行为）什么因素决定？——强化 &amp; 惩罚
+<ul>
+<li>正强化：行为在先，强化物在后</li>
+<li>负强化：强化物（厌恶性刺激）在先，行为在后</li>
+<li>两种惩罚：行为发生反应后，呈现厌恶的刺激 / 取消喜欢的刺激</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>精神分析学派（关注潜意识）</p>
+<ul>
+<li>弗洛伊德1896年创立，现代心理学中影响最大的理论之一</li>
+<li>性欲论：行为的动机来源于心灵深处的欲望，特别是性欲；性本能和死本能支配，人性恶</li>
+<li>早期的人格结构理论：潜意识unconscious+前意识Preconscious+意识conscious</li>
+<li>后期人格结构理论：
+<ul>
+<li>本我id（人格结构的底层，本能欲望、冲动组成的能量系统，追求满足、快乐的原则）</li>
+<li>自我ego（中间层，调节本我超我的矛盾。现实的原则）</li>
+<li>超我superego（抑制本我的冲动+对本我进行监控+追求完善的境界、道德的原则）</li>
+</ul>
+<blockquote>
+<p>本我欲求 -&gt; 自我的决定和行为 &lt;- 超我限制</p>
+</blockquote>
+</li>
+<li>人格发展阶段的理论</li>
+<li>研究方法：临床观察分析的方法 自由联想 释梦</li>
+<li>评价：开辟了潜意识的研究，扩大心理学研究领域</li>
+</ul>
+</li>
+</ul>
+<h3 id="当代心理学的研究取向"><a class="markdownIt-Anchor" href="#当代心理学的研究取向"></a> 当代心理学的研究取向</h3>
+<ul>
+<li>
+<p>生理心理学</p>
+<ul>
+<li>认知神经科学：脑功能成像的方法 ERP、PET、fMRI</li>
+</ul>
+</li>
+<li>
+<p>认知心理学</p>
+<ul>
+<li>强调认知过程的研究，认知因素在行为中的作用</li>
+<li>用信息加工的观点研究认知的过程（输入加工存储输出）
+<ul>
+<li>记忆：编码、储存和提取的过程</li>
+</ul>
+</li>
+<li>采用实验、观察、计算机模拟等方法</li>
+</ul>
+</li>
+<li>
+<p>人本主义心理学</p>
+<ul>
+<li>心理学的第三势力（1精神分析、2行为主义、3人本主义）</li>
+<li>强调研究健康人的心理</li>
+</ul>
+</li>
+<li>
+<p>积极心理学</p>
+<ul>
+<li>研究普通人的活力、力量与美德；促进个体的发展、社会的繁荣</li>
+</ul>
+</li>
+</ul>
+<h2 id="心理的神经生理基础"><a class="markdownIt-Anchor" href="#心理的神经生理基础"></a> 心理的神经生理基础</h2>
+<h3 id="神经系统的进化"><a class="markdownIt-Anchor" href="#神经系统的进化"></a> 神经系统的进化</h3>
+<blockquote>
+<p>脑是心理的器官，心理是人脑的功能（心理是脑对客观现实主观能动的反应）</p>
+<p>心理是神经系统发展到一定阶段的产物，神经系统越进化，心理和行为越复杂，越高级</p>
+</blockquote>
+<ul>
+<li>进化特点
+<ol>
+<li>脑重占体重的比例增加（脑指数）</li>
+<li>皮层相对大小的变化</li>
+<li>大脑皮层内部结构和功能的变化</li>
+</ol>
+<ul>
+<li>结构上：其他动物新皮层容积小，人新皮层容积大</li>
+<li>功能上：人脑功能更复杂</li>
+</ul>
+</li>
+</ul>
+<h3 id="神经系统的结构和功能"><a class="markdownIt-Anchor" href="#神经系统的结构和功能"></a> 神经系统的结构和功能</h3>
+<ul>
+<li>神经元</li>
+<li>中枢神经系统：脑和脊髓内的全部神经系统，加工整合信息，整合和调谐全身的功能
+<ul>
+<li>脊髓：将脑和周围神经系统联系起来的神经元干线
+<ul>
+<li>灰质：神经元胞体+神经元树突</li>
+<li>白质：神经元轴突</li>
+</ul>
+</li>
+<li>脑干：延脑、桥脑、中脑；网状结构</li>
+<li>小脑：与皮层运动区共同控制肌肉运动，协调身体的运动，控制身体的姿势</li>
+<li>间脑：
+<ul>
+<li>丘脑：皮层下感觉中枢，除嗅觉外的各种感觉的中转站</li>
+<li>下丘脑：调节植物性神经系统的皮下中枢</li>
+</ul>
+</li>
+<li>边缘系统：扣带回、海马（海马回、海马沟）、杏仁核等</li>
+<li>大脑：表面的灰质（大脑皮层）+ 深度的白质；额叶颞叶顶叶枕叶
+<ul>
+<li>机体感觉区：顶叶中央后回</li>
+<li>初级运动区：额叶中央前回</li>
+<li>语言区：布洛卡区（语言表达）、威尔尼克区（理解口头语言）、角围（理解书面语言）</li>
+<li>联合区：前额叶（注意、记忆、推理、问题解决、语言）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>周围神经系统</li>
+</ul>
+<h3 id="脑的可塑性"><a class="markdownIt-Anchor" href="#脑的可塑性"></a> 脑的可塑性</h3>
+<p>在后天经验的作用下，脑的结构和功能等方面会发生一定程度的变化</p>
+<h3 id="脑功能学说"><a class="markdownIt-Anchor" href="#脑功能学说"></a> 脑功能学说</h3>
+<ul>
+<li>定位说：来源于颅相说，由颅骨的形状推知某种心理能力</li>
+<li>整体说：脑的功能是由整体负责</li>
+<li>三个机能系统学说：大脑皮层定位是动态的、系统机能定位
+<ul>
+<li>调节激活和维持觉醒状态的系统</li>
+<li>信息接收、加工和储存的系统</li>
+<li>行为调节系统</li>
+</ul>
+</li>
+<li>模块说：
+<ul>
+<li>人脑在结构和功能上是由高度专门化并相对独立的功能模块组成，不同功能模块不同，模块的结合保证着认知功能的完成</li>
+<li>揭示人脑的整体特性</li>
+</ul>
+</li>
+<li>神经网络学说
+<ul>
+<li>各种心理活动是由不同脑区协同活动构成的神经网络实现</li>
+</ul>
+</li>
+</ul>
+<h1 id="感觉"><a class="markdownIt-Anchor" href="#感觉"></a> 感觉</h1>
+<blockquote>
+<p>人脑对直接作用于感觉器官的事物的个别属性的认识</p>
+</blockquote>
+<ul>
+<li>感觉的意义：提供了内外环境的信息，保持了机体与环境的信息平衡</li>
+<li>差别感觉阈限与差别感受性
+<ul>
+<li>韦伯定律</li>
+<li>对数定律：感觉的大小是刺激强度的对数函数</li>
+<li>幂定律：数量估计法</li>
+</ul>
+</li>
+</ul>
+<h2 id="视觉"><a class="markdownIt-Anchor" href="#视觉"></a> 视觉</h2>
+<p>不想学这一章了</p>
+<h1 id="知觉"><a class="markdownIt-Anchor" href="#知觉"></a> 知觉</h1>
+<p>也不想学这一章了</p>
+<h1 id="思维"><a class="markdownIt-Anchor" href="#思维"></a> 思维</h1>
+<h2 id="思维的一般概念"><a class="markdownIt-Anchor" href="#思维的一般概念"></a> 思维的一般概念</h2>
+<ul>
+<li>
+<p>含义</p>
+<ul>
+<li>思维是借助语言、表象和动作实现的、对客观事物概括和间接的认识，是认识的高级形式</li>
+<li>思维是在问题的空间中搜索的过程</li>
+</ul>
+</li>
+<li>
+<p>特征</p>
+<ul>
+<li>概括性：把一类事物共同的特征和概念抽取出来加以概括</li>
+<li>间接性：借助一定的媒介和一定的知识经验对客观事物进行间接的认识</li>
+<li>对经验的改组：思维是一种探索和发现新事物的过程，常指向新事物的特征和新关系。这需要人们对头脑中已有的知识经验不断进行更新和改组</li>
+</ul>
+</li>
+<li>
+<p>种类</p>
+<ul>
+<li>根据凭借物划分：直观动作思维、形象思维、逻辑思维</li>
+<li>考虑问题是多角度还是单一角度：辅合思维、发散思维
+<ul>
+<li>发散思维的测量方法
+<ol>
+<li>流畅性：单位时间内发散项目的数量</li>
+<li>变通性：发散项目的范围或纬度（触类旁通、举一反三）</li>
+<li>独特性：能对问题提出超乎寻常的、独特新颖的见解</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>常规思维：运用已有的知识或经验，按现成的方案直接解决问题</li>
+<li>创造性思维：重新组织已经有的知识经验、提出新的方案或程序
+<ul>
+<li>敏锐性、新颖性、独特性、具有重要的社会价值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="表象与想象"><a class="markdownIt-Anchor" href="#表象与想象"></a> 表象与想象</h2>
+<ul>
+<li>
+<p>表象</p>
+<ul>
+<li>定义：当事物不在跟前时，头脑出现的关于事物的形象</li>
+<li>种类：视觉表象、听觉表象、味觉表象、动作表象</li>
+<li>特征：直观性、概括性（抽象性）、可操作性</li>
+<li>表象在思维中的作用
+<ul>
+<li>表象是思维的单位之一，人们可以使用表象进行思维</li>
+<li>有利于问题解决（举例子）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>想象</p>
+<ul>
+<li>对头脑中已有的表象进行加工改造，形成新的形象的过程；是种高级的认知活动</li>
+<li>基本特点：形象性、新颖性</li>
+<li>创造形象的方法：
+<ul>
+<li>黏合法：把现实中从来没有结合过的特征、属性黏合在一起创造出新的形象（八戒）</li>
+<li>夸张法：改变客观事物的正常特点/突出某些特点（九头金乌）</li>
+<li>典型化法：根据一类事物的共同特征创造新形象，阿Q</li>
+<li>联想法：由一个事物联想到另一个事物</li>
+</ul>
+</li>
+<li>种类：无意想象、有意想象、再造想象、创造想象</li>
+<li>作用
+<ul>
+<li>预见的作用，能预见活动的结果，指导人们活动进行的方向</li>
+<li>创造性活动的组成部分</li>
+<li>补充知识经验的作用</li>
+<li>代替，某种需要得不到满足的时候用想象得到满足</li>
+<li>调节生理活动，能改变人体外周部分的机能活动过程</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="概念与推理"><a class="markdownIt-Anchor" href="#概念与推理"></a> 概念与推理</h2>
+<ul>
+<li>
+<p>概念</p>
+<ul>
+<li>定义：具有共同属性的一类事物的总称</li>
+<li>概念的内涵 &amp; 外延</li>
+<li>概念与词的关系
+<ul>
+<li>概念用词来表达、巩固和记载，词是概念的语言形式，概念是词的思想内容</li>
+<li>两者不是一一对应关系</li>
+</ul>
+</li>
+<li>概念的类型：合取概念、析取概念、关系概念</li>
+<li>根据概念形成的自然性划分：自然概念、人工概念</li>
+<li>概念结构的理论
+<ul>
+<li>层次网络模型：概念以节点形式储存在概念网络中——不一定具有心理现实性</li>
+<li>特征表理论：概念由语义特征表征（定义性特征+特异性特征），概念结构由定义性特征和整合这些特征的规则决定</li>
+<li>原型模型：从整体的角度来解释概念的结构</li>
+</ul>
+</li>
+<li>概念的形成是一个过程，概念的形成也叫概念的掌握
+<ul>
+<li>假设检验</li>
+<li>样例学习</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>推理</p>
+<ul>
+<li>从具体事物归纳出一般规律（归纳推理），或者根据一般原理推出新结论的思维活动（演绎推理）</li>
+<li>逻辑学与心理学研究推理的区别</li>
+<li>导致推理错误的原因
+<ul>
+<li>前提气氛效应、换位理论、心理模型</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="问题解决"><a class="markdownIt-Anchor" href="#问题解决"></a> 问题解决</h2>
+<p>不想学这一章了</p>
+<h1 id="情绪和情感"><a class="markdownIt-Anchor" href="#情绪和情感"></a> 情绪和情感</h1>
+<h2 id="概述"><a class="markdownIt-Anchor" href="#概述"></a> 概述</h2>
+<ul>
+<li>
+<p>情绪情感是人对客观事物的态度体验和相应的行为反应，包括</p>
+<ul>
+<li>是主观的一种态度体验
+<ul>
+<li>是大脑的一种感受状态，只有自己才能感受到</li>
+<li>情绪的体验可以积累，达到一定程度就会爆发</li>
+<li>伴随身体的能量变化</li>
+<li>女性的情绪体验比男性强，更容易识别面目的情绪表现，并更公开表现出来</li>
+</ul>
+</li>
+<li>生理唤醒
+<ul>
+<li>是生理的激活水平，不同的情绪情感的生理反应不同</li>
+<li>生理变化不是人为有意识可以控制的，是由植物性神经系统控制的</li>
+</ul>
+</li>
+<li>外部表现
+<ul>
+<li>面部表情、姿态表情、语调表情（体语）</li>
+<li>人在特定情绪状态下表现出一定的情绪反应</li>
+<li>人类表情是先天和后天的统一体（先天+后天习得，具有适应环境的意义）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>情绪和情感的区别和联系</p>
+<blockquote>
+<p>原来人们把区别于认知过程并同特定的愿望和需要联系起来的主观体验统称为感情</p>
+</blockquote>
+<ul>
+<li>区别
+<ul>
+<li>情绪指感情活动的过程；情感指某种体验和感受，常用来描述稳定的有社会意义的感情</li>
+<li>情绪有一定的情景性、激动性、暂时性；情感具有一定的深刻性、稳定性、持久性。</li>
+</ul>
+</li>
+<li>联系
+<ul>
+<li>稳定的情感在情绪基础上形成，并通过情绪表达出来</li>
+<li>情绪离不开情感，情绪变化反应情感的深度</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>功能</p>
+<ul>
+<li>适应功能</li>
+<li>动机功能</li>
+<li>组织功能：情绪对其他心理活动可能起促进作用或瓦解作用</li>
+<li>信号功能：通过人的表情，可以了解情绪状态，具有传递信息、沟通思想的作用</li>
+<li>影响身心健康</li>
+</ul>
+</li>
+<li>
+<p>情绪情感的分类</p>
+<ul>
+<li>基本情绪 &amp; 复合情绪</li>
+<li>积极情绪 &amp; 消极情绪
+<blockquote>
+<p>抑郁症的障碍</p>
+<ul>
+<li>心境障碍，长时间内心境总不好，郁郁寡欢</li>
+<li>思维方面对任何事物都持消极、悲观的认知</li>
+<li>躯体功能方面，感觉到疼痛、疲倦</li>
+</ul>
+<p>抑郁的原因：生理方面、后天环境、认知方面</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>情绪状态的分类</p>
+<blockquote>
+<p>根据情绪持续时间的长短、情绪的强度，把情绪进行分类</p>
+</blockquote>
+<ul>
+<li>心境：指比较平静的，持续时间比较长的状态，心境的情绪状态比较弱
+<ul>
+<li>心境具有一定的弥散性，当处于某种心境时，从事的其他活动也有心境的色彩</li>
+</ul>
+</li>
+<li>激情：强烈的、有爆发性的为时比较短暂的情绪状态
+<ul>
+<li>持续时间短、爆发力强</li>
+<li>激情会引起生理、心理变化
+<ul>
+<li>会出现意识狭窄现象（认知活动的范围缩小、理智分析能力下降、自我控制能力减弱）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>应激：人对某种意外的环境刺激的适应性反应
+<ul>
+<li>持续时间可长可短，压力可强可弱</li>
+<li>在强烈的应激状态下会对人的生理和心理造成很大影响</li>
+<li>人长期处于压力状态下，会造成适应性综合征
+<ul>
+<li>适应性综合症包括：动员、阻抗、衰竭</li>
+<li>躯体性压力源、社会性压力源、心理性压力源、文化性压力源</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>情感的分类</p>
+<ul>
+<li>道德感、理智感、美感</li>
+</ul>
+</li>
+</ul>
+<h2 id="情绪的生理机制"><a class="markdownIt-Anchor" href="#情绪的生理机制"></a> 情绪的生理机制</h2>
+<ul>
+<li>情绪的脑中枢机制
+<ul>
+<li>下丘脑位于丘脑下部，主管快乐和痛苦</li>
+<li>网状结构位于脑干，维持大脑皮层的觉醒状态
+<ul>
+<li>大脑要经过网状结构向下发送信息，引起情绪的外部表现</li>
+<li>外周神经系统接收信息，经过网状结构向上传送信息引起大脑皮层的激活状态</li>
+</ul>
+</li>
+<li>边缘系统，边缘系统的杏仁核是愤怒、恐惧的中枢</li>
+<li>大脑两半球
+<ul>
+<li>情绪的认知方面右半球起更大作用</li>
+<li>情绪体验方面左半球负责积极的情绪体验，右半球负责消极的情绪体验</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>情绪的外周神经机制
+<ul>
+<li>情绪和植物性神经系统的关联
+<ul>
+<li>交感神经系统、副交感神经系统</li>
+</ul>
+</li>
+<li>分泌系统、躯体神经系统</li>
+</ul>
+</li>
+</ul>
+<h2 id="情绪的理论"><a class="markdownIt-Anchor" href="#情绪的理论"></a> 情绪的理论</h2>
+<blockquote>
+<p>情绪发展的角度看</p>
+</blockquote>
+<h3 id="早期理论"><a class="markdownIt-Anchor" href="#早期理论"></a> 早期理论</h3>
+<blockquote>
+<p>早期的生理学理论</p>
+</blockquote>
+<ul>
+<li>
+<p>詹姆斯-兰格的情绪理论（情绪的外周理论）</p>
+<ul>
+<li>强调生理唤醒在情绪产生中的作用，生理因素是第一位的</li>
+<li>刺激作用于感觉器官引起身体的变化，对生理变化的知觉就是情绪，先有生理变化才有情绪</li>
+</ul>
+<blockquote>
+<p>评价：</p>
+<ul>
+<li>合理：看到了情绪与机体变化的直接关系，强调了植物性神经系统在情绪生产中的作用</li>
+<li>不合理：片面强调植物性神经系统的作用，忽视了植物性神经的调节、控制作用</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p>坎农-巴德学说</p>
+<ul>
+<li>坎农认为情绪的中枢在中枢神经系统的丘脑，丘脑把信息传导到大脑，大脑知觉刺激的性质，然后产生情绪体验</li>
+<li>生理变化与情绪同时产生</li>
+</ul>
+<blockquote>
+<p>评价：</p>
+<ul>
+<li>优点：注意到了中枢神经系统在情绪产生中的作用</li>
+<li>缺点：事实上这种观点不准确（实验证明）</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p>早期的生理学理论都强调生理变化在情绪产生中的作用</p>
+</li>
+</ul>
+<h3 id="认知理论"><a class="markdownIt-Anchor" href="#认知理论"></a> 认知理论</h3>
+<blockquote>
+<p>强调刺激情境的认知是情绪产生的重要因素</p>
+</blockquote>
+<ul>
+<li>
+<p>阿诺德的评定-兴奋学说</p>
+<ul>
+<li>情境——评估——情绪</li>
+<li>具体过程：感受器 -&gt; 丘脑 -&gt; 大脑皮层（评定、评估 -&gt; 态度）-&gt; 丘脑的交感神经 -&gt; 内脏、血管 -&gt; 身体变化的感觉 -&gt; 反馈到大脑皮层</li>
+</ul>
+<blockquote>
+<p>评价</p>
+<ul>
+<li>强调了生理因素 + 认知因素</li>
+<li>强调了环境的、认知的、行为的等多个因素在情绪产生中的作用，但认知因素是最重要的</li>
+<li>情绪认知理论的先驱</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p>沙赫特和辛格的情绪二因素理论</p>
+<ul>
+<li>两个因素
+<ol>
+<li>个体必须体验到高度的生理唤醒</li>
+<li>个体必须对生理唤醒的变化进行认知解释</li>
+</ol>
+</li>
+<li>情绪是对生理唤醒的进行特殊的认知解释后产生的</li>
+</ul>
+</li>
+<li>
+<p>拉扎勒斯的认知评价理论</p>
+<ul>
+<li>个体对环境事件知觉到有益或者有害，是人与环境相互作用的产物（性质 -&gt; 情绪）</li>
+<li>强调了情绪活动一定要有认知评价的参与（有益/有害）</li>
+<li>人对环境不断作出评价：
+<ul>
+<li>初评价（刺激事件是否与自己有利害关系）</li>
+<li>次评价（调节控制自己的行为反应）</li>
+<li>再评价（评价情绪和行为反应的有效性和适用性，反馈性行为）</li>
+</ul>
+</li>
+<li>没有涉及生理唤醒的因素</li>
+<li>情绪认知理论的集大成者</li>
+</ul>
+</li>
+</ul>
+<h3 id="动机分化理论"><a class="markdownIt-Anchor" href="#动机分化理论"></a> 动机分化理论</h3>
+<blockquote>
+<p>前面强调情绪的起源和发生，忽略了情绪的作用、功能</p>
+</blockquote>
+<ul>
+<li>汤姆金斯-伊扎德的动机分化理论</li>
+<li>核心观点：
+<ul>
+<li>情绪和人格系统
+<ul>
+<li>人格系统 = 体内平衡、内驱力、情绪、知觉、认知、动作系统</li>
+<li>六个系统相对独立，但互相作用</li>
+<li>情绪是人格系统的动力核心，是基本的动力系统</li>
+</ul>
+</li>
+<li>情绪系统及其功能
+<ul>
+<li>基本的情绪：特定的神经基础、特定的面部肌肉运动模式、可以区分的主观的体验</li>
+<li>复合的情绪：基本情绪的混合</li>
+<li>情绪系统包含神经生理、表情行为和情感体验三个子系统
+<ul>
+<li>情绪产生涉及广泛的神经结构</li>
+<li>表情包括神经肌肉和感觉反馈</li>
+<li>情感体验由躯体和脸部的活动模式的反馈信号进入意识状态而形成</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>情绪激活与调节
+<ul>
+<li>四种基本过程：
+<ol>
+<li>生物遗传——神经内分泌，直接激活情绪体验，并影响以下三个过程</li>
+<li>感觉反馈，肌肉活动引起的反馈信息进入边缘皮层去区，使情绪达到意识水平，产生情绪体验</li>
+<li>情感激活过程，一种情绪可以影响另外一种情绪</li>
+<li>认知激活过程 ，评价、比较等认知活动可以激活情绪</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="情绪的调节"><a class="markdownIt-Anchor" href="#情绪的调节"></a> 情绪的调节</h2>
+<ul>
+<li>情绪智力：体现一个人情绪调节能力的高低
+<ul>
+<li>1993年定义：区分自己和他人情绪的能力；调节自己和他人情绪的能力；运用情绪信息引导情绪的能力</li>
+<li>1995年定义：认识自身情绪的能力；认识他人情绪的能力；妥善管理情绪的能力；自我激励的能力；人际关系管理的能力</li>
+</ul>
+</li>
+<li>调节消极情绪的方法
+<ul>
+<li>改变不合理的认知方式
+<ul>
+<li>非此即彼，是一种绝对化的认知方式</li>
+<li>以偏概全，把一个消极的时间看作永久失败的象征</li>
+<li>选择性的过滤，专挑事物的消极方面念念不忘</li>
+<li>贬义积极的事物，对这种事物持否认的态度</li>
+</ul>
+</li>
+<li>改变的方法
+<ul>
+<li>从积极的方面考虑问题</li>
+<li>宣泄
+<ul>
+<li>直接宣泄：直接宣泄到这个人身上，但容易对人造成身心损害</li>
+<li>间接宣泄：打球喝酒睡大觉！</li>
+</ul>
+</li>
+<li>转移，转移注意力</li>
+<li>自慰，酸葡萄心理</li>
+<li>升华，把情绪所激发的力量引导到对自己、对他人有益的方面</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="能力"><a class="markdownIt-Anchor" href="#能力"></a> 能力</h1>
+<h1 id="人格"><a class="markdownIt-Anchor" href="#人格"></a> 人格</h1>
+<h2 id="人格的概念"><a class="markdownIt-Anchor" href="#人格的概念"></a> 人格的概念</h2>
+<ul>
+<li>概念
+<ul>
+<li>比较稳定的，经常能影响人的行为，并使他和别人有所区别的心理特点的总和</li>
+<li>是一个复杂的结构系统，包括多种成分如气质、性格、认知风格、自我调控等</li>
+</ul>
+</li>
+</ul>
+<h3 id="特点"><a class="markdownIt-Anchor" href="#特点"></a> 特点</h3>
+<ul>
+<li>统合性：人格是由多种成分构成的一个有机整体，具有内在的一致性，受到自我意识的调控</li>
+<li>独特性：人格是在遗传、环境、教育等先天后天因素的交互作用下形成的</li>
+<li>稳定性：人格一旦形成后在一定时间内是比较稳定的，不容易改变</li>
+<li>功能性：人格可以决定一个人的生活方式甚至命运</li>
+</ul>
+<h3 id="成分结构"><a class="markdownIt-Anchor" href="#成分结构"></a> 成分/结构</h3>
+<ul>
+<li>
+<p>气质：表现心理活动的强度、速度、灵活性、指向性等方面的心理特征</p>
+<ul>
+<li>分类（体液学）
+<ul>
+<li>多血质：情感丰富、外露、思维敏捷、活泼好动、善于交往；缺乏耐心和毅力、稳定性差（时迁）</li>
+<li>粘液质：情绪平稳、思维灵活性差；稳重踏实、自制能力强、主动性差、行动比较迟缓（唐僧）</li>
+<li>胆汁质：情绪体验很强、思维灵活、精力旺盛、直率；粗枝大叶、鲁莽、感情用事（张飞李逵）</li>
+<li>抑郁质：情绪体验深刻、思维敏锐、想象力丰富、多愁善感、优柔寡断</li>
+</ul>
+</li>
+<li>生理基础：人的高级神经活动类型在心理和行为的表现（所以不容易改变）
+<blockquote>
+<p>高级神经活动即兴奋过程和抑制过程的三个基本特性</p>
+<ul>
+<li>强度：大脑皮层神经细胞工作能力的标志</li>
+<li>平衡性：兴奋过程和抑制过程的相对的力量</li>
+<li>灵活性：兴奋过程和抑制过程相互转化的速度</li>
+</ul>
+</blockquote>
+<ul>
+<li>不可遏制型：强、不平衡 ———— 胆汁质</li>
+<li>活泼型：强、平衡、灵活 ———— 多血质</li>
+<li>安静型：强、平衡、不灵活 ———— 粘液质</li>
+<li>抑制型：弱、x、x ———— 抑郁质</li>
+</ul>
+</li>
+<li>气质调查问卷</li>
+</ul>
+</li>
+<li>
+<p>性格：与社会评价密切相关的人格特征，具有道德评价的含义</p>
+<ul>
+<li>性格受社会环境影响很大，比气质较容易发生改变</li>
+<li>表现人们对现实和周围世界的态度，表现在人们的行为举止之中</li>
+<li>性格有好坏之分</li>
+</ul>
+</li>
+<li>
+<p>认知风格：个人偏爱使用的认知方式（在认知活动过程中表现出来的不同特点）</p>
+<ul>
+<li>认知能力和认知风格不同
+<ul>
+<li>能力指顺利完成某种活动的心理条件、现有的水平或个体的潜力；风格指偏爱使用的方式</li>
+<li>能力指人们能够达到的最高行为；风格指人们的典型行为</li>
+<li>能力是单级变量，有好坏高低之分；风格没有</li>
+</ul>
+</li>
+<li>种类
+<ul>
+<li>根据人对外界环境依赖程度进行划分
+<ul>
+<li>场独立型：信息加工主要依靠内在参照/自我参照，心里分化水平较高，依据内在标准处理问题</li>
+<li>场依存型：对外在参照依赖性大，自我分化低，受周围环境和他人的影响较大</li>
+<li>测量方式？镶嵌图形测验</li>
+</ul>
+</li>
+<li>根据思考或解决问题过程中的速度&amp;准确率
+<ul>
+<li>快-正确型</li>
+<li>冲动型：快，容易出错</li>
+<li>沉思型：慢，准确率高</li>
+<li>慢-非正确型</li>
+<li>测量方式？熟悉图形匹配测验</li>
+</ul>
+</li>
+<li>同时性加工和即时性加工
+<ul>
+<li>即时性加工：一步一步分析问题，每个步骤只考虑一种假设，提出的假设在时间上有先后顺序</li>
+<li>同时性加工：宽视野的方式，考虑多种问题的可能性，发散式思维</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>自我调控：对人格各种成分进行调控，保证人格的完整和统一</p>
+<ul>
+<li>包含三个子系统
+<ul>
+<li>自我认知：对自己的洞察和理解，学会正确的、实事求是的评价自己、</li>
+<li>自我体验：伴随自我认知产生的内心的情感体验</li>
+<li>自我控制：自我意识在行为上的表现，是实现自我意识调节的最高环节</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="人格理论"><a class="markdownIt-Anchor" href="#人格理论"></a> 人格理论</h2>
+<blockquote>
+<p>关于人格的结构和功能的阐述，不同的人格理论侧重探讨的问题不同</p>
+</blockquote>
+<h3 id="特质理论"><a class="markdownIt-Anchor" href="#特质理论"></a> 特质理论</h3>
+<blockquote>
+<p>强调人格是由哪些特质或成分组成的，人格特质和行为的关系</p>
+</blockquote>
+<ul>
+<li>
+<p>特质：指持久而稳定的行为倾向，是人格的有效组成成分，是测评人格的基本单位（谦虚、认真）</p>
+</li>
+<li>
+<p>主要观点：人格的特质是人们共有的，但是在量的方面存在差异，因此表现出不同的人格</p>
+</li>
+<li>
+<p>奥尔波特的特质理论：主要包括共同特质和个人特质</p>
+<ul>
+<li>共同特质：大多数人共有的相同特质（一定的文化背景下大多数人共有的特质）</li>
+<li>个人特质：个体身上比较独特他特质，可分为：
+<ul>
+<li>首要特质：一个人最典型的、最有概括性的特质，影响人的方方面面；几乎会影响到个体行为的各个方面；</li>
+<li>中心特质：构成个体独特性的几个重要特质</li>
+<li>次要特质：不太重要的特质</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>卡特尔的人格特质理论：用因素分析的方法对人格特质进行分析</p>
+<ul>
+<li>因素分析：将多个实测变量简化为少数几个不相关变量的多元统计分析方法（<code>相关</code>的概念）</li>
+<li>表面特质：从外部行为中可以直接观察到的特质</li>
+<li>根源特质：制约表面通知的一种潜在基础，是构成人格的基本特质，是构成人格的最重要的组成部分</li>
+<li>卡特尔认为有16种最基本的根源特质（卡特尔16种人格测验量表）</li>
+</ul>
+</li>
+<li>
+<p>现代人格特质理论</p>
+<ul>
+<li>五因素理论（开放性、责任心、外倾性、宜人性、神经质/情绪稳定性）</li>
+<li>七因素理论（正负情绪性、正负效价、可靠性、宜人性、因习性）</li>
+</ul>
+</li>
+<li>
+<p>类型理论：描述一类人和另一类人的心理差异，根据一定标准把人划分为几种类型，一个人只属于其中的某一个类型（内向&amp;外向）</p>
+</li>
+<li>
+<p>类型理论划分方法</p>
+</li>
+<li>
+<p>A型人格和B型人格</p>
+<ul>
+<li>A型人格
+<ul>
+<li>性格急躁、缺乏耐性；成就欲望高，上进心强，有苦干精神；有时间紧迫感，竞争意识强；动作敏捷，说话快，生活处于紧张状态</li>
+<li>社会适应性相对较差，属于不安定性的人；在处理应激事件时在生理上容易激动，不利于身心健康</li>
+</ul>
+</li>
+<li>B型人格
+<ul>
+<li>性情温和，举止比较稳当；对工作生活的满足度较高；喜欢慢节奏的生活；可以胜任需要耐心和谨慎思考的工作</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>内向人格和外向人格（荣格）：根据心里倾向性进行划分</p>
+<ul>
+<li>内向人格：心理倾向倾向于内。经常进行自我剖析，做事谨慎、深思熟虑、交往面窄、有时候会出现使用方面的困难</li>
+<li>外向人格：注重外部世界，心理活动指向与外，独立自主、善于交往、行动敏捷</li>
+</ul>
+</li>
+<li>
+<p>特质理论和类型理论的区别</p>
+<ul>
+<li>个体之间的差异；群体间的人格差异</li>
+<li>描述人格量的差异；描述人格质的差异</li>
+<li>通过心理测量来评定；通过观察就可以获得</li>
+</ul>
+</li>
+<li>
+<p>艾森克的整合理论（试图整合特质理论和类型理论）</p>
+<ul>
+<li>把人格特质分为三个基本的人格纬度（三因素模型）：内外倾、神经质、精神质</li>
+<li>分成可以按照等级排列的不同单元，基本的结构包括：特殊性反应水平、习惯化反应水平、特质水平、类型水平</li>
+</ul>
+</li>
+</ul>
+<h3 id="精神动力学理论"><a class="markdownIt-Anchor" href="#精神动力学理论"></a> 精神动力学理论</h3>
+<blockquote>
+<p>人格内部的作用过程和人格发展的动力</p>
+</blockquote>
+<ul>
+<li>弗洛伊德的人格发展阶段理论
+<ul>
+<li>强调人格是由多种力量相互作用的动力系统，在该系统中，有一种作用对人格发展起着重要作用</li>
+<li>以性心理为主线的人格发展阶段理论</li>
+<li>以泛性论为基础，强调性本能的冲动对人格发展的重要作用</li>
+<li>性本能在不同年龄阶段有不同的区域，即性敏感区</li>
+<li>把人格发展分为五个阶段
+<ul>
+<li>口腔期（0-1岁）：性敏感区主要在口腔，儿童把自我和现实环境区别开来，产生自我，冲突来源于断奶</li>
+<li>肛门期（1-3岁）：性敏感区在肛门，冲突来源于父母的排便训练和儿童的自我排便</li>
+<li>生殖器时期（3-6岁）：性敏感区在生殖器，通过抚摸等获得满足；
+<ul>
+<li>儿童产生对父母的情绪冲突（俄狄浦斯情节、艾利克斯情节）；</li>
+<li>在解决恋父恋母情结的过程中，儿童获得了男性和女性的性格和行为特征，将父母的道德观念、社会态度内化为自己的东西，从而形成超我</li>
+</ul>
+</li>
+<li>潜伏期（6-12岁）：性的兴趣被学习知识等取代，在学习中自我和超我得到更大发展，这时男女之间的关系变得逐渐疏远</li>
+<li>生殖器时期（13岁以后）：性敏感区是生殖器，开始对异性感兴趣，逐渐摆脱对父母的依赖</li>
+</ul>
+</li>
+<li>儿童发展的首要任务是解决前一阶段的冲突；成年人的人格受到早期的影响非常大</li>
+<li>评价：
+<ul>
+<li>贡献：有一定道理，提出早期经验对人格形成的影响；提出婴儿喂养和大小便的训练对人格形成的影响偶一定道理</li>
+<li>局限：认为6-12岁这一时期对人格发展不起重要作用；概念模糊，很难被科学的验证和评价</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="行为主义"><a class="markdownIt-Anchor" href="#行为主义"></a> 行为主义</h3>
+<blockquote>
+<p>强调外部环境 学习等因素对人格形成和发展的作用</p>
+</blockquote>
+<h3 id="人本主义"><a class="markdownIt-Anchor" href="#人本主义"></a> 人本主义</h3>
+<blockquote>
+<p>关注个人感受和主观体验，以及成长潜能等方面对人格发展的作用</p>
+</blockquote>
+<h2 id="人格的测量"><a class="markdownIt-Anchor" href="#人格的测量"></a> 人格的测量</h2>
+<ul>
+<li>
+<p>自陈式量表法</p>
+<ul>
+<li>由一系列问题组成，每个问题陈述一种行为，个人按照自己的真实情况来回答问题</li>
+<li>举例
+<ul>
+<li>明尼苏达多项人格测验：10个临床量表+4个效度量表</li>
+<li>卡特尔人格因素测量量表（16PF）</li>
+<li>艾森克人格问卷：分为四个分量表：内外倾、神经质、精神质、效度量表</li>
+<li>加州心理调查量表</li>
+</ul>
+</li>
+<li>评价
+<ul>
+<li>优点：题目数固定，内容具体，施策简单，计分方便</li>
+<li>缺点：
+<ul>
+<li>测验内容有的是情绪状态方面，对某一问题的答案常常发生变化</li>
+<li>反应的偏向受社会赞许现象的影响</li>
+<li>测量结果的可靠程度受到回答者认真程度的影响</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>投射测验</p>
+<ul>
+<li>投射：指把个人的思想态度情感情绪等不自觉地反应于外界事物或他人的心理过程（以己度人）</li>
+<li>基本假设：在测验过程中给出一些模棱两可的图片，要求人们说出自己的想法。相对于无结构、没有明确内容的刺激，本身并不含有特殊的意义，但人们对图片的反应有特殊的意义，可以折射出人格的一些特征。主试对被试的反应进行分析来推断其人格特征</li>
+<li>举例
+<ul>
+<li>罗夏墨迹实验：墨迹图片，要求被试说出看到什么，主试进行提问</li>
+<li>主体统觉测验</li>
+</ul>
+</li>
+<li>评价
+<ul>
+<li>优点：测量结果真实</li>
+<li>缺点：
+<ul>
+<li>评分缺乏客观标准</li>
+<li>测验结果难以解释</li>
+<li>对特定行为不能提供较好的预测</li>
+<li>需要花费大量的时间</li>
+<li>需要进行专门训练</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>情境测验</p>
+<ul>
+<li>主试设立某种情境，在该情境中观察被试的反应，通过反应来推测人的某些人格特征</li>
+<li>举例
+<ul>
+<li>性格的教育测验：通常用于教育评价和人事的选拔</li>
+<li>情境压力测验：无领导小组讨论</li>
+<li>自我概念测验：形容词列表法；Q分类法</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="人格的成因"><a class="markdownIt-Anchor" href="#人格的成因"></a> 人格的成因</h2>
+<ul>
+<li>遗传
+<ul>
+<li>生物的遗传因素影响生物特征</li>
+<li>随着人格特质不同而不同</li>
+</ul>
+</li>
+<li>环境因素
+<ul>
+<li>社会文化因素</li>
+<li>家庭环境因素</li>
+<li>学校教育因素</li>
+</ul>
+</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>iOS代码发布为组件</title>
+    <url>/iOS%E4%BB%A3%E7%A0%81%E5%8F%91%E5%B8%83%E7%BB%84%E4%BB%B6/</url>
+    <content><![CDATA[<h2 id="1-前期准备"><a class="markdownIt-Anchor" href="#1-前期准备"></a> 1 前期准备</h2>
+<h3 id="11-远程仓库"><a class="markdownIt-Anchor" href="#11-远程仓库"></a> 1.1 远程仓库</h3>
+<blockquote>
+<p>准备好两个远程仓库，在GitHub上创建即可；</p>
+<p>权限建议为public</p>
+</blockquote>
+<ul>
+<li>
+<p>用来存放源码的仓库，该仓库用来存放自己编写的组件的源码，其应为正确的目录结构，如何模板创建下文详细说；</p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://github.com/JiaHaoFang/SFAPPRealTimeLogCaughter.git</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>用来存放组件的仓库，相当于xxxRepo、CocoaPods/Spec，是自己私有的组件仓库，用来存放.podspec文件；</p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://github.com/JiaHaoFang/SFPodRepo.git</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注：该仓库非必要，可以使用官方仓库，此处为了熟悉流程使用自己创建的仓库</li>
+</ul>
+</li>
+</ul>
+<h3 id="12-本地代码"><a class="markdownIt-Anchor" href="#12-本地代码"></a> 1.2 本地代码</h3>
+<blockquote>
+<p>由于该组件为一个完整工程作为组件发布，需要抽离</p>
+</blockquote>
+<ul>
+<li>保证需要发布为组件的工程，其核心功能完整，去耦，能够实现核心功能的抽离</li>
+<li>保证编译可通过，同时核心功能具备可移植性</li>
+</ul>
+<h2 id="2-本地目录创建"><a class="markdownIt-Anchor" href="#2-本地目录创建"></a> 2 本地目录创建</h2>
+<h3 id="21-创建私有repo目录"><a class="markdownIt-Anchor" href="#21-创建私有repo目录"></a> 2.1 创建私有Repo目录</h3>
+<ul>
+<li>
+<p>在～/.cocoapods/repo中能看到本地有的repo仓库，其中cocoapods为官方仓库，trunk也是官方仓库（历史遗留问题）；xxxRepo为公司私有仓库。</p>
+</li>
+<li>
+<p>该步骤将创建私人仓库SFRepo，作用类似上文的官方仓库，后续将用来存放个人的组件。</p>
+</li>
+<li>
+<p>或者也可以选择发布到官方仓库。</p>
+</li>
+<li>
+<p>命令</p>
+  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod repo add <span class="title class_">SFPod</span> <span class="symbol">https:</span>/<span class="regexp">/github.com/</span><span class="title class_">JiaHaoFang</span>/<span class="title class_">SFPodRepo</span>.git</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>创建完成之后可通过命令查看目录结构</p>
+  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">open ~<span class="regexp">/.cocoapods/repos</span><span class="regexp">/SFPod</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="22-创建个人组件目录"><a class="markdownIt-Anchor" href="#22-创建个人组件目录"></a> 2.2 创建个人组件目录</h3>
+<ul>
+<li>
+<p>发布的组件需要按照Cocoapod严格遵守官方给出的目录结构，官方给出了命令可以直接生成模版</p>
+  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod lib create <span class="title class_">SFAPPRealTimeLogCaughter</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>过程中终端会向我们提出一系列问题，包括开发语言是OC还是Swift，demo程序，测试框架，界面测试。我选择了包含demo程序，没有测试框架.</li>
+</ul>
+</li>
+<li>
+<p>生成模版后可以使用tree命令查看该文件夹下的目录结构</p>
+</li>
+</ul>
+<h3 id="23-编辑模版"><a class="markdownIt-Anchor" href="#23-编辑模版"></a> 2.3 编辑模版</h3>
+<blockquote>
+<p>在2.2创建的公共模版就是组件的模板，我们需要将我们的代码添加进去将其作为自己的组件</p>
+</blockquote>
+<ul>
+<li>我们需要发布的组件核心功能代码存放在/SFPod/Pod/Classes文件夹中</li>
+<li>另外在Example中编写Demo测试自己的组件是否能正常工作，点击.xcworkspace可以作为一个完整工程运行</li>
+<li>在写Example的时候，如果修改了Classes中文件的，需要pod install一下，将组件在自己的Demo中更新一下</li>
+</ul>
+<h3 id="24-编辑podspec文件"><a class="markdownIt-Anchor" href="#24-编辑podspec文件"></a> 2.4 编辑.podspec文件</h3>
+<ul>
+<li>自行Google</li>
+</ul>
+<h2 id="3-发布组件"><a class="markdownIt-Anchor" href="#3-发布组件"></a> 3 发布组件</h2>
+<blockquote>
+<p>如果上面的步骤完成了，恭喜，完成了一半</p>
+</blockquote>
+<h3 id="31-校验"><a class="markdownIt-Anchor" href="#31-校验"></a> 3.1 校验</h3>
+<ul>
+<li>
+<p>当2中的步骤全部完成，我们可以使用下面的命令检验自己组件代码的合法性（主要是检验.podspec文件）</p>
+  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod lib lint</span><br><span class="line"><span class="comment"># 只从本地验证你的pod能否通过验证。</span></span><br><span class="line">pod spec lint</span><br><span class="line"><span class="comment"># 从本地和远程验证你的pod能否通过验证，建议使用这个</span></span><br><span class="line">--allow-warnings</span><br><span class="line"><span class="comment"># 如何库代码中有警告导致通不过验证。加上这个忽略警告</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="32-提交源码"><a class="markdownIt-Anchor" href="#32-提交源码"></a> 3.2 提交源码</h3>
+<ul>
+<li>
+<p>提交源码到个人仓库</p>
+  <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git add -a</span><br><span class="line">git commit -m <span class="string">&quot;xxx&quot;</span></span><br><span class="line">git push</span><br><span class="line">git tag 0.1.0</span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="33-发布组件到个人repo"><a class="markdownIt-Anchor" href="#33-发布组件到个人repo"></a> 3.3 发布组件到个人Repo</h3>
+<ul>
+<li>
+<p>使用命令将.podspec文件添加到~/.cocoapods/repos/SFPod中，同时也发布到远程仓库</p>
+  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod repo push <span class="title class_">SFPod</span> <span class="title class_">SFAPPRealTimeLogCaughter</span>.podspec</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>执行完该步骤后， ~/.cocoapods/repos/SFPod会新增对应版本的.podspec文件</p>
+</li>
+</ul>
+<h3 id="34-查询"><a class="markdownIt-Anchor" href="#34-查询"></a> 3.4 查询</h3>
+<ul>
+<li>
+<p>搜索组件库</p>
+  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod search <span class="title class_">SFAPPRealTimeLogCaughter</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>搜索到了说明安装成功</p>
+</li>
+</ul>
+<h2 id="4-使用组件"><a class="markdownIt-Anchor" href="#4-使用组件"></a> 4 使用组件</h2>
+<ul>
+<li>
+<p>在Podfile文件新增源</p>
+  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">source <span class="string">&#x27;https://github.com/JiaHaoFang/SFPodRepo.git&#x27;</span></span><br><span class="line">source <span class="string">&#x27;https://github.com/CocoaPods/Specs.git&#x27;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>添加pod</p>
+  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod <span class="string">&#x27;SFAPPRealTimeLogCaughter&#x27;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>上面两项可以合起来写，合不起来。。。</p>
+</li>
+<li>
+<p>执行 pod install</p>
+</li>
+<li>
+<p>运行代码</p>
+</li>
+</ul>
+<blockquote>
+<p>参考资料：<a href="https://www.jianshu.com/p/103a6f0bf3a4">https://www.jianshu.com/p/103a6f0bf3a4</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>iOS</tag>
+        <tag>Cocoapods</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>test2</title>
+    <url>/test2/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>雷达自动升温控制器设计</title>
+    <url>/%E9%9B%B7%E8%BE%BE%E8%87%AA%E5%8A%A8%E5%8D%87%E6%B8%A9%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AE%BE%E8%AE%A1/</url>
+    <content><![CDATA[<h2 id="1-控制器"><a class="markdownIt-Anchor" href="#1-控制器"></a> 1 控制器</h2>
+<h3 id="11-预设升温曲线"><a class="markdownIt-Anchor" href="#11-预设升温曲线"></a> 1.1 预设升温曲线</h3>
+<ul>
+<li>
+<p>期望温度输入曲线为一次函数曲线</p>
+<ul>
+<li>
+<p>控制时间为40分钟左右，控制温度幅度约为40℃到80℃．</p>
+</li>
+<li>
+<p>曲线斜率</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi><mo>=</mo><mfrac><mrow><mn>80</mn><mi>C</mi><mo>−</mo><mn>40</mn><mi>C</mi></mrow><mrow><mn>40</mn><mi>min</mi><mo>⁡</mo></mrow></mfrac><mo>=</mo><mn>1</mn><mi>C</mi><mi mathvariant="normal">/</mi><mi>min</mi><mo>⁡</mo></mrow><annotation encoding="application/x-tex">k=\frac{80C-40C}{40\min}=1 C/\min
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.04633em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.36033em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">4</span><span class="mord">0</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">min</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">8</span><span class="mord">0</span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">4</span><span class="mord">0</span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord">/</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">min</span></span></span></span></span></p>
+<p>根据后续实验，该斜率值修正为1.1℃/min，后续记该斜率为slope = 1.1℃．</p>
+</li>
+<li>
+<p>截距<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">b=0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>，即在接管控制之后期望温度曲线为正比例函数．</p>
+</li>
+</ul>
+</li>
+<li>
+<p>控制方式</p>
+<ul>
+<li>雷达启动初期，可以利用雷达自热升温．</li>
+<li>当雷达自热升温曲线较为平缓后，控制器接管控制．</li>
+</ul>
+</li>
+</ul>
+<h3 id="12-设置输出"><a class="markdownIt-Anchor" href="#12-设置输出"></a> 1.2 设置输出</h3>
+<ul>
+<li>通过串口通讯程序(driver)实现控制器与外部硬件(风扇)的通讯．</li>
+<li>根据已有驱动代码，driver的接口为占空比，应将控制器输出转化为占空比输出．</li>
+<li>通过继电器对风扇进行通断控制，模拟PWM输出，实现输出功率的控制．</li>
+</ul>
+<h3 id="13-控制对象"><a class="markdownIt-Anchor" href="#13-控制对象"></a> 1.3 控制对象</h3>
+<ul>
+<li>
+<p>雷达的温度传感器在雷达内部，外界加热通过热风作用在雷达的金属外壳上，热量传递需要时间，并且系统惯性较大．</p>
+</li>
+<li>
+<p>将该温度控制对象抽象为一个带有大时滞环节的一阶惯性环节，频域表达式：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>G</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mi>G</mi><mi>p</mi></msub><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mo>⋅</mo><msup><mi>e</mi><mrow><mo>−</mo><mi>τ</mi><mi>s</mi></mrow></msup><mo>=</mo><mfrac><mi>K</mi><mrow><mi>T</mi><mi>s</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>⋅</mo><msup><mi>e</mi><mrow><mo>−</mo><mi>τ</mi><mi>s</mi></mrow></msup></mrow><annotation encoding="application/x-tex">G(s)=G_p(s)\cdot e^{-\tau s}=\frac K{Ts+1}\cdot e^{-\tau s}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">G</span><span class="mopen">(</span><span class="mord mathdefault">s</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault">G</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">s</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.821331em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.821331em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mathdefault mtight" style="margin-right:0.1132em;">τ</span><span class="mord mathdefault mtight">s</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.1296600000000003em;vertical-align:-0.7693300000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.36033em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault">s</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">K</span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693300000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.821331em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.821331em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mathdefault mtight" style="margin-right:0.1132em;">τ</span><span class="mord mathdefault mtight">s</span></span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p>其中<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>τ</mi><mi mathvariant="normal">/</mi><mi>T</mi><mo>&gt;</mo><mn>0.5</mn></mrow><annotation encoding="application/x-tex">\tau/T&gt;0.5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.1132em;">τ</span><span class="mord">/</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mord">.</span><span class="mord">5</span></span></span></span>.</p>
+</li>
+<li>
+<p>考虑到该对象时域表达式较复杂且各参数与实验环境相关，波动较大，所以不建模，实地测量调参</p>
+</li>
+</ul>
+<h3 id="14-控制器设计"><a class="markdownIt-Anchor" href="#14-控制器设计"></a> 1.4 控制器设计</h3>
+<ul>
+<li>
+<p>采用位置式PD控制，考虑到对象类型，可以采用中间微分反馈方案</p>
+<ul>
+<li>
+<p>中间微分</p>
+<img src="/%E9%9B%B7%E8%BE%BE%E8%87%AA%E5%8A%A8%E5%8D%87%E6%B8%A9%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AE%BE%E8%AE%A1/image-%E4%B8%AD%E9%97%B4%E5%BE%AE%E5%88%86%E5%8F%8D%E9%A6%88%E6%8E%A7%E5%88%B6%E5%99%A8%E6%A1%86%E5%9B%BE.png" class="" title="中间微分反馈控制器框图">
+</li>
+<li>
+<p>离散时域表达式：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mi>K</mi><mi>p</mi></msub><mo>⋅</mo><mi>e</mi><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo><mo>−</mo><msub><mi>K</mi><mi>d</mi></msub><mo>⋅</mo><mo stretchy="false">[</mo><mi>y</mi><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo><mo>−</mo><mi>y</mi><mo stretchy="false">(</mo><mi>k</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">u(k)=K_p\cdot e(k)-K_d \cdot [y (k)-y(k-1)]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">u</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">e</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mclose">]</span></span></span></span></span></p>
+</li>
+<li>
+<p>考虑到该系统需要跟踪单位速度曲线，且为了避免数据波动对微分的影响，时域表达式修正为：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mi>K</mi><mi>p</mi></msub><mo>⋅</mo><mi>e</mi><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo><mo>−</mo><msub><mi>K</mi><mi>d</mi></msub><mo>⋅</mo><mo stretchy="false">[</mo><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo><mo>−</mo><mi>y</mi><mo stretchy="false">(</mo><mi>k</mi><mo>−</mo><mi>T</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mfrac><mrow><mn>1</mn><mi>min</mi><mo>⁡</mo></mrow><mi>T</mi></mfrac><mo>−</mo><mi>t</mi><mi>a</mi><mi>r</mi><mi>g</mi><mi>e</mi><mi>t</mi><mi mathvariant="normal">_</mi><mi>s</mi><mi>l</mi><mi>o</mi><mi>p</mi><mi>e</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">u(k)=K_p\cdot e(k)-K_d \cdot [(y (k)-y(k-T))\frac{1\min}{T}-target\_slope]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">u</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">e</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.03086em;vertical-align:-0.686em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mclose">)</span><span class="mclose">)</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3448600000000002em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">min</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.06em;vertical-align:-0.31em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">e</span><span class="mord mathdefault">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord mathdefault">e</span><span class="mclose">]</span></span></span></span></span></p>
+<p>或写作：</p>
+</li>
+</ul>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mi>K</mi><mi>p</mi></msub><mo>⋅</mo><mi>e</mi><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo><mo>−</mo><msub><mi>K</mi><mi>d</mi></msub><mo>⋅</mo><mo stretchy="false">[</mo><mi>s</mi><mi>l</mi><mi>o</mi><mi>p</mi><mi>e</mi><mo>−</mo><mi>t</mi><mi>a</mi><mi>r</mi><mi>g</mi><mi>e</mi><mi>t</mi><mi mathvariant="normal">_</mi><mi>s</mi><mi>l</mi><mi>o</mi><mi>p</mi><mi>e</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">u(k)=K_p\cdot e(k)-K_d \cdot [slope-target\_slope]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">u</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">e</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.06em;vertical-align:-0.31em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">e</span><span class="mord mathdefault">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord mathdefault">e</span><span class="mclose">]</span></span></span></span></span></p>
+</li>
+</ul>
+<p>​		其中<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi><mi>a</mi><mi>r</mi><mi>g</mi><mi>e</mi><mi>t</mi><mi mathvariant="normal">_</mi><mi>s</mi><mi>l</mi><mi>o</mi><mi>p</mi><mi>e</mi><mo>=</mo><mn>1.1</mn></mrow><annotation encoding="application/x-tex">target\_slope=1.1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00444em;vertical-align:-0.31em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">e</span><span class="mord mathdefault">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">.</span><span class="mord">1</span></span></span></span>为预设曲线的斜率，T为一个微分时间间隔．</p>
+<ul>
+<li>设置控制器工作频率为三秒钟，保证控制较为平滑</li>
+</ul>
+<h3 id="15-参数设置"><a class="markdownIt-Anchor" href="#15-参数设置"></a> 1.5 参数设置</h3>
+<ul>
+<li>
+<p>比例部分</p>
+<ul>
+<li>
+<p>经过实际测量，系统处于稳态时，实际温度与期望温度之差保持在±1℃．</p>
+</li>
+<li>
+<p>当误差为0.5℃时，使控制器的输出为100％</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>a</mi><mi>x</mi><mo stretchy="false">[</mo><mi>e</mi><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo><mo stretchy="false">]</mo><mo>⋅</mo><msub><mi>K</mi><mi>p</mi></msub><mo>−</mo><mn>0</mn><mo>=</mo><mi>o</mi><mi>u</mi><mi>t</mi><mi>p</mi><mi>u</mi><mi>t</mi><mspace linebreak="newline"></mspace><mo>⇓</mo><mspace linebreak="newline"></mspace><mi mathvariant="normal">　</mi><mn>0.5</mn><mo>⋅</mo><msub><mi>K</mi><mi>P</mi></msub><mo>=</mo><mn>100</mn><mi mathvariant="normal">%</mi><mspace linebreak="newline"></mspace><mi mathvariant="normal">　</mi><mo>⇓</mo><mi mathvariant="normal">　</mi><mspace linebreak="newline"></mspace><msub><mi>K</mi><mi>p</mi></msub><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">max[e(k)]\cdot K_p-0= output
+\\ \Downarrow\\　0.5 \cdot K_P=100\%
+\\　\Downarrow　\\
+K_p=2
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault">x</span><span class="mopen">[</span><span class="mord mathdefault">e</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mclose">)</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.80952em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">o</span><span class="mord mathdefault">u</span><span class="mord mathdefault">t</span><span class="mord mathdefault">p</span><span class="mord mathdefault">u</span><span class="mord mathdefault">t</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mrel">⇓</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord cjk_fallback">　</span><span class="mord">0</span><span class="mord">.</span><span class="mord">5</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">P</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.80556em;vertical-align:-0.05556em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">%</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord cjk_fallback">　</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⇓</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord cjk_fallback">　</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span></span></p>
+</li>
+<li>
+<p>可以得出Kp的值在2左右．</p>
+</li>
+</ul>
+</li>
+<li>
+<p>微分部分</p>
+<ul>
+<li>
+<p>考虑到系统特性，希望微分部分作用效果较强，能够提前预测系统接下来的温度走向．</p>
+</li>
+<li>
+<p>经过实际测量，控制器开启后的升温曲线斜率与期望斜率之差保持在±1℃/min之内，当升温较为稳定时，斜率之差保持在正负0.5℃/min之内．为了让控制器对温度斜率误差较敏感．令斜率误差为0.5℃/min时（假定比例部分误差为０）控制器输出为50％：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn><mo>−</mo><mi>m</mi><mi>a</mi><mi>x</mi><mo stretchy="false">[</mo><mi>s</mi><mi>l</mi><mi>o</mi><mi>p</mi><mi>e</mi><mo>−</mo><mi>t</mi><mi>a</mi><mi>r</mi><mi>g</mi><mi>e</mi><mi>t</mi><mi mathvariant="normal">_</mi><mi>s</mi><mi>l</mi><mi>o</mi><mi>p</mi><mi>e</mi><mo stretchy="false">]</mo><mo>⋅</mo><msub><mi>K</mi><mi>d</mi></msub><mo>=</mo><mi>o</mi><mi>u</mi><mi>t</mi><mi>p</mi><mi>u</mi><mi>t</mi><mspace linebreak="newline"></mspace><mo>⇓</mo><mspace linebreak="newline"></mspace><mn>0.5</mn><mo>⋅</mo><msub><mi>K</mi><mi>d</mi></msub><mo>=</mo><mn>50</mn><mi mathvariant="normal">%</mi><mspace linebreak="newline"></mspace><mo>⇓</mo><mspace linebreak="newline"></mspace><msub><mi>K</mi><mi>d</mi></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0-max[slope-target\_slope]\cdot K_d=output
+\\\Downarrow\\
+0.5\cdot K_d=50\%
+\\\Downarrow\\
+K_d = 1
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault">x</span><span class="mopen">[</span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.06em;vertical-align:-0.31em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">e</span><span class="mord mathdefault">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord mathdefault">e</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.80952em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">o</span><span class="mord mathdefault">u</span><span class="mord mathdefault">t</span><span class="mord mathdefault">p</span><span class="mord mathdefault">u</span><span class="mord mathdefault">t</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mrel">⇓</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mord">.</span><span class="mord">5</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.80556em;vertical-align:-0.05556em;"></span><span class="mord">5</span><span class="mord">0</span><span class="mord">%</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mrel">⇓</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></span></p>
+</li>
+<li>
+<p>可以得出Kd的值在1左右</p>
+</li>
+<li>
+<p>另外，考虑到系统跟踪速度曲线较为困难，微分部分仅在升温曲线斜率小于期望斜率时开启．</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>o</mi><mi>u</mi><mi>t</mi><mi>p</mi><mi>u</mi><msub><mi>t</mi><mi>d</mi></msub><mo>=</mo><mrow><mo fence="true">{</mo><mtable rowspacing="0.3599999999999999em" columnalign="left left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mo stretchy="false">(</mo><mi>t</mi><mi>a</mi><mi>r</mi><mi>g</mi><mi>e</mi><mi>t</mi><mi mathvariant="normal">_</mi><mi>s</mi><mi>l</mi><mi>o</mi><mi>p</mi><mi>e</mi><mi mathvariant="normal">－</mi><mi>s</mi><mi>l</mi><mi>o</mi><mi>p</mi><mi>e</mi><mo stretchy="false">)</mo><mo>⋅</mo><msub><mi>K</mi><mi>d</mi></msub></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mo separator="true">,</mo><mi>s</mi><mi>l</mi><mi>o</mi><mi>p</mi><mi>e</mi><mo>&lt;</mo><mi>t</mi><mi>a</mi><mi>r</mi><mi>g</mi><mi>e</mi><mi>t</mi><mi mathvariant="normal">_</mi><mi>s</mi><mi>l</mi><mi>o</mi><mi>p</mi><mi>e</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mo separator="true">,</mo><mi>s</mi><mi>l</mi><mi>o</mi><mi>p</mi><mi>e</mi><mo>&gt;</mo><mo>=</mo><mi>t</mi><mi>a</mi><mi>r</mi><mi>g</mi><mi>e</mi><mi>t</mi><mi mathvariant="normal">_</mi><mi>s</mi><mi>l</mi><mi>o</mi><mi>p</mi><mi>e</mi></mrow></mstyle></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">output_d=
+\begin{cases}
+(target\_slope－slope)\cdot K_d&amp;,slope&lt;target\_slope
+\\
+0&amp;,slope&gt;=target\_slope
+\end{cases}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.80952em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">o</span><span class="mord mathdefault">u</span><span class="mord mathdefault">t</span><span class="mord mathdefault">p</span><span class="mord mathdefault">u</span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.0000299999999998em;vertical-align:-1.25003em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">{</span></span><span class="mord"><span class="mtable"><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mopen">(</span><span class="mord mathdefault">t</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">e</span><span class="mord mathdefault">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord mathdefault">e</span><span class="mord cjk_fallback">－</span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord mathdefault">e</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:1em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">e</span><span class="mord mathdefault">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord mathdefault">e</span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">e</span><span class="mord mathdefault">t</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord mathdefault">e</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+</li>
+<li>
+<p>微分周期问题</p>
+<ul>
+<li>
+<p>微分周期应该尽量小，以尽量逼近实际升温曲线斜率</p>
+</li>
+<li>
+<p>由于温度输入为离散信号，且部分雷达温度传感器精度较低，微分周期应该大于一定值以避免误差</p>
+</li>
+<li>
+<p>目前暂定微分周期为15s，该数据适用于16线，32线，128线雷达．但由于MEMS和bpearl雷达的传感器温度较低，可将该周期值修正为30-60s</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi><mo>=</mo><mrow><mo fence="true">{</mo><mtable rowspacing="0.3599999999999999em" columnalign="left left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mn>15</mn><mi>s</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mo separator="true">,</mo><mi>L</mi><mi>i</mi><mi>d</mi><mi>a</mi><mi>r</mi><mo>−</mo><mn>16</mn><mo separator="true">,</mo><mn>32</mn><mo separator="true">,</mo><mn>128</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mn>30</mn><mi>s</mi><mo>−</mo><mn>60</mn><mi>s</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mo separator="true">,</mo><mi>L</mi><mi>i</mi><mi>d</mi><mi>a</mi><mi>r</mi><mo>−</mo><mi>m</mi><mi>e</mi><mi>m</mi><mi>s</mi><mo separator="true">,</mo><mi>b</mi><mi>p</mi></mrow></mstyle></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">T=
+\begin{cases}
+15s&amp;,Lidar-16,32,128
+\\
+30s-60s &amp;,Lidar-mems,bp
+\end{cases}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.0000299999999998em;vertical-align:-1.25003em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">{</span></span><span class="mord"><span class="mtable"><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord">1</span><span class="mord">5</span><span class="mord mathdefault">s</span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord">3</span><span class="mord">0</span><span class="mord mathdefault">s</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">6</span><span class="mord">0</span><span class="mord mathdefault">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:1em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">L</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mord">6</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">3</span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">2</span><span class="mord">8</span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">L</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">e</span><span class="mord mathdefault">m</span><span class="mord mathdefault">s</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span><span class="mord mathdefault">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>pid</tag>
+        <tag>control theory</tag>
+      </tags>
+  </entry>
+</search>
