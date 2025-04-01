@@ -26,7 +26,7 @@ jobs:
           export TZ='Asia/Shanghai'
           npm install --prod
 
-      - name: 拉取语雀/Notion的文章
+      - name: 拉取Notion的文章
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
