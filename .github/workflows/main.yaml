@@ -43,7 +43,7 @@ jobs:
         run: |
           echo `date +"%Y-%m-%d %H:%M:%S"` begin > time.txt
           git add .
-          git commit -m "[Up] 更新 Notion 文档" -a
+          git commit -m "[CI/CD] 更新 Notion 文档" -a
 
       - name: 推送文章到仓库
         uses: ad-m/github-push-action@master
