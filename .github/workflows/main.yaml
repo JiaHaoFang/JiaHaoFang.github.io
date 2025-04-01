@@ -43,7 +43,7 @@ jobs:
         run: |
           echo `date +"%Y-%m-%d %H:%M:%S"` begin > time.txt
           git add .
-          git commit -m "更新文档" -a
+          git commit -m "[Up] 更新 Notion 文档" -a
 
       - name: 推送文章到仓库
         uses: ad-m/github-push-action@master
@@ -55,11 +55,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # 对应package.json中的script.build
-          # hexo clean
-          # hexo generate
-          # hexo deploy
           npm run build
-          # npm run deploy
 
       - name: 部署到Github Pages
         uses: peaceiris/actions-gh-pages@v4
