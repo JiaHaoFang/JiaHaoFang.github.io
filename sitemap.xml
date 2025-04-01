@@ -2,7 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://jiahaofang.github.io/ios-send2cocoapods/</loc>
+    <loc>https://jiahaofang.github.io/general-psychology-1/</loc>
+    
+    <lastmod>2025-04-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jiahaofang.github.io/general-psychology-2/</loc>
+    
+    <lastmod>2025-04-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jiahaofang.github.io/ipad-adaption/</loc>
     
     <lastmod>2025-04-01</lastmod>
     
@@ -11,7 +29,7 @@
   </url>
   
   <url>
-    <loc>https://jiahaofang.github.io/ipad-adaption/</loc>
+    <loc>https://jiahaofang.github.io/ios-send2cocoapods/</loc>
     
     <lastmod>2025-04-01</lastmod>
     
@@ -56,15 +74,6 @@
   </url>
   
   <url>
-    <loc>https://jiahaofang.github.io/categories/index.html</loc>
-    
-    <lastmod>2025-04-01</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://jiahaofang.github.io/tags/index.html</loc>
     
     <lastmod>2025-04-01</lastmod>
@@ -74,7 +83,7 @@
   </url>
   
   <url>
-    <loc>https://jiahaofang.github.io/404.html</loc>
+    <loc>https://jiahaofang.github.io/categories/index.html</loc>
     
     <lastmod>2025-04-01</lastmod>
     
@@ -84,6 +93,15 @@
   
   <url>
     <loc>https://jiahaofang.github.io/about/index.html</loc>
+    
+    <lastmod>2025-04-01</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jiahaofang.github.io/404.html</loc>
     
     <lastmod>2025-04-01</lastmod>
     
@@ -139,6 +157,13 @@
   
   <url>
     <loc>https://jiahaofang.github.io/categories/Coding/</loc>
+    <lastmod>2025-04-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jiahaofang.github.io/categories/Psychology/</loc>
     <lastmod>2025-04-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
