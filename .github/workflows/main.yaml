@@ -41,6 +41,7 @@ jobs:
 
       - name: 提交拉取的文章到GitHub仓库
         run: |
+          echo `date +"%Y-%m-%d %H:%M:%S"` begin > time.txt
           git add .
           git commit -m "更新文档" -a
 
