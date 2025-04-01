@@ -21,6 +21,11 @@ jobs:
         with:
           node-version: "16.x"
 
+      - name: 安装 Hexo
+        run: |
+          npm install hexo-cli -g
+          npm install
+
       - name: 安装依赖
         run: |
           export TZ='Asia/Shanghai'
