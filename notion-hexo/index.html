@@ -307,15 +307,15 @@
 <p>本地访问没问题直接提交所有文件到 Github 仓库即可</p>
 <h2 id="部署到-vercel"><a class="markdownIt-Anchor" href="#部署到-vercel"></a> 部署到 Vercel</h2>
 <p>注册 Vercel 账号并绑定 Github，在 Vercel 导入 该项目，Vercel 会自动识别出该 Hexo 项目，不需要改动，直接选择 Deploy 部署。部署完成会有一个 Vercel 临时域名，你也可以绑定自己的域名。</p>
-<p><img src="/images/c283a83904894fe6bfaa24584cb6a86a.png" alt="Untitled.png" /></p>
-<p><img src="/images/eceaaa23506d5f0d9210e8aa61d60205.png" alt="Untitled.png" /></p>
+<p><img src="../images/c283a83904894fe6bfaa24584cb6a86a.png" alt="Untitled.png" /></p>
+<p><img src="../images/eceaaa23506d5f0d9210e8aa61d60205.png" alt="Untitled.png" /></p>
 <h2 id="配置-github-actions-权限"><a class="markdownIt-Anchor" href="#配置-github-actions-权限"></a> 配置 Github Actions 权限</h2>
 <p>在 Github 仓库的设置中找到 <code>Actions-General</code>，打开流水线写入权限<code>Workflow permissions</code></p>
-<p><img src="/images/53b8359150ff5294ad1e88d4638940eb.png" alt="Untitled.png" /></p>
+<p><img src="../images/53b8359150ff5294ad1e88d4638940eb.png" alt="Untitled.png" /></p>
 <h2 id="配置环境变量"><a class="markdownIt-Anchor" href="#配置环境变量"></a> 配置环境变量</h2>
 <p>在本地运行时，用的是<code>.elog.env</code>文件中定义的 Notion 账号信息，而在 Github Actions 时，需要提前配置环境变量。</p>
 <p>在 Github 仓库的设置中找到 <code>Secrets and variables</code>，新增仓库的环境变量<code>NOTION_DATABASE_ID</code>和<code>NOTION_TOKEN</code>和<code>.elog.env</code>保持一致即可</p>
-<p><img src="/images/1c753720f799016f8edb30176253f472.png" alt="Untitled.png" /></p>
+<p><img src="../images/1c753720f799016f8edb30176253f472.png" alt="Untitled.png" /></p>
 <h2 id="自动化部署"><a class="markdownIt-Anchor" href="#自动化部署"></a> 自动化部署</h2>
 <p>当在 Notion 中改动文档后，手动/自动触发 Github Actions流水线，会重新从 Notion 增量拉取文档，自动提交代码到 Github 仓库。</p>
 <p>Vercel 会实时监测仓库代码，当有新的提交时都会重新部署博客。如此就实现了自动化部署博客。</p>
