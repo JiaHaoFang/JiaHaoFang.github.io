@@ -61,6 +61,7 @@ jobs:
         run: |
           # 对应package.json中的script.build
           npm run build
+          npm run deploy
 
       - name: 部署到Github Pages
         uses: peaceiris/actions-gh-pages@v3
