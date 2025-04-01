@@ -19,7 +19,11 @@ module.exports = {
     notion: {
       token: process.env.NOTION_TOKEN,
       databaseId: process.env.NOTION_DATABASE_ID,
-      filter: false, // {property: 'status', select: {equals: '已发布'}}
+      filter: true,
+      property: 'status', 
+      select: {
+        equals: '已发布'
+      }
     },
     feishu: {
       type: 'space',
@@ -80,7 +84,7 @@ module.exports = {
     local: {
       outputDir: './docs/images',
       prefixKey: '/images',
-      pathFollowDoc: true,
+      pathFollowDoc: false,
     },
     oss: {
       secretId: process.env.OSS_SECRET_ID,
