@@ -1,193 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hexo 相关记录</title>
-    <url>/Hexo%20%E7%9B%B8%E5%85%B3%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<h2 id="使用git分支保存源码"><a class="markdownIt-Anchor" href="#使用git分支保存源码"></a> 使用git分支保存源码</h2>
+    <title>Notion + Elog + GitHub Actions + Hexo 博客解决方案</title>
+    <url>/Notion%20+%20Elog%20+%20GitHub%20Actions%20+%20Hexo%20%E5%8D%9A%E5%AE%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</url>
+    <content><![CDATA[<h1 id="创作开发"><a class="markdownIt-Anchor" href="#创作开发"></a> 创作&amp;开发</h1>
+<h2 id="notion"><a class="markdownIt-Anchor" href="#notion"></a> Notion</h2>
+<h2 id="hexo"><a class="markdownIt-Anchor" href="#hexo"></a> Hexo</h2>
+<h1 id="cicd"><a class="markdownIt-Anchor" href="#cicd"></a> CI/CD</h1>
+<h2 id="notion-2"><a class="markdownIt-Anchor" href="#notion-2"></a> Notion</h2>
 <ol>
-<li>
-<p>拉取分支</p>
-<p>因Github Page要求使用master分支作为发布网站的源代码，我们只能用master分支来保存hexo生成的静态网页，对于博客源码，可以新建一个source分支来存储。在github上打开Pages对应的仓库，也就是以”<a href="http://username.github.io/">username.github.io</a>”命名的仓库，然后建立一个source分支，仓库的默认分支改为保存源码的source分支，这样通过<code>git clone</code>拉取的就是source分支代码了。</p>
- <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone &lt;https://github.com/JiaHaoFang/JiaHaoFang.github.io.git&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>配置环境</p>
- <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装hexo</span></span><br><span class="line">npm install hexo</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">git支持</span></span><br><span class="line">npm install hexo-deployer-git -save</span><br></pre></td></tr></table></figure>
-</li>
+<li>创建 automation，设置触发器</li>
 </ol>
-<h2 id="添加next主题配置"><a class="markdownIt-Anchor" href="#添加next主题配置"></a> 添加next主题配置</h2>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone &lt;https://github.com/theme-next/hexo-theme-next.git&gt; themes/next</span><br></pre></td></tr></table></figure>
-<h2 id="显示摘要"><a class="markdownIt-Anchor" href="#显示摘要"></a> 显示摘要</h2>
-<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line"># 显示摘要</span><br><span class="line">npm install hexo-excerpt --save</span><br></pre></td></tr></table></figure>
-<h2 id="用typora写作"><a class="markdownIt-Anchor" href="#用typora写作"></a> 用typora写作</h2>
-<h3 id="markdown语法支持"><a class="markdownIt-Anchor" href="#markdown语法支持"></a> markdown语法支持</h3>
-<p>使用typora作为语法编辑器，使用插件使网页能够支持markdown的编辑格式</p>
+<h2 id="slack"><a class="markdownIt-Anchor" href="#slack"></a> Slack</h2>
 <ol>
-<li>
-<p>安装库</p>
- <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">markdown语法支持</span></span><br><span class="line">npm uni hexo-renderer-marked --save</span><br><span class="line">npm i @upupming/hexo-renderer-markdown-it-plus --save</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>使用<br />
-在hexo站点配置文件_config.yml中添加如下配置，<a href="https://github.com/CHENXCHEN/hexo-renderer-markdown-it-plus">详细配置</a>:</p>
- <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Markdown config</span></span><br><span class="line"><span class="attr">markdown_it_plus:</span></span><br><span class="line">	<span class="attr">highlight:</span> <span class="literal">true</span></span><br><span class="line">	<span class="attr">html:</span> <span class="literal">true</span></span><br><span class="line">	<span class="attr">xhtmlOut:</span> <span class="literal">true</span></span><br><span class="line">	<span class="attr">breaks:</span> <span class="literal">true</span></span><br><span class="line">	<span class="attr">langPrefix:</span></span><br><span class="line">	<span class="attr">linkify:</span> <span class="literal">true</span></span><br><span class="line">	<span class="attr">typographer:</span></span><br><span class="line">	<span class="attr">quotes:</span> <span class="string">“”‘’</span></span><br><span class="line">	<span class="attr">pre_class:</span> <span class="string">highlight</span></span><br></pre></td></tr></table></figure>
-</li>
+<li>注册 <a href="%5Bhttps://slack.com/%5D(https://slack.com/)">Slack</a></li>
+<li>创建频道（channel）</li>
+<li>添加应用 Notion</li>
 </ol>
-<h3 id="图片链接"><a class="markdownIt-Anchor" href="#图片链接"></a> 图片链接</h3>
-<p>为了与typora写作，使网页能够直接渲染typora编辑的markdown文档，需要在typora中设置图片保存在./$${filename}下，安装该插件即可（该插件md写着是为了与typora共同使用而开发）</p>
-<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line"># 图片链接</span><br><span class="line">npm install hexo-image-link --save</span><br></pre></td></tr></table></figure>
-<h2 id="文章置顶"><a class="markdownIt-Anchor" href="#文章置顶"></a> 文章置顶</h2>
-<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line"># 添加文章置顶功能，未使用</span><br><span class="line">npm uninstall hexo-generator-index --save</span><br><span class="line">npm install hexo-generator-index-pin-top --save</span><br></pre></td></tr></table></figure>
-<p>安装后在文章顶部增加字段<code>top: true</code>即可</p>
-<h2 id="页脚增加网站运行时间统计next80-以下"><a class="markdownIt-Anchor" href="#页脚增加网站运行时间统计next80-以下"></a> 页脚增加网站运行时间统计(NexT8.0 以下)</h2>
+<h2 id="pipedream"><a class="markdownIt-Anchor" href="#pipedream"></a> Pipedream</h2>
 <ol>
-<li>
-<p>找到 <code>\\themes\\next\\layout\\_partials\\</code> 下面的 <code>footer.swig</code> 文件</p>
-</li>
-<li>
-<p>在合适的位置添加下面代码（通过运行调试，查看运行时间出现的位置）（45行）</p>
- <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">&lt;!--添加运行时间--&gt;</span><br><span class="line">&lt;span id=&quot;sitetime&quot;&gt;&lt;/span&gt;</span><br><span class="line">&lt;script language=javascript&gt;</span><br><span class="line">	function siteTime()&#123;</span><br><span class="line">		window.setTimeout(&quot;siteTime()&quot;, 1000);</span><br><span class="line">		var seconds = 1000;</span><br><span class="line">		var minutes = seconds * 60;</span><br><span class="line">		var hours = minutes * 60;</span><br><span class="line">		var days = hours * 24;</span><br><span class="line">		var years = days * 365;</span><br><span class="line">		var today = new Date();</span><br><span class="line">		var todayYear = today.getFullYear();</span><br><span class="line">		var todayMonth = today.getMonth()+1;</span><br><span class="line">		var todayDate = today.getDate();</span><br><span class="line">		var todayHour = today.getHours();</span><br><span class="line">		var todayMinute = today.getMinutes();</span><br><span class="line">		var todaySecond = today.getSeconds();</span><br><span class="line">		/*</span><br><span class="line">		Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)</span><br><span class="line">		year - 作为date对象的年份，为4位年份值</span><br><span class="line">		month - 0-11之间的整数，做为date对象的月份</span><br><span class="line">		day - 1-31之间的整数，做为date对象的天数</span><br><span class="line">		hours - 0(午夜24点)-23之间的整数，做为date对象的小时数</span><br><span class="line">		minutes - 0-59之间的整数，做为date对象的分钟数</span><br><span class="line">		seconds - 0-59之间的整数，做为date对象的秒数</span><br><span class="line">		microseconds - 0-999之间的整数，做为date对象的毫秒数</span><br><span class="line">		*/</span><br><span class="line">		var t1 = Date.UTC(2022,02,21,13,30,00); //北京时间2018-2-13 00:00:00</span><br><span class="line">		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);</span><br><span class="line">		var diff = t2-t1;</span><br><span class="line">		var diffYears = Math.floor(diff/years);</span><br><span class="line">		var diffDays = Math.floor((diff/days)-diffYears*365);</span><br><span class="line">		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);</span><br><span class="line">		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);</span><br><span class="line">		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);</span><br><span class="line">		document.getElementById(&quot;sitetime&quot;).innerHTML=&quot; 已运行&quot;+/*diffYears+&quot; 年 &quot;+*/diffDays+&quot; 天 &quot;+diffHours+&quot; 小时 &quot;+diffMinutes+&quot; 分钟 &quot;+diffSeconds+&quot; 秒&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	siteTime();</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;!--添加运行时间--&gt;</span><br></pre></td></tr></table></figure>
-</li>
+<li>注册</li>
+<li>创建 Project</li>
+<li>创建 workflow</li>
+<li>设置 workflow</li>
+<li>增加 Python step</li>
 </ol>
-<h2 id="页脚增加网站运行时间统计next80-以上"><a class="markdownIt-Anchor" href="#页脚增加网站运行时间统计next80-以上"></a> 页脚增加网站运行时间统计(NexT8.0 以上)</h2>
+<h2 id="elog-github-action"><a class="markdownIt-Anchor" href="#elog-github-action"></a> Elog + Github Action</h2>
 <ol>
-<li>
-<p>找到 <code>themes/next/layout/_partials/footer.njk</code>文件</p>
-</li>
-<li>
-<p>在末尾加入以下代码</p>
- <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">&lt;!-- &lt;br /&gt; --&gt;</span><br><span class="line">&lt;!-- 网站运行时间的设置 --&gt;</span><br><span class="line">&lt;span id=&quot;timeDate&quot;&gt;载入天数...&lt;/span&gt;</span><br><span class="line">&lt;!-- &lt;span id=&quot;times&quot;&gt;载入时分秒...&lt;/span&gt; --&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">var now = new Date();</span><br><span class="line">function createtime() &#123;</span><br><span class="line">	var grt= new Date(&quot;02/21/2022 13:30:00&quot;);//(2022,02,21,13,30,00)</span><br><span class="line">	now.setTime(now.getTime()+250);</span><br><span class="line">	days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);</span><br><span class="line">	hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);</span><br><span class="line">	if(String(hnum).length ==1 )&#123;hnum = &quot;0&quot; + hnum;&#125; minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);</span><br><span class="line">	mnum = Math.floor(minutes); if(String(mnum).length ==1 )&#123;mnum = &quot;0&quot; + mnum;&#125;</span><br><span class="line">	seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);</span><br><span class="line">	snum = Math.round(seconds);</span><br><span class="line">	if(String(snum).length ==1 )&#123;snum = &quot;0&quot; + snum;&#125;</span><br><span class="line">	// var times = document.getElementById(&quot;times&quot;).innerHTML = hnum + &quot; 小时 &quot; + mnum + &quot; 分 &quot; + snum + &quot; 秒&quot;;</span><br><span class="line">	document.getElementById(&quot;timeDate&quot;).innerHTML = &quot;本站已安全运行 &quot;+dnum+&quot; 天 &quot;+hnum + &quot; 小时 &quot; + mnum + &quot; 分 &quot; + snum + &quot; 秒&quot;;</span><br><span class="line">&#125;</span><br><span class="line">setInterval(&quot;createtime()&quot;,250);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-</li>
+<li>添加 workflow 配置</li>
+<li>添加环境变量；配置执行权限</li>
 </ol>
-<h2 id="搜索引擎支持"><a class="markdownIt-Anchor" href="#搜索引擎支持"></a> 搜索引擎支持</h2>
-<ol>
-<li>
-<p>各搜索引擎网站管理员中心</p>
-<ul>
-<li>Google：<a href="https://www.google.com/webmasters/tools">https://www.google.com/webmasters/tools</a></li>
-<li>bing：<a href="https://www.bing.com/webmasters/home">https://www.bing.com/webmasters/home</a></li>
-</ul>
-</li>
-<li>
-<p>向搜索引擎提交站点</p>
-<blockquote>
-<p>以Google为例</p>
-</blockquote>
-<p>修改<code>themes/next/_config.yml</code>文件：</p>
- <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Google Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: &lt;https://www.google.com/webmasters&gt;</span></span><br><span class="line"><span class="attr">google_site_verification:</span> <span class="string">xxxxxxxxxx</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>提交网站地图</p>
-<blockquote>
-<p>提交网站地图加快索引</p>
-</blockquote>
-<ol>
-<li>
-<p>安装插件sitemap</p>
- <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-sitemap –save</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>在<code>themes/next/_config.yml</code>中修改：</p>
- <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line"><span class="attr">home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-home</span></span><br><span class="line"><span class="attr">tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-tags</span></span><br><span class="line"><span class="attr">categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-th</span></span><br><span class="line"><span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-archive</span></span><br><span class="line"><span class="attr">about:</span> <span class="string">/about/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-user</span></span><br><span class="line"><span class="comment">#schedule: /schedule/ || fa fa-calendar</span></span><br><span class="line"><span class="attr">sitemap:</span> <span class="string">/sitemap.xml</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-sitemap</span></span><br><span class="line"><span class="comment">#commonweal: /404/ || fa fa-heartbeat</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>生成静态网页，上传，然后在对应搜索引擎的webmasters中添加站点地图的地址即可</p>
-</li>
-</ol>
-</li>
-<li>
-<p>验证是否被检索<br />
-以GitHub Pages为例，新建的GitHub Pages是没有被谷歌检索的。在谷歌搜索栏中输入如下信息进行检索：</p>
- <figure class="highlight html"><table><tr><td class="code"><pre><span class="line">site: jiahaofang.github.io</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="本地搜索功能"><a class="markdownIt-Anchor" href="#本地搜索功能"></a> 本地搜索功能</h2>
-<ol>
-<li>
-<p>在根目录执行命令</p>
- <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>配置 hexo 的<code>_config.yml</code>文件<br />
-在文件末尾新增配置项</p>
- <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">search:</span></span><br><span class="line"> 	<span class="attr">path:</span> <span class="string">search.xml</span></span><br><span class="line"> 	<span class="attr">field:</span> <span class="string">post</span></span><br><span class="line"> 	<span class="attr">format:</span> <span class="string">html</span></span><br><span class="line"> 	<span class="attr">limit:</span> <span class="number">10000</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>配置 <code>NexT</code> 主题的 <code>_config.yml</code>（根据 next 文档，应为<code>/_config.next.yml</code>）</p>
- <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Local search</span></span><br><span class="line"><span class="attr">local_search:</span></span><br><span class="line">	<span class="attr">enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
+<h2 id=""><a class="markdownIt-Anchor" href="#"></a> </h2>
 ]]></content>
       <categories>
         <category>Blog</category>
       </categories>
       <tags>
         <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Notion-Hexo 的 Elog 配置详解</title>
-    <url>//notion-notice/</url>
-    <content><![CDATA[<h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
-<p>在使用 Elog 同步Notion 上的文档时，因为是将富文本向下转成 markdown，会有很多样式损失。这是由于 markdown 样式集合＜ Notion 样式集合。所以在 Notion 上书写时，得按照 markdown 支持的样式进行写作。</p>
-<blockquote>
-<p>可以在<a href="/notion-example/">这里</a> 看到 Notion 文档被导出为 markdown 时的样式损失程度</p>
-</blockquote>
-<p>如果你不能接受样式损失，可能 markdown 并不适合你，隔壁 <a href="https://github.com/tangly1024/NotionNext">NotionNext</a> 可能更适合你搭建博客。</p>
-<h1 id="notion-格式注意点"><a class="markdownIt-Anchor" href="#notion-格式注意点"></a> Notion 格式注意点</h1>
-<h3 id="不要使用-markdown-不支持的样式语法"><a class="markdownIt-Anchor" href="#不要使用-markdown-不支持的样式语法"></a> 不要使用 markdown 不支持的样式/语法</h3>
-<p>例如字体颜色、多级折叠块、书签、数据库、嵌入等。导出为 markdown 都不能正常展示。</p>
-<h3 id="适当使用-markdown-形式的超链接"><a class="markdownIt-Anchor" href="#适当使用-markdown-形式的超链接"></a> 适当使用 markdown 形式的超链接</h3>
-<p>在文档中使用markdown 形式的超链接可以解决部分路由问题，例如链接Notion文档的超链接会被自动处理为非完整路径，或者手动链接到某个相对路由，可以使用以下方式解决</p>
-<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">// 使用[]() markdown 超链接语法</span><br><span class="line">点击 [下一篇](/notion/deploy-platform) 继续配置部署平台</span><br></pre></td></tr></table></figure>
-<h3 id="请勿上传视频-文件到-notion-文档"><a class="markdownIt-Anchor" href="#请勿上传视频-文件到-notion-文档"></a> 请勿上传视频、文件到 Notion 文档</h3>
-<p>Elog 还暂不支持将Notion 中的视频、文件暂不支持上传到图床。如果下载到本地，短期内能访问，但因为 notion 的链接具有时效性，一般是一个小时，之后就不能查看了。</p>
-<h1 id="elog-配置详解"><a class="markdownIt-Anchor" href="#elog-配置详解"></a> Elog 配置详解</h1>
-<p>参考<a href="https://elog.1874.cool/">Elog 文档</a>，本博客的 Elog 的配置如下：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">write</span>: &#123;</span><br><span class="line">    <span class="attr">platform</span>: <span class="string">&#x27;notion&#x27;</span>,</span><br><span class="line">    <span class="attr">notion</span>: &#123;</span><br><span class="line">      <span class="attr">token</span>: process.<span class="property">env</span>.<span class="property">NOTION_TOKEN</span>,</span><br><span class="line">      <span class="attr">databaseId</span>: process.<span class="property">env</span>.<span class="property">NOTION_DATABASE_ID</span>,</span><br><span class="line">      <span class="attr">filter</span>: &#123; <span class="attr">property</span>: <span class="string">&#x27;status&#x27;</span>, <span class="attr">select</span>: &#123; <span class="attr">equals</span>: <span class="string">&#x27;已发布&#x27;</span> &#125;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">deploy</span>: &#123;</span><br><span class="line">    <span class="attr">platform</span>: <span class="string">&#x27;local&#x27;</span>,</span><br><span class="line">    <span class="attr">local</span>: &#123;</span><br><span class="line">      <span class="attr">outputDir</span>: <span class="string">&#x27;./source/_posts&#x27;</span>,</span><br><span class="line">      <span class="attr">filename</span>: <span class="string">&#x27;title&#x27;</span>,</span><br><span class="line">      <span class="attr">format</span>: <span class="string">&#x27;markdown&#x27;</span>,</span><br><span class="line">      <span class="attr">frontMatter</span>: &#123;</span><br><span class="line">        <span class="attr">enable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">include</span>: [<span class="string">&#x27;categories&#x27;</span>, <span class="string">&#x27;tags&#x27;</span>, <span class="string">&#x27;title&#x27;</span>, <span class="string">&#x27;date&#x27;</span>, <span class="string">&#x27;updated&#x27;</span>, <span class="string">&#x27;permalink&#x27;</span>, <span class="string">&#x27;cover&#x27;</span>, <span class="string">&#x27;description&#x27;</span>]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">formatExt</span>: <span class="string">&#x27;./format-image.js&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">image</span>: &#123;</span><br><span class="line">    <span class="attr">enable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">platform</span>: <span class="string">&#x27;local&#x27;</span>,</span><br><span class="line">    <span class="attr">local</span>: &#123;</span><br><span class="line">      <span class="attr">outputDir</span>: <span class="string">&#x27;./source/images&#x27;</span>,</span><br><span class="line">      <span class="attr">prefixKey</span>: <span class="string">&#x27;/images&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="notion-配置"><a class="markdownIt-Anchor" href="#notion-配置"></a> Notion 配置</h2>
-<p><img src="/images/e09e3db7b0e26c15ae5f7b720d2bf00f.png" alt="Untitled.png" /></p>
-<p>根据 <a href="https://hexo.io/zh-cn/docs/front-matter">Hexo 的 FrontMatter 配置文档</a>，和 <a href="https://butterfly.js.org/posts/dc584b87/?highlight=front%20matter#Post-Front-matter">Butterfly主题的 FrontMatter 配置文档</a>，可以将需要的参数作为 notion 数据库的字段来设置。一般来说，主题的 FrontMatter 为 Hexo在一些基础字段是共用的。</p>
-<ul>
-<li><code>permalink</code>为文档的永久链接，例如<code>https://notion-hexo.vercel.app/notion-hexo/</code>，注意记得在结尾加上<code>/</code></li>
-<li><code>categories</code>为文档的分类</li>
-<li><code>tags</code> 为文档的标签</li>
-<li><code>description</code>为主题配置中可选的文档描述</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="attr">notion</span>: &#123;</span><br><span class="line">  <span class="attr">token</span>: process.<span class="property">env</span>.<span class="property">NOTION_TOKEN</span>,</span><br><span class="line">  <span class="attr">databaseId</span>: process.<span class="property">env</span>.<span class="property">NOTION_DATABASE_ID</span>,</span><br><span class="line">  <span class="attr">filter</span>: &#123; <span class="attr">property</span>: <span class="string">&#x27;status&#x27;</span>, <span class="attr">select</span>: &#123; <span class="attr">equals</span>: <span class="string">&#x27;已发布&#x27;</span> &#125;&#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>token</code>为 Notion Token，可从<a href="https://elog.1874.cool/notion/gvnxobqogetukays#token-1">此处</a>获取</li>
-<li><code>databaseId</code>为数据库的 ID，可从<a href="https://elog.1874.cool/notion/gvnxobqogetukays#databaseid">此处</a>获取</li>
-<li><code>filter</code>表示 Elog 将下载 notion 数据库属性为<code>status=已发布</code>的文档</li>
-</ul>
-<h2 id="本地配置"><a class="markdownIt-Anchor" href="#本地配置"></a> 本地配置</h2>
-<p><img src="/images/6be21de37012453d6acaef1a2720e3ff.png" alt="Untitled.png" /></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="attr">local</span>: &#123;</span><br><span class="line">  <span class="attr">outputDir</span>: <span class="string">&#x27;./source/_posts&#x27;</span>,</span><br><span class="line">  <span class="attr">filename</span>: <span class="string">&#x27;title&#x27;</span>,</span><br><span class="line">  <span class="attr">format</span>: <span class="string">&#x27;markdown&#x27;</span>,</span><br><span class="line">  <span class="attr">frontMatter</span>: &#123;</span><br><span class="line">    <span class="attr">enable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">include</span>: [<span class="string">&#x27;categories&#x27;</span>, <span class="string">&#x27;tags&#x27;</span>, <span class="string">&#x27;title&#x27;</span>, <span class="string">&#x27;date&#x27;</span>, <span class="string">&#x27;updated&#x27;</span>, <span class="string">&#x27;permalink&#x27;</span>, <span class="string">&#x27;cover&#x27;</span>, <span class="string">&#x27;description&#x27;</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">formatExt</span>: <span class="string">&#x27;./format-image.js&#x27;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>outputDir</code>表示文档的存放位置为项目根目录下的<code>source/_posts</code>文件夹中</li>
-<li><code>filename</code>表示文档将以数据库的 <code>title</code> 字段命名，也就是文档名</li>
-<li><code>format</code>表示文档将以 markdown 的形式保存</li>
-<li><code>frontMatter.enable</code>表示在 markdown 文档开头添加 Front Matter</li>
-<li><code>frontMatter.include</code>表示只输出数组中存在的字段，数据库的其他字段忽略</li>
-<li><code>formatExt=./format-image.js</code>表示将使用自定义文档插件，插件路径为项目根目录下的<code>format-image.js</code>文件</li>
-</ul>
-<h3 id="format-imagejs"><a class="markdownIt-Anchor" href="#format-imagejs"></a> format-image.js</h3>
-<p>该文档插件的作用就是将 notion 文档最上面的<code>封面图 cover</code>，也下载到本地，并替换为本地图片链接</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; matterMarkdownAdapter &#125; = <span class="built_in">require</span>(<span class="string">&#x27;@elog/cli&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 自定义文档插件</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">DocDetail</span>&#125; doc doc的类型定义为 DocDetail</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">ImageClient</span>&#125; imageClient 图床下载器</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">Promise&lt;DocDetail&gt;</span>&#125; 返回处理后的文档对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">format</span> = <span class="keyword">async</span> (<span class="params">doc, imageClient</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> cover = doc.<span class="property">properties</span>.<span class="property">cover</span></span><br><span class="line">  <span class="keyword">if</span> (imageClient)  &#123;</span><br><span class="line">    <span class="comment">// 只有启用图床平台image.enable=true时，imageClient才能用，否则请自行实现图片上传</span></span><br><span class="line">    <span class="keyword">const</span> url = <span class="keyword">await</span> imageClient.<span class="title function_">uploadImageFromUrl</span>(cover, doc)</span><br><span class="line">    <span class="comment">// cover链接替换为本地图片</span></span><br><span class="line">    doc.<span class="property">properties</span>.<span class="property">cover</span> = url</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 将文档内容格式化为带有 Front Matter 的 markdown</span></span><br><span class="line">  doc.<span class="property">body</span> = <span class="title function_">matterMarkdownAdapter</span>(doc);</span><br><span class="line">  <span class="comment">// 返回整个文档对象</span></span><br><span class="line">  <span class="keyword">return</span> doc;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">// 必须要暴露此方法</span></span><br><span class="line">  format,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="图床配置"><a class="markdownIt-Anchor" href="#图床配置"></a> 图床配置</h2>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="attr">local</span>: &#123;</span><br><span class="line">  <span class="attr">outputDir</span>: <span class="string">&#x27;./source/images&#x27;</span>,</span><br><span class="line">  <span class="attr">prefixKey</span>: <span class="string">&#x27;/images&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>outputDir</code>表示图片的存放位置为项目根目录下的<code>source/images</code>文件夹中</li>
-<li><code>prefixKey=/images</code>表示图片的统一前缀为<code>/images</code>，因为 Hexo 会将<code>source/images</code>文件夹视为<a href="https://hexo.io/zh-cn/docs/asset-folders">静态资源根目录</a>，统一将图片放在这里，并指定图片前缀，Hexo 才能找到此图片</li>
-</ul>
-<h2 id="更多-elog-配置详情请阅读-elog-文档"><a class="markdownIt-Anchor" href="#更多-elog-配置详情请阅读-elog-文档"></a> 更多 Elog 配置详情，请阅读 <a href="https://elog.1874.cool/">Elog 文档</a></h2>
-]]></content>
-      <categories>
-        <category>Blog</category>
-      </categories>
-      <tags>
-        <tag>notion</tag>
         <tag>elog</tag>
+        <tag>notion</tag>
       </tags>
   </entry>
   <entry>
@@ -225,15 +76,15 @@
 <p>本地访问没问题直接提交所有文件到 Github 仓库即可</p>
 <h2 id="部署到-vercel"><a class="markdownIt-Anchor" href="#部署到-vercel"></a> 部署到 Vercel</h2>
 <p>注册 Vercel 账号并绑定 Github，在 Vercel 导入 该项目，Vercel 会自动识别出该 Hexo 项目，不需要改动，直接选择 Deploy 部署。部署完成会有一个 Vercel 临时域名，你也可以绑定自己的域名。</p>
-<p><img src="/images/c283a83904894fe6bfaa24584cb6a86a.png" alt="Untitled.png" /></p>
-<p><img src="/images/eceaaa23506d5f0d9210e8aa61d60205.png" alt="Untitled.png" /></p>
+<p><img src="../../docs/images/c283a83904894fe6bfaa24584cb6a86a.png" alt="Untitled.png" /></p>
+<p><img src="../../docs/images/eceaaa23506d5f0d9210e8aa61d60205.png" alt="Untitled.png" /></p>
 <h2 id="配置-github-actions-权限"><a class="markdownIt-Anchor" href="#配置-github-actions-权限"></a> 配置 Github Actions 权限</h2>
 <p>在 Github 仓库的设置中找到 <code>Actions-General</code>，打开流水线写入权限<code>Workflow permissions</code></p>
-<p><img src="/images/53b8359150ff5294ad1e88d4638940eb.png" alt="Untitled.png" /></p>
+<p><img src="../../docs/images/53b8359150ff5294ad1e88d4638940eb.png" alt="Untitled.png" /></p>
 <h2 id="配置环境变量"><a class="markdownIt-Anchor" href="#配置环境变量"></a> 配置环境变量</h2>
 <p>在本地运行时，用的是<code>.elog.env</code>文件中定义的 Notion 账号信息，而在 Github Actions 时，需要提前配置环境变量。</p>
 <p>在 Github 仓库的设置中找到 <code>Secrets and variables</code>，新增仓库的环境变量<code>NOTION_DATABASE_ID</code>和<code>NOTION_TOKEN</code>和<code>.elog.env</code>保持一致即可</p>
-<p><img src="/images/1c753720f799016f8edb30176253f472.png" alt="Untitled.png" /></p>
+<p><img src="../../docs/images/1c753720f799016f8edb30176253f472.png" alt="Untitled.png" /></p>
 <h2 id="自动化部署"><a class="markdownIt-Anchor" href="#自动化部署"></a> 自动化部署</h2>
 <p>当在 Notion 中改动文档后，手动/自动触发 Github Actions流水线，会重新从 Notion 增量拉取文档，自动提交代码到 Github 仓库。</p>
 <p>Vercel 会实时监测仓库代码，当有新的提交时都会重新部署博客。如此就实现了自动化部署博客。</p>
@@ -255,286 +106,8 @@
       </categories>
       <tags>
         <tag>hexo</tag>
-        <tag>notion</tag>
         <tag>elog</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Notion示例文章</title>
-    <url>//notion-example/</url>
-    <content><![CDATA[<h1 id="notion-markdown"><a class="markdownIt-Anchor" href="#notion-markdown"></a> Notion-Markdown</h1>
-<p><a href="https://1874.notion.site/Notion-0658ee89cadf4d0e9b6adfbb1d953c70">Notion示例文章源地址</a></p>
-<h2 id="行内样式"><a class="markdownIt-Anchor" href="#行内样式"></a> 行内样式</h2>
-<ul>
-<li><strong>加粗</strong></li>
-</ul>
-<p><em>斜体</em></p>
-<p><u>下划线</u></p>
-<p>删除线</p>
-<p>行内代码 <code>const a = 123</code></p>
-<p>行内公式，在Vitepress会报错，不做演示</p>
-<p>红色的文字</p>
-<p>蓝色的文字背景</p>
-<p>绿色的块背景</p>
-<h2 id="basic-block基本块"><a class="markdownIt-Anchor" href="#basic-block基本块"></a> Basic block（基本块）</h2>
-<h2 id="notion示例文章的子页面"><a class="markdownIt-Anchor" href="#notion示例文章的子页面"></a> Notion示例文章的子页面</h2>
-<p>Notion示例文章的子页面</p>
-<table>
-<thead>
-<tr>
-<th>表格标题</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>测试1</td>
-<td>啊大大</td>
-</tr>
-<tr>
-<td>测试2</td>
-<td><code>const a = 123</code></td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>无序列表</li>
-</ul>
-<ol>
-<li>有序列表：事物按规律变化，也有一种不可避免的性质．这种性质就叫做<strong>必然性</strong>
-<ol>
-<li>事物的必然性，是事物本身的性质（我们反对宿命论的是其认为这一切是受神明的支配，而不是反对事物发展中存在的不可避免的性质的事实）
-<ol>
-<li>第三级别列表</li>
-<li>第三级别列表</li>
-</ol>
-</li>
-<li>其决定于它自己本身发展的情况和周围的条件
-<ol>
-<li>第三级别列表
-<ol>
-<li>第三级别列表</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<details>
-<summary>折叠块：点击展开【一级】</summary>
-<details>
-<summary>点击展开【二级】</summary>
-<details>
-<summary>点击展开【三级】</summary>
-<p>内容文本</p>
-</details>
-</details>
-</details>
-<p>123</p>
-<blockquote>
-<p>引用块<br />
-引用换行<br />
-引用换行<br />
-引用 2<br />
-引用 2 换行</p>
-</blockquote>
-<hr />
-<blockquote>
-<p>👏 标注文本：<strong>Elog 0.4.0-beta.7 发布了！</strong><br />
-开放式跨平台博客解决方案，随意组合写作平台和部署平台</p>
-<p>帮助导航👇<br />
-❓ <a href="https://elog.1874.cool/notion/introduce">Elog能干什么</a><br />
-🚀 <a href="https://elog.1874.cool/notion/start">快速开始</a></p>
-</blockquote>
-<h2 id="media媒体"><a class="markdownIt-Anchor" href="#media媒体"></a> Media（媒体）</h2>
-<p><img src="/images/10a91945736a3027f2854218fa71c659.JPG" alt="cover.JPG" /></p>
-<p><a href="https://elog.1874.cool">bookmark</a></p>
-<p><a href="https://prod-files-secure.s3.us-west-2.amazonaws.com/809b2785-2afd-42d1-9139-e6f17eaa52c1/5999649b-7796-46a0-abd4-2e17b7b607ab/46_1677164223.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB46645F67YKF%2F20250401%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20250401T100803Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEFIaCXVzLXdlc3QtMiJHMEUCIQC1j34bhgwfa2Of7y1%2F1MLhfDNx3hHYXxTp0jYb%2BX0WKAIgHIZvJ6G6%2FLsXS7sJvvCI1m328zeDKZYEU8vTFZdrRNcqiAQIuv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDMRCq7NQbv0bIWkbzCrcA7PXaenbh9QoGDCvV5i0ZdMb4DHvFJPq%2F0Eq6QkMD3K5NGRLHIdp4%2BYLuf3Bj7K1qYUiRQbt8OH2ciQhloEoRqYqttrUoMKsomUg4ieFedUjnl%2FSXRjDUzBv81m%2BSczoQXbNjs18b9Vs7vlKcu%2BF1ivMNBg60YtyU5igr6AyQRNkkEeT2gcr67ihPwBTzzqDqM0YHJYu6ubG%2BwciRWQG26VnlV2Xti3%2Fb61EKs7tQ88uNxCOo913aEO2qMQSgoZRvexdeDGfBCBvVElE4GZ9xSpsKSdMyw%2Bcfj%2F2F76lWjL10B46aWFyKxWhjZ6N5Hwc8epTCHuVUOPgEX0UvT7vGFh5TaJifPoQfM5ymNfrCJBNtYKqyVI5bNJpYUfh5C1JU8KsehgEkQv54WGpXpRs8EESEJuFCUGy5ko%2Foxe1htl20f201nFam8FLK7Ay7W2LNCy%2BiEqzHJ2qhhqoGs%2F5uu76KcXsk0kw1lZFyR5PgAndxobGtS3myV8tiojI4g1ZqhdeCN%2BMFmL%2F7Yz7tVFV61N6RTbj1a37uCOAJ1scwVFzK%2BMz44ElWaaVegdB%2FGQgRZzSVRZ%2BF6BBXvfm7N%2FHIfQU8o0YEqq7NiPOQUcsqo6609hE3fedBau4T5AHMKrlrr8GOqUB85oC3xJAh2zFObojLQ%2Bibse6CaMgUyGFj8FejpaNTtD2AbPkjhISPg85DDlJPSEkJpl3F3%2FaDpBvMwNHXS2yUd4mIqLCFr4S8XbTh20j9gCb49V0%2F0ETNTzATgIJsAAxp9MWfe8mUK3NqGm7vkxvve3Inc0FGA8BCYquqQG7KP%2Bfxm93vM%2BhHRFGCGaUvrtFy1JWH25cPx8WPo7nBDk8%2B21GWbFb&amp;X-Amz-Signature=65494291bc5a595c8f02511ad659c8e4ab977fbf83756d09f332a3da6cf60ba2&amp;X-Amz-SignedHeaders=host&amp;x-id=GetObject">46_1677164223.mp4</a></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pwd=<span class="string">&#x27;123456&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;password=<span class="subst">&#123;pwd!r&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## output:</span></span><br><span class="line"><span class="comment">#password=&#x27;123456&#x27;</span></span><br></pre></td></tr></table></figure>
-<p><a href="https://prod-files-secure.s3.us-west-2.amazonaws.com/809b2785-2afd-42d1-9139-e6f17eaa52c1/753c8245-2aea-45de-8a5a-509c105f6236/example.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB46645F67YKF%2F20250401%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20250401T100803Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEFIaCXVzLXdlc3QtMiJHMEUCIQC1j34bhgwfa2Of7y1%2F1MLhfDNx3hHYXxTp0jYb%2BX0WKAIgHIZvJ6G6%2FLsXS7sJvvCI1m328zeDKZYEU8vTFZdrRNcqiAQIuv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDMRCq7NQbv0bIWkbzCrcA7PXaenbh9QoGDCvV5i0ZdMb4DHvFJPq%2F0Eq6QkMD3K5NGRLHIdp4%2BYLuf3Bj7K1qYUiRQbt8OH2ciQhloEoRqYqttrUoMKsomUg4ieFedUjnl%2FSXRjDUzBv81m%2BSczoQXbNjs18b9Vs7vlKcu%2BF1ivMNBg60YtyU5igr6AyQRNkkEeT2gcr67ihPwBTzzqDqM0YHJYu6ubG%2BwciRWQG26VnlV2Xti3%2Fb61EKs7tQ88uNxCOo913aEO2qMQSgoZRvexdeDGfBCBvVElE4GZ9xSpsKSdMyw%2Bcfj%2F2F76lWjL10B46aWFyKxWhjZ6N5Hwc8epTCHuVUOPgEX0UvT7vGFh5TaJifPoQfM5ymNfrCJBNtYKqyVI5bNJpYUfh5C1JU8KsehgEkQv54WGpXpRs8EESEJuFCUGy5ko%2Foxe1htl20f201nFam8FLK7Ay7W2LNCy%2BiEqzHJ2qhhqoGs%2F5uu76KcXsk0kw1lZFyR5PgAndxobGtS3myV8tiojI4g1ZqhdeCN%2BMFmL%2F7Yz7tVFV61N6RTbj1a37uCOAJ1scwVFzK%2BMz44ElWaaVegdB%2FGQgRZzSVRZ%2BF6BBXvfm7N%2FHIfQU8o0YEqq7NiPOQUcsqo6609hE3fedBau4T5AHMKrlrr8GOqUB85oC3xJAh2zFObojLQ%2Bibse6CaMgUyGFj8FejpaNTtD2AbPkjhISPg85DDlJPSEkJpl3F3%2FaDpBvMwNHXS2yUd4mIqLCFr4S8XbTh20j9gCb49V0%2F0ETNTzATgIJsAAxp9MWfe8mUK3NqGm7vkxvve3Inc0FGA8BCYquqQG7KP%2Bfxm93vM%2BhHRFGCGaUvrtFy1JWH25cPx8WPo7nBDk8%2B21GWbFb&amp;X-Amz-Signature=e586523e035aad8c03d0967f718f5062483c39e8613ab3af11204d3f7a5ccada&amp;X-Amz-SignedHeaders=host&amp;x-id=GetObject">example.txt</a></p>
-<h2 id="database数据库"><a class="markdownIt-Anchor" href="#database数据库"></a> DataBase（数据库）</h2>
-<p>数据库</p>
-<h2 id="ai-block"><a class="markdownIt-Anchor" href="#ai-block"></a> AI block</h2>
-<p>API不支持，会报错<code>Block type ai_block is not supported via the API.</code></p>
-<h2 id="advanced-block高级块"><a class="markdownIt-Anchor" href="#advanced-block高级块"></a> Advanced block（高级块）</h2>
-<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><mi>f</mi><mrow><mo fence="true">(</mo><msup><mrow><mo fence="true">[</mo><mfrac><mrow><mn>1</mn><mo>+</mo><mo stretchy="false">{</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">}</mo></mrow><mrow><mrow><mo fence="true">(</mo><mfrac><mi>x</mi><mi>y</mi></mfrac><mo>+</mo><mfrac><mi>y</mi><mi>x</mi></mfrac><mo fence="true">)</mo></mrow><mo stretchy="false">(</mo><mi>u</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mfrac><mo>+</mo><mi>a</mi><mo fence="true">]</mo></mrow><mrow><mn>3</mn><mi mathvariant="normal">/</mi><mn>2</mn></mrow></msup><mo fence="true">)</mo></mrow></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(行标)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">f\left(\left[\frac{1+\{x, y\}}{\left(\frac{x}{y}+\frac{y}{x}\right)(u+1)}+a\right]^{3 / 2}\right)\tag{行标}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:4.200049999999999em;vertical-align:-1.850025em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.3500249999999996em;"><span style="top:-1.9499950000000004em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎝</span></span></span><span style="top:-3.1050050000000002em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎜</span></span></span><span style="top:-4.350025em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎛</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.850025em;"><span></span></span></span></span></span></span><span class="minner"><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05002em;"><span style="top:-2.2500000000000004em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎣</span></span></span><span style="top:-4.05002em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎡</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55002em;"><span></span></span></span></span></span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.11em;"><span class="pstrut" style="height:3.15em;"></span><span class="mord"><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size2">(</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.695392em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">y</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.481108em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7475em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.446108em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">y</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size2">)</span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mopen">(</span><span class="mord mathdefault">u</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span><span style="top:-3.38em;"><span class="pstrut" style="height:3.15em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.827em;"><span class="pstrut" style="height:3.15em;"></span><span class="mord"><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mopen">{</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">}</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.69002em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault">a</span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05002em;"><span style="top:-2.2500000000000004em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎦</span></span></span><span style="top:-4.05002em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎤</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55002em;"><span></span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:2.3279199999999998em;"><span style="top:-4.5029200000000005em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span><span class="mord mtight">/</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.3500249999999996em;"><span style="top:-1.9499950000000004em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎠</span></span></span><span style="top:-3.1050050000000002em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎟</span></span></span><span style="top:-4.350025em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎞</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.850025em;"><span></span></span></span></span></span></span></span></span><span class="tag"><span class="strut" style="height:4.200049999999999em;vertical-align:-1.850025em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord cjk_fallback">行</span><span class="mord cjk_fallback">标</span></span><span class="mord">)</span></span></span></span></span></span></p>
-<p>Notion示例文章的同步块</p>
-<h1 id="折叠一级标题"><a class="markdownIt-Anchor" href="#折叠一级标题"></a> 折叠一级标题</h1>
-<pre><code>## 折叠二级标题
-
-
-    折叠内容
-</code></pre>
-<p>两列分栏（左）</p>
-<ul>
-<li>[ ] 左侧书写</li>
-</ul>
-<p>两列分栏（右）</p>
-<ul>
-<li>[ ] 右侧书写</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph LR;</span><br><span class="line">Mermaid思维导图--&gt;思维导图</span><br><span class="line">Mermaid思维导图--&gt;研发</span><br></pre></td></tr></table></figure>
-<p>@Anonymous</p>
-<p><a href="https://www.notion.so/f478ef37c82a41f1b7a59c195b043831">Untitled</a></p>
-<p>2023-04-26</p>
-<p>🚀🔥🐸</p>
-<h2 id="embeds嵌入"><a class="markdownIt-Anchor" href="#embeds嵌入"></a> Embeds（嵌入）</h2>
-<p>嵌入网页</p>
-<p><a href="https://elog.1874.cool">embed</a></p>
-]]></content>
-      <categories>
-        <category>Blog</category>
-      </categories>
-      <tags>
         <tag>notion</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>iOS代码发布为组件</title>
-    <url>/iOS%E4%BB%A3%E7%A0%81%E5%8F%91%E5%B8%83%E4%B8%BA%E7%BB%84%E4%BB%B6/</url>
-    <content><![CDATA[<h2 id="1-前期准备"><a class="markdownIt-Anchor" href="#1-前期准备"></a> 1 前期准备</h2>
-<h3 id="11-远程仓库"><a class="markdownIt-Anchor" href="#11-远程仓库"></a> 1.1 远程仓库</h3>
-<blockquote>
-<p>准备好两个远程仓库，在GitHub上创建即可；</p>
-<p>权限建议为public</p>
-</blockquote>
-<ul>
-<li>
-<p>用来存放源码的仓库，该仓库用来存放自己编写的组件的源码，其应为正确的目录结构，如何模板创建下文详细说；</p>
-  <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">&lt;https://github.com/JiaHaoFang/SFAPPRealTimeLogCaughter.git&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>用来存放组件的仓库，相当于xxxRepo、CocoaPods/Spec，是自己私有的组件仓库，用来存放.podspec文件；</p>
-  <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">&lt;https://github.com/JiaHaoFang/SFPodRepo.git&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>注：该仓库非必要，可以使用官方仓库，此处为了熟悉流程使用自己创建的仓库</li>
-</ul>
-</li>
-</ul>
-<h3 id="12-本地代码"><a class="markdownIt-Anchor" href="#12-本地代码"></a> 1.2 本地代码</h3>
-<blockquote>
-<p>由于该组件为一个完整工程作为组件发布，需要抽离</p>
-</blockquote>
-<ul>
-<li>保证需要发布为组件的工程，其核心功能完整，去耦，能够实现核心功能的抽离</li>
-<li>保证编译可通过，同时核心功能具备可移植性</li>
-</ul>
-<h2 id="2-本地目录创建"><a class="markdownIt-Anchor" href="#2-本地目录创建"></a> 2 本地目录创建</h2>
-<h3 id="21-创建私有repo目录"><a class="markdownIt-Anchor" href="#21-创建私有repo目录"></a> 2.1 创建私有Repo目录</h3>
-<ul>
-<li>
-<p>在～/.cocoapods/repo中能看到本地有的repo仓库，其中cocoapods为官方仓库，trunk也是官方仓库（历史遗留问题）；xxxRepo为公司私有仓库。</p>
-</li>
-<li>
-<p>该步骤将创建私人仓库SFRepo，作用类似上文的官方仓库，后续将用来存放个人的组件。</p>
-</li>
-<li>
-<p>或者也可以选择发布到官方仓库。</p>
-</li>
-<li>
-<p>命令</p>
-  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod repo add <span class="title class_">SFPod</span> &lt;<span class="symbol">https:</span>/<span class="regexp">/github.com/</span><span class="title class_">JiaHaoFang</span>/<span class="title class_">SFPodRepo</span>.git&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>创建完成之后可通过命令查看目录结构</p>
-  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">open ~<span class="regexp">/.cocoapods/repos</span><span class="regexp">/SFPod</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="22-创建个人组件目录"><a class="markdownIt-Anchor" href="#22-创建个人组件目录"></a> 2.2 创建个人组件目录</h3>
-<ul>
-<li>
-<p>发布的组件需要按照Cocoapod严格遵守官方给出的目录结构，官方给出了命令可以直接生成模版</p>
-  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod lib create <span class="title class_">SFAPPRealTimeLogCaughter</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>过程中终端会向我们提出一系列问题，包括开发语言是OC还是Swift，demo程序，测试框架，界面测试。我选择了包含demo程序，没有测试框架.</li>
-</ul>
-</li>
-<li>
-<p>生成模版后可以使用tree命令查看该文件夹下的目录结构</p>
-</li>
-</ul>
-<h3 id="23-编辑模版"><a class="markdownIt-Anchor" href="#23-编辑模版"></a> 2.3 编辑模版</h3>
-<blockquote>
-<p>在2.2创建的公共模版就是组件的模板，我们需要将我们的代码添加进去将其作为自己的组件</p>
-</blockquote>
-<ul>
-<li>我们需要发布的组件核心功能代码存放在/SFPod/Pod/Classes文件夹中</li>
-<li>另外在Example中编写Demo测试自己的组件是否能正常工作，点击.xcworkspace可以作为一个完整工程运行</li>
-<li>在写Example的时候，如果修改了Classes中文件的，需要pod install一下，将组件在自己的Demo中更新一下</li>
-</ul>
-<h3 id="24-编辑podspec文件"><a class="markdownIt-Anchor" href="#24-编辑podspec文件"></a> 2.4 编辑.podspec文件</h3>
-<ul>
-<li>自行Google</li>
-</ul>
-<h2 id="3-发布组件"><a class="markdownIt-Anchor" href="#3-发布组件"></a> 3 发布组件</h2>
-<blockquote>
-<p>如果上面的步骤完成了，恭喜，完成了一半</p>
-</blockquote>
-<h3 id="31-校验"><a class="markdownIt-Anchor" href="#31-校验"></a> 3.1 校验</h3>
-<ul>
-<li>
-<p>当2中的步骤全部完成，我们可以使用下面的命令检验自己组件代码的合法性（主要是检验.podspec文件）</p>
-  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod lib lint</span><br><span class="line"><span class="comment"># 只从本地验证你的pod能否通过验证。</span></span><br><span class="line">pod spec lint</span><br><span class="line"><span class="comment"># 从本地和远程验证你的pod能否通过验证，建议使用这个</span></span><br><span class="line">--allow-warnings</span><br><span class="line"><span class="comment"># 如何库代码中有警告导致通不过验证。加上这个忽略警告</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="32-提交源码"><a class="markdownIt-Anchor" href="#32-提交源码"></a> 3.2 提交源码</h3>
-<ul>
-<li>
-<p>提交源码到个人仓库</p>
-  <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">git add -a</span><br><span class="line">git commit -m &quot;xxx&quot;</span><br><span class="line">git push</span><br><span class="line">git tag 0.1.0</span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="33-发布组件到个人repo"><a class="markdownIt-Anchor" href="#33-发布组件到个人repo"></a> 3.3 发布组件到个人Repo</h3>
-<ul>
-<li>
-<p>使用命令将.podspec文件添加到~/.cocoapods/repos/SFPod中，同时也发布到远程仓库</p>
-  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod repo push <span class="title class_">SFPod</span> <span class="title class_">SFAPPRealTimeLogCaughter</span>.podspec</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>执行完该步骤后， ~/.cocoapods/repos/SFPod会新增对应版本的.podspec文件</p>
-</li>
-</ul>
-<h3 id="34-查询"><a class="markdownIt-Anchor" href="#34-查询"></a> 3.4 查询</h3>
-<ul>
-<li>
-<p>搜索组件库</p>
-  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod search <span class="title class_">SFAPPRealTimeLogCaughter</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>搜索到了说明安装成功</p>
-</li>
-</ul>
-<h2 id="4-使用组件"><a class="markdownIt-Anchor" href="#4-使用组件"></a> 4 使用组件</h2>
-<ul>
-<li>
-<p>在Podfile文件新增源</p>
-  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">source <span class="string">&#x27;&lt;https://github.com/JiaHaoFang/SFPodRepo.git&gt;&#x27;</span></span><br><span class="line">source <span class="string">&#x27;&lt;https://github.com/CocoaPods/Specs.git&gt;&#x27;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>添加pod</p>
-  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod <span class="string">&#x27;SFAPPRealTimeLogCaughter&#x27;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>上面两项可以合起来写，合不起来。。。</p>
-</li>
-<li>
-<p>执行 pod install</p>
-</li>
-<li>
-<p>运行代码</p>
-</li>
-</ul>
-<blockquote>
-<p>参考资料：<a href="https://www.jianshu.com/p/103a6f0bf3a4">https://www.jianshu.com/p/103a6f0bf3a4</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Coding</category>
-      </categories>
-      <tags>
-        <tag>iOS</tag>
       </tags>
   </entry>
 </search>
