@@ -94,7 +94,7 @@ module.exports = {
 ## Notion 配置
 
 
-![Untitled.png](/images/e09e3db7b0e26c15ae5f7b720d2bf00f.png)
+![Untitled.png](../images/e09e3db7b0e26c15ae5f7b720d2bf00f.png)
 
 
 根据 [Hexo 的 FrontMatter 配置文档](https://hexo.io/zh-cn/docs/front-matter)，和 [Butterfly主题的 FrontMatter 配置文档](https://butterfly.js.org/posts/dc584b87/?highlight=front%20matter#Post-Front-matter)，可以将需要的参数作为 notion 数据库的字段来设置。一般来说，主题的 FrontMatter 为 Hexo在一些基础字段是共用的。
@@ -119,7 +119,7 @@ notion: {
 ## 本地配置
 
 
-![Untitled.png](/images/6be21de37012453d6acaef1a2720e3ff.png)
+![Untitled.png](../images/6be21de37012453d6acaef1a2720e3ff.png)
 
 
 ```javascript

@@ -8,7 +8,7 @@ status: 已发布
 description: ''
 permalink: notion-hexo/
 title: Notion + Hexo + GitHub Actions + Vercel 博客解决方案
-cover: 'https://prod-files-secure.s3.us-west-2.amazonaws.com/809b2785-2afd-42d1-9139-e6f17eaa52c1/dc3ab2f7-66cb-4a5c-91bd-0c775b8e2aa5/%E5%B9%BD%E7%81%B5%E5%85%AC%E4%B8%BB.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466Z4JMBRVH%2F20250401%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250401T105959Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEFMaCXVzLXdlc3QtMiJGMEQCIA93qI0%2FjcIHIa%2Fx6IKZRQuqMO8gQ5ran9JHx46kSygoAiABjrMADy03Gi7xkVdtu0igtzqAhIqVn5aJKn7o9FX0qSqIBAi8%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMEpYSCyhoTOVD%2BfOxKtwDb5AY%2F1Gr7Pbvu%2FjBr8kxMbfv1OP4J65saldyvJiEU2hNnwZeUIu8pAOB4YSzg9iBzV4KMeNCXlSs1r%2FzAYzVisKETDqVYs8oZd4vBnwTSMx%2Bqsp43zCMNrvhIYwGQctfXyVWo0shOZMOhapbl3NMNirB1%2B1h2%2Flw11bNZzd4eNNDgBlVdx5D3lV%2BZa35aHgxMkqwlhPBeiecxQt%2Fh5OEfqCL8z5%2FN%2BvuzxEIvMrWrWma1WvYJy9T5xZUmYqiEtmonpmcTKeCkuEBvV0HsIjmteF16eb6xCaptABOGm0hUVcmcZ92uNrQsOdGbJPsPKj2zcTv6QFPGeXtRH%2BcdrImpbax0Sxb8joratdKR2T2syg%2F5hoz%2BH1IcpGP3mrzWy2Rw7%2Bth57%2Bh7LDrHKF%2FoF5GuU7teeajrOoA%2Bn1mibSyWX7EJtRNHZGt%2Fq4RvZMt2l42vzzxBibk2jcwybizqNwvZak7nfCbB5CEfNkRd2YyU7a0ZJf5NgL5ME3hzQWlNPsy4S4g7AsMEcdmuVwOXIGBLjywfjbSANzcW5PFnIZuFDQ6bSutz9X1OFUKuY1ghUtoAjCveTJgYsYUGUT7t%2BYSmdn6c3MSofEw7in6xb%2F8OCaTIM3lkgr21DKzGww4YOvvwY6pgEFVzxQGg6L09U359ez9XxrI0sc3FL3eH5QspGFdrz5ty7sp4G0liZIe6dTsWIATU6kuwW8sxdzZ70U0H5jMR%2BF5lxsBiyKqJlt7jXNmZEdoma4vWoZVIXce12p31eF545gjOHNezsSvUvs3XgJE7fF08uSK6GcmP2gRPBjlzj8v4GdxEDGJrOFSOxRBrlPUfedwLhso5Gy0TnaVC8R1SOiIDIFijvT&X-Amz-Signature=c0bbef039edb607894f1109e38f3eb02119fe97f55136a5c0480eef8f82bc10b&X-Amz-SignedHeaders=host&x-id=GetObject'
+cover: 'https://prod-files-secure.s3.us-west-2.amazonaws.com/809b2785-2afd-42d1-9139-e6f17eaa52c1/dc3ab2f7-66cb-4a5c-91bd-0c775b8e2aa5/%E5%B9%BD%E7%81%B5%E5%85%AC%E4%B8%BB.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466Q5JJ6X4Z%2F20250401%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250401T110418Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEFMaCXVzLXdlc3QtMiJGMEQCIEXc7HFWTWA1O29a%2B01cp3sgwY8WJ%2B%2FuyKhsduqut16FAiBNgjgS%2BJX1INnNv5lTZVOGl91hDHraN%2FRDqeLI6cSmXSqIBAi8%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMPPtysWyes9YB%2FRIDKtwDlVw2gLhNsFdR%2BJXzPXbLfLqghL54HZvCqhJDYcjz53j4%2FRsaZBPf3K%2BeQ5JLRxMVcdT4o8TFYeWtQXQSDb3v88AvMVT0C1fAoMLI0hwl6It0c9KH59lMtuvDUQWqamxMP%2BEnaorYiNUwDbQuJakEDD9boSHYQC6bsbItK3IM1yAhK%2FEuZ9WmNIvolNF9arDAAt00fBkYfY%2FnW9xwuDT5BIb5u0xuY%2FoUkqHEnlxD%2BSQt1iQxDihQCna%2Frf7qI83Eb7fIYmjZQi7IbjP1g08887tohL%2BuFc0xytv4QXzFUbCmWRSP2LmYYpuO%2BDqF%2F%2Fepxt9QqBBqDd%2FfiGx8RuNZ0LifgxaorMNfsNuY7%2Fr69wFkEDa3VTCicqH7%2Fy2LKEpWLzne53qFJ5gJF%2BFezk45XWBRoOrpmZwon6uEFt9dT6J%2BgOzPGwEJ%2F%2FvF2Y6ijhnBBJEi7ip4Zuh6rbV%2F1PDHysMSueJVkzNGUo9DLajqkEb13VsFQrNjsBFwXpMdh0viou2R7d5gzQvJlOOsElYOXABCBS3Uf721DUG6zCsqx%2Fv9c%2BNFSPWSOqeikuooNtFMx93KfKpIKKsaizYBAp%2BNG8%2BgSCfGb9DUL2L%2BfbU6KgwnoEmlQgAIcoXcljMwx4OvvwY6pgH%2BXVCj5TAJbTvb64h%2B158AGCLrSMuoIREoE0%2BVfcRO0VTfZVcgI4OgdF0%2BHwSCqHinieWKmaequda7kLHvkBLXGwStp94dTO9dFej41tNKDE43UIrl2XZXdOuA8a0kRDk0SwQ3oONtsoF7sG7tmrWS9kLYygmaV%2FwsHhsaa0ETvPFlAIJ%2FhOP4%2Bmeo5%2BfR6M%2BSUyJiMrvN9Hi507OTjkCqF9jS27wZ&X-Amz-Signature=01b78f8beca0c61d976e0f0dc678d0172ffbe7ad48f93cc779c9bd89edfb9f9c&X-Amz-SignedHeaders=host&x-id=GetObject'
 urlname: 1c724191-cd14-81ce-a193-d17c96f48d1b
 date: '2025-03-31 23:35:00'
 updated: '2025-04-01 18:12:00'
@@ -101,10 +101,10 @@ npm run server
 注册 Vercel 账号并绑定 Github，在 Vercel 导入 该项目，Vercel 会自动识别出该 Hexo 项目，不需要改动，直接选择 Deploy 部署。部署完成会有一个 Vercel 临时域名，你也可以绑定自己的域名。
 
 
-![Untitled.png](/images/c283a83904894fe6bfaa24584cb6a86a.png)
+![Untitled.png](../images/c283a83904894fe6bfaa24584cb6a86a.png)
 
 
-![Untitled.png](/images/eceaaa23506d5f0d9210e8aa61d60205.png)
+![Untitled.png](../images/eceaaa23506d5f0d9210e8aa61d60205.png)
 
 
 ## 配置 Github Actions 权限
@@ -113,7 +113,7 @@ npm run server
 在 Github 仓库的设置中找到 `Actions-General`，打开流水线写入权限`Workflow permissions`
 
 
-![Untitled.png](/images/53b8359150ff5294ad1e88d4638940eb.png)
+![Untitled.png](../images/53b8359150ff5294ad1e88d4638940eb.png)
 
 
 ## 配置环境变量
@@ -125,7 +125,7 @@ npm run server
 在 Github 仓库的设置中找到 `Secrets  and variables`，新增仓库的环境变量`NOTION_DATABASE_ID`和`NOTION_TOKEN`和`.elog.env`保持一致即可
 
 
-![Untitled.png](/images/1c753720f799016f8edb30176253f472.png)
+![Untitled.png](../images/1c753720f799016f8edb30176253f472.png)
 
 
 ## 自动化部署
