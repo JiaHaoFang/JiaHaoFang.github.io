@@ -39,7 +39,7 @@ jobs:
           COS_IMAGE_REGION: ${{ secrets.COS_IMAGE_REGION }}
         run: |
           # 对应package.json中的script.sync
-          npm run elog sync
+          npm run sync
 
       - name: 配置Git用户名邮箱
         run: |
@@ -60,7 +60,7 @@ jobs:
       - name: 生成静态文件
         run: |
           # 对应package.json中的script.build
-          npm run hexo deploy
+          npm run build
 
       - name: 部署到Github Pages
         uses: peaceiris/actions-gh-pages@v3
