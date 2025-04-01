@@ -14,10 +14,10 @@ jobs:
 
     steps:
       - name: 检查分支
-        uses: actions/checkout@source
+        uses: actions/checkout@master
 
       - name: 安装node环境
-        uses: actions/setup-node@source
+        uses: actions/setup-node@master
         with:
           node-version: "16.x"
 
@@ -48,12 +48,11 @@ jobs:
 
       - name: 提交拉取的文章到GitHub仓库
         run: |
-          echo `date +"%Y-%m-%d %H:%M:%S"` begin > time.txt
           git add .
           git commit -m "更新文档" -a
 
       - name: 推送文章到仓库
-        uses: ad-m/github-push-action@source
+        uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
