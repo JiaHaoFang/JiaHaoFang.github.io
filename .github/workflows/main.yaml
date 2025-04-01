@@ -60,7 +60,7 @@ jobs:
       - name: 生成静态文件
         run: |
           # 对应package.json中的script.build
-          npm run buildAndDeploy
+          npm run buildA
 
       - name: 部署到Github Pages
         uses: peaceiris/actions-gh-pages@v3
