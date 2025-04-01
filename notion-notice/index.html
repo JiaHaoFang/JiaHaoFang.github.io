@@ -29,15 +29,15 @@
 <meta property="og:site_name" content="阿告今天学习了吗">
 <meta property="og:description" content="使用Notion + Hexo部署博客时，在 Notion 上写作的注意事项，以及如何配置Elog使其更好的结合Hexo">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://prod-files-secure.s3.us-west-2.amazonaws.com/809b2785-2afd-42d1-9139-e6f17eaa52c1/37f1ce20-a930-40df-8bf2-e65ba2ceff0d/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466UGF2QTHD%2F20250331%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20250331T162953Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEEaCXVzLXdlc3QtMiJHMEUCIBRMroQqHfdYIoMB8UX0vVMMPIHZHsit2cxBMLKNnWvgAiEA8A85JIQX268ogRSn8XiVI32YcB67CAGmGPkuxlloWQoqiAQIqf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDLYaCIztOyANzQXHmSrcA1rU8Gj0oaebutc%2Bo%2BmVFtRiD9VxTDYLaDFrTvEihj8bx8taqYTd6ZV6PWag27zgOYYRZtH9I%2BHk1WAQBljW2fePcm5tpxHfTs6rWAE6UK0R1XSYzIUdc7Al3T47VlpdFIzmJTcOafJTHZvaW9ZoxYk03JPnm9XoKnprIib4M%2BLOLX1gMeoIeotnGUweUtB2RIrPUSPZIARZsaZKAJFBqMKS0xBIiIZGy2FY%2BQXpFb4y38rbBwMsdmP4nygs8QDclzeWM2fAnZj%2BWA3JJ2alMGWgtKV4lXemQH6Gb%2F9yPjsesKaC3c6Yg0%2FvA4x91M%2FSjLDNqHMpLWDfD9uakazazPJ1YNq3s5o%2FEaLwftDrFTNhiYHvSYi%2Fdc0DR1h39WqSbjHUqL%2BnvK0wQeGuSvBuTDq0XSKCSqcmFSBRzEo2T2Urz6HSgmjmIm6bgw%2FdNqo3%2Fx21pKhZj4OgjFaYJV6UFg7RIBb3oJqfefSwCMJgReJ3KNX8bw%2F3lXw2v%2F%2BfOEmkOO1OIBEsgQGjmh1n2p829VSAPZPnhohxKtt77DviUviKSNjslTKydxJHn4TXO6zQqjm%2BH4Mhr9wfbStjV2LW3K6IwEV9ej5XYdEq%2FElIbWGsWLZfLh94n7Oof9zjMPaBq78GOqUBujjh62nd3urre%2FhyboD02OhX6BpoTt7HgO7PVPdsOYYUjreOyX2i5OTS8iTHAwxjIZd9ouU9HiEG%2FxkhoBc5qHr5ORhQ2u1cGjwGZmk8CBrFqHR5ctxnaNBWn%2FhntFHY91z5LUI6BnbxvnOqttN2k5BBwD8WZjJncVcL4QqMZ2Dm87PgMrtCXFLUhocVlW5SadU7mYFbsMTP2cgDYbKlSTCQSZT5&amp;X-Amz-Signature=ce94dc797314523cb9240fe38fca82d579edcf44492195860ce944cc3d70c80d&amp;X-Amz-SignedHeaders=host&amp;x-id=GetObject">
-<meta property="og:image" content="https://prod-files-secure.s3.us-west-2.amazonaws.com/809b2785-2afd-42d1-9139-e6f17eaa52c1/804acc7d-2f1b-4daa-95f1-5dcbd316fe76/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466UGF2QTHD%2F20250331%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20250331T162953Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEEaCXVzLXdlc3QtMiJHMEUCIBRMroQqHfdYIoMB8UX0vVMMPIHZHsit2cxBMLKNnWvgAiEA8A85JIQX268ogRSn8XiVI32YcB67CAGmGPkuxlloWQoqiAQIqf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDLYaCIztOyANzQXHmSrcA1rU8Gj0oaebutc%2Bo%2BmVFtRiD9VxTDYLaDFrTvEihj8bx8taqYTd6ZV6PWag27zgOYYRZtH9I%2BHk1WAQBljW2fePcm5tpxHfTs6rWAE6UK0R1XSYzIUdc7Al3T47VlpdFIzmJTcOafJTHZvaW9ZoxYk03JPnm9XoKnprIib4M%2BLOLX1gMeoIeotnGUweUtB2RIrPUSPZIARZsaZKAJFBqMKS0xBIiIZGy2FY%2BQXpFb4y38rbBwMsdmP4nygs8QDclzeWM2fAnZj%2BWA3JJ2alMGWgtKV4lXemQH6Gb%2F9yPjsesKaC3c6Yg0%2FvA4x91M%2FSjLDNqHMpLWDfD9uakazazPJ1YNq3s5o%2FEaLwftDrFTNhiYHvSYi%2Fdc0DR1h39WqSbjHUqL%2BnvK0wQeGuSvBuTDq0XSKCSqcmFSBRzEo2T2Urz6HSgmjmIm6bgw%2FdNqo3%2Fx21pKhZj4OgjFaYJV6UFg7RIBb3oJqfefSwCMJgReJ3KNX8bw%2F3lXw2v%2F%2BfOEmkOO1OIBEsgQGjmh1n2p829VSAPZPnhohxKtt77DviUviKSNjslTKydxJHn4TXO6zQqjm%2BH4Mhr9wfbStjV2LW3K6IwEV9ej5XYdEq%2FElIbWGsWLZfLh94n7Oof9zjMPaBq78GOqUBujjh62nd3urre%2FhyboD02OhX6BpoTt7HgO7PVPdsOYYUjreOyX2i5OTS8iTHAwxjIZd9ouU9HiEG%2FxkhoBc5qHr5ORhQ2u1cGjwGZmk8CBrFqHR5ctxnaNBWn%2FhntFHY91z5LUI6BnbxvnOqttN2k5BBwD8WZjJncVcL4QqMZ2Dm87PgMrtCXFLUhocVlW5SadU7mYFbsMTP2cgDYbKlSTCQSZT5&amp;X-Amz-Signature=8949d67a28fd4d088596ebcf14a98ab16d0ee439980984696f0aeff8aa899cb6&amp;X-Amz-SignedHeaders=host&amp;x-id=GetObject">
+<meta property="og:image" content="https://jiahaofang.github.io/images/e09e3db7b0e26c15ae5f7b720d2bf00f.png">
+<meta property="og:image" content="https://jiahaofang.github.io/images/6be21de37012453d6acaef1a2720e3ff.png">
 <meta property="article:published_time" content="2025-03-31T23:35:00.000Z">
-<meta property="article:modified_time" content="2025-03-31T23:35:00.000Z">
+<meta property="article:modified_time" content="2025-04-01T18:05:00.000Z">
 <meta property="article:author" content="阿告2426">
-<meta property="article:tag" content="elog">
 <meta property="article:tag" content="notion">
+<meta property="article:tag" content="elog">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://prod-files-secure.s3.us-west-2.amazonaws.com/809b2785-2afd-42d1-9139-e6f17eaa52c1/37f1ce20-a930-40df-8bf2-e65ba2ceff0d/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466UGF2QTHD%2F20250331%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20250331T162953Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEEaCXVzLXdlc3QtMiJHMEUCIBRMroQqHfdYIoMB8UX0vVMMPIHZHsit2cxBMLKNnWvgAiEA8A85JIQX268ogRSn8XiVI32YcB67CAGmGPkuxlloWQoqiAQIqf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDLYaCIztOyANzQXHmSrcA1rU8Gj0oaebutc%2Bo%2BmVFtRiD9VxTDYLaDFrTvEihj8bx8taqYTd6ZV6PWag27zgOYYRZtH9I%2BHk1WAQBljW2fePcm5tpxHfTs6rWAE6UK0R1XSYzIUdc7Al3T47VlpdFIzmJTcOafJTHZvaW9ZoxYk03JPnm9XoKnprIib4M%2BLOLX1gMeoIeotnGUweUtB2RIrPUSPZIARZsaZKAJFBqMKS0xBIiIZGy2FY%2BQXpFb4y38rbBwMsdmP4nygs8QDclzeWM2fAnZj%2BWA3JJ2alMGWgtKV4lXemQH6Gb%2F9yPjsesKaC3c6Yg0%2FvA4x91M%2FSjLDNqHMpLWDfD9uakazazPJ1YNq3s5o%2FEaLwftDrFTNhiYHvSYi%2Fdc0DR1h39WqSbjHUqL%2BnvK0wQeGuSvBuTDq0XSKCSqcmFSBRzEo2T2Urz6HSgmjmIm6bgw%2FdNqo3%2Fx21pKhZj4OgjFaYJV6UFg7RIBb3oJqfefSwCMJgReJ3KNX8bw%2F3lXw2v%2F%2BfOEmkOO1OIBEsgQGjmh1n2p829VSAPZPnhohxKtt77DviUviKSNjslTKydxJHn4TXO6zQqjm%2BH4Mhr9wfbStjV2LW3K6IwEV9ej5XYdEq%2FElIbWGsWLZfLh94n7Oof9zjMPaBq78GOqUBujjh62nd3urre%2FhyboD02OhX6BpoTt7HgO7PVPdsOYYUjreOyX2i5OTS8iTHAwxjIZd9ouU9HiEG%2FxkhoBc5qHr5ORhQ2u1cGjwGZmk8CBrFqHR5ctxnaNBWn%2FhntFHY91z5LUI6BnbxvnOqttN2k5BBwD8WZjJncVcL4QqMZ2Dm87PgMrtCXFLUhocVlW5SadU7mYFbsMTP2cgDYbKlSTCQSZT5&amp;X-Amz-Signature=ce94dc797314523cb9240fe38fca82d579edcf44492195860ce944cc3d70c80d&amp;X-Amz-SignedHeaders=host&amp;x-id=GetObject">
+<meta name="twitter:image" content="https://jiahaofang.github.io/images/e09e3db7b0e26c15ae5f7b720d2bf00f.png">
 
 
 <link rel="canonical" href="https://jiahaofang.github.io/notion-notice/">
@@ -165,18 +165,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -248,11 +248,18 @@
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-04-01 18:05:00" itemprop="dateModified" datetime="2025-04-01T18:05:00+00:00">2025-04-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Elog-Notion/" itemprop="url" rel="index"><span itemprop="name">Elog-Notion</span></a>
+          <a href="/categories/Blog/" itemprop="url" rel="index"><span itemprop="name">Blog</span></a>
         </span>
     </span>
 
@@ -284,7 +291,7 @@
 <p>参考<a target="_blank" rel="noopener" href="https://elog.1874.cool/">Elog 文档</a>，本博客的 Elog 的配置如下：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">write</span>: &#123;</span><br><span class="line">    <span class="attr">platform</span>: <span class="string">&#x27;notion&#x27;</span>,</span><br><span class="line">    <span class="attr">notion</span>: &#123;</span><br><span class="line">      <span class="attr">token</span>: process.<span class="property">env</span>.<span class="property">NOTION_TOKEN</span>,</span><br><span class="line">      <span class="attr">databaseId</span>: process.<span class="property">env</span>.<span class="property">NOTION_DATABASE_ID</span>,</span><br><span class="line">      <span class="attr">filter</span>: &#123; <span class="attr">property</span>: <span class="string">&#x27;status&#x27;</span>, <span class="attr">select</span>: &#123; <span class="attr">equals</span>: <span class="string">&#x27;已发布&#x27;</span> &#125;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">deploy</span>: &#123;</span><br><span class="line">    <span class="attr">platform</span>: <span class="string">&#x27;local&#x27;</span>,</span><br><span class="line">    <span class="attr">local</span>: &#123;</span><br><span class="line">      <span class="attr">outputDir</span>: <span class="string">&#x27;./source/_posts&#x27;</span>,</span><br><span class="line">      <span class="attr">filename</span>: <span class="string">&#x27;title&#x27;</span>,</span><br><span class="line">      <span class="attr">format</span>: <span class="string">&#x27;markdown&#x27;</span>,</span><br><span class="line">      <span class="attr">frontMatter</span>: &#123;</span><br><span class="line">        <span class="attr">enable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">include</span>: [<span class="string">&#x27;categories&#x27;</span>, <span class="string">&#x27;tags&#x27;</span>, <span class="string">&#x27;title&#x27;</span>, <span class="string">&#x27;date&#x27;</span>, <span class="string">&#x27;updated&#x27;</span>, <span class="string">&#x27;permalink&#x27;</span>, <span class="string">&#x27;cover&#x27;</span>, <span class="string">&#x27;description&#x27;</span>]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">formatExt</span>: <span class="string">&#x27;./format-image.js&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">image</span>: &#123;</span><br><span class="line">    <span class="attr">enable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">platform</span>: <span class="string">&#x27;local&#x27;</span>,</span><br><span class="line">    <span class="attr">local</span>: &#123;</span><br><span class="line">      <span class="attr">outputDir</span>: <span class="string">&#x27;./source/images&#x27;</span>,</span><br><span class="line">      <span class="attr">prefixKey</span>: <span class="string">&#x27;/images&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="notion-配置"><a class="markdownIt-Anchor" href="#notion-配置"></a> Notion 配置</h2>
-<p><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/809b2785-2afd-42d1-9139-e6f17eaa52c1/37f1ce20-a930-40df-8bf2-e65ba2ceff0d/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466UGF2QTHD%2F20250331%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20250331T162953Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEEaCXVzLXdlc3QtMiJHMEUCIBRMroQqHfdYIoMB8UX0vVMMPIHZHsit2cxBMLKNnWvgAiEA8A85JIQX268ogRSn8XiVI32YcB67CAGmGPkuxlloWQoqiAQIqf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDLYaCIztOyANzQXHmSrcA1rU8Gj0oaebutc%2Bo%2BmVFtRiD9VxTDYLaDFrTvEihj8bx8taqYTd6ZV6PWag27zgOYYRZtH9I%2BHk1WAQBljW2fePcm5tpxHfTs6rWAE6UK0R1XSYzIUdc7Al3T47VlpdFIzmJTcOafJTHZvaW9ZoxYk03JPnm9XoKnprIib4M%2BLOLX1gMeoIeotnGUweUtB2RIrPUSPZIARZsaZKAJFBqMKS0xBIiIZGy2FY%2BQXpFb4y38rbBwMsdmP4nygs8QDclzeWM2fAnZj%2BWA3JJ2alMGWgtKV4lXemQH6Gb%2F9yPjsesKaC3c6Yg0%2FvA4x91M%2FSjLDNqHMpLWDfD9uakazazPJ1YNq3s5o%2FEaLwftDrFTNhiYHvSYi%2Fdc0DR1h39WqSbjHUqL%2BnvK0wQeGuSvBuTDq0XSKCSqcmFSBRzEo2T2Urz6HSgmjmIm6bgw%2FdNqo3%2Fx21pKhZj4OgjFaYJV6UFg7RIBb3oJqfefSwCMJgReJ3KNX8bw%2F3lXw2v%2F%2BfOEmkOO1OIBEsgQGjmh1n2p829VSAPZPnhohxKtt77DviUviKSNjslTKydxJHn4TXO6zQqjm%2BH4Mhr9wfbStjV2LW3K6IwEV9ej5XYdEq%2FElIbWGsWLZfLh94n7Oof9zjMPaBq78GOqUBujjh62nd3urre%2FhyboD02OhX6BpoTt7HgO7PVPdsOYYUjreOyX2i5OTS8iTHAwxjIZd9ouU9HiEG%2FxkhoBc5qHr5ORhQ2u1cGjwGZmk8CBrFqHR5ctxnaNBWn%2FhntFHY91z5LUI6BnbxvnOqttN2k5BBwD8WZjJncVcL4QqMZ2Dm87PgMrtCXFLUhocVlW5SadU7mYFbsMTP2cgDYbKlSTCQSZT5&amp;X-Amz-Signature=ce94dc797314523cb9240fe38fca82d579edcf44492195860ce944cc3d70c80d&amp;X-Amz-SignedHeaders=host&amp;x-id=GetObject" alt="Untitled.png" /></p>
+<p><img src="/images/e09e3db7b0e26c15ae5f7b720d2bf00f.png" alt="Untitled.png" /></p>
 <p>根据 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/front-matter">Hexo 的 FrontMatter 配置文档</a>，和 <a target="_blank" rel="noopener" href="https://butterfly.js.org/posts/dc584b87/?highlight=front%20matter#Post-Front-matter">Butterfly主题的 FrontMatter 配置文档</a>，可以将需要的参数作为 notion 数据库的字段来设置。一般来说，主题的 FrontMatter 为 Hexo在一些基础字段是共用的。</p>
 <ul>
 <li><code>permalink</code>为文档的永久链接，例如<code>https://notion-hexo.vercel.app/notion-hexo/</code>，注意记得在结尾加上<code>/</code></li>
@@ -299,7 +306,7 @@
 <li><code>filter</code>表示 Elog 将下载 notion 数据库属性为<code>status=已发布</code>的文档</li>
 </ul>
 <h2 id="本地配置"><a class="markdownIt-Anchor" href="#本地配置"></a> 本地配置</h2>
-<p><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/809b2785-2afd-42d1-9139-e6f17eaa52c1/804acc7d-2f1b-4daa-95f1-5dcbd316fe76/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466UGF2QTHD%2F20250331%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20250331T162953Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEEaCXVzLXdlc3QtMiJHMEUCIBRMroQqHfdYIoMB8UX0vVMMPIHZHsit2cxBMLKNnWvgAiEA8A85JIQX268ogRSn8XiVI32YcB67CAGmGPkuxlloWQoqiAQIqf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDLYaCIztOyANzQXHmSrcA1rU8Gj0oaebutc%2Bo%2BmVFtRiD9VxTDYLaDFrTvEihj8bx8taqYTd6ZV6PWag27zgOYYRZtH9I%2BHk1WAQBljW2fePcm5tpxHfTs6rWAE6UK0R1XSYzIUdc7Al3T47VlpdFIzmJTcOafJTHZvaW9ZoxYk03JPnm9XoKnprIib4M%2BLOLX1gMeoIeotnGUweUtB2RIrPUSPZIARZsaZKAJFBqMKS0xBIiIZGy2FY%2BQXpFb4y38rbBwMsdmP4nygs8QDclzeWM2fAnZj%2BWA3JJ2alMGWgtKV4lXemQH6Gb%2F9yPjsesKaC3c6Yg0%2FvA4x91M%2FSjLDNqHMpLWDfD9uakazazPJ1YNq3s5o%2FEaLwftDrFTNhiYHvSYi%2Fdc0DR1h39WqSbjHUqL%2BnvK0wQeGuSvBuTDq0XSKCSqcmFSBRzEo2T2Urz6HSgmjmIm6bgw%2FdNqo3%2Fx21pKhZj4OgjFaYJV6UFg7RIBb3oJqfefSwCMJgReJ3KNX8bw%2F3lXw2v%2F%2BfOEmkOO1OIBEsgQGjmh1n2p829VSAPZPnhohxKtt77DviUviKSNjslTKydxJHn4TXO6zQqjm%2BH4Mhr9wfbStjV2LW3K6IwEV9ej5XYdEq%2FElIbWGsWLZfLh94n7Oof9zjMPaBq78GOqUBujjh62nd3urre%2FhyboD02OhX6BpoTt7HgO7PVPdsOYYUjreOyX2i5OTS8iTHAwxjIZd9ouU9HiEG%2FxkhoBc5qHr5ORhQ2u1cGjwGZmk8CBrFqHR5ctxnaNBWn%2FhntFHY91z5LUI6BnbxvnOqttN2k5BBwD8WZjJncVcL4QqMZ2Dm87PgMrtCXFLUhocVlW5SadU7mYFbsMTP2cgDYbKlSTCQSZT5&amp;X-Amz-Signature=8949d67a28fd4d088596ebcf14a98ab16d0ee439980984696f0aeff8aa899cb6&amp;X-Amz-SignedHeaders=host&amp;x-id=GetObject" alt="Untitled.png" /></p>
+<p><img src="/images/6be21de37012453d6acaef1a2720e3ff.png" alt="Untitled.png" /></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">local</span>: &#123;</span><br><span class="line">  <span class="attr">outputDir</span>: <span class="string">&#x27;./source/_posts&#x27;</span>,</span><br><span class="line">  <span class="attr">filename</span>: <span class="string">&#x27;title&#x27;</span>,</span><br><span class="line">  <span class="attr">format</span>: <span class="string">&#x27;markdown&#x27;</span>,</span><br><span class="line">  <span class="attr">frontMatter</span>: &#123;</span><br><span class="line">    <span class="attr">enable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">include</span>: [<span class="string">&#x27;categories&#x27;</span>, <span class="string">&#x27;tags&#x27;</span>, <span class="string">&#x27;title&#x27;</span>, <span class="string">&#x27;date&#x27;</span>, <span class="string">&#x27;updated&#x27;</span>, <span class="string">&#x27;permalink&#x27;</span>, <span class="string">&#x27;cover&#x27;</span>, <span class="string">&#x27;description&#x27;</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">formatExt</span>: <span class="string">&#x27;./format-image.js&#x27;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>outputDir</code>表示文档的存放位置为项目根目录下的<code>source/_posts</code>文件夹中</li>
@@ -345,21 +352,21 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/elog/" rel="tag"># elog</a>
               <a href="/tags/notion/" rel="tag"># notion</a>
+              <a href="/tags/elog/" rel="tag"># elog</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/notion-example/" rel="prev" title="Notion示例文章">
-                  <i class="fa fa-angle-left"></i> Notion示例文章
+                <a href="/notion-hexo/" rel="prev" title="Notion + Hexo + GitHub Actions + Vercel 博客解决方案">
+                  <i class="fa fa-angle-left"></i> Notion + Hexo + GitHub Actions + Vercel 博客解决方案
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/notion-hexo/" rel="next" title="Notion + Hexo + GitHub Actions + Vercel 博客解决方案">
-                  Notion + Hexo + GitHub Actions + Vercel 博客解决方案 <i class="fa fa-angle-right"></i>
+                <a href="/Hexo%20%E7%9B%B8%E5%85%B3%E8%AE%B0%E5%BD%95/" rel="next" title="Hexo 相关记录">
+                  Hexo 相关记录 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
