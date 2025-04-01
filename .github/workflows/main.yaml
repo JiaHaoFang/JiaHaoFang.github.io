@@ -53,9 +53,8 @@ jobs:
       - name: 生成静态文件
         run: |
           # 对应package.json中的script.build
-          hexo clean
-          hexo generate
-          hexo deploy
+          npm run build
+          num run deploy
 
       - name: 部署到Github Pages
         uses: peaceiris/actions-gh-pages@v3
