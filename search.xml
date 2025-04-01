@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>Hexo 相关记录</title>
-    <url>/Hexo%20%E7%9B%B8%E5%85%B3%E8%AE%B0%E5%BD%95/</url>
+    <url>//hexo-record/</url>
     <content><![CDATA[<h2 id="使用git分支保存源码"><a class="markdownIt-Anchor" href="#使用git分支保存源码"></a> 使用git分支保存源码</h2>
 <ol>
 <li>
@@ -127,7 +127,7 @@
   </entry>
   <entry>
     <title>Notion + Hexo 博客解决方案</title>
-    <url>/Notion%20+%20Hexo%20%E5%8D%9A%E5%AE%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</url>
+    <url>//notion-hexo-deploy/</url>
     <content><![CDATA[<h1 id="创作开发"><a class="markdownIt-Anchor" href="#创作开发"></a> 创作&amp;开发</h1>
 <h2 id="notion"><a class="markdownIt-Anchor" href="#notion"></a> Notion</h2>
 <ul>
@@ -379,9 +379,9 @@
 <h2 id="media媒体"><a class="markdownIt-Anchor" href="#media媒体"></a> Media（媒体）</h2>
 <p><img src="../images/10a91945736a3027f2854218fa71c659.JPG" alt="cover.JPG" /></p>
 <p><a href="https://elog.1874.cool">bookmark</a></p>
-<p><a href="https://prod-files-secure.s3.us-west-2.amazonaws.com/809b2785-2afd-42d1-9139-e6f17eaa52c1/5999649b-7796-46a0-abd4-2e17b7b607ab/46_1677164223.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466S6DP6ISN%2F20250401%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20250401T122544Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEFQaCXVzLXdlc3QtMiJHMEUCIDxH9GbUD5FWKBb%2F0dNAG3LKyva%2BhBKJsMeS4qZtMsGHAiEAsGHFre4XOD0sPzMeDJK32vfj1PJLYaWJTbovzo6lWxYqiAQIvf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDGGncXPk4rfY4%2BcSwircA8C6N7fQEVWJZTJh1UUVGsJEj8DZPZ67rS8Lk80ZSQiaMY4P%2BK66nprJK66w3b%2FO8rtysyYFXVVQtCotzeW%2BAEs5T3W5q89b9Pc3tJiblTTo0hvwojIpghRzre0RqAFrKO%2BbeKA3MhLO2MSehdQOfQprLvzAnDk7QYxu3wdljVsLE8iDkBrrA07fMvVe9bRn4inmNbZtat%2BFfjpjlFkXwgip77daTDy6966hBwrm6JFOKqmwWdyUutDi1N%2FfC4%2FT2ofG9Hld%2BHnW%2BkoI8WFoaK4Y2PUqZVVBJJDpu4%2BPXbbk2n1oxnxryuUhDyEI7jWkpSRLZTyuDYdHdWrQW%2FSmWKhNtR0rZva87ThKdHIRZ%2FYO4kxxzfaYF4CsEnROeA%2BbSNAQE1n7i6Okd15wMwWCtaD16TvjyDVE%2F7wAPO%2FfeJaiqx8INstFfu2fG8640MXEf0uIlzzrfx2CSbRAUtkjAN%2FL0ZhfTKMAK4eiJFRrr7iFke4hi%2BtmW1RCBLaYIr%2BsD%2F7exATLbCIfGzOpd9y7eoGJsa0DLQLZBep32vat%2B577F%2FDjSg34PVEAtxw9M%2Funp%2B9NRrsZcyxWYPByqSlr52YYKuV3LiLGK3tFKbvAJ5kW8j90xx3xybSXjmTcMLOdr78GOqUBY%2Fe5IYHip0x6GeViNZxIViM%2FsM3hckaJ6scDwVNbHMuG7c9zvUf5REMAcBvaD0YJGaKhWytOfxQPVYumnOIC5GfbWI0ifDmTjioJdq1ln5iFxI8yek1eoeXXYULL6bDcJsFabNL3IpmeAZ0aaD6t9VyVCcq4GR6Npk%2FHvO%2FijOcqJSN%2Fe%2Ft3HN%2BS7XDGs8l%2FEGTFWXmHPtw%2BgKTUzjU6l3MBWs%2FR&amp;X-Amz-Signature=029ffcb6a8787c051ad97f64e8961b1221079f2952fd60eebab2e3024a06b99d&amp;X-Amz-SignedHeaders=host&amp;x-id=GetObject">46_1677164223.mp4</a></p>
+<p><a href="https://prod-files-secure.s3.us-west-2.amazonaws.com/809b2785-2afd-42d1-9139-e6f17eaa52c1/5999649b-7796-46a0-abd4-2e17b7b607ab/46_1677164223.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466VWCIXCPW%2F20250401%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20250401T125513Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEFUaCXVzLXdlc3QtMiJHMEUCIANBuFV9EJwNJTVhGQUkGAnU2SvcOCXbCp%2BBe%2B3Udm67AiEAjzCGPIWGKDFWmMdlZwhR48DBxrACtiX7N3mduxOVOG8qiAQIvv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDHb9yKdmVgCD9DG8AircA1Gj11ZKTRwVSYewykq%2Fx6QIBEaeLGeCdqyJg3fShKeURmqvo1sjeru7%2Fpg6rhrJwX7Kt%2B6haeOXSlJe7SJLcdhQveuFZAM4MMUQtAggPcC5crzPovWjIbPW2TNkrt%2BxTZrCWzGQTWMnscKlMtbWiMAlAzfOowfN8Xbh0XApr50VfxGFUAJk0wbl%2BCZ1SJw4FbR5i%2Fgn3Atye3qNFtxgIMD9UuvDLgsfS%2B84jtL3czLt7eNXhLBceCUe%2FKG35zlPAwsQiy72ZJd4AjZ1fHUdLoiWoUWQ7bpxSHl83DuyZUxVfxGs9Ufdfn6s%2Btblj4UahBNIs3nntvuyupZt8CNKdW4Ndxix2vS4jfJC8OpZl4OJu3tK23Kq4Kjq4Wi7U22kF1RmAyFNmTGuq7wfAKz21oRwIzgxTinXKV48Q5%2BXMuAQQRhOW29VtXDeQEO7leCDZN%2BnjO1X8ke748PKFtxN5nWNX%2FNfg2GipcjDHZoP8GpQmSjbBqcQpO6kaKbx%2BmJNfiiO5RGrkC7lRuBcIKAxk94XKoFmxeNH4Sa5zYYPQXrIXHXg1bpCWzvtopHnFFG%2BkXTorHKXgFsAIa7wrGKxUHMa%2Bvmc%2FqlK8qj5lW2h%2BcMk0t7atGxqSsF6zHpzMLO2r78GOqUBUI6H7%2BVQWUAL%2Fs38yuvnrQ%2B1wIABX77fnTCCrFtW5tWv%2BkPFebXeB%2FMA6owH%2FnWUBUwz%2BrdqukCs917EyAPcne%2Bjh7JpPN8Rl6gNgSX9w5Bf0TW%2F1Pi4u1MNeZLwV8I%2Bw0fq3YwPgwEGfI7Khf9Gv2K2LsDAWgQJIoTN3Ehm4U5B6p8INZsuRHQ5qZJwB1vUHlbuWYbtZCHlUs%2BdXWondlZZK6JB&amp;X-Amz-Signature=f95cda382b011e2c3b01b6698558131e16e79a8518f306000c299f15453fa47d&amp;X-Amz-SignedHeaders=host&amp;x-id=GetObject">46_1677164223.mp4</a></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pwd=<span class="string">&#x27;123456&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;password=<span class="subst">&#123;pwd!r&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## output:</span></span><br><span class="line"><span class="comment">#password=&#x27;123456&#x27;</span></span><br></pre></td></tr></table></figure>
-<p><a href="https://prod-files-secure.s3.us-west-2.amazonaws.com/809b2785-2afd-42d1-9139-e6f17eaa52c1/753c8245-2aea-45de-8a5a-509c105f6236/example.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466S6DP6ISN%2F20250401%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20250401T122544Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEFQaCXVzLXdlc3QtMiJHMEUCIDxH9GbUD5FWKBb%2F0dNAG3LKyva%2BhBKJsMeS4qZtMsGHAiEAsGHFre4XOD0sPzMeDJK32vfj1PJLYaWJTbovzo6lWxYqiAQIvf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDGGncXPk4rfY4%2BcSwircA8C6N7fQEVWJZTJh1UUVGsJEj8DZPZ67rS8Lk80ZSQiaMY4P%2BK66nprJK66w3b%2FO8rtysyYFXVVQtCotzeW%2BAEs5T3W5q89b9Pc3tJiblTTo0hvwojIpghRzre0RqAFrKO%2BbeKA3MhLO2MSehdQOfQprLvzAnDk7QYxu3wdljVsLE8iDkBrrA07fMvVe9bRn4inmNbZtat%2BFfjpjlFkXwgip77daTDy6966hBwrm6JFOKqmwWdyUutDi1N%2FfC4%2FT2ofG9Hld%2BHnW%2BkoI8WFoaK4Y2PUqZVVBJJDpu4%2BPXbbk2n1oxnxryuUhDyEI7jWkpSRLZTyuDYdHdWrQW%2FSmWKhNtR0rZva87ThKdHIRZ%2FYO4kxxzfaYF4CsEnROeA%2BbSNAQE1n7i6Okd15wMwWCtaD16TvjyDVE%2F7wAPO%2FfeJaiqx8INstFfu2fG8640MXEf0uIlzzrfx2CSbRAUtkjAN%2FL0ZhfTKMAK4eiJFRrr7iFke4hi%2BtmW1RCBLaYIr%2BsD%2F7exATLbCIfGzOpd9y7eoGJsa0DLQLZBep32vat%2B577F%2FDjSg34PVEAtxw9M%2Funp%2B9NRrsZcyxWYPByqSlr52YYKuV3LiLGK3tFKbvAJ5kW8j90xx3xybSXjmTcMLOdr78GOqUBY%2Fe5IYHip0x6GeViNZxIViM%2FsM3hckaJ6scDwVNbHMuG7c9zvUf5REMAcBvaD0YJGaKhWytOfxQPVYumnOIC5GfbWI0ifDmTjioJdq1ln5iFxI8yek1eoeXXYULL6bDcJsFabNL3IpmeAZ0aaD6t9VyVCcq4GR6Npk%2FHvO%2FijOcqJSN%2Fe%2Ft3HN%2BS7XDGs8l%2FEGTFWXmHPtw%2BgKTUzjU6l3MBWs%2FR&amp;X-Amz-Signature=70e95596899c9fa899f23f469154656e25a346e4b36d2c59c9d70c94f17837f2&amp;X-Amz-SignedHeaders=host&amp;x-id=GetObject">example.txt</a></p>
+<p><a href="https://prod-files-secure.s3.us-west-2.amazonaws.com/809b2785-2afd-42d1-9139-e6f17eaa52c1/753c8245-2aea-45de-8a5a-509c105f6236/example.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466VWCIXCPW%2F20250401%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20250401T125513Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEFUaCXVzLXdlc3QtMiJHMEUCIANBuFV9EJwNJTVhGQUkGAnU2SvcOCXbCp%2BBe%2B3Udm67AiEAjzCGPIWGKDFWmMdlZwhR48DBxrACtiX7N3mduxOVOG8qiAQIvv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDHb9yKdmVgCD9DG8AircA1Gj11ZKTRwVSYewykq%2Fx6QIBEaeLGeCdqyJg3fShKeURmqvo1sjeru7%2Fpg6rhrJwX7Kt%2B6haeOXSlJe7SJLcdhQveuFZAM4MMUQtAggPcC5crzPovWjIbPW2TNkrt%2BxTZrCWzGQTWMnscKlMtbWiMAlAzfOowfN8Xbh0XApr50VfxGFUAJk0wbl%2BCZ1SJw4FbR5i%2Fgn3Atye3qNFtxgIMD9UuvDLgsfS%2B84jtL3czLt7eNXhLBceCUe%2FKG35zlPAwsQiy72ZJd4AjZ1fHUdLoiWoUWQ7bpxSHl83DuyZUxVfxGs9Ufdfn6s%2Btblj4UahBNIs3nntvuyupZt8CNKdW4Ndxix2vS4jfJC8OpZl4OJu3tK23Kq4Kjq4Wi7U22kF1RmAyFNmTGuq7wfAKz21oRwIzgxTinXKV48Q5%2BXMuAQQRhOW29VtXDeQEO7leCDZN%2BnjO1X8ke748PKFtxN5nWNX%2FNfg2GipcjDHZoP8GpQmSjbBqcQpO6kaKbx%2BmJNfiiO5RGrkC7lRuBcIKAxk94XKoFmxeNH4Sa5zYYPQXrIXHXg1bpCWzvtopHnFFG%2BkXTorHKXgFsAIa7wrGKxUHMa%2Bvmc%2FqlK8qj5lW2h%2BcMk0t7atGxqSsF6zHpzMLO2r78GOqUBUI6H7%2BVQWUAL%2Fs38yuvnrQ%2B1wIABX77fnTCCrFtW5tWv%2BkPFebXeB%2FMA6owH%2FnWUBUwz%2BrdqukCs917EyAPcne%2Bjh7JpPN8Rl6gNgSX9w5Bf0TW%2F1Pi4u1MNeZLwV8I%2Bw0fq3YwPgwEGfI7Khf9Gv2K2LsDAWgQJIoTN3Ehm4U5B6p8INZsuRHQ5qZJwB1vUHlbuWYbtZCHlUs%2BdXWondlZZK6JB&amp;X-Amz-Signature=124e3b3bff07ab6751cef65e7c10d68b618546bef2718277b42ba82fb8de8346&amp;X-Amz-SignedHeaders=host&amp;x-id=GetObject">example.txt</a></p>
 <h2 id="database数据库"><a class="markdownIt-Anchor" href="#database数据库"></a> DataBase（数据库）</h2>
 <p>数据库</p>
 <h2 id="ai-block"><a class="markdownIt-Anchor" href="#ai-block"></a> AI block</h2>
@@ -424,7 +424,7 @@ Mermaid思维导图-->研发</pre>
   </entry>
   <entry>
     <title>iOS代码发布为组件</title>
-    <url>/iOS%E4%BB%A3%E7%A0%81%E5%8F%91%E5%B8%83%E4%B8%BA%E7%BB%84%E4%BB%B6/</url>
+    <url>//ios-send2cocoapods/</url>
     <content><![CDATA[<h2 id="1-前期准备"><a class="markdownIt-Anchor" href="#1-前期准备"></a> 1 前期准备</h2>
 <h3 id="11-远程仓库"><a class="markdownIt-Anchor" href="#11-远程仓库"></a> 1.1 远程仓库</h3>
 <blockquote>
@@ -570,7 +570,7 @@ Mermaid思维导图-->研发</pre>
   </entry>
   <entry>
     <title>iPad 适配二三事</title>
-    <url>/iPad%20%E9%80%82%E9%85%8D%E4%BA%8C%E4%B8%89%E4%BA%8B/</url>
+    <url>//ipad-adaption/</url>
     <content><![CDATA[<h3 id="1-背景前言"><a class="markdownIt-Anchor" href="#1-背景前言"></a> <strong>1 背景&amp;前言</strong></h3>
 <p>当谈及移动设备的应用程序开发时，iPad是一个备受关注的平台。作为一款功能强大且备受欢迎的设备，iPad是许多人日常生活中不可或缺的工具之一。对于开发者来说，确保他们的应用在iPad上的完美适配是至关重要的。</p>
 <p>然而，大部分公司都会选择优先开发和推广手机端 app 的发展策略，前期不会花费过多精力在iPad 端进行适配，在 app 有了一定体量之后，用户对 iPad 端的体验提出需求之后，才会开始考虑进行 iPad 的适配。这就势必造成 iPad 的适配必须要考虑原有业务代码对适配工作造成的影响——这并不是一个简单的任务。</p>
@@ -698,7 +698,7 @@ Mermaid思维导图-->研发</pre>
   </entry>
   <entry>
     <title>当我们在谈论DarkMode时我们在谈论什么</title>
-    <url>/%E5%BD%93%E6%88%91%E4%BB%AC%E5%9C%A8%E8%B0%88%E8%AE%BADarkMode%E6%97%B6%E6%88%91%E4%BB%AC%E5%9C%A8%E8%B0%88%E8%AE%BA%E4%BB%80%E4%B9%88/</url>
+    <url>//ios-darkmode-practice/</url>
     <content><![CDATA[<h1 id="1-前言"><a class="markdownIt-Anchor" href="#1-前言"></a> 1 前言</h1>
 <p>2024年6月，Apple 在 WWDC2024 发布了iOS18。新版本的 iOS 系统中包含了一项褒贬不一的新特性：把深色模式扩展到了主屏幕的图标，这让已经融入我们生活中的深色模式功能多多少少又秀了一把存在感。</p>
 <p>距离 iOS13 深色模式功能上线已经过去五年了，市面上常见的手机应用绝大部分也适配了深色模式，笔者个人更是对这一功能情有独钟，将其视为 App 中并非最重要，但不可或缺的功能之一。同时作为一个 iOS 开发者，笔者也十分清楚对于一个功能完整，已经运营了一段时间的 App 要适配这一功能需要付出怎么样的努力，这篇文章不只是对深色模式适配的介绍，也是对 VeSync App 完整适配过程的分享。</p>
