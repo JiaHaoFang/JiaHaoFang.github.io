@@ -3,7 +3,7 @@ name: Deplo To Github Pages
 on:
   push:
     branches:
-      - master
+      - source
   repository_dispatch:
     types:
       - deploy
@@ -65,7 +65,7 @@ jobs:
       - name: 部署到Github Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          deploy_key: ${{ secrets.SSH_PRIVATE_KEY }}
           publish_dir: source/_posts
           external_repository: JiaHaoFang/JiaHaoFang.github.io
           publish_branch: master
