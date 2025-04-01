@@ -60,6 +60,7 @@ jobs:
       - name: 生成静态文件
         run: |
           # 对应package.json中的script.build
+          npm run clean
           npm run build
           npm run deploy
 
