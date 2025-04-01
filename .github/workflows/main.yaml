@@ -61,6 +61,8 @@ jobs:
           hexo clean
           hexo generate
           hexo deploy
+        with:
+          secrets: inherit
 
       - name: 部署到Github Pages
         uses: peaceiris/actions-gh-pages@v3
