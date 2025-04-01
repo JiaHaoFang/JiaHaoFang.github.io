@@ -99,8 +99,8 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 ## https://github.com/fi3ework/hexo-theme-archer
-# theme: next
-remote_theme: https://github.com/theme-next/hexo-theme-next
+theme: next
+# remote_theme: https://github.com/theme-next/hexo-theme-next
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
