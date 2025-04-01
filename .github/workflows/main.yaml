@@ -67,5 +67,5 @@ jobs:
           personal_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: source/_posts
           external_repository: JiaHaoFang/JiaHaoFang.github.io
-          publish_branch: source
+          publish_branch: master
           commit_message: ${{ github.event.head_commit.message }}
