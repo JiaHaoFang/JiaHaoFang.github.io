@@ -80,7 +80,7 @@ module.exports = {
     local: {
       outputDir: './docs/images',
       prefixKey: '/images',
-      pathFollowDoc: false,
+      pathFollowDoc: true,
     },
     oss: {
       secretId: process.env.OSS_SECRET_ID,
