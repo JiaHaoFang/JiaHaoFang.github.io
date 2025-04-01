@@ -1,4 +1,4 @@
-name: Deplo To Github Pages
+name: Deploy To Github Pages
 
 on:
   push:
@@ -14,10 +14,10 @@ jobs:
 
     steps:
       - name: 检查分支
-        uses: actions/checkout@master
+        uses: actions/checkout@source
 
       - name: 安装node环境
-        uses: actions/setup-node@master
+        uses: actions/setup-node@source
         with:
           node-version: "16.x"
 
@@ -53,7 +53,7 @@ jobs:
           git commit -m "更新文档" -a
 
       - name: 推送文章到仓库
-        uses: ad-m/github-push-action@master
+        uses: ad-m/github-push-action@source
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -68,5 +68,5 @@ jobs:
           personal_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: source/_posts
           external_repository: JiaHaoFang/JiaHaoFang.github.io
-          publish_branch: master
+          publish_branch: source
           commit_message: ${{ github.event.head_commit.message }}
