@@ -390,11 +390,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Test</title>
-    <url>/Test/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title></title>
     <url>/general_psychology/</url>
     <content><![CDATA[<p>[TOC]</p>
@@ -1516,6 +1511,11 @@
 </li>
 </ul>
 ]]></content>
+  </entry>
+  <entry>
+    <title>Test</title>
+    <url>/Test/</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>iOS代码发布为组件</title>
