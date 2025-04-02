@@ -3,7 +3,7 @@
     {
       "id": "1c824191-cd14-80f1-a0a9-fe3e818db109",
       "doc_id": "1c824191-cd14-80f1-a0a9-fe3e818db109",
-      "updated": 1743560220000,
+      "updated": 1743564300000,
       "properties": {
         "categories": "Programming",
         "tags": [
@@ -11,11 +11,12 @@
         ],
         "status": "已发布",
         "description": "关于 iPad 适配的介绍和实践",
+        "日期": "",
         "permalink": "ipad-adaption/",
         "title": "iPad 适配二三事",
         "urlname": "1c824191-cd14-80f1-a0a9-fe3e818db109",
         "date": "2025-04-01 19:23:00",
-        "updated": "2025-04-02 10:17:00"
+        "updated": "2025-04-02 11:25:00"
       },
       "realName": "iPad 适配二三事",
       "relativePath": "/iPad 适配二三事.md",
@@ -24,7 +25,7 @@
     {
       "id": "1c824191-cd14-80bc-8904-fcd2405aa86e",
       "doc_id": "1c824191-cd14-80bc-8904-fcd2405aa86e",
-      "updated": 1743560220000,
+      "updated": 1743560640000,
       "properties": {
         "categories": "Programming",
         "tags": [
@@ -32,11 +33,12 @@
         ],
         "status": "已发布",
         "description": "iOS 深色模式介绍和实践",
+        "日期": "",
         "permalink": "ios-darkmode-practice/",
         "title": "当我们在谈论DarkMode时我们在谈论什么",
         "urlname": "1c824191-cd14-80bc-8904-fcd2405aa86e",
         "date": "2025-04-01 19:22:00",
-        "updated": "2025-04-02 10:17:00"
+        "updated": "2025-04-02 10:24:00"
       },
       "realName": "当我们在谈论DarkMode时我们在谈论什么",
       "relativePath": "/当我们在谈论DarkMode时我们在谈论什么.md",
@@ -45,19 +47,21 @@
     {
       "id": "1c824191-cd14-8096-8654-ce5869028b0f",
       "doc_id": "1c824191-cd14-8096-8654-ce5869028b0f",
-      "updated": 1743560220000,
+      "updated": 1743560640000,
       "properties": {
         "categories": "Programming",
         "tags": [
-          "iOS"
+          "iOS",
+          "Cocoapods"
         ],
         "status": "已发布",
         "description": "使用 Cocoapods 发布代码作为组件",
+        "日期": "",
         "permalink": "ios-send2cocoapods/",
         "title": "iOS代码发布为组件",
         "urlname": "1c824191-cd14-8096-8654-ce5869028b0f",
         "date": "2025-04-01 18:01:00",
-        "updated": "2025-04-02 10:17:00"
+        "updated": "2025-04-02 10:24:00"
       },
       "realName": "iOS代码发布为组件",
       "relativePath": "/iOS代码发布为组件.md",
@@ -179,6 +183,7 @@
         ],
         "status": "已发布",
         "description": "北师大《普通心理学》（第二部分）",
+        "日期": "",
         "permalink": "general-psychology-2/",
         "title": "普通心理学（二）",
         "urlname": "1c824191-cd14-8089-b81a-e1152d1d2277",
@@ -216,6 +221,7 @@
         ],
         "status": "已发布",
         "description": "北师大《普通心理学》（第一部分）",
+        "日期": "",
         "permalink": "general-psychology-1/",
         "title": "普通心理学（一）",
         "urlname": "1c824191-cd14-8070-b5ff-deb1b47f904e",
@@ -229,7 +235,7 @@
       "object": "page",
       "id": "1c824191-cd14-80f1-a0a9-fe3e818db109",
       "created_time": "2025-04-01T11:23:00.000Z",
-      "last_edited_time": "2025-04-02T02:17:00.000Z",
+      "last_edited_time": "2025-04-02T03:25:00.000Z",
       "created_by": {
         "object": "user",
         "id": "f9e52dea-3218-4b01-ab60-006834c17e09"
@@ -253,11 +259,12 @@
         ],
         "status": "已发布",
         "description": "关于 iPad 适配的介绍和实践",
+        "日期": "",
         "permalink": "ipad-adaption/",
         "title": "iPad 适配二三事",
         "urlname": "1c824191-cd14-80f1-a0a9-fe3e818db109",
         "date": "2025-04-01 19:23:00",
-        "updated": "2025-04-02 10:17:00"
+        "updated": "2025-04-02 11:25:00"
       },
       "url": "https://www.notion.so/iPad-1c824191cd1480f1a0a9fe3e818db109",
       "public_url": "https://excellent-moonstone-c91.notion.site/iPad-1c824191cd1480f1a0a9fe3e818db109"
@@ -266,7 +273,7 @@
       "object": "page",
       "id": "1c824191-cd14-80bc-8904-fcd2405aa86e",
       "created_time": "2025-04-01T11:22:00.000Z",
-      "last_edited_time": "2025-04-02T02:17:00.000Z",
+      "last_edited_time": "2025-04-02T02:24:00.000Z",
       "created_by": {
         "object": "user",
         "id": "f9e52dea-3218-4b01-ab60-006834c17e09"
@@ -290,11 +297,12 @@
         ],
         "status": "已发布",
         "description": "iOS 深色模式介绍和实践",
+        "日期": "",
         "permalink": "ios-darkmode-practice/",
         "title": "当我们在谈论DarkMode时我们在谈论什么",
         "urlname": "1c824191-cd14-80bc-8904-fcd2405aa86e",
         "date": "2025-04-01 19:22:00",
-        "updated": "2025-04-02 10:17:00"
+        "updated": "2025-04-02 10:24:00"
       },
       "url": "https://www.notion.so/DarkMode-1c824191cd1480bc8904fcd2405aa86e",
       "public_url": "https://excellent-moonstone-c91.notion.site/DarkMode-1c824191cd1480bc8904fcd2405aa86e"
@@ -329,6 +337,7 @@
         ],
         "status": "已发布",
         "description": "使用 Notion + Hexo 开发，通过Slack + Pipedream + GitHub Action + Elog 部署的个人博客解决方案",
+        "日期": "",
         "permalink": "notion-hexo-deploy/",
         "title": "Notion + Hexo 博客解决方案",
         "urlname": "1c824191-cd14-80de-997d-d5804b90b61f",
@@ -342,7 +351,7 @@
       "object": "page",
       "id": "1c824191-cd14-8096-8654-ce5869028b0f",
       "created_time": "2025-04-01T10:01:00.000Z",
-      "last_edited_time": "2025-04-02T02:17:00.000Z",
+      "last_edited_time": "2025-04-02T02:24:00.000Z",
       "created_by": {
         "object": "user",
         "id": "f9e52dea-3218-4b01-ab60-006834c17e09"
@@ -362,15 +371,17 @@
       "properties": {
         "categories": "Programming",
         "tags": [
-          "iOS"
+          "iOS",
+          "Cocoapods"
         ],
         "status": "已发布",
         "description": "使用 Cocoapods 发布代码作为组件",
+        "日期": "",
         "permalink": "ios-send2cocoapods/",
         "title": "iOS代码发布为组件",
         "urlname": "1c824191-cd14-8096-8654-ce5869028b0f",
         "date": "2025-04-01 18:01:00",
-        "updated": "2025-04-02 10:17:00"
+        "updated": "2025-04-02 10:24:00"
       },
       "url": "https://www.notion.so/iOS-1c824191cd1480968654ce5869028b0f",
       "public_url": "https://excellent-moonstone-c91.notion.site/iOS-1c824191cd1480968654ce5869028b0f"
@@ -403,6 +414,7 @@
         ],
         "status": "已发布",
         "description": "hexo搭建过程和问题记录",
+        "日期": "",
         "permalink": "hexo-record/",
         "title": "Hexo 相关记录",
         "urlname": "1c824191-cd14-805c-a745-fdf1f4f8ecd9",

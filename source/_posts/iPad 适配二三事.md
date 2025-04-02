@@ -4,11 +4,12 @@ tags:
   - iOS
 status: 已发布
 description: 关于 iPad 适配的介绍和实践
+日期: ''
 permalink: ipad-adaption/
 title: iPad 适配二三事
 urlname: 1c824191-cd14-80f1-a0a9-fe3e818db109
 date: '2025-04-01 19:23:00'
-updated: '2025-04-02 10:17:00'
+updated: '2025-04-02 11:25:00'
 ---
 
 # **背景&前言**
@@ -32,7 +33,7 @@ updated: '2025-04-02 10:17:00'
 要让原本为 iPhone 平台开发的 app 能在 iPad 上使用，第一步就是要在 target 中添加对 iPad 平台的支持，这个配置项能让 app 在 iPad 平台运行。
 
 
-![image](https://alidocs.dingtalk.com/core/api/resources/img/5eecdaf48460cde5250c2f5592072f73b1916d4bb99fc5c58433de2d5aa4e7b0640036fb88b8850565a117e96928706430a2b2e61e00e6494f0e630055628d18d873dd421eac6771cd5ee39a95b70c2b7216fe09f303fe3a07afbbdd4225fe9b?tmpCode=33cad466-79cd-42b3-af28-b70f8ca77a72)
+![image.png](../images/d10025b4724e56a9cde4c45d77a283dc.png)
 
 
 经常用 iPad 的朋友们都知道，一个 app 在 iPad 端的呈现方式是十分多样化的，可以有横屏竖屏分屏浮窗等样式。在实际开发中，iPad 横竖屏的支持在 `iPad Orientation` 配置项中设置；浮窗/分屏的支持由 `Requires full screen`决定，勾选了此项之后即不支持浮窗或分屏。
@@ -41,7 +42,7 @@ updated: '2025-04-02 10:17:00'
 本文主要涉及的是 iPad 横竖屏的适配，不涉及浮窗/分屏的适配。
 
 
-![image](https://alidocs.dingtalk.com/core/api/resources/img/5eecdaf48460cde5250c2f5592072f73b1916d4bb99fc5c58433de2d5aa4e7b0640036fb88b8850565a117e9692870643e15b76dbc801406491036b8fc56f063dcff94bb73dd75d04ed3757a4994c1b34e38713706b2a07a9508fd59fedd0e8f?tmpCode=33cad466-79cd-42b3-af28-b70f8ca77a72)
+![image.png](../images/0ae78ee0bc2e45d6a08478f96083e335.png)
 
 
 到这里为止，我们的应用就可以在 iPad 上跑起来了。
@@ -204,22 +205,31 @@ NotificationCenter.default.rx
 ## **常见适配方案介绍**
 
 
+### 左右分栏
+
+
 iPad 原生应用程序，如信息、相册、备忘录等，绝大部分采用了左右分栏的形式（如下图所示）。这种设计形式的好处在于分栏的设计能够最大化利用 iPad 的大屏，合理地利用横屏展示更多的内容。但是这种方案对原有架构的改动较大，从 UI 样式到页面交互都会发生比较大的变动，需要开发人员单独为 iPad 编写业务代码。
 
 
-child_database
+![image.png](../images/9722c1080f6d5d149e3af96dac4c3edd.png)
+
+
+### 内容响应式布局
 
 
 App Store 的设计方案采用的则是内容响应式布局，根据页面的宽度和高度按照特定的规则调整布局。这种方案灵活性更佳，用户体验好， 但是对设计人员和开发人员的要求也会更高。
 
 
-child_database
+![image.png](../images/6083a0643ec2e4b2d4670c14ce12ab74.png)
+
+
+### 横向拉伸页面
 
 
 最常见的适配方案就是横向拉伸页面，页面的元素按照原有的布局逻辑横向拉伸，与手机端的布局基本保持一致。这种方式既保证了页面布局的合理性，同时也不需要开发人员过多地为 iPad 单独编写代码，是一种相对折中的适配方案。
 
 
-child_database
+![image.png](../images/61d91799d9c561d21709e0d552fddeec.png)
 
 
 ## **VeSync 适配方案**
@@ -240,7 +250,7 @@ VeSync App 手机端用户居多，几乎所有的页面都只考虑了手机端
 ## **“弹出”的中心小窗**
 
 
-![image](https://alidocs.dingtalk.com/core/api/resources/img/5eecdaf48460cde5250c2f5592072f73b1916d4bb99fc5c58433de2d5aa4e7b0640036fb88b8850565a117e969287064e625f4a129c160b3978737631521d09889929b6aee2cbb183509b237bee6e05edc92b29510f5a164149565b860957ab4?tmpCode=33cad466-79cd-42b3-af28-b70f8ca77a72)
+![image.png](../images/fb2aad38a5e32c0c8f8094b30a0513b1.png)
 
 
 中心小窗的方案实际效果如图所示，用文字大致描述如下：
