@@ -562,7 +562,7 @@ Mermaid思维导图-->研发</pre>
 </blockquote>
 ]]></content>
       <categories>
-        <category>Coding</category>
+        <category>Programming</category>
       </categories>
       <tags>
         <tag>iOS</tag>
@@ -690,7 +690,7 @@ Mermaid思维导图-->研发</pre>
 <p>最后的最后，感谢您的阅读，希望本文对您在iPad应用适配方面有所启发。</p>
 ]]></content>
       <categories>
-        <category>Coding</category>
+        <category>Programming</category>
       </categories>
       <tags>
         <tag>iOS</tag>
@@ -889,7 +889,7 @@ H ---> I(替换完成，结束)</pre>
 <p>感谢您的阅读，希望本文能够为您提供一些关于深色模式适配的有益见解和启发。如果您有任何疑问或建议，欢迎留言交流。</p>
 ]]></content>
       <categories>
-        <category>Blog</category>
+        <category>Programming</category>
       </categories>
       <tags>
         <tag>iOS</tag>
@@ -1208,7 +1208,7 @@ H ---> I(替换完成，结束)</pre>
 </ul>
 </li>
 </ul>
-<h1 id="感觉"><a class="markdownIt-Anchor" href="#感觉"></a> <strong>感觉</strong></h1>
+<h2 id="感觉"><a class="markdownIt-Anchor" href="#感觉"></a> <strong>感觉</strong></h2>
 <blockquote>
 <p>人脑对直接作用于感觉器官的事物的个别属性的认识</p>
 </blockquote>
@@ -1349,8 +1349,11 @@ H ---> I(替换完成，结束)</pre>
 </ul>
 ]]></content>
       <categories>
-        <category>Psychology</category>
+        <category>Humanities</category>
       </categories>
+      <tags>
+        <tag>Psychology</tag>
+      </tags>
   </entry>
   <entry>
     <title>普通心理学（二）</title>
@@ -1981,7 +1984,10 @@ H ---> I(替换完成，结束)</pre>
 </ul>
 ]]></content>
       <categories>
-        <category>Psychology</category>
+        <category>Humanities</category>
       </categories>
+      <tags>
+        <tag>Psychology</tag>
+      </tags>
   </entry>
 </search>
