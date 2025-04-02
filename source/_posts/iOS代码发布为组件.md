@@ -1,5 +1,5 @@
 ---
-categories: Coding
+categories: Programming
 tags:
   - iOS
 status: 已发布
@@ -8,7 +8,7 @@ permalink: ios-send2cocoapods/
 title: iOS代码发布为组件
 urlname: 1c824191-cd14-8096-8654-ce5869028b0f
 date: '2025-04-01 18:01:00'
-updated: '2025-04-01 20:50:00'
+updated: '2025-04-02 10:17:00'
 ---
 
 ## 1 前期准备

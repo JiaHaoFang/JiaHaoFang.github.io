@@ -1,5 +1,5 @@
 ---
-categories: Blog
+categories: Programming
 tags:
   - iOS
 status: 已发布
@@ -8,7 +8,7 @@ permalink: ios-darkmode-practice/
 title: 当我们在谈论DarkMode时我们在谈论什么
 urlname: 1c824191-cd14-80bc-8904-fcd2405aa86e
 date: '2025-04-01 19:22:00'
-updated: '2025-04-01 20:46:00'
+updated: '2025-04-02 10:17:00'
 ---
 
 # 1 前言

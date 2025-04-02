@@ -1,5 +1,5 @@
 ---
-categories: Coding
+categories: Programming
 tags:
   - iOS
 status: 已发布
@@ -8,7 +8,7 @@ permalink: ipad-adaption/
 title: iPad 适配二三事
 urlname: 1c824191-cd14-80f1-a0a9-fe3e818db109
 date: '2025-04-01 19:23:00'
-updated: '2025-04-01 20:58:00'
+updated: '2025-04-02 10:17:00'
 ---
 
 # **背景&前言**
