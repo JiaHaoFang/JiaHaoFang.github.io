@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://jiahaofang.github.io/ios-send2cocoapods/</loc>
+    <loc>https://jiahaofang.github.io/ipad-adaption/</loc>
     
     <lastmod>2025-04-02</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://jiahaofang.github.io/ipad-adaption/</loc>
+    <loc>https://jiahaofang.github.io/ios-send2cocoapods/</loc>
     
     <lastmod>2025-04-02</lastmod>
     
@@ -141,6 +141,13 @@
   
   <url>
     <loc>https://jiahaofang.github.io/tags/iOS/</loc>
+    <lastmod>2025-04-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jiahaofang.github.io/tags/Cocoapods/</loc>
     <lastmod>2025-04-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
