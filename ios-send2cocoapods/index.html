@@ -24,13 +24,13 @@
 
     <meta name="description" content="使用 Cocoapods 发布代码作为组件">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS代码发布为组件">
+<meta property="og:title" content="iOS 代码发布为组件">
 <meta property="og:url" content="https://jiahaofang.github.io/ios-send2cocoapods/index.html">
 <meta property="og:site_name" content="阿告今天学习了吗">
 <meta property="og:description" content="使用 Cocoapods 发布代码作为组件">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-04-01T18:01:00.000Z">
-<meta property="article:modified_time" content="2025-04-02T10:24:00.000Z">
+<meta property="article:modified_time" content="2025-04-03T16:56:00.000Z">
 <meta property="article:author" content="阿告2426">
 <meta property="article:tag" content="iOS">
 <meta property="article:tag" content="Cocoapods">
@@ -41,10 +41,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiahaofang.github.io/ios-send2cocoapods/","path":"/ios-send2cocoapods/","title":"iOS代码发布为组件"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiahaofang.github.io/ios-send2cocoapods/","path":"/ios-send2cocoapods/","title":"iOS 代码发布为组件"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>iOS代码发布为组件 | 阿告今天学习了吗</title>
+<title>iOS 代码发布为组件 | 阿告今天学习了吗</title>
   
 
 
@@ -147,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="nav-text"> 1 前期准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#11-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-text"> 1.1 远程仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-%E6%9C%AC%E5%9C%B0%E4%BB%A3%E7%A0%81"><span class="nav-text"> 1.2 本地代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%9C%AC%E5%9C%B0%E7%9B%AE%E5%BD%95%E5%88%9B%E5%BB%BA"><span class="nav-text"> 2 本地目录创建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#21-%E5%88%9B%E5%BB%BA%E7%A7%81%E6%9C%89repo%E7%9B%AE%E5%BD%95"><span class="nav-text"> 2.1 创建私有Repo目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22-%E5%88%9B%E5%BB%BA%E4%B8%AA%E4%BA%BA%E7%BB%84%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="nav-text"> 2.2 创建个人组件目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23-%E7%BC%96%E8%BE%91%E6%A8%A1%E7%89%88"><span class="nav-text"> 2.3 编辑模版</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24-%E7%BC%96%E8%BE%91podspec%E6%96%87%E4%BB%B6"><span class="nav-text"> 2.4 编辑.podspec文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%8F%91%E5%B8%83%E7%BB%84%E4%BB%B6"><span class="nav-text"> 3 发布组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#31-%E6%A0%A1%E9%AA%8C"><span class="nav-text"> 3.1 校验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#32-%E6%8F%90%E4%BA%A4%E6%BA%90%E7%A0%81"><span class="nav-text"> 3.2 提交源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#33-%E5%8F%91%E5%B8%83%E7%BB%84%E4%BB%B6%E5%88%B0%E4%B8%AA%E4%BA%BArepo"><span class="nav-text"> 3.3 发布组件到个人Repo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#34-%E6%9F%A5%E8%AF%A2"><span class="nav-text"> 3.4 查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E4%BD%BF%E7%94%A8%E7%BB%84%E4%BB%B6"><span class="nav-text"> 4 使用组件</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text"> 前期准备</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-number">1.1.</span> <span class="nav-text"> 远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E4%BB%A3%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text"> 本地代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E7%9B%AE%E5%BD%95%E5%88%9B%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text"> 本地目录创建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%A7%81%E6%9C%89repo%E7%9B%AE%E5%BD%95"><span class="nav-number">2.1.</span> <span class="nav-text"> 创建私有Repo目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%AA%E4%BA%BA%E7%BB%84%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="nav-number">2.2.</span> <span class="nav-text"> 创建个人组件目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%BE%91%E6%A8%A1%E7%89%88"><span class="nav-number">2.3.</span> <span class="nav-text"> 编辑模版</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%BE%91podspec%E6%96%87%E4%BB%B6"><span class="nav-number">2.4.</span> <span class="nav-text"> 编辑.podspec文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%91%E5%B8%83%E7%BB%84%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text"> 发布组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%A1%E9%AA%8C"><span class="nav-number">3.1.</span> <span class="nav-text"> 校验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E6%BA%90%E7%A0%81"><span class="nav-number">3.2.</span> <span class="nav-text"> 提交源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E5%B8%83%E7%BB%84%E4%BB%B6%E5%88%B0%E4%B8%AA%E4%BA%BArepo"><span class="nav-number">3.3.</span> <span class="nav-text"> 发布组件到个人Repo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2"><span class="nav-number">3.4.</span> <span class="nav-text"> 查询</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%BB%84%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text"> 使用组件</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -162,7 +162,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -225,12 +225,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="iOS代码发布为组件 | 阿告今天学习了吗">
+      <meta itemprop="name" content="iOS 代码发布为组件 | 阿告今天学习了吗">
       <meta itemprop="description" content="使用 Cocoapods 发布代码作为组件">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          iOS代码发布为组件
+          iOS 代码发布为组件
         </h1>
 
         <div class="post-meta-container">
@@ -248,7 +248,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-04-02 10:24:00" itemprop="dateModified" datetime="2025-04-02T10:24:00+00:00">2025-04-02</time>
+      <time title="修改时间：2025-04-03 16:56:00" itemprop="dateModified" datetime="2025-04-03T16:56:00+00:00">2025-04-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -270,8 +270,8 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="1-前期准备"><a class="markdownIt-Anchor" href="#1-前期准备"></a> 1 前期准备</h2>
-<h3 id="11-远程仓库"><a class="markdownIt-Anchor" href="#11-远程仓库"></a> 1.1 远程仓库</h3>
+    <div class="post-body" itemprop="articleBody"><h1 id="前期准备"><a class="markdownIt-Anchor" href="#前期准备"></a> 前期准备</h1>
+<h2 id="远程仓库"><a class="markdownIt-Anchor" href="#远程仓库"></a> 远程仓库</h2>
 <blockquote>
 <p>准备好两个远程仓库，在GitHub上创建即可；</p>
 <p>权限建议为public</p>
@@ -289,7 +289,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="12-本地代码"><a class="markdownIt-Anchor" href="#12-本地代码"></a> 1.2 本地代码</h3>
+<h2 id="本地代码"><a class="markdownIt-Anchor" href="#本地代码"></a> 本地代码</h2>
 <blockquote>
 <p>由于该组件为一个完整工程作为组件发布，需要抽离</p>
 </blockquote>
@@ -297,8 +297,8 @@
 <li>保证需要发布为组件的工程，其核心功能完整，去耦，能够实现核心功能的抽离</li>
 <li>保证编译可通过，同时核心功能具备可移植性</li>
 </ul>
-<h2 id="2-本地目录创建"><a class="markdownIt-Anchor" href="#2-本地目录创建"></a> 2 本地目录创建</h2>
-<h3 id="21-创建私有repo目录"><a class="markdownIt-Anchor" href="#21-创建私有repo目录"></a> 2.1 创建私有Repo目录</h3>
+<h1 id="本地目录创建"><a class="markdownIt-Anchor" href="#本地目录创建"></a> 本地目录创建</h1>
+<h2 id="创建私有repo目录"><a class="markdownIt-Anchor" href="#创建私有repo目录"></a> 创建私有Repo目录</h2>
 <ul>
 <li>
 <p>在～/.cocoapods/repo中能看到本地有的repo仓库，其中cocoapods为官方仓库，trunk也是官方仓库（历史遗留问题）；xxxRepo为公司私有仓库。</p>
@@ -318,7 +318,7 @@
   <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open ~<span class="regexp">/.cocoapods/repos</span><span class="regexp">/SFPod</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="22-创建个人组件目录"><a class="markdownIt-Anchor" href="#22-创建个人组件目录"></a> 2.2 创建个人组件目录</h3>
+<h2 id="创建个人组件目录"><a class="markdownIt-Anchor" href="#创建个人组件目录"></a> 创建个人组件目录</h2>
 <ul>
 <li>
 <p>发布的组件需要按照Cocoapod严格遵守官方给出的目录结构，官方给出了命令可以直接生成模版</p>
@@ -331,7 +331,7 @@
 <p>生成模版后可以使用tree命令查看该文件夹下的目录结构</p>
 </li>
 </ul>
-<h3 id="23-编辑模版"><a class="markdownIt-Anchor" href="#23-编辑模版"></a> 2.3 编辑模版</h3>
+<h2 id="编辑模版"><a class="markdownIt-Anchor" href="#编辑模版"></a> 编辑模版</h2>
 <blockquote>
 <p>在2.2创建的公共模版就是组件的模板，我们需要将我们的代码添加进去将其作为自己的组件</p>
 </blockquote>
@@ -340,29 +340,29 @@
 <li>另外在Example中编写Demo测试自己的组件是否能正常工作，点击.xcworkspace可以作为一个完整工程运行</li>
 <li>在写Example的时候，如果修改了Classes中文件的，需要pod install一下，将组件在自己的Demo中更新一下</li>
 </ul>
-<h3 id="24-编辑podspec文件"><a class="markdownIt-Anchor" href="#24-编辑podspec文件"></a> 2.4 编辑.podspec文件</h3>
+<h2 id="编辑podspec文件"><a class="markdownIt-Anchor" href="#编辑podspec文件"></a> 编辑.podspec文件</h2>
 <ul>
 <li>自行Google</li>
 </ul>
-<h2 id="3-发布组件"><a class="markdownIt-Anchor" href="#3-发布组件"></a> 3 发布组件</h2>
+<h1 id="发布组件"><a class="markdownIt-Anchor" href="#发布组件"></a> 发布组件</h1>
 <blockquote>
 <p>如果上面的步骤完成了，恭喜，完成了一半</p>
 </blockquote>
-<h3 id="31-校验"><a class="markdownIt-Anchor" href="#31-校验"></a> 3.1 校验</h3>
+<h2 id="校验"><a class="markdownIt-Anchor" href="#校验"></a> 校验</h2>
 <ul>
 <li>
 <p>当2中的步骤全部完成，我们可以使用下面的命令检验自己组件代码的合法性（主要是检验.podspec文件）</p>
   <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pod lib lint</span><br><span class="line"><span class="comment"># 只从本地验证你的pod能否通过验证。</span></span><br><span class="line">pod spec lint</span><br><span class="line"><span class="comment"># 从本地和远程验证你的pod能否通过验证，建议使用这个</span></span><br><span class="line">--allow-warnings</span><br><span class="line"><span class="comment"># 如何库代码中有警告导致通不过验证。加上这个忽略警告</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="32-提交源码"><a class="markdownIt-Anchor" href="#32-提交源码"></a> 3.2 提交源码</h3>
+<h2 id="提交源码"><a class="markdownIt-Anchor" href="#提交源码"></a> 提交源码</h2>
 <ul>
 <li>
 <p>提交源码到个人仓库</p>
   <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git add -a</span><br><span class="line">git commit -m &quot;xxx&quot;</span><br><span class="line">git push</span><br><span class="line">git tag 0.1.0</span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="33-发布组件到个人repo"><a class="markdownIt-Anchor" href="#33-发布组件到个人repo"></a> 3.3 发布组件到个人Repo</h3>
+<h2 id="发布组件到个人repo"><a class="markdownIt-Anchor" href="#发布组件到个人repo"></a> 发布组件到个人Repo</h2>
 <ul>
 <li>
 <p>使用命令将.podspec文件添加到~/.cocoapods/repos/SFPod中，同时也发布到远程仓库</p>
@@ -372,7 +372,7 @@
 <p>执行完该步骤后， ~/.cocoapods/repos/SFPod会新增对应版本的.podspec文件</p>
 </li>
 </ul>
-<h3 id="34-查询"><a class="markdownIt-Anchor" href="#34-查询"></a> 3.4 查询</h3>
+<h2 id="查询"><a class="markdownIt-Anchor" href="#查询"></a> 查询</h2>
 <ul>
 <li>
 <p>搜索组件库</p>
@@ -382,7 +382,7 @@
 <p>搜索到了说明安装成功</p>
 </li>
 </ul>
-<h2 id="4-使用组件"><a class="markdownIt-Anchor" href="#4-使用组件"></a> 4 使用组件</h2>
+<h1 id="使用组件"><a class="markdownIt-Anchor" href="#使用组件"></a> 使用组件</h1>
 <ul>
 <li>
 <p>在Podfile文件新增源</p>
@@ -422,7 +422,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://jiahaofang.github.io/ios-send2cocoapods/" title="iOS代码发布为组件">https://jiahaofang.github.io/ios-send2cocoapods/</a>
+      <a href="https://jiahaofang.github.io/ios-send2cocoapods/" title="iOS 代码发布为组件">https://jiahaofang.github.io/ios-send2cocoapods/</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -444,8 +444,8 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/notion-hexo-deploy/" rel="next" title="Notion + Hexo 博客解决方案">
-                  Notion + Hexo 博客解决方案 <i class="fa fa-angle-right"></i>
+                <a href="/notion-hexo-deploy/" rel="next" title="Notion+Hexo 博客解决方案">
+                  Notion+Hexo 博客解决方案 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

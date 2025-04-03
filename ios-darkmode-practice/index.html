@@ -24,7 +24,7 @@
 
     <meta name="description" content="iOS 深色模式介绍和实践">
 <meta property="og:type" content="article">
-<meta property="og:title" content="当我们在谈论DarkMode时我们在谈论什么">
+<meta property="og:title" content="iOS 暗黑模式适配">
 <meta property="og:url" content="https://jiahaofang.github.io/ios-darkmode-practice/index.html">
 <meta property="og:site_name" content="阿告今天学习了吗">
 <meta property="og:description" content="iOS 深色模式介绍和实践">
@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://jiahaofang.github.io/images/4f2f3449d38be5692bf965de75e11c9e.png">
 <meta property="og:image" content="https://jiahaofang.github.io/images/45538b7ee06e8a22f6afe2d2902d7368.png">
 <meta property="article:published_time" content="2025-04-01T19:22:00.000Z">
-<meta property="article:modified_time" content="2025-04-02T10:24:00.000Z">
+<meta property="article:modified_time" content="2025-04-03T16:56:00.000Z">
 <meta property="article:author" content="阿告2426">
 <meta property="article:tag" content="iOS">
 <meta name="twitter:card" content="summary">
@@ -48,10 +48,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiahaofang.github.io/ios-darkmode-practice/","path":"/ios-darkmode-practice/","title":"当我们在谈论DarkMode时我们在谈论什么"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiahaofang.github.io/ios-darkmode-practice/","path":"/ios-darkmode-practice/","title":"iOS 暗黑模式适配"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>当我们在谈论DarkMode时我们在谈论什么 | 阿告今天学习了吗</title>
+<title>iOS 暗黑模式适配 | 阿告今天学习了吗</title>
   
 
 
@@ -154,7 +154,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%89%8D%E8%A8%80"><span class="nav-text"> 1 前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%8E%9F%E7%90%86"><span class="nav-text"> 2 原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#21-api"><span class="nav-text"> 2.1 API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-%E9%A2%9C%E8%89%B2%E8%B5%84%E6%BA%90%E6%94%AF%E6%8C%81"><span class="nav-text"> 2.2 颜色资源支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23-%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90%E6%94%AF%E6%8C%81"><span class="nav-text"> 2.3 图片资源支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24-%E5%85%B6%E4%BB%96%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E5%9C%B0%E6%96%B9"><span class="nav-text"> 2.4 其他需要注意的地方</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E4%B8%AD%E5%9C%BA%E4%BC%91%E6%81%AF"><span class="nav-text"> 3 中场休息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90%E5%A4%84%E7%90%86"><span class="nav-text"> 4 图片资源处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#41-%E6%96%B9%E6%A1%88"><span class="nav-text"> 4.1 方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#42-%E5%AE%9E%E6%96%BD"><span class="nav-text"> 4.2 实施</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#43-%E5%85%B6%E4%BB%96%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90"><span class="nav-text"> 4.3 其他图片资源</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E9%A2%9C%E8%89%B2%E8%B5%84%E6%BA%90%E5%A4%84%E7%90%86"><span class="nav-text"> 5 颜色资源处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#51-%E6%96%B9%E6%A1%88"><span class="nav-text"> 5.1 方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#52-%E5%AE%9E%E6%96%BD"><span class="nav-text"> 5.2 实施</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#53-%E6%9C%BA%E5%99%A8%E9%98%9Fvs%E4%BA%BA%E5%B7%A5%E9%98%9F"><span class="nav-text"> 5.3 机器队VS人工队</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E5%B0%BE%E5%A3%B0"><span class="nav-text"> 6 尾声</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text"> 前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text"> 原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#api"><span class="nav-number">2.1.</span> <span class="nav-text"> API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%9C%E8%89%B2%E8%B5%84%E6%BA%90%E6%94%AF%E6%8C%81"><span class="nav-number">2.2.</span> <span class="nav-text"> 颜色资源支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90%E6%94%AF%E6%8C%81"><span class="nav-number">2.3.</span> <span class="nav-text"> 图片资源支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E5%9C%B0%E6%96%B9"><span class="nav-number">2.4.</span> <span class="nav-text"> 其他需要注意的地方</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%AD%E5%9C%BA%E4%BC%91%E6%81%AF"><span class="nav-number">3.</span> <span class="nav-text"> 中场休息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90%E5%A4%84%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text"> 图片资源处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%A1%88"><span class="nav-number">4.1.</span> <span class="nav-text"> 方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E6%96%BD"><span class="nav-number">4.2.</span> <span class="nav-text"> 实施</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90"><span class="nav-number">4.3.</span> <span class="nav-text"> 其他图片资源</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%9C%E8%89%B2%E8%B5%84%E6%BA%90%E5%A4%84%E7%90%86"><span class="nav-number">5.</span> <span class="nav-text"> 颜色资源处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%A1%88-2"><span class="nav-number">5.0.1.</span> <span class="nav-text"> 方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E6%96%BD-2"><span class="nav-number">5.0.2.</span> <span class="nav-text"> 实施</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E9%98%9Fvs%E4%BA%BA%E5%B7%A5%E9%98%9F"><span class="nav-number">5.0.3.</span> <span class="nav-text"> 机器队VS人工队</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%BE%E5%A3%B0"><span class="nav-number">6.</span> <span class="nav-text"> 尾声</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -169,7 +169,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -232,12 +232,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="当我们在谈论DarkMode时我们在谈论什么 | 阿告今天学习了吗">
+      <meta itemprop="name" content="iOS 暗黑模式适配 | 阿告今天学习了吗">
       <meta itemprop="description" content="iOS 深色模式介绍和实践">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          当我们在谈论DarkMode时我们在谈论什么
+          iOS 暗黑模式适配
         </h1>
 
         <div class="post-meta-container">
@@ -255,7 +255,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-04-02 10:24:00" itemprop="dateModified" datetime="2025-04-02T10:24:00+00:00">2025-04-02</time>
+      <time title="修改时间：2025-04-03 16:56:00" itemprop="dateModified" datetime="2025-04-03T16:56:00+00:00">2025-04-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -277,13 +277,16 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="1-前言"><a class="markdownIt-Anchor" href="#1-前言"></a> 1 前言</h1>
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>本文已发表在微信公众号，<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/GolsykOfKmhaloVTjoZk3g">《当我们在谈论DarkMode时我们在谈论什么》</a></p>
+</blockquote>
+<h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
 <p>2024年6月，Apple 在 WWDC2024 发布了iOS18。新版本的 iOS 系统中包含了一项褒贬不一的新特性：把深色模式扩展到了主屏幕的图标，这让已经融入我们生活中的深色模式功能多多少少又秀了一把存在感。</p>
 <p>距离 iOS13 深色模式功能上线已经过去五年了，市面上常见的手机应用绝大部分也适配了深色模式，笔者个人更是对这一功能情有独钟，将其视为 App 中并非最重要，但不可或缺的功能之一。同时作为一个 iOS 开发者，笔者也十分清楚对于一个功能完整，已经运营了一段时间的 App 要适配这一功能需要付出怎么样的努力，这篇文章不只是对深色模式适配的介绍，也是对 VeSync App 完整适配过程的分享。</p>
-<h1 id="2-原理"><a class="markdownIt-Anchor" href="#2-原理"></a> 2 原理</h1>
+<h1 id="原理"><a class="markdownIt-Anchor" href="#原理"></a> 原理</h1>
 <p>在进行适配之前，肯定要先了解Apple 给出的相关API。本篇文章的重点其实并不是介绍这些<a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/uikit/appearance_customization/supporting_dark_mode_in_your_interface">官网</a>白纸黑字写清楚的东西，但是出于文章完整性的考虑，这部分内容还是必不可少的。</p>
 <p>注意：下文介绍的内容均默认 App 的最低支持版本为 iOS13，省略了版本判断的相关代码。</p>
-<h2 id="21-api"><a class="markdownIt-Anchor" href="#21-api"></a> 2.1 API</h2>
+<h2 id="api"><a class="markdownIt-Anchor" href="#api"></a> API</h2>
 <ul>
 <li>UIView 的 overrideUserInterfaceStyle 属性</li>
 </ul>
@@ -301,7 +304,7 @@
 <li>某个页面单独设置不支持深色模式</li>
 </ul>
 <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">extension ViewController &#123;</span><br><span class="line">    override func viewWillAppear(_ animated: Bool) &#123;</span><br><span class="line">        super.viewWillAppear(animated)</span><br><span class="line">        self.overrideUserInterfaceStyle = .light</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="22-颜色资源支持"><a class="markdownIt-Anchor" href="#22-颜色资源支持"></a> 2.2 颜色资源支持</h2>
+<h2 id="颜色资源支持"><a class="markdownIt-Anchor" href="#颜色资源支持"></a> 颜色资源支持</h2>
 <p>系统提供了一种创建自定义颜色的方法</p>
 <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 创建自定义颜色的方法</span><br><span class="line">public init(dynamicProvider: @escaping (UITraitCollection) -&gt; UIColor)</span><br><span class="line"></span><br><span class="line">// 通过当前traitCollection得到对应UIColor</span><br><span class="line">open func resolvedColor(with traitCollection: UITraitCollection) -&gt; UIColor</span><br></pre></td></tr></table></figure>
 <p>或者在assets 中直接添加颜色资源，如下图</p>
@@ -311,27 +314,27 @@
 <li>点击选中浅色/深色模式下的颜色；</li>
 <li>编辑色值</li>
 </ol>
-<h2 id="23-图片资源支持"><a class="markdownIt-Anchor" href="#23-图片资源支持"></a> 2.3 图片资源支持</h2>
+<h2 id="图片资源支持"><a class="markdownIt-Anchor" href="#图片资源支持"></a> 图片资源支持</h2>
 <p><img src="../images/f7d32e77d60402793b9bb235245af3f1.png" alt="image.png" /></p>
 <ol>
 <li>修改 Appearance 为 Any,Dark；</li>
 <li>把深色模式的资源拖到对应位置；</li>
 </ol>
-<h2 id="24-其他需要注意的地方"><a class="markdownIt-Anchor" href="#24-其他需要注意的地方"></a> 2.4 其他需要注意的地方</h2>
+<h2 id="其他需要注意的地方"><a class="markdownIt-Anchor" href="#其他需要注意的地方"></a> 其他需要注意的地方</h2>
 <ol>
 <li>CGColor 不支持动态更新颜色，原因是 CoreGraphic 是比 UIKit 更底层的库，动态更新颜色是 UIKit 支持的功能，cgColor 只会使用一开始设置的颜色色值（<code>xxx.cgColor = UIColor.systemBackground.cgColor</code>），并不会跟着系统的外观切换而动态更新色值。</li>
 <li>在iOS系统切换模式之后，会调用<code>layoutSubviews</code>方法，也可以在这个方法里做UI更新</li>
 <li>使用 UIGraphics 绘制的图片，可以分别绘制亮色和暗色的图片，再通过<code>UIImage.imageAsset</code>注册，让其能够自动切换外观</li>
 </ol>
-<h1 id="3-中场休息"><a class="markdownIt-Anchor" href="#3-中场休息"></a> 3 中场休息</h1>
+<h1 id="中场休息"><a class="markdownIt-Anchor" href="#中场休息"></a> 中场休息</h1>
 <p>以上是深色模式相关的所有内容，你已经学会了，现在来试试看吧！</p>
 <p><img src="../images/9041ddd09b96dc19b2e8a7d583488825.jpg" alt="%E7%BC%96%E7%A8%8B%E6%95%B0%E5%AD%A6%E4%B9%A6.jpg" /></p>
 <p>开个玩笑～</p>
 <p>从上面的官方接口说明中看出，深色模式的适配分为图片资源和颜色资源两个板块，如果你的 App 从一开始就使用官方的资源管理方案进行图片和颜色资源的管理，那恭喜你，你们的适配将会非常轻松，你们只需要导出图片和颜色的资源，让设计师在原有资源名字下提供深色模式的图片和颜色，比如XXX_dark，这样我们就可以通过脚本将图片和颜色资源导入资源管理库，即可完成深色模式适配的绝大部分工作。</p>
 <p>实际上，理论与实践总是存在着巨大差异，接下来让我们一起看看 VeSync 在深色模式适配的实践中到底是怎么做的。</p>
-<h1 id="4-图片资源处理"><a class="markdownIt-Anchor" href="#4-图片资源处理"></a> 4 图片资源处理</h1>
+<h1 id="图片资源处理"><a class="markdownIt-Anchor" href="#图片资源处理"></a> 图片资源处理</h1>
 <p>VeSync App的图片资源，绝大多数都是使用的系统资源管理库进行管理，所以我们使用标准的处理方案进行处理即可。</p>
-<h2 id="41-方案"><a class="markdownIt-Anchor" href="#41-方案"></a> 4.1 方案</h2>
+<h2 id="方案"><a class="markdownIt-Anchor" href="#方案"></a> 方案</h2>
 <p>上文已经提过，只要在 assets 中管理的图片资源添加对应的深色模式的图片，系统就会在外观切换的时候自动切换图片的样式。按照VeSync 的图片资源命名规范，一张图片的深色样式是在原有图片名加上”_dark”或者”Dark”后缀，这取决于图片原本的命名方式是下划线还是驼峰，最终效果如：</p>
 <p><img src="../images/8784a15dc04333a200710ab3c27f46d7.png" alt="image.png" /></p>
 <p><img src="../images/146e5d2cbe84855cce342de2b99d021d.png" alt="image.png" /></p>
@@ -342,7 +345,7 @@
 <li>早期项目中相同图片被反复添加，形成了冗余资源，这些重复图片需要去重处理。</li>
 </ol>
 <p>以上这些问题我们都使用了脚本进行辅助处理。</p>
-<h2 id="42-实施"><a class="markdownIt-Anchor" href="#42-实施"></a> 4.2 实施</h2>
+<h2 id="实施"><a class="markdownIt-Anchor" href="#实施"></a> 实施</h2>
 <p>辅助脚本的整个流程基于图片相似度计算、脚本自动化处理与人工补充相结合。每一步的中间结果（如未匹配图片、重复图片等）都会生成 Excel 文件，以便人工确认和后续处理。</p>
 <p>因为 App 的图片资源已经抽离在系统文件资源库中，对图片资源的更新不会影响到业务代码，所以这一部分工作由专人负责，负责整个 App 的所有图片的补充、替换、去重工作。工作流的大致流程图下图所示：</p>
 <p>我帮您检查了全文，发现以下需要注意的地方：</p>
@@ -370,7 +373,7 @@ C ---> D[删除重复图片并更新项目引用]</pre>
 <p>人工校对第三步生成的重复图片 Excel 表格，确认需要删除的图片。此后遍历项目中所有代码源文件，查找并替换引用的旧图片路径为新图片的路径。</p>
 </li>
 </ol>
-<h2 id="43-其他图片资源"><a class="markdownIt-Anchor" href="#43-其他图片资源"></a> 4.3 其他图片资源</h2>
+<h2 id="其他图片资源"><a class="markdownIt-Anchor" href="#其他图片资源"></a> 其他图片资源</h2>
 <p>除了 assets 中的图片资源，我们还有两种资源：</p>
 <ol>
 <li>本地图片资源：一些使用不规范的图片资源没有使用 assets 管理，而是直接把资源添加到工程文件夹目录，导致了这些资源无法根据系统外观自动切换。一种处理方案是在资源使用处手动添加两个版本的图片资源使其自动切换（<code>UIImage.imageAsset</code>的方式），更优的方案是将这些资源迁移到 assets 中统一管理。</li>
@@ -381,7 +384,7 @@ C ---> D[删除重复图片并更新项目引用]</pre>
 <li>JSON 动画资源：目前我们团队采用的动画方案是 Lottie + JSON，显而易见地，这种方案并不支持在系统层面上根据外观自动切换。我们采用的方案是手动监听系统的外观模式切换，根据系统的外观更新对应的 JSON 以达成动画的深色模式或浅色模式更新。在处理一些与当前状态相关的动画效果的时候，需要注意动画切换时的流畅性。</li>
 <li>GIF 动画资源：在一些老旧的业务代码中还存留着 GIF 动画资源。与 JSON 动画类似，我们需要监听系统的外观切换，手动更新动画。</li>
 </ol>
-<h1 id="5-颜色资源处理"><a class="markdownIt-Anchor" href="#5-颜色资源处理"></a> 5 颜色资源处理</h1>
+<h1 id="颜色资源处理"><a class="markdownIt-Anchor" href="#颜色资源处理"></a> 颜色资源处理</h1>
 <p>根据官方指南，相较于以前的硬编码颜色色值的使用方式，支持深色模式的资源更适合使用语义化的名称，根据颜色的使用场景为其命名，配置好的颜色资源会自动适应当前的 App 外观。</p>
 <p>在支持深色模式的场景下，颜色应该使用“颜色的场景名称”而不是“颜色的色值”。在这种定义推动下，我们“只需要”工程里用到的所有的颜色色值替换成语义化颜色名即可。</p>
 <p>对于一个持续运营迭代了好几年的 App，这样子的颜色色值替换可不是简单的工作。在一个体量并不小的工程中，找出所有的颜色色值并替换会遇到下面这些问题：</p>
@@ -392,7 +395,7 @@ C ---> D[删除重复图片并更新项目引用]</pre>
 <li>对于 VeSync 来说，业务形态决定了某一些板块会相对独立，在开发者对某一模块并不熟悉的情况下要怎么进行这一部分的适配工作？</li>
 </ol>
 <p>显然，量变产生质变，要人工逐个替换已经是不可能完成的工作了，通过<code>脚本</code>进行颜色替换就是自然而然选择了。以下就介绍一下颜色处理的方案和实践流程。</p>
-<h3 id="51-方案"><a class="markdownIt-Anchor" href="#51-方案"></a> 5.1 方案</h3>
+<h3 id="方案-2"><a class="markdownIt-Anchor" href="#方案-2"></a> 方案</h3>
 <p>在脚本替换之前，我们需要先建立我们的颜色资源库。</p>
 <p>根据官方指南， 我们需要一个语义化的颜色资源库。这一部分工作由设计部门完成，他们需要为 App 内所用到的所有颜色色值增加对应深色模式的颜色色值，并为其命名，形成一套完整的语义化颜色资源。</p>
 <p>在拿到语义化的颜色资源后，我们要将这些颜色资源导入到工程中。由于涉及到跨部门、跨工具的合作（Zeplin/Figma、Xcode/VSCode），这一部分并没办法用脚本处理，只能人工一个个颜色搬运到工程的 .xcassets 文件中。在辛苦搬运完成后，我们就可以使用脚本读取这些资源并使用它们了。</p>
@@ -410,7 +413,7 @@ D --色值相同--> G[替换硬编码颜色为语义化颜色]
 G -- 输出 --> H[工程源码替换]
 G -- 输出 --> H1(记录success.xml)
 H ---> I(替换完成，结束)</pre>
-<h3 id="52-实施"><a class="markdownIt-Anchor" href="#52-实施"></a> 5.2 实施</h3>
+<h3 id="实施-2"><a class="markdownIt-Anchor" href="#实施-2"></a> 实施</h3>
 <p>接下来我们简单介绍一下具体的实践方式。</p>
 <p>iOS 使用 .xcassets 的方式储存颜色资源，配置好的颜色资源如下图所示：</p>
 <p><img src="../images/4f2f3449d38be5692bf965de75e11c9e.png" alt="%E9%A2%9C%E8%89%B2%E8%B5%84%E6%BA%90%E5%BA%93.png" /></p>
@@ -428,7 +431,7 @@ H ---> I(替换完成，结束)</pre>
 <p>接下来要做的事情就比较简单了，遍历两个数组（硬编码颜色、语义化颜色），使用他们的 rgba 值进行比对，如果硬编码颜色匹配到了对应的语义化的颜色名，则直接在源码中进行文件读写操作，替换为语义化颜色名，同时记录到 Excel 文件中。下面是这个功能的伪代码：</p>
 <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Read color resources into vscolor_json</span><br><span class="line">Identify and parse hardcoded colors into color_json</span><br><span class="line"></span><br><span class="line">For each sheet in color_json</span><br><span class="line">    For each line in sheet</span><br><span class="line">        If line contains &quot;red value&quot;, &quot;green value&quot;, &quot;blue value&quot;, &quot;alpha value&quot;, and &quot;result&quot; is &quot;correct&quot;</span><br><span class="line">            For each vscolor in vscolor_json</span><br><span class="line">                If line&#x27;s color values match vscolor&#x27;s color values</span><br><span class="line">                    Get file_path, line_number, old_color</span><br><span class="line">                    Determine new_color based on sheet type</span><br><span class="line">                    Print replacement information</span><br><span class="line">                    Replace color code in file</span><br><span class="line">                    Exit loop</span><br><span class="line">          Else</span><br><span class="line">              Continue to next loop</span><br></pre></td></tr></table></figure>
 <p>写到这里，脚本的任务基本就完成了，这些脚本为我们提取并替换颜色，大幅度提高了工作效率，为程序员的头发作出了巨大贡献。</p>
-<h3 id="53-机器队vs人工队"><a class="markdownIt-Anchor" href="#53-机器队vs人工队"></a> 5.3 机器队VS人工队</h3>
+<h3 id="机器队vs人工队"><a class="markdownIt-Anchor" href="#机器队vs人工队"></a> 机器队VS人工队</h3>
 <p>VeSync App 是使用组件化的方式进行业务开发，在一个组件内的业务代码相对完整，他们的开发者对自己负责过的业务组件更加熟悉，但考虑到实际情况，这些开发者并没有很多时间投入到存量业务的深色模式适配项目中。面对这个问题，我们采用了<strong>脚本替换+人工校对+UI阶段性验收</strong>的方式进行项目开发，具体的开发流程如下</p>
 <pre class="mermaid">sequenceDiagram
     autonumber
@@ -462,7 +465,7 @@ H ---> I(替换完成，结束)</pre>
 <li>实际开发：对模块的每个页面逐个核对，修正遗漏掉的颜色等错误展示效果</li>
 </ul>
 <p>按照上面的流程，深色模式的适配对于业务线的开发者来说，只需要如常执行他们的业务流程，指出并修复个别错误展示效果（颜色或图片），而工作量最大的颜色替换部分则由项目负责人使用脚本进行处理。在一个板块的适配完成后，会打包交付 UI、产品阶段性验收，验收完成后，开发再针对提出的 UI 问题进行修改。这样一来，我们就同时保证了开发的效率和准确率。</p>
-<h1 id="6-尾声"><a class="markdownIt-Anchor" href="#6-尾声"></a> 6 尾声</h1>
+<h1 id="尾声"><a class="markdownIt-Anchor" href="#尾声"></a> 尾声</h1>
 <p>在探讨了深色模式的技术细节之后，我们不难发现，尽管其核心概念和实现方法在技术层面上并不复杂，但真正要将深色模式完美融入我们的应用中，却远非易事。对于已经上线并拥有一定用户基础的应用来说，如何在不破坏现有功能和用户体验的前提下，平滑过渡到深色模式，是一个需要精心策划和逐步实施的过程。虽然技术实现本身并不复杂，但要真正做到完美适配，却需要我们投入更多的精力和智慧。在未来，随着用户对个性化和舒适度要求的不断提高，深色模式无疑将成为应用中不可或缺的一部分。我们期待，通过不断的探索和实践，能够为用户带来更加丰富和舒适的使用体验。</p>
 <p>感谢您的阅读，希望本文能够为您提供一些关于深色模式适配的有益见解和启发。如果您有任何疑问或建议，欢迎留言交流。</p>
 
@@ -482,7 +485,7 @@ H ---> I(替换完成，结束)</pre>
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://jiahaofang.github.io/ios-darkmode-practice/" title="当我们在谈论DarkMode时我们在谈论什么">https://jiahaofang.github.io/ios-darkmode-practice/</a>
+      <a href="https://jiahaofang.github.io/ios-darkmode-practice/" title="iOS 暗黑模式适配">https://jiahaofang.github.io/ios-darkmode-practice/</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -498,13 +501,13 @@ H ---> I(替换完成，结束)</pre>
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/notion-hexo-deploy/" rel="prev" title="Notion + Hexo 博客解决方案">
-                  <i class="fa fa-angle-left"></i> Notion + Hexo 博客解决方案
+                <a href="/notion-hexo-deploy/" rel="prev" title="Notion+Hexo 博客解决方案">
+                  <i class="fa fa-angle-left"></i> Notion+Hexo 博客解决方案
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/ipad-adaption/" rel="next" title="iPad 适配二三事">
-                  iPad 适配二三事 <i class="fa fa-angle-right"></i>
+                <a href="/ipad-adaption/" rel="next" title="iOS 横屏适配">
+                  iOS 横屏适配 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

@@ -126,7 +126,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Notion + Hexo 博客解决方案</title>
+    <title>Notion+Hexo 博客解决方案</title>
     <url>//notion-hexo-deploy/</url>
     <content><![CDATA[<h1 id="创作开发"><a class="markdownIt-Anchor" href="#创作开发"></a> 创作&amp;开发</h1>
 <h2 id="notion"><a class="markdownIt-Anchor" href="#notion"></a> Notion</h2>
@@ -289,10 +289,10 @@
       </tags>
   </entry>
   <entry>
-    <title>iOS代码发布为组件</title>
+    <title>iOS 代码发布为组件</title>
     <url>//ios-send2cocoapods/</url>
-    <content><![CDATA[<h2 id="1-前期准备"><a class="markdownIt-Anchor" href="#1-前期准备"></a> 1 前期准备</h2>
-<h3 id="11-远程仓库"><a class="markdownIt-Anchor" href="#11-远程仓库"></a> 1.1 远程仓库</h3>
+    <content><![CDATA[<h1 id="前期准备"><a class="markdownIt-Anchor" href="#前期准备"></a> 前期准备</h1>
+<h2 id="远程仓库"><a class="markdownIt-Anchor" href="#远程仓库"></a> 远程仓库</h2>
 <blockquote>
 <p>准备好两个远程仓库，在GitHub上创建即可；</p>
 <p>权限建议为public</p>
@@ -310,7 +310,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="12-本地代码"><a class="markdownIt-Anchor" href="#12-本地代码"></a> 1.2 本地代码</h3>
+<h2 id="本地代码"><a class="markdownIt-Anchor" href="#本地代码"></a> 本地代码</h2>
 <blockquote>
 <p>由于该组件为一个完整工程作为组件发布，需要抽离</p>
 </blockquote>
@@ -318,8 +318,8 @@
 <li>保证需要发布为组件的工程，其核心功能完整，去耦，能够实现核心功能的抽离</li>
 <li>保证编译可通过，同时核心功能具备可移植性</li>
 </ul>
-<h2 id="2-本地目录创建"><a class="markdownIt-Anchor" href="#2-本地目录创建"></a> 2 本地目录创建</h2>
-<h3 id="21-创建私有repo目录"><a class="markdownIt-Anchor" href="#21-创建私有repo目录"></a> 2.1 创建私有Repo目录</h3>
+<h1 id="本地目录创建"><a class="markdownIt-Anchor" href="#本地目录创建"></a> 本地目录创建</h1>
+<h2 id="创建私有repo目录"><a class="markdownIt-Anchor" href="#创建私有repo目录"></a> 创建私有Repo目录</h2>
 <ul>
 <li>
 <p>在～/.cocoapods/repo中能看到本地有的repo仓库，其中cocoapods为官方仓库，trunk也是官方仓库（历史遗留问题）；xxxRepo为公司私有仓库。</p>
@@ -339,7 +339,7 @@
   <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">open ~<span class="regexp">/.cocoapods/repos</span><span class="regexp">/SFPod</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="22-创建个人组件目录"><a class="markdownIt-Anchor" href="#22-创建个人组件目录"></a> 2.2 创建个人组件目录</h3>
+<h2 id="创建个人组件目录"><a class="markdownIt-Anchor" href="#创建个人组件目录"></a> 创建个人组件目录</h2>
 <ul>
 <li>
 <p>发布的组件需要按照Cocoapod严格遵守官方给出的目录结构，官方给出了命令可以直接生成模版</p>
@@ -352,7 +352,7 @@
 <p>生成模版后可以使用tree命令查看该文件夹下的目录结构</p>
 </li>
 </ul>
-<h3 id="23-编辑模版"><a class="markdownIt-Anchor" href="#23-编辑模版"></a> 2.3 编辑模版</h3>
+<h2 id="编辑模版"><a class="markdownIt-Anchor" href="#编辑模版"></a> 编辑模版</h2>
 <blockquote>
 <p>在2.2创建的公共模版就是组件的模板，我们需要将我们的代码添加进去将其作为自己的组件</p>
 </blockquote>
@@ -361,29 +361,29 @@
 <li>另外在Example中编写Demo测试自己的组件是否能正常工作，点击.xcworkspace可以作为一个完整工程运行</li>
 <li>在写Example的时候，如果修改了Classes中文件的，需要pod install一下，将组件在自己的Demo中更新一下</li>
 </ul>
-<h3 id="24-编辑podspec文件"><a class="markdownIt-Anchor" href="#24-编辑podspec文件"></a> 2.4 编辑.podspec文件</h3>
+<h2 id="编辑podspec文件"><a class="markdownIt-Anchor" href="#编辑podspec文件"></a> 编辑.podspec文件</h2>
 <ul>
 <li>自行Google</li>
 </ul>
-<h2 id="3-发布组件"><a class="markdownIt-Anchor" href="#3-发布组件"></a> 3 发布组件</h2>
+<h1 id="发布组件"><a class="markdownIt-Anchor" href="#发布组件"></a> 发布组件</h1>
 <blockquote>
 <p>如果上面的步骤完成了，恭喜，完成了一半</p>
 </blockquote>
-<h3 id="31-校验"><a class="markdownIt-Anchor" href="#31-校验"></a> 3.1 校验</h3>
+<h2 id="校验"><a class="markdownIt-Anchor" href="#校验"></a> 校验</h2>
 <ul>
 <li>
 <p>当2中的步骤全部完成，我们可以使用下面的命令检验自己组件代码的合法性（主要是检验.podspec文件）</p>
   <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod lib lint</span><br><span class="line"><span class="comment"># 只从本地验证你的pod能否通过验证。</span></span><br><span class="line">pod spec lint</span><br><span class="line"><span class="comment"># 从本地和远程验证你的pod能否通过验证，建议使用这个</span></span><br><span class="line">--allow-warnings</span><br><span class="line"><span class="comment"># 如何库代码中有警告导致通不过验证。加上这个忽略警告</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="32-提交源码"><a class="markdownIt-Anchor" href="#32-提交源码"></a> 3.2 提交源码</h3>
+<h2 id="提交源码"><a class="markdownIt-Anchor" href="#提交源码"></a> 提交源码</h2>
 <ul>
 <li>
 <p>提交源码到个人仓库</p>
   <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">git add -a</span><br><span class="line">git commit -m &quot;xxx&quot;</span><br><span class="line">git push</span><br><span class="line">git tag 0.1.0</span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="33-发布组件到个人repo"><a class="markdownIt-Anchor" href="#33-发布组件到个人repo"></a> 3.3 发布组件到个人Repo</h3>
+<h2 id="发布组件到个人repo"><a class="markdownIt-Anchor" href="#发布组件到个人repo"></a> 发布组件到个人Repo</h2>
 <ul>
 <li>
 <p>使用命令将.podspec文件添加到~/.cocoapods/repos/SFPod中，同时也发布到远程仓库</p>
@@ -393,7 +393,7 @@
 <p>执行完该步骤后， ~/.cocoapods/repos/SFPod会新增对应版本的.podspec文件</p>
 </li>
 </ul>
-<h3 id="34-查询"><a class="markdownIt-Anchor" href="#34-查询"></a> 3.4 查询</h3>
+<h2 id="查询"><a class="markdownIt-Anchor" href="#查询"></a> 查询</h2>
 <ul>
 <li>
 <p>搜索组件库</p>
@@ -403,7 +403,7 @@
 <p>搜索到了说明安装成功</p>
 </li>
 </ul>
-<h2 id="4-使用组件"><a class="markdownIt-Anchor" href="#4-使用组件"></a> 4 使用组件</h2>
+<h1 id="使用组件"><a class="markdownIt-Anchor" href="#使用组件"></a> 使用组件</h1>
 <ul>
 <li>
 <p>在Podfile文件新增源</p>
@@ -436,9 +436,214 @@
       </tags>
   </entry>
   <entry>
-    <title>iPad 适配二三事</title>
+    <title>iOS 暗黑模式适配</title>
+    <url>//ios-darkmode-practice/</url>
+    <content><![CDATA[<blockquote>
+<p>本文已发表在微信公众号，<a href="https://mp.weixin.qq.com/s/GolsykOfKmhaloVTjoZk3g">《当我们在谈论DarkMode时我们在谈论什么》</a></p>
+</blockquote>
+<h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
+<p>2024年6月，Apple 在 WWDC2024 发布了iOS18。新版本的 iOS 系统中包含了一项褒贬不一的新特性：把深色模式扩展到了主屏幕的图标，这让已经融入我们生活中的深色模式功能多多少少又秀了一把存在感。</p>
+<p>距离 iOS13 深色模式功能上线已经过去五年了，市面上常见的手机应用绝大部分也适配了深色模式，笔者个人更是对这一功能情有独钟，将其视为 App 中并非最重要，但不可或缺的功能之一。同时作为一个 iOS 开发者，笔者也十分清楚对于一个功能完整，已经运营了一段时间的 App 要适配这一功能需要付出怎么样的努力，这篇文章不只是对深色模式适配的介绍，也是对 VeSync App 完整适配过程的分享。</p>
+<h1 id="原理"><a class="markdownIt-Anchor" href="#原理"></a> 原理</h1>
+<p>在进行适配之前，肯定要先了解Apple 给出的相关API。本篇文章的重点其实并不是介绍这些<a href="https://developer.apple.com/documentation/uikit/appearance_customization/supporting_dark_mode_in_your_interface">官网</a>白纸黑字写清楚的东西，但是出于文章完整性的考虑，这部分内容还是必不可少的。</p>
+<p>注意：下文介绍的内容均默认 App 的最低支持版本为 iOS13，省略了版本判断的相关代码。</p>
+<h2 id="api"><a class="markdownIt-Anchor" href="#api"></a> API</h2>
+<ul>
+<li>UIView 的 overrideUserInterfaceStyle 属性</li>
+</ul>
+<p>获取当前window之后，修改window的overrideUserInterfaceStyle属性，页面的颜色/图标会根据设置的模式同步更新，不需要手动操作。</p>
+<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene, let window = windowScene.windows.first else &#123; return &#125;</span><br><span class="line">// 设置为Light模式</span><br><span class="line">window.overrideUserInterfaceStyle = .light</span><br><span class="line"></span><br><span class="line">public enum UIUserInterfaceStyle : Int &#123;</span><br><span class="line">    // 未指明的</span><br><span class="line">    case unspecified</span><br><span class="line">    // 浅色模式</span><br><span class="line">    case light</span><br><span class="line">    // 深色模式</span><br><span class="line">    case dark</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取当前深色模式状态</li>
+</ul>
+<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">/// 在 UIView 中</span><br><span class="line">let mode = self.traitCollection.userInterfaceStyle</span><br><span class="line">/// 不在 UIView 中</span><br><span class="line">let mode = UITraitCollection.current.userInterfaceStyle</span><br></pre></td></tr></table></figure>
+<ul>
+<li>监听深色模式切换</li>
+</ul>
+<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) &#123;</span><br><span class="line">    if UITraitCollection.current.userInterfaceStyle == .dark &#123;</span><br><span class="line">        // Do something</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        // Do something else</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>某个页面单独设置不支持深色模式</li>
+</ul>
+<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">extension ViewController &#123;</span><br><span class="line">    override func viewWillAppear(_ animated: Bool) &#123;</span><br><span class="line">        super.viewWillAppear(animated)</span><br><span class="line">        self.overrideUserInterfaceStyle = .light</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="颜色资源支持"><a class="markdownIt-Anchor" href="#颜色资源支持"></a> 颜色资源支持</h2>
+<p>系统提供了一种创建自定义颜色的方法</p>
+<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">// 创建自定义颜色的方法</span><br><span class="line">public init(dynamicProvider: @escaping (UITraitCollection) -&gt; UIColor)</span><br><span class="line"></span><br><span class="line">// 通过当前traitCollection得到对应UIColor</span><br><span class="line">open func resolvedColor(with traitCollection: UITraitCollection) -&gt; UIColor</span><br></pre></td></tr></table></figure>
+<p>或者在assets 中直接添加颜色资源，如下图</p>
+<p><img src="../images/ebde22c5e12faedd53e48809f263135e.png" alt="image.png" /></p>
+<ol>
+<li>修改 Appearance 为 Any,Dark；</li>
+<li>点击选中浅色/深色模式下的颜色；</li>
+<li>编辑色值</li>
+</ol>
+<h2 id="图片资源支持"><a class="markdownIt-Anchor" href="#图片资源支持"></a> 图片资源支持</h2>
+<p><img src="../images/f7d32e77d60402793b9bb235245af3f1.png" alt="image.png" /></p>
+<ol>
+<li>修改 Appearance 为 Any,Dark；</li>
+<li>把深色模式的资源拖到对应位置；</li>
+</ol>
+<h2 id="其他需要注意的地方"><a class="markdownIt-Anchor" href="#其他需要注意的地方"></a> 其他需要注意的地方</h2>
+<ol>
+<li>CGColor 不支持动态更新颜色，原因是 CoreGraphic 是比 UIKit 更底层的库，动态更新颜色是 UIKit 支持的功能，cgColor 只会使用一开始设置的颜色色值（<code>xxx.cgColor = UIColor.systemBackground.cgColor</code>），并不会跟着系统的外观切换而动态更新色值。</li>
+<li>在iOS系统切换模式之后，会调用<code>layoutSubviews</code>方法，也可以在这个方法里做UI更新</li>
+<li>使用 UIGraphics 绘制的图片，可以分别绘制亮色和暗色的图片，再通过<code>UIImage.imageAsset</code>注册，让其能够自动切换外观</li>
+</ol>
+<h1 id="中场休息"><a class="markdownIt-Anchor" href="#中场休息"></a> 中场休息</h1>
+<p>以上是深色模式相关的所有内容，你已经学会了，现在来试试看吧！</p>
+<p><img src="../images/9041ddd09b96dc19b2e8a7d583488825.jpg" alt="%E7%BC%96%E7%A8%8B%E6%95%B0%E5%AD%A6%E4%B9%A6.jpg" /></p>
+<p>开个玩笑～</p>
+<p>从上面的官方接口说明中看出，深色模式的适配分为图片资源和颜色资源两个板块，如果你的 App 从一开始就使用官方的资源管理方案进行图片和颜色资源的管理，那恭喜你，你们的适配将会非常轻松，你们只需要导出图片和颜色的资源，让设计师在原有资源名字下提供深色模式的图片和颜色，比如XXX_dark，这样我们就可以通过脚本将图片和颜色资源导入资源管理库，即可完成深色模式适配的绝大部分工作。</p>
+<p>实际上，理论与实践总是存在着巨大差异，接下来让我们一起看看 VeSync 在深色模式适配的实践中到底是怎么做的。</p>
+<h1 id="图片资源处理"><a class="markdownIt-Anchor" href="#图片资源处理"></a> 图片资源处理</h1>
+<p>VeSync App的图片资源，绝大多数都是使用的系统资源管理库进行管理，所以我们使用标准的处理方案进行处理即可。</p>
+<h2 id="方案"><a class="markdownIt-Anchor" href="#方案"></a> 方案</h2>
+<p>上文已经提过，只要在 assets 中管理的图片资源添加对应的深色模式的图片，系统就会在外观切换的时候自动切换图片的样式。按照VeSync 的图片资源命名规范，一张图片的深色样式是在原有图片名加上”_dark”或者”Dark”后缀，这取决于图片原本的命名方式是下划线还是驼峰，最终效果如：</p>
+<p><img src="../images/8784a15dc04333a200710ab3c27f46d7.png" alt="image.png" /></p>
+<p><img src="../images/146e5d2cbe84855cce342de2b99d021d.png" alt="image.png" /></p>
+<p>但是上面只是理想情况，实际上我们还遇到了下面的问题：</p>
+<ol>
+<li>由于新的 UI 图片采用了统一的命名规范，导致旧版图片无法直接通过文件名匹配批量处理；</li>
+<li>UI 设计师会要求在新增深色样式图片的同时，更新浅色样式的图片；</li>
+<li>早期项目中相同图片被反复添加，形成了冗余资源，这些重复图片需要去重处理。</li>
+</ol>
+<p>以上这些问题我们都使用了脚本进行辅助处理。</p>
+<h2 id="实施"><a class="markdownIt-Anchor" href="#实施"></a> 实施</h2>
+<p>辅助脚本的整个流程基于图片相似度计算、脚本自动化处理与人工补充相结合。每一步的中间结果（如未匹配图片、重复图片等）都会生成 Excel 文件，以便人工确认和后续处理。</p>
+<p>因为 App 的图片资源已经抽离在系统文件资源库中，对图片资源的更新不会影响到业务代码，所以这一部分工作由专人负责，负责整个 App 的所有图片的补充、替换、去重工作。工作流的大致流程图下图所示：</p>
+<p>我帮您检查了全文，发现以下需要注意的地方：</p>
+<pre class="mermaid">graph TB
+A[自动匹配与配置更新] ---> B[人工补充未匹配图片]
+B ---> C[扫描查找重复图片]
+C ---> D[删除重复图片并更新项目引用]</pre>
+<ol>
+<li>
+<p>图片相似度匹配</p>
+<p>使用脚本计算浅色模式图片的相似度，找到与暗色模式图片匹配的目标路径。将匹配成功的暗黑模式图片复制到目标文件夹，同时修改目标文件夹中的 Contents.json，为每张图片添加暗色模式配置。</p>
+<p>这一步完成之后，大部分浅色模式图片能够匹配到对应的暗黑模式图片并完成更新。（因尺寸、色彩空间、内容轻微差异等问题）未匹配到的图片会被记录到一个 Excel 文件中，供后续人工处理。</p>
+<p>注：这一步使用 OpenCV 提供的模板匹配（Template Matching）方法进行图像相似度计算以建立新旧图片之间的关系。</p>
+</li>
+<li>
+<p>人工补充未匹配图片目标，补充第一步中未能自动匹配的图片。</p>
+<p>在第一步生成的 Excel 表格人工填写未匹配图片对应的暗黑模式图片路径，将补充完成的表格作为输入，使用脚本批量将这些图片添加到目标路径，并更新 Contents.json，为所有浅色模式图片都具备对应的暗黑模式版本。</p>
+</li>
+<li>
+<p>扫描查找重复图片，清理项目中存在的重复图片。</p>
+<p>使用脚本扫描项目文件，定位所有重复的暗黑模式图片。将重复的图片记录到一个 Excel 文件中，供后续人工校对。</p>
+</li>
+<li>
+<p>删除重复图片并更新项目中引用的图片名称。</p>
+<p>人工校对第三步生成的重复图片 Excel 表格，确认需要删除的图片。此后遍历项目中所有代码源文件，查找并替换引用的旧图片路径为新图片的路径。</p>
+</li>
+</ol>
+<h2 id="其他图片资源"><a class="markdownIt-Anchor" href="#其他图片资源"></a> 其他图片资源</h2>
+<p>除了 assets 中的图片资源，我们还有两种资源：</p>
+<ol>
+<li>本地图片资源：一些使用不规范的图片资源没有使用 assets 管理，而是直接把资源添加到工程文件夹目录，导致了这些资源无法根据系统外观自动切换。一种处理方案是在资源使用处手动添加两个版本的图片资源使其自动切换（<code>UIImage.imageAsset</code>的方式），更优的方案是将这些资源迁移到 assets 中统一管理。</li>
+<li>网络图片资源：对于 url 资源，我们无法做到动态切换。这常见于一些用户自定义的图片、头像等，也有一些配置化的资源需要存在云端，在使用的时候才会拉取下来进行展示。对于这种情况，在我们与设计团队进行沟通之后，决定对于这些资源进行统一化处理，即在深色模式和浅色模式下都用同一张图片资源，这样就免去了动态切换的麻烦。在进行统一化处理的时候，需要注意图片的背景颜色、图片透明度的问题，同时如果需要在不同外观下具有不同的背景色，则背景色应该交由 App 进行绘制，再将图片叠加其上。</li>
+</ol>
+<p>此外，除了单纯的图片资源，我们还有动画资源。</p>
+<ol>
+<li>JSON 动画资源：目前我们团队采用的动画方案是 Lottie + JSON，显而易见地，这种方案并不支持在系统层面上根据外观自动切换。我们采用的方案是手动监听系统的外观模式切换，根据系统的外观更新对应的 JSON 以达成动画的深色模式或浅色模式更新。在处理一些与当前状态相关的动画效果的时候，需要注意动画切换时的流畅性。</li>
+<li>GIF 动画资源：在一些老旧的业务代码中还存留着 GIF 动画资源。与 JSON 动画类似，我们需要监听系统的外观切换，手动更新动画。</li>
+</ol>
+<h1 id="颜色资源处理"><a class="markdownIt-Anchor" href="#颜色资源处理"></a> 颜色资源处理</h1>
+<p>根据官方指南，相较于以前的硬编码颜色色值的使用方式，支持深色模式的资源更适合使用语义化的名称，根据颜色的使用场景为其命名，配置好的颜色资源会自动适应当前的 App 外观。</p>
+<p>在支持深色模式的场景下，颜色应该使用“颜色的场景名称”而不是“颜色的色值”。在这种定义推动下，我们“只需要”工程里用到的所有的颜色色值替换成语义化颜色名即可。</p>
+<p>对于一个持续运营迭代了好几年的 App，这样子的颜色色值替换可不是简单的工作。在一个体量并不小的工程中，找出所有的颜色色值并替换会遇到下面这些问题：</p>
+<ol>
+<li>Swift/OC创建颜色的方法有很多种，对于这些五花八门的颜色使用方式，我们要怎么找到它们然后再一一替换成需要的资源？</li>
+<li>对于海量的颜色色值，我们势必采用批量处理的方式进行替换，如果仅使用 IDE 的 Find-Replace 方式进行替换效率太低，要如何提升效率并保证准确率？</li>
+<li>对于各种各样的业务及所用到的颜色色值，要怎么定义它们的一一对应关系？换句话说，原本的么处理？</li>
+<li>对于 VeSync 来说，业务形态决定了某一些板块会相对独立，在开发者对某一模块并不熟悉的情况下要怎么进行这一部分的适配工作？</li>
+</ol>
+<p>显然，量变产生质变，要人工逐个替换已经是不可能完成的工作了，通过<code>脚本</code>进行颜色替换就是自然而然选择了。以下就介绍一下颜色处理的方案和实践流程。</p>
+<h3 id="方案-2"><a class="markdownIt-Anchor" href="#方案-2"></a> 方案</h3>
+<p>在脚本替换之前，我们需要先建立我们的颜色资源库。</p>
+<p>根据官方指南， 我们需要一个语义化的颜色资源库。这一部分工作由设计部门完成，他们需要为 App 内所用到的所有颜色色值增加对应深色模式的颜色色值，并为其命名，形成一套完整的语义化颜色资源。</p>
+<p>在拿到语义化的颜色资源后，我们要将这些颜色资源导入到工程中。由于涉及到跨部门、跨工具的合作（Zeplin/Figma、Xcode/VSCode），这一部分并没办法用脚本处理，只能人工一个个颜色搬运到工程的 .xcassets 文件中。在辛苦搬运完成后，我们就可以使用脚本读取这些资源并使用它们了。</p>
+<p>至此我们有了语义化的颜色资料库，那么接下来就是识别工程中的存量的硬编码的颜色代码，并进行替换了。虽然先前的问题中提到了硬编码色值的方式多种多样，但事实上这些编码方式总是可以穷举的。既然可以穷举，那我们就可以编写脚本进行批量处理。我们采用的方式是通过遍历源文件，以正则匹配的方式获取到硬编码色值的代码段及其对应的色值。</p>
+<p>当有了颜色资料库、有了工程所用到的颜色，下一步要做的事情已经显而易见了。我们对比两者，将原本的硬编码色值的相关代码替换为语义化的颜色名代码。此外，为了处理一些“边界情况”，我们需要使用 Excel 表格记录下我们的替换结果，让开发人员能够有所凭依地进行开发和检查。</p>
+<p>到这里为止，我们使用脚本适配深色模式的流程就已经基本构思完成，如下流程图所示：</p>
+<pre class="mermaid">graph TB
+A(人工导入语义化颜色资源) ---> B[脚本读取.xcassets中的颜色资源]
+B -- 输出 --> C1(颜色代码)
+B ---> D{使用色值进行比对}
+D --色值不同--> D1(输出 error.xml)
+E(穷举颜色编码方式) ---> F[识别、解析存量的硬编码颜色]
+F ---> D
+D --色值相同--> G[替换硬编码颜色为语义化颜色]
+G -- 输出 --> H[工程源码替换]
+G -- 输出 --> H1(记录success.xml)
+H ---> I(替换完成，结束)</pre>
+<h3 id="实施-2"><a class="markdownIt-Anchor" href="#实施-2"></a> 实施</h3>
+<p>接下来我们简单介绍一下具体的实践方式。</p>
+<p>iOS 使用 .xcassets 的方式储存颜色资源，配置好的颜色资源如下图所示：</p>
+<p><img src="../images/4f2f3449d38be5692bf965de75e11c9e.png" alt="%E9%A2%9C%E8%89%B2%E8%B5%84%E6%BA%90%E5%BA%93.png" /></p>
+<p>这一个个颜色资源本质上是<code>Contents.json</code>文件：</p>
+<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;colors&quot; : [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;color&quot; : &#123;</span><br><span class="line">        &quot;color-space&quot; : &quot;srgb&quot;,</span><br><span class="line">        &quot;components&quot; : &#123;</span><br><span class="line">          &quot;alpha&quot; : &quot;1.000&quot;,</span><br><span class="line">          &quot;blue&quot; : &quot;0x89&quot;,</span><br><span class="line">          &quot;green&quot; : &quot;0x66&quot;,</span><br><span class="line">          &quot;red&quot; : &quot;0x00&quot;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;idiom&quot; : &quot;universal&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;appearances&quot; : [</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;appearance&quot; : &quot;luminosity&quot;,</span><br><span class="line">          &quot;value&quot; : &quot;dark&quot;</span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      &quot;color&quot; : &#123;</span><br><span class="line">        &quot;color-space&quot; : &quot;srgb&quot;,</span><br><span class="line">        &quot;components&quot; : &#123;</span><br><span class="line">          &quot;alpha&quot; : &quot;1.000&quot;,</span><br><span class="line">          &quot;blue&quot; : &quot;0x77&quot;,</span><br><span class="line">          &quot;green&quot; : &quot;0x59&quot;,</span><br><span class="line">          &quot;red&quot; : &quot;0x02&quot;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;idiom&quot; : &quot;universal&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  &quot;info&quot; : &#123;</span><br><span class="line">    &quot;author&quot; : &quot;xcode&quot;,</span><br><span class="line">    &quot;version&quot; : 1</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过解析 json 中的<code>components</code>我们可以得到颜色名和色值的对应关系。需要注意的是，<code>components</code>中的色值可能存在不同的写法，这与xcassets文件中颜色的 <code>Input Method</code>有关。</p>
+<p>在读取完语义化颜色后，我们会把这些资源输出为一个单独的模块。在这一步我们使用了一些模板代码，将解析到的语义化颜色名及其色值按照 swift 规范整理成我们需要的方法及其注释，如下所示，以便在业务代码中引用。</p>
+<p>这些颜色读取的脚本和模板代码应该单独抽离出来或生成一个可执行文件，为后续项目的开发新增颜色创造便利条件。</p>
+<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">@objc public class VSColor: NSObject &#123;&#125;</span><br><span class="line">/// 语义化颜色</span><br><span class="line">public extension VSColor &#123;</span><br><span class="line">    // MARK: - Auxiliary</span><br><span class="line">    /// Light - 006689, 1.00</span><br><span class="line">    /// Dark - 025977, 1.00</span><br><span class="line">    @objc static func auxiliary_blue() -&gt; UIColor &#123;</span><br><span class="line">        return color(named: &quot;auxiliary_blue&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    /// Light - 64EDC2, 1.00</span><br><span class="line">    /// Dark - 57CBA7, 1.00</span><br><span class="line">    @objc static func auxiliary_brilliant_green() -&gt; UIColor &#123;</span><br><span class="line">        return color(named: &quot;auxiliary_brilliant_green&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    // ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>类似地，我们采用脚本读取工程中存量的硬编码颜色。对于各种各样的颜色编码方式，我们只能采用”比较笨”的穷举的方式，找到工程中使用的编码方式，采用字符串分割或者是正则匹配的方式提取到这一段代码块并解析色值，具体问题具体分析。这一步其实就是“玩转字符串”，相信大家一定很熟悉，笔者就不在这里献丑了。</p>
+<p>事实上这一步需要处理的细节会想象中的更多，比如处理 swift、OC 的语法区别（没错，还有 OC 代码）；比如 RGBA 和 HEX 的写法需要区分和解析；比如处理浅色模式的同一个色值在深色模式下可能会有不同的色值，即同一个硬编码色值在不同的业务板块需要替换成不同的语义化颜色。</p>
+<p>此外，我们除了需要记录提取到的代码块的源码、解析到的rgba值之外，还需要额外记录代码的文件位置和行数等有用信息，以便后续进行字符串替换。</p>
+<p>放一个图让大家看看“穷举”到底有多少</p>
+<p><img src="../images/45538b7ee06e8a22f6afe2d2902d7368.png" alt="%E9%A2%9C%E8%89%B2%E7%A9%B7%E4%B8%BE.png" /></p>
+<p>接下来要做的事情就比较简单了，遍历两个数组（硬编码颜色、语义化颜色），使用他们的 rgba 值进行比对，如果硬编码颜色匹配到了对应的语义化的颜色名，则直接在源码中进行文件读写操作，替换为语义化颜色名，同时记录到 Excel 文件中。下面是这个功能的伪代码：</p>
+<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">Read color resources into vscolor_json</span><br><span class="line">Identify and parse hardcoded colors into color_json</span><br><span class="line"></span><br><span class="line">For each sheet in color_json</span><br><span class="line">    For each line in sheet</span><br><span class="line">        If line contains &quot;red value&quot;, &quot;green value&quot;, &quot;blue value&quot;, &quot;alpha value&quot;, and &quot;result&quot; is &quot;correct&quot;</span><br><span class="line">            For each vscolor in vscolor_json</span><br><span class="line">                If line&#x27;s color values match vscolor&#x27;s color values</span><br><span class="line">                    Get file_path, line_number, old_color</span><br><span class="line">                    Determine new_color based on sheet type</span><br><span class="line">                    Print replacement information</span><br><span class="line">                    Replace color code in file</span><br><span class="line">                    Exit loop</span><br><span class="line">          Else</span><br><span class="line">              Continue to next loop</span><br></pre></td></tr></table></figure>
+<p>写到这里，脚本的任务基本就完成了，这些脚本为我们提取并替换颜色，大幅度提高了工作效率，为程序员的头发作出了巨大贡献。</p>
+<h3 id="机器队vs人工队"><a class="markdownIt-Anchor" href="#机器队vs人工队"></a> 机器队VS人工队</h3>
+<p>VeSync App 是使用组件化的方式进行业务开发，在一个组件内的业务代码相对完整，他们的开发者对自己负责过的业务组件更加熟悉，但考虑到实际情况，这些开发者并没有很多时间投入到存量业务的深色模式适配项目中。面对这个问题，我们采用了<strong>脚本替换+人工校对+UI阶段性验收</strong>的方式进行项目开发，具体的开发流程如下</p>
+<pre class="mermaid">sequenceDiagram
+    autonumber
+    participant UI as UI
+    participant Dev as App开发-负责人
+    participant Bus as App开发-业务线
+
+    UI->>Dev: 按模块出设计稿
+    Note right of Dev: 开始开发流程
+    Dev->>Bus: 协调模块对应开发人员
+    Bus->>Dev: 业务线提前告知介入时间
+    Dev->>Dev: 1. 申请Zeplin/Figma权限<br>2. 申请相关开发仓库分支<br>3. 执行颜色替换脚本<br>4. 大致修正颜色
+    Dev->>Bus: 业务线实际介入开发
+    Note right of Bus: 业务线进行校对&开发工作
+    Bus->>Dev: 开发完成，返回开发负责人
+    Dev->>Dev: 代码合并、打包
+    Note right of Dev: 开发完成，准备审查
+    Dev->>UI: 阶段性审查
+    UI->>Dev: UI问题修正
+    Note right of UI: 根据审查结果进行调整
+    Dev->>UI: 最终审查
+    Note right of UI: 确认无误，流程结束</pre>
+<p>对于上图的流程这里再做一些补充说明：</p>
+<ul>
+<li>App 开发-负责人：</li>
+<li>申请分支：负责人会与业务线开发人员沟通，申请对应业务相关的仓库分支</li>
+<li>执行脚本：在申请完分支以后，负责人会执行脚本，替换大部分颜色，保证各页面基本适配</li>
+<li>大致修正颜色：对于一些特殊颜色，开发负责人会在业务线介入之前大致修正白色的使用（根据颜色的使用语境判断）</li>
+<li>App 开发-业务线</li>
+<li>前告知介入时间：在介入的提前两天与负责人沟通</li>
+<li>实际开发：对模块的每个页面逐个核对，修正遗漏掉的颜色等错误展示效果</li>
+</ul>
+<p>按照上面的流程，深色模式的适配对于业务线的开发者来说，只需要如常执行他们的业务流程，指出并修复个别错误展示效果（颜色或图片），而工作量最大的颜色替换部分则由项目负责人使用脚本进行处理。在一个板块的适配完成后，会打包交付 UI、产品阶段性验收，验收完成后，开发再针对提出的 UI 问题进行修改。这样一来，我们就同时保证了开发的效率和准确率。</p>
+<h1 id="尾声"><a class="markdownIt-Anchor" href="#尾声"></a> 尾声</h1>
+<p>在探讨了深色模式的技术细节之后，我们不难发现，尽管其核心概念和实现方法在技术层面上并不复杂，但真正要将深色模式完美融入我们的应用中，却远非易事。对于已经上线并拥有一定用户基础的应用来说，如何在不破坏现有功能和用户体验的前提下，平滑过渡到深色模式，是一个需要精心策划和逐步实施的过程。虽然技术实现本身并不复杂，但要真正做到完美适配，却需要我们投入更多的精力和智慧。在未来，随着用户对个性化和舒适度要求的不断提高，深色模式无疑将成为应用中不可或缺的一部分。我们期待，通过不断的探索和实践，能够为用户带来更加丰富和舒适的使用体验。</p>
+<p>感谢您的阅读，希望本文能够为您提供一些关于深色模式适配的有益见解和启发。如果您有任何疑问或建议，欢迎留言交流。</p>
+]]></content>
+      <categories>
+        <category>Programming</category>
+      </categories>
+      <tags>
+        <tag>iOS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>iOS 横屏适配</title>
     <url>//ipad-adaption/</url>
-    <content><![CDATA[<h1 id="背景前言"><a class="markdownIt-Anchor" href="#背景前言"></a> <strong>背景&amp;前言</strong></h1>
+    <content><![CDATA[<blockquote>
+<p>本文已发表在微信公众号，<a href="https://mp.weixin.qq.com/s/mbZzBNYlzku2vn4ElUspXA">《iPad 适配二三事》</a></p>
+</blockquote>
+<h1 id="背景前言"><a class="markdownIt-Anchor" href="#背景前言"></a> <strong>背景&amp;前言</strong></h1>
 <p>当谈及移动设备的应用程序开发时，iPad是一个备受关注的平台。作为一款功能强大且备受欢迎的设备，iPad是许多人日常生活中不可或缺的工具之一。对于开发者来说，确保他们的应用在iPad上的完美适配是至关重要的。</p>
 <p>然而，大部分公司都会选择优先开发和推广手机端 app 的发展策略，前期不会花费过多精力在iPad 端进行适配，在 app 有了一定体量之后，用户对 iPad 端的体验提出需求之后，才会开始考虑进行 iPad 的适配。这就势必造成 iPad 的适配必须要考虑原有业务代码对适配工作造成的影响——这并不是一个简单的任务。</p>
 <p>在本文中，我们将探讨一些iPad应用适配策略和最佳实践，介绍一些常见的适配问题，并提供解决方案和建议，帮助开发人员克服这些障碍。无论您是一个经验丰富的开发人员还是一个新手，我们相信这篇文章将为您提供有关在iPad上适配应用程序的经验建议和指导。</p>
@@ -525,7 +730,7 @@
 <li>涉及到设备业务的设备主页的业务采用<code>弹出位于屏幕中心的小窗口</code>（下称<strong>中心小窗</strong>）的适配方案。</li>
 </ul>
 <p>这种适配方案实际上是对 3.1 中提及的方案进行了“混搭”，再根据 VeSync 的实际情况进行调整（中心小窗）。方案综合考虑了用户体验和开发周期，在有限的开发时间内保证用户能有良好的使用体验。此外，对于开发者来说，这种方案不需要单独为 iPad 适配编写过多代码，保证了业务代码的纯净。</p>
-<h2 id="弹出的中心小窗"><a class="markdownIt-Anchor" href="#弹出的中心小窗"></a> <strong>“弹出”的中心小窗</strong></h2>
+<h3 id="弹出的中心小窗"><a class="markdownIt-Anchor" href="#弹出的中心小窗"></a> <strong>“弹出”的中心小窗</strong></h3>
 <p><img src="../images/fb2aad38a5e32c0c8f8094b30a0513b1.png" alt="image.png" /></p>
 <p>中心小窗的方案实际效果如图所示，用文字大致描述如下：</p>
 <ol>
@@ -537,7 +742,7 @@
 <p>在弹窗内的页面，获取容器大小的方式也要发生改变。大部分开发者会采用<code>UIScreen.main.bounds</code>的方式获取容器大小，这种方式在此方案下是有局限性的，无法获取到页面真正的大小。我们需要通过定义一个新的变量来获取当前容器的大小（W+H）。</p>
 <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">/// 顶层控制器的宽度</span><br><span class="line">public static var adaptiveScreenW: CGFloat &#123; adaptiveScreenSize.width &#125;</span><br><span class="line">/// 顶层控制器的高度</span><br><span class="line">public static var adaptiveScreenH: CGFloat &#123; adaptiveScreenSize.height &#125;</span><br><span class="line">/// 顶层控制器的尺寸</span><br><span class="line">public static var adaptiveScreenSize: CGSize &#123;</span><br><span class="line">    guard VS.isPad, let window = UIApplication.shared.keyWindow else &#123; return screenSize &#125;</span><br><span class="line">    if let present = window.rootViewController?.presentedViewController, present.preferredContentSize != .zero &#123;</span><br><span class="line">        return present.preferredContentSize</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return window.bounds.size</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>可以看出，<code>adaptiveScreenSize</code>优先获取容器的大小，否则返回屏幕大小。无论是iPhone、iPad 全屏、iPad 中心小窗，通过这种定义方式，设备方的业务代码只需要使用这一套屏幕尺寸变量即可获取正确的容器大小。</p>
-<h2 id="中心小窗带来的变化及问题"><a class="markdownIt-Anchor" href="#中心小窗带来的变化及问题"></a> 中心小窗带来的变化及问题</h2>
+<h3 id="中心小窗带来的变化及问题"><a class="markdownIt-Anchor" href="#中心小窗带来的变化及问题"></a> 中心小窗带来的变化及问题</h3>
 <p>上文已经提到，中心小窗实际上是通过 present 一个封装的<code>UINavigationController</code>实现的，这样的导航管理与 iPhone 端是有区别的——从一个导航栈管理变成两个导航栈管理，这势必导致原有业务代码的导航的更新，具体需要更新的内容包括但不限于：</p>
 <ol>
 <li>原有的<code>popToRoot</code>事件在小窗口内会变成<code>dismiss</code>事件</li>
@@ -567,209 +772,9 @@
       </tags>
   </entry>
   <entry>
-    <title>当我们在谈论DarkMode时我们在谈论什么</title>
-    <url>//ios-darkmode-practice/</url>
-    <content><![CDATA[<h1 id="1-前言"><a class="markdownIt-Anchor" href="#1-前言"></a> 1 前言</h1>
-<p>2024年6月，Apple 在 WWDC2024 发布了iOS18。新版本的 iOS 系统中包含了一项褒贬不一的新特性：把深色模式扩展到了主屏幕的图标，这让已经融入我们生活中的深色模式功能多多少少又秀了一把存在感。</p>
-<p>距离 iOS13 深色模式功能上线已经过去五年了，市面上常见的手机应用绝大部分也适配了深色模式，笔者个人更是对这一功能情有独钟，将其视为 App 中并非最重要，但不可或缺的功能之一。同时作为一个 iOS 开发者，笔者也十分清楚对于一个功能完整，已经运营了一段时间的 App 要适配这一功能需要付出怎么样的努力，这篇文章不只是对深色模式适配的介绍，也是对 VeSync App 完整适配过程的分享。</p>
-<h1 id="2-原理"><a class="markdownIt-Anchor" href="#2-原理"></a> 2 原理</h1>
-<p>在进行适配之前，肯定要先了解Apple 给出的相关API。本篇文章的重点其实并不是介绍这些<a href="https://developer.apple.com/documentation/uikit/appearance_customization/supporting_dark_mode_in_your_interface">官网</a>白纸黑字写清楚的东西，但是出于文章完整性的考虑，这部分内容还是必不可少的。</p>
-<p>注意：下文介绍的内容均默认 App 的最低支持版本为 iOS13，省略了版本判断的相关代码。</p>
-<h2 id="21-api"><a class="markdownIt-Anchor" href="#21-api"></a> 2.1 API</h2>
-<ul>
-<li>UIView 的 overrideUserInterfaceStyle 属性</li>
-</ul>
-<p>获取当前window之后，修改window的overrideUserInterfaceStyle属性，页面的颜色/图标会根据设置的模式同步更新，不需要手动操作。</p>
-<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene, let window = windowScene.windows.first else &#123; return &#125;</span><br><span class="line">// 设置为Light模式</span><br><span class="line">window.overrideUserInterfaceStyle = .light</span><br><span class="line"></span><br><span class="line">public enum UIUserInterfaceStyle : Int &#123;</span><br><span class="line">    // 未指明的</span><br><span class="line">    case unspecified</span><br><span class="line">    // 浅色模式</span><br><span class="line">    case light</span><br><span class="line">    // 深色模式</span><br><span class="line">    case dark</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>获取当前深色模式状态</li>
-</ul>
-<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">/// 在 UIView 中</span><br><span class="line">let mode = self.traitCollection.userInterfaceStyle</span><br><span class="line">/// 不在 UIView 中</span><br><span class="line">let mode = UITraitCollection.current.userInterfaceStyle</span><br></pre></td></tr></table></figure>
-<ul>
-<li>监听深色模式切换</li>
-</ul>
-<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) &#123;</span><br><span class="line">    if UITraitCollection.current.userInterfaceStyle == .dark &#123;</span><br><span class="line">        // Do something</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        // Do something else</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>某个页面单独设置不支持深色模式</li>
-</ul>
-<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">extension ViewController &#123;</span><br><span class="line">    override func viewWillAppear(_ animated: Bool) &#123;</span><br><span class="line">        super.viewWillAppear(animated)</span><br><span class="line">        self.overrideUserInterfaceStyle = .light</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="22-颜色资源支持"><a class="markdownIt-Anchor" href="#22-颜色资源支持"></a> 2.2 颜色资源支持</h2>
-<p>系统提供了一种创建自定义颜色的方法</p>
-<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">// 创建自定义颜色的方法</span><br><span class="line">public init(dynamicProvider: @escaping (UITraitCollection) -&gt; UIColor)</span><br><span class="line"></span><br><span class="line">// 通过当前traitCollection得到对应UIColor</span><br><span class="line">open func resolvedColor(with traitCollection: UITraitCollection) -&gt; UIColor</span><br></pre></td></tr></table></figure>
-<p>或者在assets 中直接添加颜色资源，如下图</p>
-<p><img src="../images/ebde22c5e12faedd53e48809f263135e.png" alt="image.png" /></p>
-<ol>
-<li>修改 Appearance 为 Any,Dark；</li>
-<li>点击选中浅色/深色模式下的颜色；</li>
-<li>编辑色值</li>
-</ol>
-<h2 id="23-图片资源支持"><a class="markdownIt-Anchor" href="#23-图片资源支持"></a> 2.3 图片资源支持</h2>
-<p><img src="../images/f7d32e77d60402793b9bb235245af3f1.png" alt="image.png" /></p>
-<ol>
-<li>修改 Appearance 为 Any,Dark；</li>
-<li>把深色模式的资源拖到对应位置；</li>
-</ol>
-<h2 id="24-其他需要注意的地方"><a class="markdownIt-Anchor" href="#24-其他需要注意的地方"></a> 2.4 其他需要注意的地方</h2>
-<ol>
-<li>CGColor 不支持动态更新颜色，原因是 CoreGraphic 是比 UIKit 更底层的库，动态更新颜色是 UIKit 支持的功能，cgColor 只会使用一开始设置的颜色色值（<code>xxx.cgColor = UIColor.systemBackground.cgColor</code>），并不会跟着系统的外观切换而动态更新色值。</li>
-<li>在iOS系统切换模式之后，会调用<code>layoutSubviews</code>方法，也可以在这个方法里做UI更新</li>
-<li>使用 UIGraphics 绘制的图片，可以分别绘制亮色和暗色的图片，再通过<code>UIImage.imageAsset</code>注册，让其能够自动切换外观</li>
-</ol>
-<h1 id="3-中场休息"><a class="markdownIt-Anchor" href="#3-中场休息"></a> 3 中场休息</h1>
-<p>以上是深色模式相关的所有内容，你已经学会了，现在来试试看吧！</p>
-<p><img src="../images/9041ddd09b96dc19b2e8a7d583488825.jpg" alt="%E7%BC%96%E7%A8%8B%E6%95%B0%E5%AD%A6%E4%B9%A6.jpg" /></p>
-<p>开个玩笑～</p>
-<p>从上面的官方接口说明中看出，深色模式的适配分为图片资源和颜色资源两个板块，如果你的 App 从一开始就使用官方的资源管理方案进行图片和颜色资源的管理，那恭喜你，你们的适配将会非常轻松，你们只需要导出图片和颜色的资源，让设计师在原有资源名字下提供深色模式的图片和颜色，比如XXX_dark，这样我们就可以通过脚本将图片和颜色资源导入资源管理库，即可完成深色模式适配的绝大部分工作。</p>
-<p>实际上，理论与实践总是存在着巨大差异，接下来让我们一起看看 VeSync 在深色模式适配的实践中到底是怎么做的。</p>
-<h1 id="4-图片资源处理"><a class="markdownIt-Anchor" href="#4-图片资源处理"></a> 4 图片资源处理</h1>
-<p>VeSync App的图片资源，绝大多数都是使用的系统资源管理库进行管理，所以我们使用标准的处理方案进行处理即可。</p>
-<h2 id="41-方案"><a class="markdownIt-Anchor" href="#41-方案"></a> 4.1 方案</h2>
-<p>上文已经提过，只要在 assets 中管理的图片资源添加对应的深色模式的图片，系统就会在外观切换的时候自动切换图片的样式。按照VeSync 的图片资源命名规范，一张图片的深色样式是在原有图片名加上”_dark”或者”Dark”后缀，这取决于图片原本的命名方式是下划线还是驼峰，最终效果如：</p>
-<p><img src="../images/8784a15dc04333a200710ab3c27f46d7.png" alt="image.png" /></p>
-<p><img src="../images/146e5d2cbe84855cce342de2b99d021d.png" alt="image.png" /></p>
-<p>但是上面只是理想情况，实际上我们还遇到了下面的问题：</p>
-<ol>
-<li>由于新的 UI 图片采用了统一的命名规范，导致旧版图片无法直接通过文件名匹配批量处理；</li>
-<li>UI 设计师会要求在新增深色样式图片的同时，更新浅色样式的图片；</li>
-<li>早期项目中相同图片被反复添加，形成了冗余资源，这些重复图片需要去重处理。</li>
-</ol>
-<p>以上这些问题我们都使用了脚本进行辅助处理。</p>
-<h2 id="42-实施"><a class="markdownIt-Anchor" href="#42-实施"></a> 4.2 实施</h2>
-<p>辅助脚本的整个流程基于图片相似度计算、脚本自动化处理与人工补充相结合。每一步的中间结果（如未匹配图片、重复图片等）都会生成 Excel 文件，以便人工确认和后续处理。</p>
-<p>因为 App 的图片资源已经抽离在系统文件资源库中，对图片资源的更新不会影响到业务代码，所以这一部分工作由专人负责，负责整个 App 的所有图片的补充、替换、去重工作。工作流的大致流程图下图所示：</p>
-<p>我帮您检查了全文，发现以下需要注意的地方：</p>
-<pre class="mermaid">graph TB
-A[自动匹配与配置更新] ---> B[人工补充未匹配图片]
-B ---> C[扫描查找重复图片]
-C ---> D[删除重复图片并更新项目引用]</pre>
-<ol>
-<li>
-<p>图片相似度匹配</p>
-<p>使用脚本计算浅色模式图片的相似度，找到与暗色模式图片匹配的目标路径。将匹配成功的暗黑模式图片复制到目标文件夹，同时修改目标文件夹中的 Contents.json，为每张图片添加暗色模式配置。</p>
-<p>这一步完成之后，大部分浅色模式图片能够匹配到对应的暗黑模式图片并完成更新。（因尺寸、色彩空间、内容轻微差异等问题）未匹配到的图片会被记录到一个 Excel 文件中，供后续人工处理。</p>
-<p>注：这一步使用 OpenCV 提供的模板匹配（Template Matching）方法进行图像相似度计算以建立新旧图片之间的关系。</p>
-</li>
-<li>
-<p>人工补充未匹配图片目标，补充第一步中未能自动匹配的图片。</p>
-<p>在第一步生成的 Excel 表格人工填写未匹配图片对应的暗黑模式图片路径，将补充完成的表格作为输入，使用脚本批量将这些图片添加到目标路径，并更新 Contents.json，为所有浅色模式图片都具备对应的暗黑模式版本。</p>
-</li>
-<li>
-<p>扫描查找重复图片，清理项目中存在的重复图片。</p>
-<p>使用脚本扫描项目文件，定位所有重复的暗黑模式图片。将重复的图片记录到一个 Excel 文件中，供后续人工校对。</p>
-</li>
-<li>
-<p>删除重复图片并更新项目中引用的图片名称。</p>
-<p>人工校对第三步生成的重复图片 Excel 表格，确认需要删除的图片。此后遍历项目中所有代码源文件，查找并替换引用的旧图片路径为新图片的路径。</p>
-</li>
-</ol>
-<h2 id="43-其他图片资源"><a class="markdownIt-Anchor" href="#43-其他图片资源"></a> 4.3 其他图片资源</h2>
-<p>除了 assets 中的图片资源，我们还有两种资源：</p>
-<ol>
-<li>本地图片资源：一些使用不规范的图片资源没有使用 assets 管理，而是直接把资源添加到工程文件夹目录，导致了这些资源无法根据系统外观自动切换。一种处理方案是在资源使用处手动添加两个版本的图片资源使其自动切换（<code>UIImage.imageAsset</code>的方式），更优的方案是将这些资源迁移到 assets 中统一管理。</li>
-<li>网络图片资源：对于 url 资源，我们无法做到动态切换。这常见于一些用户自定义的图片、头像等，也有一些配置化的资源需要存在云端，在使用的时候才会拉取下来进行展示。对于这种情况，在我们与设计团队进行沟通之后，决定对于这些资源进行统一化处理，即在深色模式和浅色模式下都用同一张图片资源，这样就免去了动态切换的麻烦。在进行统一化处理的时候，需要注意图片的背景颜色、图片透明度的问题，同时如果需要在不同外观下具有不同的背景色，则背景色应该交由 App 进行绘制，再将图片叠加其上。</li>
-</ol>
-<p>此外，除了单纯的图片资源，我们还有动画资源。</p>
-<ol>
-<li>JSON 动画资源：目前我们团队采用的动画方案是 Lottie + JSON，显而易见地，这种方案并不支持在系统层面上根据外观自动切换。我们采用的方案是手动监听系统的外观模式切换，根据系统的外观更新对应的 JSON 以达成动画的深色模式或浅色模式更新。在处理一些与当前状态相关的动画效果的时候，需要注意动画切换时的流畅性。</li>
-<li>GIF 动画资源：在一些老旧的业务代码中还存留着 GIF 动画资源。与 JSON 动画类似，我们需要监听系统的外观切换，手动更新动画。</li>
-</ol>
-<h1 id="5-颜色资源处理"><a class="markdownIt-Anchor" href="#5-颜色资源处理"></a> 5 颜色资源处理</h1>
-<p>根据官方指南，相较于以前的硬编码颜色色值的使用方式，支持深色模式的资源更适合使用语义化的名称，根据颜色的使用场景为其命名，配置好的颜色资源会自动适应当前的 App 外观。</p>
-<p>在支持深色模式的场景下，颜色应该使用“颜色的场景名称”而不是“颜色的色值”。在这种定义推动下，我们“只需要”工程里用到的所有的颜色色值替换成语义化颜色名即可。</p>
-<p>对于一个持续运营迭代了好几年的 App，这样子的颜色色值替换可不是简单的工作。在一个体量并不小的工程中，找出所有的颜色色值并替换会遇到下面这些问题：</p>
-<ol>
-<li>Swift/OC创建颜色的方法有很多种，对于这些五花八门的颜色使用方式，我们要怎么找到它们然后再一一替换成需要的资源？</li>
-<li>对于海量的颜色色值，我们势必采用批量处理的方式进行替换，如果仅使用 IDE 的 Find-Replace 方式进行替换效率太低，要如何提升效率并保证准确率？</li>
-<li>对于各种各样的业务及所用到的颜色色值，要怎么定义它们的一一对应关系？换句话说，原本的么处理？</li>
-<li>对于 VeSync 来说，业务形态决定了某一些板块会相对独立，在开发者对某一模块并不熟悉的情况下要怎么进行这一部分的适配工作？</li>
-</ol>
-<p>显然，量变产生质变，要人工逐个替换已经是不可能完成的工作了，通过<code>脚本</code>进行颜色替换就是自然而然选择了。以下就介绍一下颜色处理的方案和实践流程。</p>
-<h3 id="51-方案"><a class="markdownIt-Anchor" href="#51-方案"></a> 5.1 方案</h3>
-<p>在脚本替换之前，我们需要先建立我们的颜色资源库。</p>
-<p>根据官方指南， 我们需要一个语义化的颜色资源库。这一部分工作由设计部门完成，他们需要为 App 内所用到的所有颜色色值增加对应深色模式的颜色色值，并为其命名，形成一套完整的语义化颜色资源。</p>
-<p>在拿到语义化的颜色资源后，我们要将这些颜色资源导入到工程中。由于涉及到跨部门、跨工具的合作（Zeplin/Figma、Xcode/VSCode），这一部分并没办法用脚本处理，只能人工一个个颜色搬运到工程的 .xcassets 文件中。在辛苦搬运完成后，我们就可以使用脚本读取这些资源并使用它们了。</p>
-<p>至此我们有了语义化的颜色资料库，那么接下来就是识别工程中的存量的硬编码的颜色代码，并进行替换了。虽然先前的问题中提到了硬编码色值的方式多种多样，但事实上这些编码方式总是可以穷举的。既然可以穷举，那我们就可以编写脚本进行批量处理。我们采用的方式是通过遍历源文件，以正则匹配的方式获取到硬编码色值的代码段及其对应的色值。</p>
-<p>当有了颜色资料库、有了工程所用到的颜色，下一步要做的事情已经显而易见了。我们对比两者，将原本的硬编码色值的相关代码替换为语义化的颜色名代码。此外，为了处理一些“边界情况”，我们需要使用 Excel 表格记录下我们的替换结果，让开发人员能够有所凭依地进行开发和检查。</p>
-<p>到这里为止，我们使用脚本适配深色模式的流程就已经基本构思完成，如下流程图所示：</p>
-<pre class="mermaid">graph TB
-A(人工导入语义化颜色资源) ---> B[脚本读取.xcassets中的颜色资源]
-B -- 输出 --> C1(颜色代码)
-B ---> D{使用色值进行比对}
-D --色值不同--> D1(输出 error.xml)
-E(穷举颜色编码方式) ---> F[识别、解析存量的硬编码颜色]
-F ---> D
-D --色值相同--> G[替换硬编码颜色为语义化颜色]
-G -- 输出 --> H[工程源码替换]
-G -- 输出 --> H1(记录success.xml)
-H ---> I(替换完成，结束)</pre>
-<h3 id="52-实施"><a class="markdownIt-Anchor" href="#52-实施"></a> 5.2 实施</h3>
-<p>接下来我们简单介绍一下具体的实践方式。</p>
-<p>iOS 使用 .xcassets 的方式储存颜色资源，配置好的颜色资源如下图所示：</p>
-<p><img src="../images/4f2f3449d38be5692bf965de75e11c9e.png" alt="%E9%A2%9C%E8%89%B2%E8%B5%84%E6%BA%90%E5%BA%93.png" /></p>
-<p>这一个个颜色资源本质上是<code>Contents.json</code>文件：</p>
-<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;colors&quot; : [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;color&quot; : &#123;</span><br><span class="line">        &quot;color-space&quot; : &quot;srgb&quot;,</span><br><span class="line">        &quot;components&quot; : &#123;</span><br><span class="line">          &quot;alpha&quot; : &quot;1.000&quot;,</span><br><span class="line">          &quot;blue&quot; : &quot;0x89&quot;,</span><br><span class="line">          &quot;green&quot; : &quot;0x66&quot;,</span><br><span class="line">          &quot;red&quot; : &quot;0x00&quot;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;idiom&quot; : &quot;universal&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;appearances&quot; : [</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;appearance&quot; : &quot;luminosity&quot;,</span><br><span class="line">          &quot;value&quot; : &quot;dark&quot;</span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      &quot;color&quot; : &#123;</span><br><span class="line">        &quot;color-space&quot; : &quot;srgb&quot;,</span><br><span class="line">        &quot;components&quot; : &#123;</span><br><span class="line">          &quot;alpha&quot; : &quot;1.000&quot;,</span><br><span class="line">          &quot;blue&quot; : &quot;0x77&quot;,</span><br><span class="line">          &quot;green&quot; : &quot;0x59&quot;,</span><br><span class="line">          &quot;red&quot; : &quot;0x02&quot;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;idiom&quot; : &quot;universal&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  &quot;info&quot; : &#123;</span><br><span class="line">    &quot;author&quot; : &quot;xcode&quot;,</span><br><span class="line">    &quot;version&quot; : 1</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>通过解析 json 中的<code>components</code>我们可以得到颜色名和色值的对应关系。需要注意的是，<code>components</code>中的色值可能存在不同的写法，这与xcassets文件中颜色的 <code>Input Method</code>有关。</p>
-<p>在读取完语义化颜色后，我们会把这些资源输出为一个单独的模块。在这一步我们使用了一些模板代码，将解析到的语义化颜色名及其色值按照 swift 规范整理成我们需要的方法及其注释，如下所示，以便在业务代码中引用。</p>
-<p>这些颜色读取的脚本和模板代码应该单独抽离出来或生成一个可执行文件，为后续项目的开发新增颜色创造便利条件。</p>
-<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">@objc public class VSColor: NSObject &#123;&#125;</span><br><span class="line">/// 语义化颜色</span><br><span class="line">public extension VSColor &#123;</span><br><span class="line">    // MARK: - Auxiliary</span><br><span class="line">    /// Light - 006689, 1.00</span><br><span class="line">    /// Dark - 025977, 1.00</span><br><span class="line">    @objc static func auxiliary_blue() -&gt; UIColor &#123;</span><br><span class="line">        return color(named: &quot;auxiliary_blue&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    /// Light - 64EDC2, 1.00</span><br><span class="line">    /// Dark - 57CBA7, 1.00</span><br><span class="line">    @objc static func auxiliary_brilliant_green() -&gt; UIColor &#123;</span><br><span class="line">        return color(named: &quot;auxiliary_brilliant_green&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    // ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>类似地，我们采用脚本读取工程中存量的硬编码颜色。对于各种各样的颜色编码方式，我们只能采用”比较笨”的穷举的方式，找到工程中使用的编码方式，采用字符串分割或者是正则匹配的方式提取到这一段代码块并解析色值，具体问题具体分析。这一步其实就是“玩转字符串”，相信大家一定很熟悉，笔者就不在这里献丑了。</p>
-<p>事实上这一步需要处理的细节会想象中的更多，比如处理 swift、OC 的语法区别（没错，还有 OC 代码）；比如 RGBA 和 HEX 的写法需要区分和解析；比如处理浅色模式的同一个色值在深色模式下可能会有不同的色值，即同一个硬编码色值在不同的业务板块需要替换成不同的语义化颜色。</p>
-<p>此外，我们除了需要记录提取到的代码块的源码、解析到的rgba值之外，还需要额外记录代码的文件位置和行数等有用信息，以便后续进行字符串替换。</p>
-<p>放一个图让大家看看“穷举”到底有多少</p>
-<p><img src="../images/45538b7ee06e8a22f6afe2d2902d7368.png" alt="%E9%A2%9C%E8%89%B2%E7%A9%B7%E4%B8%BE.png" /></p>
-<p>接下来要做的事情就比较简单了，遍历两个数组（硬编码颜色、语义化颜色），使用他们的 rgba 值进行比对，如果硬编码颜色匹配到了对应的语义化的颜色名，则直接在源码中进行文件读写操作，替换为语义化颜色名，同时记录到 Excel 文件中。下面是这个功能的伪代码：</p>
-<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">Read color resources into vscolor_json</span><br><span class="line">Identify and parse hardcoded colors into color_json</span><br><span class="line"></span><br><span class="line">For each sheet in color_json</span><br><span class="line">    For each line in sheet</span><br><span class="line">        If line contains &quot;red value&quot;, &quot;green value&quot;, &quot;blue value&quot;, &quot;alpha value&quot;, and &quot;result&quot; is &quot;correct&quot;</span><br><span class="line">            For each vscolor in vscolor_json</span><br><span class="line">                If line&#x27;s color values match vscolor&#x27;s color values</span><br><span class="line">                    Get file_path, line_number, old_color</span><br><span class="line">                    Determine new_color based on sheet type</span><br><span class="line">                    Print replacement information</span><br><span class="line">                    Replace color code in file</span><br><span class="line">                    Exit loop</span><br><span class="line">          Else</span><br><span class="line">              Continue to next loop</span><br></pre></td></tr></table></figure>
-<p>写到这里，脚本的任务基本就完成了，这些脚本为我们提取并替换颜色，大幅度提高了工作效率，为程序员的头发作出了巨大贡献。</p>
-<h3 id="53-机器队vs人工队"><a class="markdownIt-Anchor" href="#53-机器队vs人工队"></a> 5.3 机器队VS人工队</h3>
-<p>VeSync App 是使用组件化的方式进行业务开发，在一个组件内的业务代码相对完整，他们的开发者对自己负责过的业务组件更加熟悉，但考虑到实际情况，这些开发者并没有很多时间投入到存量业务的深色模式适配项目中。面对这个问题，我们采用了<strong>脚本替换+人工校对+UI阶段性验收</strong>的方式进行项目开发，具体的开发流程如下</p>
-<pre class="mermaid">sequenceDiagram
-    autonumber
-    participant UI as UI
-    participant Dev as App开发-负责人
-    participant Bus as App开发-业务线
-
-    UI->>Dev: 按模块出设计稿
-    Note right of Dev: 开始开发流程
-    Dev->>Bus: 协调模块对应开发人员
-    Bus->>Dev: 业务线提前告知介入时间
-    Dev->>Dev: 1. 申请Zeplin/Figma权限<br>2. 申请相关开发仓库分支<br>3. 执行颜色替换脚本<br>4. 大致修正颜色
-    Dev->>Bus: 业务线实际介入开发
-    Note right of Bus: 业务线进行校对&开发工作
-    Bus->>Dev: 开发完成，返回开发负责人
-    Dev->>Dev: 代码合并、打包
-    Note right of Dev: 开发完成，准备审查
-    Dev->>UI: 阶段性审查
-    UI->>Dev: UI问题修正
-    Note right of UI: 根据审查结果进行调整
-    Dev->>UI: 最终审查
-    Note right of UI: 确认无误，流程结束</pre>
-<p>对于上图的流程这里再做一些补充说明：</p>
-<ul>
-<li>App 开发-负责人：</li>
-<li>申请分支：负责人会与业务线开发人员沟通，申请对应业务相关的仓库分支</li>
-<li>执行脚本：在申请完分支以后，负责人会执行脚本，替换大部分颜色，保证各页面基本适配</li>
-<li>大致修正颜色：对于一些特殊颜色，开发负责人会在业务线介入之前大致修正白色的使用（根据颜色的使用语境判断）</li>
-<li>App 开发-业务线</li>
-<li>前告知介入时间：在介入的提前两天与负责人沟通</li>
-<li>实际开发：对模块的每个页面逐个核对，修正遗漏掉的颜色等错误展示效果</li>
-</ul>
-<p>按照上面的流程，深色模式的适配对于业务线的开发者来说，只需要如常执行他们的业务流程，指出并修复个别错误展示效果（颜色或图片），而工作量最大的颜色替换部分则由项目负责人使用脚本进行处理。在一个板块的适配完成后，会打包交付 UI、产品阶段性验收，验收完成后，开发再针对提出的 UI 问题进行修改。这样一来，我们就同时保证了开发的效率和准确率。</p>
-<h1 id="6-尾声"><a class="markdownIt-Anchor" href="#6-尾声"></a> 6 尾声</h1>
-<p>在探讨了深色模式的技术细节之后，我们不难发现，尽管其核心概念和实现方法在技术层面上并不复杂，但真正要将深色模式完美融入我们的应用中，却远非易事。对于已经上线并拥有一定用户基础的应用来说，如何在不破坏现有功能和用户体验的前提下，平滑过渡到深色模式，是一个需要精心策划和逐步实施的过程。虽然技术实现本身并不复杂，但要真正做到完美适配，却需要我们投入更多的精力和智慧。在未来，随着用户对个性化和舒适度要求的不断提高，深色模式无疑将成为应用中不可或缺的一部分。我们期待，通过不断的探索和实践，能够为用户带来更加丰富和舒适的使用体验。</p>
-<p>感谢您的阅读，希望本文能够为您提供一些关于深色模式适配的有益见解和启发。如果您有任何疑问或建议，欢迎留言交流。</p>
-]]></content>
-      <categories>
-        <category>Programming</category>
-      </categories>
-      <tags>
-        <tag>iOS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>普通心理学（一）</title>
-    <url>//general-psychology-1/</url>
-    <content><![CDATA[<h1 id="普通心理学"><a class="markdownIt-Anchor" href="#普通心理学"></a> <strong>普通心理学</strong></h1>
-<blockquote>
+    <title>普通心理学</title>
+    <url>//general-psychology/</url>
+    <content><![CDATA[<blockquote>
 <p>source: BV1Fy4y1i79C</p>
 <p>参考教材</p>
 <p>《普通心理学》第4版 彭聃龄，北京师范大学出版社</p>
@@ -780,11 +785,12 @@ H ---> I(替换完成，结束)</pre>
 <p>《改变心理学的40项研究》 白学军，中国轻工业出版社</p>
 <p>《登天的感觉》——以案例的方式讲心理咨询</p>
 </blockquote>
-<h2 id="心理学的研究对象-方法"><a class="markdownIt-Anchor" href="#心理学的研究对象-方法"></a> <strong>心理学的研究对象、方法</strong></h2>
+<h1 id="心理学的研究对象-方法"><a class="markdownIt-Anchor" href="#心理学的研究对象-方法"></a> <strong>心理学的研究对象、方法</strong></h1>
 <ul>
 <li>心理学研究什么？心理现象 + 行为</li>
 <li>心理学更多从个体角度研究心理（个体心理）</li>
 </ul>
+<h2 id="心理学的研究对象和目标"><a class="markdownIt-Anchor" href="#心理学的研究对象和目标"></a> 心理学的研究对象和目标</h2>
 <h3 id="心理现象"><a class="markdownIt-Anchor" href="#心理现象"></a> <strong>心理现象</strong></h3>
 <blockquote>
 <p>人脑对现实生活的主观反应</p>
@@ -846,20 +852,19 @@ H ---> I(替换完成，结束)</pre>
 </ul>
 </li>
 </ul>
-<h3 id="现代心理学的门类"><a class="markdownIt-Anchor" href="#现代心理学的门类"></a> <strong>现代心理学的门类</strong></h3>
-<ul>
-<li>理论心理学：发展*，学习*，认知*，人格*，社会*，变态*，生理*，实验*，比较*（动物*）等</li>
-<li>应用心理学：教育*，咨询*，临床*，犯罪*，工业*（包括管理*，工程*），医学*，广告*，健康*，心理测量学等</li>
-</ul>
-<h3 id="心理学研究的目标"><a class="markdownIt-Anchor" href="#心理学研究的目标"></a> <strong>心理学研究的目标</strong></h3>
+<h3 id="研究目标"><a class="markdownIt-Anchor" href="#研究目标"></a> <strong>研究目标</strong></h3>
 <ul>
 <li>描述：描述这种现象是什么</li>
 <li>解释：为什么会出现这种现象</li>
 <li>预测：做出预测</li>
 <li>控制：控制心理和行为</li>
 </ul>
-<h3 id="心理学的应用"><a class="markdownIt-Anchor" href="#心理学的应用"></a> <strong>心理学的应用</strong></h3>
-<h3 id="心理学的研究方法"><a class="markdownIt-Anchor" href="#心理学的研究方法"></a> <strong>心理学的研究方法</strong></h3>
+<h3 id="现代心理学的门类"><a class="markdownIt-Anchor" href="#现代心理学的门类"></a> <strong>现代心理学的门类</strong></h3>
+<ul>
+<li>理论心理学：发展*，学习*，认知*，人格*，社会*，变态*，生理*，实验*，比较*（动物*）等</li>
+<li>应用心理学：教育*，咨询*，临床*，犯罪*，工业*（包括管理*，工程*），医学*，广告*，健康*，心理测量学等</li>
+</ul>
+<h2 id="心理学的研究方法"><a class="markdownIt-Anchor" href="#心理学的研究方法"></a> <strong>心理学的研究方法</strong></h2>
 <blockquote>
 <p>原则：客观、实事求是</p>
 </blockquote>
@@ -1002,8 +1007,8 @@ H ---> I(替换完成，结束)</pre>
 </ul>
 </li>
 </ul>
-<h2 id="心理的神经生理基础"><a class="markdownIt-Anchor" href="#心理的神经生理基础"></a> <strong>心理的神经生理基础</strong></h2>
-<h3 id="神经系统的进化"><a class="markdownIt-Anchor" href="#神经系统的进化"></a> <strong>神经系统的进化</strong></h3>
+<h1 id="心理的神经生理基础"><a class="markdownIt-Anchor" href="#心理的神经生理基础"></a> <strong>心理的神经生理基础</strong></h1>
+<h2 id="神经系统的进化"><a class="markdownIt-Anchor" href="#神经系统的进化"></a> <strong>神经系统的进化</strong></h2>
 <blockquote>
 <p>脑是心理的器官，心理是人脑的功能（心理是脑对客观现实主观能动的反应）</p>
 <p>心理是神经系统发展到一定阶段的产物，神经系统越进化，心理和行为越复杂，越高级</p>
@@ -1021,7 +1026,7 @@ H ---> I(替换完成，结束)</pre>
 </ul>
 </li>
 </ul>
-<h3 id="神经系统的结构和功能"><a class="markdownIt-Anchor" href="#神经系统的结构和功能"></a> <strong>神经系统的结构和功能</strong></h3>
+<h2 id="神经系统的结构和功能"><a class="markdownIt-Anchor" href="#神经系统的结构和功能"></a> <strong>神经系统的结构和功能</strong></h2>
 <ul>
 <li>神经元</li>
 <li>中枢神经系统：脑和脊髓内的全部神经系统，加工整合信息，整合和调谐全身的功能
@@ -1053,9 +1058,10 @@ H ---> I(替换完成，结束)</pre>
 </li>
 <li>周围神经系统</li>
 </ul>
-<h3 id="脑的可塑性"><a class="markdownIt-Anchor" href="#脑的可塑性"></a> <strong>脑的可塑性</strong></h3>
+<h2 id="脑的可塑性-脑功能学说"><a class="markdownIt-Anchor" href="#脑的可塑性-脑功能学说"></a> <strong>脑的可塑性 / 脑功能学说</strong></h2>
+<blockquote>
 <p>在后天经验的作用下，脑的结构和功能等方面会发生一定程度的变化</p>
-<h3 id="脑功能学说"><a class="markdownIt-Anchor" href="#脑功能学说"></a> <strong>脑功能学说</strong></h3>
+</blockquote>
 <ul>
 <li>定位说：来源于颅相说，由颅骨的形状推知某种心理能力</li>
 <li>整体说：脑的功能是由整体负责</li>
@@ -1078,27 +1084,8 @@ H ---> I(替换完成，结束)</pre>
 </ul>
 </li>
 </ul>
-<h2 id="感觉"><a class="markdownIt-Anchor" href="#感觉"></a> <strong>感觉</strong></h2>
-<blockquote>
-<p>人脑对直接作用于感觉器官的事物的个别属性的认识</p>
-</blockquote>
-<ul>
-<li>感觉的意义：提供了内外环境的信息，保持了机体与环境的信息平衡</li>
-<li>差别感觉阈限与差别感受性
-<ul>
-<li>韦伯定律</li>
-<li>对数定律：感觉的大小是刺激强度的对数函数</li>
-<li>幂定律：数量估计法</li>
-</ul>
-</li>
-</ul>
-<p>略</p>
-<h2 id="视觉"><a class="markdownIt-Anchor" href="#视觉"></a> <strong>视觉</strong></h2>
-<p>略</p>
-<h2 id="知觉"><a class="markdownIt-Anchor" href="#知觉"></a> <strong>知觉</strong></h2>
-<p>略</p>
-<h2 id="思维"><a class="markdownIt-Anchor" href="#思维"></a> <strong>思维</strong></h2>
-<h3 id="思维的一般概念"><a class="markdownIt-Anchor" href="#思维的一般概念"></a> <strong>思维的一般概念</strong></h3>
+<h1 id="思维"><a class="markdownIt-Anchor" href="#思维"></a> <strong>思维</strong></h1>
+<h2 id="思维的一般概念"><a class="markdownIt-Anchor" href="#思维的一般概念"></a> <strong>思维的一般概念</strong></h2>
 <ul>
 <li>含义
 <ul>
@@ -1136,7 +1123,7 @@ H ---> I(替换完成，结束)</pre>
 </ul>
 </li>
 </ul>
-<h3 id="表象与想象"><a class="markdownIt-Anchor" href="#表象与想象"></a> <strong>表象与想象</strong></h3>
+<h2 id="表象与想象"><a class="markdownIt-Anchor" href="#表象与想象"></a> <strong>表象与想象</strong></h2>
 <ul>
 <li>表象
 <ul>
@@ -1176,7 +1163,7 @@ H ---> I(替换完成，结束)</pre>
 </ul>
 </li>
 </ul>
-<h3 id="概念与推理"><a class="markdownIt-Anchor" href="#概念与推理"></a> <strong>概念与推理</strong></h3>
+<h2 id="概念与推理"><a class="markdownIt-Anchor" href="#概念与推理"></a> <strong>概念与推理</strong></h2>
 <ul>
 <li>概念
 <ul>
@@ -1217,18 +1204,7 @@ H ---> I(替换完成，结束)</pre>
 </ul>
 </li>
 </ul>
-]]></content>
-      <categories>
-        <category>Humanities</category>
-      </categories>
-      <tags>
-        <tag>Psychology</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>普通心理学（二）</title>
-    <url>//general-psychology-2/</url>
-    <content><![CDATA[<h1 id="普通心理学"><a class="markdownIt-Anchor" href="#普通心理学"></a> <strong>普通心理学</strong></h1>
+<h1 id="情绪的调节"><a class="markdownIt-Anchor" href="#情绪的调节"></a> <strong>情绪的调节</strong></h1>
 <h2 id="情绪和情感"><a class="markdownIt-Anchor" href="#情绪和情感"></a> <strong>情绪和情感</strong></h2>
 <h3 id="概述"><a class="markdownIt-Anchor" href="#概述"></a> <strong>概述</strong></h3>
 <ul>
@@ -1510,9 +1486,6 @@ H ---> I(替换完成，结束)</pre>
 </li>
 </ul>
 </li>
-</ul>
-<h2 id="情绪的调节"><a class="markdownIt-Anchor" href="#情绪的调节"></a> <strong>情绪的调节</strong></h2>
-<ul>
 <li>情绪智力：体现一个人情绪调节能力的高低
 <ul>
 <li>1993年定义：区分自己和他人情绪的能力；调节自己和他人情绪的能力；运用情绪信息引导情绪的能力</li>
@@ -1546,9 +1519,8 @@ H ---> I(替换完成，结束)</pre>
 </ul>
 </li>
 </ul>
-<h2 id="能力"><a class="markdownIt-Anchor" href="#能力"></a> <strong>能力</strong></h2>
-<h2 id="人格"><a class="markdownIt-Anchor" href="#人格"></a> <strong>人格</strong></h2>
-<h3 id="人格的概念"><a class="markdownIt-Anchor" href="#人格的概念"></a> <strong>人格的概念</strong></h3>
+<h1 id="人格"><a class="markdownIt-Anchor" href="#人格"></a> <strong>人格</strong></h1>
+<h2 id="人格的概念"><a class="markdownIt-Anchor" href="#人格的概念"></a> <strong>人格的概念</strong></h2>
 <ul>
 <li>概念
 <ul>
