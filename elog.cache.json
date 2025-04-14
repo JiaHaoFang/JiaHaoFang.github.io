@@ -134,9 +134,69 @@
       "realName": "普通心理学",
       "relativePath": "/普通心理学.md",
       "docPath": "./source/_posts"
+    },
+    {
+      "id": "1c924191-cd14-808b-80fb-fd09948fb231",
+      "doc_id": "1c924191-cd14-808b-80fb-fd09948fb231",
+      "updated": 1744634400000,
+      "properties": {
+        "categories": "Humanities",
+        "tags": [
+          "Psychology"
+        ],
+        "status": "已发布",
+        "description": "《社会心理学》第一编 社会思维",
+        "日期": "",
+        "permalink": "social-phychology_social_thinking/",
+        "title": "社会心理学（一）社会思维",
+        "urlname": "1c924191-cd14-808b-80fb-fd09948fb231",
+        "date": "2025-04-02 19:34:00",
+        "updated": "2025-04-14 20:40:00"
+      },
+      "realName": "社会心理学（一）社会思维",
+      "relativePath": "/社会心理学（一）社会思维.md",
+      "docPath": "./source/_posts"
     }
   ],
   "catalog": [
+    {
+      "object": "page",
+      "id": "1c924191-cd14-808b-80fb-fd09948fb231",
+      "created_time": "2025-04-02T11:34:00.000Z",
+      "last_edited_time": "2025-04-14T12:40:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "f9e52dea-3218-4b01-ab60-006834c17e09"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "f9e52dea-3218-4b01-ab60-006834c17e09"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "1c724191-cd14-809d-a910-fde6198cd7de"
+      },
+      "archived": false,
+      "in_trash": false,
+      "properties": {
+        "categories": "Humanities",
+        "tags": [
+          "Psychology"
+        ],
+        "status": "已发布",
+        "description": "《社会心理学》第一编 社会思维",
+        "日期": "",
+        "permalink": "social-phychology_social_thinking/",
+        "title": "社会心理学（一）社会思维",
+        "urlname": "1c924191-cd14-808b-80fb-fd09948fb231",
+        "date": "2025-04-02 19:34:00",
+        "updated": "2025-04-14 20:40:00"
+      },
+      "url": "https://www.notion.so/1c924191cd14808b80fbfd09948fb231",
+      "public_url": "https://excellent-moonstone-c91.notion.site/1c924191cd14808b80fbfd09948fb231"
+    },
     {
       "object": "page",
       "id": "1c824191-cd14-8070-b5ff-deb1b47f904e",
