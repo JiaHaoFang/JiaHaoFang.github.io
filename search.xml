@@ -126,6 +126,153 @@
       </tags>
   </entry>
   <entry>
+    <title>iOS 代码发布为组件</title>
+    <url>//ios-send2cocoapods/</url>
+    <content><![CDATA[<h1 id="前期准备"><a class="markdownIt-Anchor" href="#前期准备"></a> 前期准备</h1>
+<h2 id="远程仓库"><a class="markdownIt-Anchor" href="#远程仓库"></a> 远程仓库</h2>
+<blockquote>
+<p>准备好两个远程仓库，在GitHub上创建即可；</p>
+<p>权限建议为public</p>
+</blockquote>
+<ul>
+<li>
+<p>用来存放源码的仓库，该仓库用来存放自己编写的组件的源码，其应为正确的目录结构，如何模板创建下文详细说；</p>
+  <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">&lt;https://github.com/JiaHaoFang/SFAPPRealTimeLogCaughter.git&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>用来存放组件的仓库，相当于xxxRepo、CocoaPods/Spec，是自己私有的组件仓库，用来存放.podspec文件；</p>
+  <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">&lt;https://github.com/JiaHaoFang/SFPodRepo.git&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注：该仓库非必要，可以使用官方仓库，此处为了熟悉流程使用自己创建的仓库</li>
+</ul>
+</li>
+</ul>
+<h2 id="本地代码"><a class="markdownIt-Anchor" href="#本地代码"></a> 本地代码</h2>
+<blockquote>
+<p>由于该组件为一个完整工程作为组件发布，需要抽离</p>
+</blockquote>
+<ul>
+<li>保证需要发布为组件的工程，其核心功能完整，去耦，能够实现核心功能的抽离</li>
+<li>保证编译可通过，同时核心功能具备可移植性</li>
+</ul>
+<h1 id="本地目录创建"><a class="markdownIt-Anchor" href="#本地目录创建"></a> 本地目录创建</h1>
+<h2 id="创建私有repo目录"><a class="markdownIt-Anchor" href="#创建私有repo目录"></a> 创建私有Repo目录</h2>
+<ul>
+<li>
+<p>在～/.cocoapods/repo中能看到本地有的repo仓库，其中cocoapods为官方仓库，trunk也是官方仓库（历史遗留问题）；xxxRepo为公司私有仓库。</p>
+</li>
+<li>
+<p>该步骤将创建私人仓库SFRepo，作用类似上文的官方仓库，后续将用来存放个人的组件。</p>
+</li>
+<li>
+<p>或者也可以选择发布到官方仓库。</p>
+</li>
+<li>
+<p>命令</p>
+  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod repo add <span class="title class_">SFPod</span> &lt;<span class="symbol">https:</span>/<span class="regexp">/github.com/</span><span class="title class_">JiaHaoFang</span>/<span class="title class_">SFPodRepo</span>.git&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>创建完成之后可通过命令查看目录结构</p>
+  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">open ~<span class="regexp">/.cocoapods/repos</span><span class="regexp">/SFPod</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="创建个人组件目录"><a class="markdownIt-Anchor" href="#创建个人组件目录"></a> 创建个人组件目录</h2>
+<ul>
+<li>
+<p>发布的组件需要按照Cocoapod严格遵守官方给出的目录结构，官方给出了命令可以直接生成模版</p>
+  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod lib create <span class="title class_">SFAPPRealTimeLogCaughter</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>过程中终端会向我们提出一系列问题，包括开发语言是OC还是Swift，demo程序，测试框架，界面测试。我选择了包含demo程序，没有测试框架.</li>
+</ul>
+</li>
+<li>
+<p>生成模版后可以使用tree命令查看该文件夹下的目录结构</p>
+</li>
+</ul>
+<h2 id="编辑模版"><a class="markdownIt-Anchor" href="#编辑模版"></a> 编辑模版</h2>
+<blockquote>
+<p>在2.2创建的公共模版就是组件的模板，我们需要将我们的代码添加进去将其作为自己的组件</p>
+</blockquote>
+<ul>
+<li>我们需要发布的组件核心功能代码存放在/SFPod/Pod/Classes文件夹中</li>
+<li>另外在Example中编写Demo测试自己的组件是否能正常工作，点击.xcworkspace可以作为一个完整工程运行</li>
+<li>在写Example的时候，如果修改了Classes中文件的，需要pod install一下，将组件在自己的Demo中更新一下</li>
+</ul>
+<h2 id="编辑podspec文件"><a class="markdownIt-Anchor" href="#编辑podspec文件"></a> 编辑.podspec文件</h2>
+<ul>
+<li>自行Google</li>
+</ul>
+<h1 id="发布组件"><a class="markdownIt-Anchor" href="#发布组件"></a> 发布组件</h1>
+<blockquote>
+<p>如果上面的步骤完成了，恭喜，完成了一半</p>
+</blockquote>
+<h2 id="校验"><a class="markdownIt-Anchor" href="#校验"></a> 校验</h2>
+<ul>
+<li>
+<p>当2中的步骤全部完成，我们可以使用下面的命令检验自己组件代码的合法性（主要是检验.podspec文件）</p>
+  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod lib lint</span><br><span class="line"><span class="comment"># 只从本地验证你的pod能否通过验证。</span></span><br><span class="line">pod spec lint</span><br><span class="line"><span class="comment"># 从本地和远程验证你的pod能否通过验证，建议使用这个</span></span><br><span class="line">--allow-warnings</span><br><span class="line"><span class="comment"># 如何库代码中有警告导致通不过验证。加上这个忽略警告</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="提交源码"><a class="markdownIt-Anchor" href="#提交源码"></a> 提交源码</h2>
+<ul>
+<li>
+<p>提交源码到个人仓库</p>
+  <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">git add -a</span><br><span class="line">git commit -m &quot;xxx&quot;</span><br><span class="line">git push</span><br><span class="line">git tag 0.1.0</span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="发布组件到个人repo"><a class="markdownIt-Anchor" href="#发布组件到个人repo"></a> 发布组件到个人Repo</h2>
+<ul>
+<li>
+<p>使用命令将.podspec文件添加到~/.cocoapods/repos/SFPod中，同时也发布到远程仓库</p>
+  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod repo push <span class="title class_">SFPod</span> <span class="title class_">SFAPPRealTimeLogCaughter</span>.podspec</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>执行完该步骤后， ~/.cocoapods/repos/SFPod会新增对应版本的.podspec文件</p>
+</li>
+</ul>
+<h2 id="查询"><a class="markdownIt-Anchor" href="#查询"></a> 查询</h2>
+<ul>
+<li>
+<p>搜索组件库</p>
+  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod search <span class="title class_">SFAPPRealTimeLogCaughter</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>搜索到了说明安装成功</p>
+</li>
+</ul>
+<h1 id="使用组件"><a class="markdownIt-Anchor" href="#使用组件"></a> 使用组件</h1>
+<ul>
+<li>
+<p>在Podfile文件新增源</p>
+  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">source <span class="string">&#x27;&lt;https://github.com/JiaHaoFang/SFPodRepo.git&gt;&#x27;</span></span><br><span class="line">source <span class="string">&#x27;&lt;https://github.com/CocoaPods/Specs.git&gt;&#x27;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>添加pod</p>
+  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod <span class="string">&#x27;SFAPPRealTimeLogCaughter&#x27;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>上面两项可以合起来写，合不起来。。。</p>
+</li>
+<li>
+<p>执行 pod install</p>
+</li>
+<li>
+<p>运行代码</p>
+</li>
+</ul>
+<blockquote>
+<p>参考资料：<a href="https://www.jianshu.com/p/103a6f0bf3a4">https://www.jianshu.com/p/103a6f0bf3a4</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Programming</category>
+      </categories>
+      <tags>
+        <tag>iOS</tag>
+        <tag>Cocoapods</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Notion+Hexo 博客解决方案</title>
     <url>//notion-hexo-deploy/</url>
     <content><![CDATA[<h1 id="创作开发"><a class="markdownIt-Anchor" href="#创作开发"></a> 创作&amp;开发</h1>
@@ -286,153 +433,6 @@
         <tag>hexo</tag>
         <tag>elog</tag>
         <tag>notion</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>iOS 代码发布为组件</title>
-    <url>//ios-send2cocoapods/</url>
-    <content><![CDATA[<h1 id="前期准备"><a class="markdownIt-Anchor" href="#前期准备"></a> 前期准备</h1>
-<h2 id="远程仓库"><a class="markdownIt-Anchor" href="#远程仓库"></a> 远程仓库</h2>
-<blockquote>
-<p>准备好两个远程仓库，在GitHub上创建即可；</p>
-<p>权限建议为public</p>
-</blockquote>
-<ul>
-<li>
-<p>用来存放源码的仓库，该仓库用来存放自己编写的组件的源码，其应为正确的目录结构，如何模板创建下文详细说；</p>
-  <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">&lt;https://github.com/JiaHaoFang/SFAPPRealTimeLogCaughter.git&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>用来存放组件的仓库，相当于xxxRepo、CocoaPods/Spec，是自己私有的组件仓库，用来存放.podspec文件；</p>
-  <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">&lt;https://github.com/JiaHaoFang/SFPodRepo.git&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>注：该仓库非必要，可以使用官方仓库，此处为了熟悉流程使用自己创建的仓库</li>
-</ul>
-</li>
-</ul>
-<h2 id="本地代码"><a class="markdownIt-Anchor" href="#本地代码"></a> 本地代码</h2>
-<blockquote>
-<p>由于该组件为一个完整工程作为组件发布，需要抽离</p>
-</blockquote>
-<ul>
-<li>保证需要发布为组件的工程，其核心功能完整，去耦，能够实现核心功能的抽离</li>
-<li>保证编译可通过，同时核心功能具备可移植性</li>
-</ul>
-<h1 id="本地目录创建"><a class="markdownIt-Anchor" href="#本地目录创建"></a> 本地目录创建</h1>
-<h2 id="创建私有repo目录"><a class="markdownIt-Anchor" href="#创建私有repo目录"></a> 创建私有Repo目录</h2>
-<ul>
-<li>
-<p>在～/.cocoapods/repo中能看到本地有的repo仓库，其中cocoapods为官方仓库，trunk也是官方仓库（历史遗留问题）；xxxRepo为公司私有仓库。</p>
-</li>
-<li>
-<p>该步骤将创建私人仓库SFRepo，作用类似上文的官方仓库，后续将用来存放个人的组件。</p>
-</li>
-<li>
-<p>或者也可以选择发布到官方仓库。</p>
-</li>
-<li>
-<p>命令</p>
-  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod repo add <span class="title class_">SFPod</span> &lt;<span class="symbol">https:</span>/<span class="regexp">/github.com/</span><span class="title class_">JiaHaoFang</span>/<span class="title class_">SFPodRepo</span>.git&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>创建完成之后可通过命令查看目录结构</p>
-  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">open ~<span class="regexp">/.cocoapods/repos</span><span class="regexp">/SFPod</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="创建个人组件目录"><a class="markdownIt-Anchor" href="#创建个人组件目录"></a> 创建个人组件目录</h2>
-<ul>
-<li>
-<p>发布的组件需要按照Cocoapod严格遵守官方给出的目录结构，官方给出了命令可以直接生成模版</p>
-  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod lib create <span class="title class_">SFAPPRealTimeLogCaughter</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>过程中终端会向我们提出一系列问题，包括开发语言是OC还是Swift，demo程序，测试框架，界面测试。我选择了包含demo程序，没有测试框架.</li>
-</ul>
-</li>
-<li>
-<p>生成模版后可以使用tree命令查看该文件夹下的目录结构</p>
-</li>
-</ul>
-<h2 id="编辑模版"><a class="markdownIt-Anchor" href="#编辑模版"></a> 编辑模版</h2>
-<blockquote>
-<p>在2.2创建的公共模版就是组件的模板，我们需要将我们的代码添加进去将其作为自己的组件</p>
-</blockquote>
-<ul>
-<li>我们需要发布的组件核心功能代码存放在/SFPod/Pod/Classes文件夹中</li>
-<li>另外在Example中编写Demo测试自己的组件是否能正常工作，点击.xcworkspace可以作为一个完整工程运行</li>
-<li>在写Example的时候，如果修改了Classes中文件的，需要pod install一下，将组件在自己的Demo中更新一下</li>
-</ul>
-<h2 id="编辑podspec文件"><a class="markdownIt-Anchor" href="#编辑podspec文件"></a> 编辑.podspec文件</h2>
-<ul>
-<li>自行Google</li>
-</ul>
-<h1 id="发布组件"><a class="markdownIt-Anchor" href="#发布组件"></a> 发布组件</h1>
-<blockquote>
-<p>如果上面的步骤完成了，恭喜，完成了一半</p>
-</blockquote>
-<h2 id="校验"><a class="markdownIt-Anchor" href="#校验"></a> 校验</h2>
-<ul>
-<li>
-<p>当2中的步骤全部完成，我们可以使用下面的命令检验自己组件代码的合法性（主要是检验.podspec文件）</p>
-  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod lib lint</span><br><span class="line"><span class="comment"># 只从本地验证你的pod能否通过验证。</span></span><br><span class="line">pod spec lint</span><br><span class="line"><span class="comment"># 从本地和远程验证你的pod能否通过验证，建议使用这个</span></span><br><span class="line">--allow-warnings</span><br><span class="line"><span class="comment"># 如何库代码中有警告导致通不过验证。加上这个忽略警告</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="提交源码"><a class="markdownIt-Anchor" href="#提交源码"></a> 提交源码</h2>
-<ul>
-<li>
-<p>提交源码到个人仓库</p>
-  <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">git add -a</span><br><span class="line">git commit -m &quot;xxx&quot;</span><br><span class="line">git push</span><br><span class="line">git tag 0.1.0</span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="发布组件到个人repo"><a class="markdownIt-Anchor" href="#发布组件到个人repo"></a> 发布组件到个人Repo</h2>
-<ul>
-<li>
-<p>使用命令将.podspec文件添加到~/.cocoapods/repos/SFPod中，同时也发布到远程仓库</p>
-  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod repo push <span class="title class_">SFPod</span> <span class="title class_">SFAPPRealTimeLogCaughter</span>.podspec</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>执行完该步骤后， ~/.cocoapods/repos/SFPod会新增对应版本的.podspec文件</p>
-</li>
-</ul>
-<h2 id="查询"><a class="markdownIt-Anchor" href="#查询"></a> 查询</h2>
-<ul>
-<li>
-<p>搜索组件库</p>
-  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod search <span class="title class_">SFAPPRealTimeLogCaughter</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>搜索到了说明安装成功</p>
-</li>
-</ul>
-<h1 id="使用组件"><a class="markdownIt-Anchor" href="#使用组件"></a> 使用组件</h1>
-<ul>
-<li>
-<p>在Podfile文件新增源</p>
-  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">source <span class="string">&#x27;&lt;https://github.com/JiaHaoFang/SFPodRepo.git&gt;&#x27;</span></span><br><span class="line">source <span class="string">&#x27;&lt;https://github.com/CocoaPods/Specs.git&gt;&#x27;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>添加pod</p>
-  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod <span class="string">&#x27;SFAPPRealTimeLogCaughter&#x27;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>上面两项可以合起来写，合不起来。。。</p>
-</li>
-<li>
-<p>执行 pod install</p>
-</li>
-<li>
-<p>运行代码</p>
-</li>
-</ul>
-<blockquote>
-<p>参考资料：<a href="https://www.jianshu.com/p/103a6f0bf3a4">https://www.jianshu.com/p/103a6f0bf3a4</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Programming</category>
-      </categories>
-      <tags>
-        <tag>iOS</tag>
-        <tag>Cocoapods</tag>
       </tags>
   </entry>
   <entry>
