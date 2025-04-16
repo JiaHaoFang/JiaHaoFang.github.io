@@ -40,10 +40,10 @@ custom_file_path:
 # ---------------------------------------------------------------
 
 favicon:
-  small: /favicon/moon-cat.png
-  medium: /favicon/moon-cat.png
-  apple_touch_icon: /favicon/moon-cat.png
-  safari_pinned_tab: /favicon/moon-cat.png
+  small: /favicon/paw.png
+  medium: /favicon/paw.png
+  apple_touch_icon: /favicon/paw.png
+  safari_pinned_tab: /favicon/paw.png
   #android_manifest: /images/manifest.json
   #ms_browserconfig: /images/browserconfig.xml
 
