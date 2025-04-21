@@ -157,6 +157,28 @@
       "realName": "普通心理学",
       "relativePath": "/普通心理学.md",
       "docPath": "./source/_posts"
+    },
+    {
+      "id": "1c824191-cd14-807d-8371-e8c0fbd2c416",
+      "doc_id": "1c824191-cd14-807d-8371-e8c0fbd2c416",
+      "updated": 1745250360000,
+      "properties": {
+        "categories": "Humanities",
+        "tags": [
+          "Philosophy"
+        ],
+        "status": "已发布",
+        "description": "《哲学-死亡》第一部分（形而上学、灵魂的论证、人格同一性）",
+        "日期": "",
+        "permalink": "philosophy-death-1/",
+        "title": "哲学-死亡（一）",
+        "urlname": "1c824191-cd14-807d-8371-e8c0fbd2c416",
+        "date": "2025-04-01 22:32:00",
+        "updated": "2025-04-21 23:46:00"
+      },
+      "realName": "哲学-死亡（一）",
+      "relativePath": "/哲学-死亡（一）.md",
+      "docPath": "./source/_posts"
     }
   ],
   "catalog": [
@@ -198,6 +220,44 @@
       },
       "url": "https://www.notion.so/1c924191cd14808b80fbfd09948fb231",
       "public_url": "https://excellent-moonstone-c91.notion.site/1c924191cd14808b80fbfd09948fb231"
+    },
+    {
+      "object": "page",
+      "id": "1c824191-cd14-807d-8371-e8c0fbd2c416",
+      "created_time": "2025-04-01T14:32:00.000Z",
+      "last_edited_time": "2025-04-21T15:46:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "f9e52dea-3218-4b01-ab60-006834c17e09"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "f9e52dea-3218-4b01-ab60-006834c17e09"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "1c724191-cd14-809d-a910-fde6198cd7de"
+      },
+      "archived": false,
+      "in_trash": false,
+      "properties": {
+        "categories": "Humanities",
+        "tags": [
+          "Philosophy"
+        ],
+        "status": "已发布",
+        "description": "《哲学-死亡》第一部分（形而上学、灵魂的论证、人格同一性）",
+        "日期": "",
+        "permalink": "philosophy-death-1/",
+        "title": "哲学-死亡（一）",
+        "urlname": "1c824191-cd14-807d-8371-e8c0fbd2c416",
+        "date": "2025-04-01 22:32:00",
+        "updated": "2025-04-21 23:46:00"
+      },
+      "url": "https://www.notion.so/1c824191cd14807d8371e8c0fbd2c416",
+      "public_url": "https://excellent-moonstone-c91.notion.site/1c824191cd14807d8371e8c0fbd2c416"
     },
     {
       "object": "page",
