@@ -126,153 +126,6 @@
       </tags>
   </entry>
   <entry>
-    <title>iOS 代码发布为组件</title>
-    <url>//ios-send2cocoapods/</url>
-    <content><![CDATA[<h1 id="前期准备"><a class="markdownIt-Anchor" href="#前期准备"></a> 前期准备</h1>
-<h2 id="远程仓库"><a class="markdownIt-Anchor" href="#远程仓库"></a> 远程仓库</h2>
-<blockquote>
-<p>准备好两个远程仓库，在GitHub上创建即可；</p>
-<p>权限建议为public</p>
-</blockquote>
-<ul>
-<li>
-<p>用来存放源码的仓库，该仓库用来存放自己编写的组件的源码，其应为正确的目录结构，如何模板创建下文详细说；</p>
-  <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">&lt;https://github.com/JiaHaoFang/SFAPPRealTimeLogCaughter.git&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>用来存放组件的仓库，相当于xxxRepo、CocoaPods/Spec，是自己私有的组件仓库，用来存放.podspec文件；</p>
-  <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">&lt;https://github.com/JiaHaoFang/SFPodRepo.git&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>注：该仓库非必要，可以使用官方仓库，此处为了熟悉流程使用自己创建的仓库</li>
-</ul>
-</li>
-</ul>
-<h2 id="本地代码"><a class="markdownIt-Anchor" href="#本地代码"></a> 本地代码</h2>
-<blockquote>
-<p>由于该组件为一个完整工程作为组件发布，需要抽离</p>
-</blockquote>
-<ul>
-<li>保证需要发布为组件的工程，其核心功能完整，去耦，能够实现核心功能的抽离</li>
-<li>保证编译可通过，同时核心功能具备可移植性</li>
-</ul>
-<h1 id="本地目录创建"><a class="markdownIt-Anchor" href="#本地目录创建"></a> 本地目录创建</h1>
-<h2 id="创建私有repo目录"><a class="markdownIt-Anchor" href="#创建私有repo目录"></a> 创建私有Repo目录</h2>
-<ul>
-<li>
-<p>在～/.cocoapods/repo中能看到本地有的repo仓库，其中cocoapods为官方仓库，trunk也是官方仓库（历史遗留问题）；xxxRepo为公司私有仓库。</p>
-</li>
-<li>
-<p>该步骤将创建私人仓库SFRepo，作用类似上文的官方仓库，后续将用来存放个人的组件。</p>
-</li>
-<li>
-<p>或者也可以选择发布到官方仓库。</p>
-</li>
-<li>
-<p>命令</p>
-  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod repo add <span class="title class_">SFPod</span> &lt;<span class="symbol">https:</span>/<span class="regexp">/github.com/</span><span class="title class_">JiaHaoFang</span>/<span class="title class_">SFPodRepo</span>.git&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>创建完成之后可通过命令查看目录结构</p>
-  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">open ~<span class="regexp">/.cocoapods/repos</span><span class="regexp">/SFPod</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="创建个人组件目录"><a class="markdownIt-Anchor" href="#创建个人组件目录"></a> 创建个人组件目录</h2>
-<ul>
-<li>
-<p>发布的组件需要按照Cocoapod严格遵守官方给出的目录结构，官方给出了命令可以直接生成模版</p>
-  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod lib create <span class="title class_">SFAPPRealTimeLogCaughter</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>过程中终端会向我们提出一系列问题，包括开发语言是OC还是Swift，demo程序，测试框架，界面测试。我选择了包含demo程序，没有测试框架.</li>
-</ul>
-</li>
-<li>
-<p>生成模版后可以使用tree命令查看该文件夹下的目录结构</p>
-</li>
-</ul>
-<h2 id="编辑模版"><a class="markdownIt-Anchor" href="#编辑模版"></a> 编辑模版</h2>
-<blockquote>
-<p>在2.2创建的公共模版就是组件的模板，我们需要将我们的代码添加进去将其作为自己的组件</p>
-</blockquote>
-<ul>
-<li>我们需要发布的组件核心功能代码存放在/SFPod/Pod/Classes文件夹中</li>
-<li>另外在Example中编写Demo测试自己的组件是否能正常工作，点击.xcworkspace可以作为一个完整工程运行</li>
-<li>在写Example的时候，如果修改了Classes中文件的，需要pod install一下，将组件在自己的Demo中更新一下</li>
-</ul>
-<h2 id="编辑podspec文件"><a class="markdownIt-Anchor" href="#编辑podspec文件"></a> 编辑.podspec文件</h2>
-<ul>
-<li>自行Google</li>
-</ul>
-<h1 id="发布组件"><a class="markdownIt-Anchor" href="#发布组件"></a> 发布组件</h1>
-<blockquote>
-<p>如果上面的步骤完成了，恭喜，完成了一半</p>
-</blockquote>
-<h2 id="校验"><a class="markdownIt-Anchor" href="#校验"></a> 校验</h2>
-<ul>
-<li>
-<p>当2中的步骤全部完成，我们可以使用下面的命令检验自己组件代码的合法性（主要是检验.podspec文件）</p>
-  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod lib lint</span><br><span class="line"><span class="comment"># 只从本地验证你的pod能否通过验证。</span></span><br><span class="line">pod spec lint</span><br><span class="line"><span class="comment"># 从本地和远程验证你的pod能否通过验证，建议使用这个</span></span><br><span class="line">--allow-warnings</span><br><span class="line"><span class="comment"># 如何库代码中有警告导致通不过验证。加上这个忽略警告</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="提交源码"><a class="markdownIt-Anchor" href="#提交源码"></a> 提交源码</h2>
-<ul>
-<li>
-<p>提交源码到个人仓库</p>
-  <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">git add -a</span><br><span class="line">git commit -m &quot;xxx&quot;</span><br><span class="line">git push</span><br><span class="line">git tag 0.1.0</span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="发布组件到个人repo"><a class="markdownIt-Anchor" href="#发布组件到个人repo"></a> 发布组件到个人Repo</h2>
-<ul>
-<li>
-<p>使用命令将.podspec文件添加到~/.cocoapods/repos/SFPod中，同时也发布到远程仓库</p>
-  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod repo push <span class="title class_">SFPod</span> <span class="title class_">SFAPPRealTimeLogCaughter</span>.podspec</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>执行完该步骤后， ~/.cocoapods/repos/SFPod会新增对应版本的.podspec文件</p>
-</li>
-</ul>
-<h2 id="查询"><a class="markdownIt-Anchor" href="#查询"></a> 查询</h2>
-<ul>
-<li>
-<p>搜索组件库</p>
-  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod search <span class="title class_">SFAPPRealTimeLogCaughter</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>搜索到了说明安装成功</p>
-</li>
-</ul>
-<h1 id="使用组件"><a class="markdownIt-Anchor" href="#使用组件"></a> 使用组件</h1>
-<ul>
-<li>
-<p>在Podfile文件新增源</p>
-  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">source <span class="string">&#x27;&lt;https://github.com/JiaHaoFang/SFPodRepo.git&gt;&#x27;</span></span><br><span class="line">source <span class="string">&#x27;&lt;https://github.com/CocoaPods/Specs.git&gt;&#x27;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>添加pod</p>
-  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod <span class="string">&#x27;SFAPPRealTimeLogCaughter&#x27;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>上面两项可以合起来写，合不起来。。。</p>
-</li>
-<li>
-<p>执行 pod install</p>
-</li>
-<li>
-<p>运行代码</p>
-</li>
-</ul>
-<blockquote>
-<p>参考资料：<a href="https://www.jianshu.com/p/103a6f0bf3a4">https://www.jianshu.com/p/103a6f0bf3a4</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Programming</category>
-      </categories>
-      <tags>
-        <tag>iOS</tag>
-        <tag>Cocoapods</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Notion+Hexo 博客解决方案</title>
     <url>//notion-hexo-deploy/</url>
     <content><![CDATA[<h1 id="创作开发"><a class="markdownIt-Anchor" href="#创作开发"></a> 创作&amp;开发</h1>
@@ -433,6 +286,153 @@
         <tag>hexo</tag>
         <tag>elog</tag>
         <tag>notion</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>iOS 代码发布为组件</title>
+    <url>//ios-send2cocoapods/</url>
+    <content><![CDATA[<h1 id="前期准备"><a class="markdownIt-Anchor" href="#前期准备"></a> 前期准备</h1>
+<h2 id="远程仓库"><a class="markdownIt-Anchor" href="#远程仓库"></a> 远程仓库</h2>
+<blockquote>
+<p>准备好两个远程仓库，在GitHub上创建即可；</p>
+<p>权限建议为public</p>
+</blockquote>
+<ul>
+<li>
+<p>用来存放源码的仓库，该仓库用来存放自己编写的组件的源码，其应为正确的目录结构，如何模板创建下文详细说；</p>
+  <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">&lt;https://github.com/JiaHaoFang/SFAPPRealTimeLogCaughter.git&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>用来存放组件的仓库，相当于xxxRepo、CocoaPods/Spec，是自己私有的组件仓库，用来存放.podspec文件；</p>
+  <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">&lt;https://github.com/JiaHaoFang/SFPodRepo.git&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注：该仓库非必要，可以使用官方仓库，此处为了熟悉流程使用自己创建的仓库</li>
+</ul>
+</li>
+</ul>
+<h2 id="本地代码"><a class="markdownIt-Anchor" href="#本地代码"></a> 本地代码</h2>
+<blockquote>
+<p>由于该组件为一个完整工程作为组件发布，需要抽离</p>
+</blockquote>
+<ul>
+<li>保证需要发布为组件的工程，其核心功能完整，去耦，能够实现核心功能的抽离</li>
+<li>保证编译可通过，同时核心功能具备可移植性</li>
+</ul>
+<h1 id="本地目录创建"><a class="markdownIt-Anchor" href="#本地目录创建"></a> 本地目录创建</h1>
+<h2 id="创建私有repo目录"><a class="markdownIt-Anchor" href="#创建私有repo目录"></a> 创建私有Repo目录</h2>
+<ul>
+<li>
+<p>在～/.cocoapods/repo中能看到本地有的repo仓库，其中cocoapods为官方仓库，trunk也是官方仓库（历史遗留问题）；xxxRepo为公司私有仓库。</p>
+</li>
+<li>
+<p>该步骤将创建私人仓库SFRepo，作用类似上文的官方仓库，后续将用来存放个人的组件。</p>
+</li>
+<li>
+<p>或者也可以选择发布到官方仓库。</p>
+</li>
+<li>
+<p>命令</p>
+  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod repo add <span class="title class_">SFPod</span> &lt;<span class="symbol">https:</span>/<span class="regexp">/github.com/</span><span class="title class_">JiaHaoFang</span>/<span class="title class_">SFPodRepo</span>.git&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>创建完成之后可通过命令查看目录结构</p>
+  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">open ~<span class="regexp">/.cocoapods/repos</span><span class="regexp">/SFPod</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="创建个人组件目录"><a class="markdownIt-Anchor" href="#创建个人组件目录"></a> 创建个人组件目录</h2>
+<ul>
+<li>
+<p>发布的组件需要按照Cocoapod严格遵守官方给出的目录结构，官方给出了命令可以直接生成模版</p>
+  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod lib create <span class="title class_">SFAPPRealTimeLogCaughter</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>过程中终端会向我们提出一系列问题，包括开发语言是OC还是Swift，demo程序，测试框架，界面测试。我选择了包含demo程序，没有测试框架.</li>
+</ul>
+</li>
+<li>
+<p>生成模版后可以使用tree命令查看该文件夹下的目录结构</p>
+</li>
+</ul>
+<h2 id="编辑模版"><a class="markdownIt-Anchor" href="#编辑模版"></a> 编辑模版</h2>
+<blockquote>
+<p>在2.2创建的公共模版就是组件的模板，我们需要将我们的代码添加进去将其作为自己的组件</p>
+</blockquote>
+<ul>
+<li>我们需要发布的组件核心功能代码存放在/SFPod/Pod/Classes文件夹中</li>
+<li>另外在Example中编写Demo测试自己的组件是否能正常工作，点击.xcworkspace可以作为一个完整工程运行</li>
+<li>在写Example的时候，如果修改了Classes中文件的，需要pod install一下，将组件在自己的Demo中更新一下</li>
+</ul>
+<h2 id="编辑podspec文件"><a class="markdownIt-Anchor" href="#编辑podspec文件"></a> 编辑.podspec文件</h2>
+<ul>
+<li>自行Google</li>
+</ul>
+<h1 id="发布组件"><a class="markdownIt-Anchor" href="#发布组件"></a> 发布组件</h1>
+<blockquote>
+<p>如果上面的步骤完成了，恭喜，完成了一半</p>
+</blockquote>
+<h2 id="校验"><a class="markdownIt-Anchor" href="#校验"></a> 校验</h2>
+<ul>
+<li>
+<p>当2中的步骤全部完成，我们可以使用下面的命令检验自己组件代码的合法性（主要是检验.podspec文件）</p>
+  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod lib lint</span><br><span class="line"><span class="comment"># 只从本地验证你的pod能否通过验证。</span></span><br><span class="line">pod spec lint</span><br><span class="line"><span class="comment"># 从本地和远程验证你的pod能否通过验证，建议使用这个</span></span><br><span class="line">--allow-warnings</span><br><span class="line"><span class="comment"># 如何库代码中有警告导致通不过验证。加上这个忽略警告</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="提交源码"><a class="markdownIt-Anchor" href="#提交源码"></a> 提交源码</h2>
+<ul>
+<li>
+<p>提交源码到个人仓库</p>
+  <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">git add -a</span><br><span class="line">git commit -m &quot;xxx&quot;</span><br><span class="line">git push</span><br><span class="line">git tag 0.1.0</span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="发布组件到个人repo"><a class="markdownIt-Anchor" href="#发布组件到个人repo"></a> 发布组件到个人Repo</h2>
+<ul>
+<li>
+<p>使用命令将.podspec文件添加到~/.cocoapods/repos/SFPod中，同时也发布到远程仓库</p>
+  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod repo push <span class="title class_">SFPod</span> <span class="title class_">SFAPPRealTimeLogCaughter</span>.podspec</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>执行完该步骤后， ~/.cocoapods/repos/SFPod会新增对应版本的.podspec文件</p>
+</li>
+</ul>
+<h2 id="查询"><a class="markdownIt-Anchor" href="#查询"></a> 查询</h2>
+<ul>
+<li>
+<p>搜索组件库</p>
+  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod search <span class="title class_">SFAPPRealTimeLogCaughter</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>搜索到了说明安装成功</p>
+</li>
+</ul>
+<h1 id="使用组件"><a class="markdownIt-Anchor" href="#使用组件"></a> 使用组件</h1>
+<ul>
+<li>
+<p>在Podfile文件新增源</p>
+  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">source <span class="string">&#x27;&lt;https://github.com/JiaHaoFang/SFPodRepo.git&gt;&#x27;</span></span><br><span class="line">source <span class="string">&#x27;&lt;https://github.com/CocoaPods/Specs.git&gt;&#x27;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>添加pod</p>
+  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">pod <span class="string">&#x27;SFAPPRealTimeLogCaughter&#x27;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>上面两项可以合起来写，合不起来。。。</p>
+</li>
+<li>
+<p>执行 pod install</p>
+</li>
+<li>
+<p>运行代码</p>
+</li>
+</ul>
+<blockquote>
+<p>参考资料：<a href="https://www.jianshu.com/p/103a6f0bf3a4">https://www.jianshu.com/p/103a6f0bf3a4</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Programming</category>
+      </categories>
+      <tags>
+        <tag>iOS</tag>
+        <tag>Cocoapods</tag>
       </tags>
   </entry>
   <entry>
@@ -1230,680 +1230,184 @@ But how soul can create the consciousness? As far as i can see, right now nobody
 <p>What matters to me isn’t survival per se. It’s having the same personality.</p>
 </li>
 </ul>
-]]></content>
-      <categories>
-        <category>Humanities</category>
-      </categories>
-      <tags>
-        <tag>Philosophy</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>社会心理学（一）</title>
-    <url>//social-psychology-1/</url>
-    <content><![CDATA[<blockquote>
-<p>参考书籍：《社会心理学》第11版</p>
-</blockquote>
-<h1 id="导论"><a class="markdownIt-Anchor" href="#导论"></a> 导论</h1>
+<h1 id="what-is-dead"><a class="markdownIt-Anchor" href="#what-is-dead"></a> What is Dead</h1>
+<h2 id="question"><a class="markdownIt-Anchor" href="#question"></a> Question</h2>
 <ul>
-<li>社会心理学是一门研究人们如何看待他人，如何相互影响，以及如何与他人互相关联的科学</li>
+<li>Which functions are crucial in defining the moment of death?</li>
+<li>when do I die? what is death?</li>
+<li>when did I cease exists?</li>
+<li>what’s the nature of death?</li>
 </ul>
-<h3 id="重要观点"><a class="markdownIt-Anchor" href="#重要观点"></a> 重要观点</h3>
-<ul>
-<li>我们构建了社会现实</li>
-<li>社会直觉通常强大但有时也危险</li>
-<li>社会影响塑造行为</li>
-<li>个人态度和性格倾向塑造行为</li>
-<li>社会行为有其生物性基础</li>
-<li>社会心理学原理在日常生活中的应用（信念、态度、社会关系）</li>
-</ul>
-<h3 id="价值观影响心理学"><a class="markdownIt-Anchor" href="#价值观影响心理学"></a> 价值观影响心理学</h3>
-<ul>
-<li>直接影响
-<ul>
-<li>当选择研究课题时，价值观会对其产生影响</li>
-<li>价值观影响投身于不同学科的人群类型</li>
-<li>价值观是社会心理学分析的对象</li>
-</ul>
-</li>
-<li>间接影响
-<ul>
-<li>科学存在主观性的一面（科学并非全然客观；社会表征）</li>
-<li>隐含价值观的心理概念（陈述事实？价值判断！）</li>
-</ul>
-</li>
-</ul>
-<h3 id="社会心理学是常识吗"><a class="markdownIt-Anchor" href="#社会心理学是常识吗"></a> 社会心理学是常识吗</h3>
-<ul>
-<li><code>后见之明偏差</code></li>
-<li>常识总在事后证明是正确的，在事实揭晓之后才显得“显而易见”</li>
-</ul>
-<h3 id="研究方法"><a class="markdownIt-Anchor" href="#研究方法"></a> 研究方法</h3>
-<ul>
-<li>假设的形成与验证
-<ul>
-<li>理论：一套原则的整合，可以对观察到的事件进行概括（能有效概括大量结果）和预测（做出清晰预测，便于 确证或修正理论 / 激发新的探索 / 指出可能的应用方向）</li>
-</ul>
-</li>
-<li>相关研究（探寻两个或多个因素之间的自然关系）
-<ul>
-<li>相关与因果关系（X 导致 Y / Y 导致 X / 共同受到 Z 的影响）</li>
-<li>调查研究（可能会造成偏差）
-<ul>
-<li>是否有具有代表性的样本</li>
-<li>问题的顺序</li>
-<li>答案的选项</li>
-<li>问题的措辞</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>实验研究（通过操纵一些因素来考察它们对其他因素的影响）
+<h2 id="when-do-i-die"><a class="markdownIt-Anchor" href="#when-do-i-die"></a> When do I die?</h2>
+<h3 id="cases"><a class="markdownIt-Anchor" href="#cases"></a> Cases</h3>
 <ol>
-<li>控制（变量的操纵）</li>
-<li>随机分配（消除额外变量的干扰）</li>
+<li>Case One
+<blockquote>
+<p>P-functioning and B-functioning stop at the same time.<br />
+Phase A —— B-functioning only; Phase B —— B-functioning and P-functioning; Phase C —— corpse</p>
+</blockquote>
+</li>
+<li>Case Two
+<blockquote>
+<p>P-functioning stops earlier then B-functioning<br />
+Phase A —— B-functioning only; Phase B —— B-functioning and P-functioning; Phase D —— B-functioning only ; Phase C —— corpse</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="explanation"><a class="markdownIt-Anchor" href="#explanation"></a> Explanation</h3>
+<ul>
+<li>As a body theorist
+<ul>
+<li>I die at the end of Phase B in case one or phase D in case two.</li>
+<li>“Me” still exist as a corpse (phase C)</li>
+<li>Existence wasn’t good enough for the body theorist, he want to be alive, especially in Phase D, he want to be a person!</li>
+<li>Am I still a person?</li>
+</ul>
+</li>
+<li>As a personality theorist
+<ul>
+<li>I die at the end of the P-functioning (Phase B)</li>
+<li>I don’t exist in phase D, because nothing have my personality</li>
+<li>but my body still be alive at the end of phase B</li>
+<li>—— I don’t exist, but I still be alive …? (C &amp; D)</li>
+<li>—— have a distinction between “my being alive” and “my body being alive”</li>
+</ul>
+</li>
+<li>Argument about Phase A
+<ul>
+<li>
+<p>body view —— the stage of my existence before I become a person</p>
+<ul>
+<li>
+<p>the brain view</p>
+<p>—— Until late A, when the brain gets put together, that I start to exist.</p>
+<p>—— It’s a body but not me in the early A</p>
+</li>
+</ul>
+</li>
+<li>
+<p>personality view —— I did not exist when that fertilized egg came into being</p>
+</li>
+</ul>
+</li>
+<li>Argument about Phase D
+<blockquote>
+<p>Who or what has the right to life? I or my body?</p>
+</blockquote>
+<ul>
+<li>Question: Is there something immoral about removing the organs during D?</li>
+</ul>
+</li>
+</ul>
+<h2 id="p-functioning-and-death"><a class="markdownIt-Anchor" href="#p-functioning-and-death"></a> P-functioning and death</h2>
+<ul>
+<li>
+<p>If I’m not P-functioning, do we have to then say I’m dead?</p>
+<p>—— when I’m sleep that none of the P-functioning is occurring, I’m dead.</p>
+<p>—— revise this theory</p>
+</li>
+<li>
+<p>If you <u>will</u> P-functioning again, that you are not dead.</p>
+<p>—— On Judgment Day, God resurrects the dead.</p>
+<p>—— then it turn out to the dead weren’t really dead after all. They were only temporarily not P-functioning, just like sleep</p>
+<p>—— Proposal that death is a matter of permanent cessation of P-functioning versus temporary isn’t going to do the trick.</p>
+</li>
+<li>
+<p>You still <u>can</u> be P-functioning, you had the ability to engage in P-functioning</p>
+<p>—— Abilities aren’t always actualized.</p>
+<p>—— Dead is to be unable to engage in P-functioning</p>
+<ul>
+<li>
+<p>Somebody who is in a coma, not engage P-functioning</p>
+<p>—— can they engage P-functioning?</p>
+<p>—— this might be a persistent vegetative state with no possibility of engaging P-functioning</p>
+</li>
+<li>
+<p>Somebody is in a state of suspended animation</p>
+<p>—— cooling someone and wake him up few years later</p>
+<p>—— The structures in the brain which would underwrite the ability to engage in P-functioning didn’t destroyed by the suspended animation</p>
+<p>—— the person can engage in P-functioning, they’re not dead.</p>
+</li>
+</ul>
+<p>—— It seems like he’s not alive either</p>
+<p>—— death, alive and suspended?</p>
+</li>
+<li>
+<p>Physicalist view</p>
+<ul>
+<li>The body is able to function in a variety of ways. When some of those lower biological functions are occurring, the body is alive. The body is also capable of engaging in higher order personal P-functioning. And then you got a person.</li>
+<li>The body begins to break, you get the loss of P-functioning. You no longer exist as a person. When the body breaks some more, you get the loss of biological of B-functioning, and then the body die.</li>
+</ul>
+</li>
+</ul>
+<h2 id="do-believe-that-you-will-die"><a class="markdownIt-Anchor" href="#do-believe-that-you-will-die"></a> Do believe that you will die</h2>
+<ol>
+<li>
+<p>Nobody believes that they’ll ever cease to exist as a person</p>
+<ul>
+<li>
+<p>It’s impossible to picture being dead, nobody believes that the are going to die</p>
+<p>—— I can’t picture being dead.</p>
+<p>—— There’s no mystery about what it’s like to be dead. It isn’t like anything. When you dead, there is nothing on the inside to be imagined.</p>
+<p>—— BUT, it’s not possible to picture or imagine a dreamless sleep or fainted</p>
+</li>
+<li>
+<p>You can’t picture being dead from the inside, but you can picture it from the <u>outside</u></p>
+<p>—— Every time I try to picture myself being dead, I smuggle myself back in conscious and existing as a person. Hence, not death as a person</p>
+<p>——Freud conclude at some level none of us really believes we’re going to die</p>
+<p>—— OBJECTION: try to imagine a meeting without you.</p>
+<p>—— Viewing the world without you from a point of view doesn’t mean you’re in the world</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Nobody believes their body is going to die</p>
+<ul>
+<li>
+<p>People do all sorts of behaviors which become very hard to interpret if they don’t believe their bodies are going to die</p>
+<p>—— Many people write wills, take out life insurance</p>
+<p>—— they believe they are going to die</p>
+</li>
+<li>
+<p>Death seems not vivid for us</p>
+<p>—— People who have brushes with death change their behavior in significant ways.</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="we-die-alone"><a class="markdownIt-Anchor" href="#we-die-alone"></a> We die alone</h2>
+<blockquote>
+<p>It seems like a deep insight into the nature of death. What could it possible mean when people say “everyone dies alone”?</p>
+</blockquote>
+<ul>
+<li>
+<p>Not being with others or things I do by myself</p>
+<ol>
+<li>
+<p>The most natural, straightforward interpretation, to say that somebody do something alone means they do it not in the presence of others.</p>
+<p>—— Sometimes people die in the presence of others.</p>
+</li>
+<li>
+<p>Even if there are others with you, dying is something that you’re doing alone.</p>
+<p>—— We could have battlefields in which many people are dying along with others</p>
+</li>
+<li>
+<p>People dying alone in the sense that he’s doing it by themselves. It can’t be a joint undertaking.</p>
+<p>—— Some sort of suicide pact.</p>
+</li>
+<li>
+<p>Even if I’m dying with other, nobody can take my part. Nobody can die your death for you.</p>
+<p>—— It seems that somebody could take my place at the guillotine. (?</p>
+<p>—— Nobody can take my place at my death. <u>My death</u> is something that only I can undergo.</p>
+</li>
 </ol>
 </li>
-</ul>
-<h1 id="社会思维"><a class="markdownIt-Anchor" href="#社会思维"></a> 社会思维</h1>
-<blockquote>
-<p>我们如何看待他人（社会认知）</p>
-</blockquote>
-<h2 id="社会中的自我"><a class="markdownIt-Anchor" href="#社会中的自我"></a> 社会中的自我</h2>
-<h3 id="焦点和错觉"><a class="markdownIt-Anchor" href="#焦点和错觉"></a> 焦点和错觉</h3>
-<ul>
-<li>焦点效应：人类往往会把自己看做一切的中心，并直觉地高估别人对我们的关注程度（物理方面）</li>
-<li>透明度错觉：我们能敏锐捕捉到自己的情绪但其他人并不如此（情绪方面）
-<ul>
-<li>社会环境对自我觉知的影响</li>
-<li>带有自我服务色彩的社会判断</li>
-<li>自我关注激发的社会行为</li>
-<li>社会关系有助于我们界定自我</li>
-</ul>
-</li>
-</ul>
-<h3 id="自我概念"><a class="markdownIt-Anchor" href="#自我概念"></a> 自我概念</h3>
-<ul>
-<li>自我的概念
-<ul>
-<li><code>自我图示</code> ：自我的概念构成要素以及定义自我的特殊信念</li>
-<li><code>可能自我</code> ：包括我们梦想中自己的样子，能对我们产生巨大的激励作用</li>
-</ul>
-</li>
-<li>社会自我的发展
-<ul>
-<li>我们在社会生活中扮演的角色</li>
-<li>社会比较：生活的大部分是围绕着社会比较进行的</li>
-<li>其他人的评价；<code>镜像自我</code></li>
-</ul>
-</li>
-<li>自我与文化
-<blockquote>
-<p>个人主义 &amp; 集体主义</p>
-</blockquote>
-<ul>
-<li>个人与社会文化的互动：个人观念创造了社会文化 ？社会文化影响了个人观念</li>
-<li>文化与认知：独立的自我 &amp; 相互依赖的自我</li>
-<li>文化和自尊
-<ul>
-<li>在集体主义中，自尊与“别人怎么评价我和我的群体”密切相关；自我概念是有弹性的（与特定情境有关）而不是固定不变的（夸情境的持久性）</li>
-<li>个人主义文化中，个体自尊更多是个人的而不是关系的</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>自我认识
-<ul>
-<li>解释我们的行为</li>
-<li>预测我们的行为（<code>规划谬误</code>——低估完成事情的时间）</li>
-<li>预测我们的感受（<code>影响偏差</code>——高估情绪事件的持久性影响；<code>免疫忽视现象</code>——心理的免疫系统）</li>
-<li>自我分析的智慧和错觉（<code>双重态度系统</code>——控制我们社会行为的心理过程与解释我们行为的心理过程截然不同，关于人或事的自动的内隐态度通常与受意识控制的外显态度不同）</li>
-</ul>
-</li>
-</ul>
-<h3 id="自尊的实质及其动机力量"><a class="markdownIt-Anchor" href="#自尊的实质及其动机力量"></a> 自尊的实质及其动机力量</h3>
-<blockquote>
-<p>自尊 = 自我图示 + 可能自我？</p>
-</blockquote>
-<ul>
-<li>自尊动机
-<ul>
-<li>大多数人努力维持自己的自尊</li>
-<li>自尊的威胁：自尊水平会影响个体反应
-<ul>
-<li>高自尊的人会做出补偿反应（责怪别人、下次更努力），有助于保护积极的自我感觉</li>
-<li>低自尊的人更容易自责或放弃努力</li>
-</ul>
-</li>
-<li>人际关系对我们的生存和发展具有导向意义
-<ul>
-<li>社会拒绝会降低我们的自尊，同时增强我们渴望被接受的意愿</li>
-<li>驱使我们通过兴东来发展自我，在其他地方寻求社会接纳和认同</li>
-</ul>
-</li>
-<li>“恐惧管理理论”观点</li>
-</ul>
-</li>
-<li>自尊的阴暗面
-<ul>
-<li>自恋——当自尊变成自负
-<ul>
-<li>大多数高自尊的人都重视个人成功和他人的关系，但自恋的人缺失关心他人（自我为中心）
-<blockquote>
-<p>“黑暗三角”的消极特质：自恋、权术主义、反社会人格</p>
-</blockquote>
-</li>
-<li>高自尊且高自恋的人具有攻击性（报复）</li>
-<li>集体自恋</li>
-<li>自恋人数在增加：物质主义、同理心能力降低</li>
-</ul>
-</li>
-<li>低自尊与安全型自尊
-<ul>
-<li>低自尊的人容易面临各种临床问题：焦虑、孤独、饮食障碍</li>
-<li>安全型自尊：因为自己的内在特质而不是外在而感觉良好</li>
-<li>自我同情：不与他人比较，而是善待自己</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="知觉到的自我控制的意义"><a class="markdownIt-Anchor" href="#知觉到的自我控制的意义"></a> “知觉到的自我控制”的意义</h3>
-<ul>
-<li>自我的能量
-<ul>
-<li>努力做自我控制会消耗我们有限的意志力</li>
-<li>自我的力量会耗尽，但是自我概念会影响我们的行为</li>
-</ul>
-</li>
-<li>自我效能 <code>self-efficacy</code>
-<ul>
-<li>对自己能力与效率的乐观信念可以获得很大的回报</li>
-<li>自我效能感会随着辛苦付出换来的成就而增强</li>
-<li>自我效能和自尊的区别
-<ul>
-<li>自我效能：相信自己<u>有能力做一些事</u></li>
-<li>自尊：由衷地<u>喜欢自己</u></li>
-</ul>
-</li>
-<li>自我效能 = 社会说服 + 自我说服</li>
-<li>自我效能感的主要来源是成功的体验</li>
-</ul>
-</li>
-<li>控制点 locus of control
-<ul>
-<li>内部控制点：命运由自己掌控</li>
-<li>外部控制点：机会和外部力量决定了你的命运</li>
-<li>多大程度感觉到控制，取决于我们的挫折归因</li>
-</ul>
-</li>
-<li>习得性无助
-<ul>
-<li>无法控制的不利事件 → 知觉到缺乏控制 → 习得性无助</li>
-</ul>
-</li>
-<li>过度的自由
-<ul>
-<li>为人们提供较小的选择范围可能为他们提供较大的选择范围更能带来满足感</li>
-</ul>
-</li>
-</ul>
-<h3 id="自我服务偏差"><a class="markdownIt-Anchor" href="#自我服务偏差"></a> 自我服务偏差</h3>
-<ul>
-<li>自我服务偏差的表现
-<ul>
-<li><strong>自我服务归因</strong> <code>self-serving attributions</code>
-<ul>
-<li>把好的结果归因与自己，而把坏的结果归因于其他；将自我与成功相联系，而刻意避开失败对自我的影响</li>
-<li>可能的生理学解释：进行自我服务归因能够激活奖赏和愉悦相关的脑区</li>
-<li><code>偏见盲点</code>：我们的偏见会让我们无视自己的偏见（自己避免了自我服务偏差，但却认为别人持有这一偏见）</li>
-</ul>
-</li>
-<li>自我恭维的比较
-<ul>
-<li>拿自己和别人比较时也会出现自我服务偏差</li>
-<li>群体的每个成员对自己为工作所做贡献的评价之和总是超过 100%</li>
-<li>可能的原因：我们对自己行为的了解远多于对别人行为的了解，于是我们假设其他人的行为不会比自己更极端</li>
-<li>主观维度（自律的）将比客观维度（守时的）引发更强的自我服务偏差</li>
-</ul>
-</li>
-<li>盲目乐观
-<ul>
-<li>盲目乐观让我们更加脆弱</li>
-<li>防御性悲观主义（居安思危）</li>
-</ul>
-</li>
-<li><code>虚假普遍性</code>效应
-<ul>
-<li>过分高估或低估他人会想我们一样思考和行事的程度</li>
-<li>原因：归纳性结论只来自一个有限的样本，而这个样本还包括我们自己，于是用自己的内心投射他人</li>
-</ul>
-</li>
-<li><code>虚假独特性</code>效应
-<ul>
-<li>在能力方面，当我们获得成功时时常发生</li>
-<li>把自己的才智和品德看成超乎寻常的，以完善自我形象</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>对自我服务偏差的解释
-<ul>
-<li>知觉错误
-<ul>
-<li>加工和记忆有关个人信息的副产品：将自己与他人比较，要求我们去注意、评价、回忆自己和他人的行为，这就增加了信息加工过程中出错的机会</li>
-</ul>
-</li>
-<li>自我服务动机
-<ul>
-<li>渴望自我证实、验证我们的自我概念</li>
-<li>寻求自我确认，希望能提升自我形象</li>
-<li>自尊的动机也促进了自我服务偏差的出现</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>自尊和自我服务偏差的反思
-<ul>
-<li>适应性
-<ul>
-<li>保护人们免受抑郁的侵害</li>
-<li>帮助人们缓解压力</li>
-<li>在自我服务知觉中可能存在某种实践智慧，认为自己比真实中的自我更聪明、强大、成功。也许是一种有利的策略</li>
-<li>激发我们努力（自我实现的预言），在困境中保持希望</li>
-</ul>
-</li>
-<li>不良适应
-<ul>
-<li>自我服务知觉可以损害一个群体——认为自己更杰出——引发不和与嫉妒</li>
-<li>群体服务偏差：夸大人们对自己群体的评价</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="自我表露的管理"><a class="markdownIt-Anchor" href="#自我表露的管理"></a> 自我表露的管理</h3>
-<ul>
-<li>自我妨碍
-<ul>
-<li>设置障碍来阻挠自己的成功（而达到自我保护的目的：要不是因为 xxx，我肯定能干好）</li>
-<li>自我妨碍有利于我们把失败归因于一些暂时的或外在的因素（借口）</li>
-</ul>
-</li>
-<li>印象管理
-<ul>
-<li>自我表露：想要向外在的观众和内在的观众展现一种受赞许的形象</li>
-<li>出于对自我表露的关注，在失败时人们就会采取自我妨碍的方式</li>
-<li>自我监控：不断监控自己的行为，注意他人的反应，调整自己的社会行为以获得社会赞许</li>
-<li>人们了解的自我与表现出的自我是不同的</li>
-<li>高自我监控与低自我监控</li>
-</ul>
-</li>
-</ul>
-<h2 id="社会信念和判断"><a class="markdownIt-Anchor" href="#社会信念和判断"></a> 社会信念和判断</h2>
-<h3 id="社会世界的感知"><a class="markdownIt-Anchor" href="#社会世界的感知"></a> 社会世界的感知</h3>
-<blockquote>
-<p>我们并非如实地对现实进行反应，而是根据我们对现实的建构作出反应</p>
-</blockquote>
-<ul>
-<li>启动效应
-<ul>
-<li>记忆系统是一个相互联结的网络，而<strong>启动</strong>就是唤醒或者激活其中的某些特定联结</li>
-<li>启动一个念头（即使个体对此并无意识）会影响个体的另一个念头</li>
-<li>即使刺激信息是阈下呈现的（呈现时间极短使得意识无法捕捉），也会诱发启动效应</li>
-<li>我们对许多社会信息的加工是自动的</li>
-<li>具身认知：身体的感觉也会启动我们的社会判断</li>
-</ul>
-</li>
-<li>感知和解释事件
-<ul>
-<li>预先判断和期望效应</li>
-<li>先入之见（先入为主）</li>
-<li><code>自发性特性转移</code>：当我们说别人好话坏话时候，人们会试图讲那些特质与我们联系在一起</li>
-</ul>
-</li>
-<li>信念固着
-<ul>
-<li>指：人们执着于自己先前所持有的信念以及认可这一信念的原因，甚至在这种信念的基础被否定时仍是如此</li>
-<li>信念可以独立存在，并当支持它的证据被否定时仍会存活下来</li>
-<li>我们越想证明我们的理论和解释可能是正确的，我们就对挑战自己信念的信息越封闭</li>
-<li>如何纠正：解释相反的观点</li>
-</ul>
-</li>
-<li>建构记忆
-<ul>
-<li>记忆不是我们记忆库中信息的精确复制品，相反我们会在提取信息的同时对记忆进行建构</li>
-<li><code>误导信息效应</code>：人们会将误导性的信息整合在他们的记忆中</li>
-<li>重构过去的态度
-<ul>
-<li>积极的记忆建构可以美化我们的回忆</li>
-<li>我们同他人的关系改变时，我们关于他人的回忆也会改变</li>
-</ul>
-</li>
-<li>重构过去的行为
-<ul>
-<li>“在记忆中，事情有必要按照期望的方式发生”</li>
-<li>我们会改变我们（记忆中）过去的行为使其符合我们现在的观点</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="社会世界的判断"><a class="markdownIt-Anchor" href="#社会世界的判断"></a> 社会世界的判断</h3>
-<ul>
-<li>直觉判断
-<ul>
-<li>我们思维只有一部分是受控制加工（反应性的、深思熟虑的、有意识的），还有一部分是自动化加工（冲动的、无需努力的、无意识的）</li>
-<li>例子
-<ul>
-<li><code>schema</code>（图示）自发引导我们的知觉和解释</li>
-<li>情绪反应通常是即时的</li>
-<li>如果积累了足够多的专业知识，就可能凭直觉获得答案</li>
-<li>当面临需要做决定又缺乏专业知识快速做出决断时，我们的无意识思维会引导我们做出令人满意的答案</li>
-</ul>
-</li>
-<li>习惯化的认知功能是在没有觉察的状态下自动且无目的地发生的（阈下刺激）</li>
-<li>局限性：
-<ul>
-<li>阈下信息无法达到有意识的唤醒水平</li>
-<li>错觉思维：基于知觉的错误解释、想象和建构性的信念</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>过度自信
-<ul>
-<li>来源
-<ul>
-<li>自动化直觉有时候会出错并且我们通常意识不到</li>
-<li>我们更容易描绘自己正确而非错误的缘由</li>
-<li><code>智力自负</code>会影响知识的评价和未来行为的预测（规划谬误）</li>
-<li>能力不足会促进过度自信倾向；别人眼中的我们比自己眼中的我们更接近客观现实</li>
-</ul>
-</li>
-<li>验证性偏差
-<ul>
-<li>与寻找证据证伪自己的信念相比，我们更愿意证实它们</li>
-<li>验证性偏差有助于解释我们的自我意象不稳定</li>
-</ul>
-</li>
-<li>矫正
-<ul>
-<li>即时反馈</li>
-<li>分解任务（矫正规划谬误）</li>
-<li>让人们设想自己的判断可能出错的原因，迫使他们去考虑无法证实自己信念的信息</li>
-</ul>
-</li>
-<li>虽然过度自信会让我们会付出代价，但基于现实的自信是有适应意义的</li>
-</ul>
-</li>
-<li>启发式判断
-<ul>
-<li>代表性启发式判断：
-<ul>
-<li>对某个事物进行评价时，在直觉的引导下，将其与某一类别的心理表征进行比较</li>
-<li>对某人或某事是否属于某个类别的快速判断</li>
-</ul>
-</li>
-<li>易得性启发式判断
-<ul>
-<li>我们越容易回想起某个东西，那个东西就越可能是真的</li>
-<li>人们从一条一般公理演绎出一个具体例证的过程是缓慢的，但从一个鲜明的例证归纳出一般公理的过程是迅速的</li>
-<li><code>概率性忽视现象</code>：为了小概率事件忧心忡忡，却忽视了高概率事件</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>反事实思维</code>
-<ul>
-<li>易于想象的事件会影响我们对负罪、遗憾、挫败、宽慰的体验，“差一点就可以达成目标的遗憾”</li>
-<li>反事实思维是构成我们幸运感的基础</li>
-<li>事件本身越重要，反事实思维的强度就越大</li>
-<li>绝大部分人对已做的事情的悔恨比没有做的事情的悔恨要少</li>
-</ul>
-</li>
-<li>错觉思维
-<ul>
-<li>错觉相关
-<ul>
-<li>当我们期待发现某种重要的联系时，我们很容易会将各种随机事件联系起来</li>
-<li>加入我们相信事件之间存在相关，我们更可能注意并回忆出某些支持性证据</li>
-</ul>
-</li>
-<li>控制错觉
-<ul>
-<li>将随机事件知觉为有联系的倾向容易产生控制错觉——认为各种随机事件受我们影响</li>
-<li>例证：赌博、股票、趋均数回归</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>情绪判断
-<ul>
-<li>情绪会影响我们的判断</li>
-<li>好的坏的情绪会激起个体对相关经历的回忆</li>
-<li>当情绪被唤起时，我们更可能在仓促间做决定，或根据刻板影响评价别人</li>
-</ul>
-</li>
-</ul>
-<h3 id="社会世界的解释"><a class="markdownIt-Anchor" href="#社会世界的解释"></a> 社会世界的解释</h3>
-<ul>
-<li><code>归因理论</code>
-<ul>
-<li>错误归因（是产生性骚扰的重要原因）</li>
-<li>自发性特质推论（推断个体行为背后的特质）</li>
-<li>三种因素影响归因：一致性、区别性、共同反应</li>
-</ul>
-</li>
-<li><code>基本归因错误</code>
-<ul>
-<li>也叫对应偏见</li>
-<li>当我们解释他人的行为时，会低估环境造成的影响，而高估个人的特质和态度造成的影响（但对自己不会）</li>
-<li>我们通常认为他人的行为就是其内在特点的直接反映</li>
-</ul>
-</li>
-<li>基本归因错误的原因
-<ul>
-<li>视角和情境意识
-<ul>
-<li>当我们作为行动者时，<strong>环境</strong>会支配我们的注意；观察别人行为时，作为行为载体的<strong>人</strong>会成为我们注意的中心</li>
-<li>当行为时有意而为且是好的，会将它归因为自己的优点，忽略情境的作用；表现得不好的时候，更可能归因于外部情境</li>
-<li>结论：我们从自己关注的地方寻找原因</li>
-</ul>
-</li>
-<li>文化差异
-<ul>
-<li>文化中普遍存在归因错误</li>
-<li>东亚文化的人对环境的作用格外敏感；集体主义文化通常更愿意做情境性归因；西方文化更倾向性格归因</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>研究归因错误的必要性
-<ul>
-<li>我们的思维模式总的来说具有一定的适应性，错觉通常是我们将复杂信息简单化的策略的副产品（类似知觉机制）</li>
-<li>一个关注诸如基本归因错误这类思维偏见的原因就是出于人道主义的考虑（人们不应该总是因为自己的问题而被责备）</li>
-<li>通常意识不到这种思维偏见，但了解这类思维偏见会给我们带来很大的好处</li>
-</ul>
-</li>
-</ul>
-<h3 id="社会期望的影响"><a class="markdownIt-Anchor" href="#社会期望的影响"></a> 社会期望的影响</h3>
-<ul>
-<li><code>自我实现预言</code>：信念能够导向自我实现
-<ul>
-<li>教师期望效应：教师的评价是学生行为的原因而不仅仅是结果（皮格马利翁效应）</li>
-<li>学生期望效应：对自己的老师抱有高期望的学生觉得老师更出色，学到的东西也更多</li>
-</ul>
-</li>
-<li><code>行为确证</code>：一旦形成错误的社会信念，就可能引发他人做出某些行为反应以支持这种信念</li>
-</ul>
-<h3 id="结论"><a class="markdownIt-Anchor" href="#结论"></a> 结论</h3>
-<ul>
-<li>我们的信息加工能力有很高的效率和适应性，但难以避免可预测性的错误和误判</li>
-<li>虽然我们在社会认知和判断中存在着各种偏差（<u>基本归因错误、虚假普遍性、对不完善的启发式判断的过度依赖、自我服务偏差等</u>），但对他人的感知却惊人的准确。</li>
-<li>人类理性的有限性→简化思维过程→启发式判断</li>
-</ul>
-<h2 id="态度和行为"><a class="markdownIt-Anchor" href="#态度和行为"></a> 态度和行为</h2>
-<h3 id="态度对行为的预测"><a class="markdownIt-Anchor" href="#态度对行为的预测"></a> 态度对行为的预测</h3>
-<blockquote>
-<p>人们表现出的态度很难预测他们的行为，那态度何时能预测行为？</p>
-</blockquote>
-<ul>
-<li>外显态度（受控制的思考）+内隐态度（自动的思考）
-<ul>
-<li>内隐联想测试 IAT</li>
-<li>内隐偏见普遍存在；内隐偏见存在个体差异；人们通常意识不到自己的内隐偏见</li>
-<li>外显态度和内隐态度都有助于预测个体的行为</li>
-</ul>
-</li>
-<li>面对的情境
-<ul>
-<li>观察人的总体的或通常的行为（而非某一次单独的），态度对于行为的预测效应会变得更明显</li>
-<li>特定且相关的态度能预测行为</li>
-<li><code>计划行为理论</code> ： 个体的态度、知觉到的社会规范和控制感共同决定了个体的动机，从而指导行为</li>
-</ul>
-</li>
-<li>强有力的态度
-<ul>
-<li><code>自我觉知</code></li>
-<li>通过经验建立的稳定的态度（可接近的、稳定的）</li>
-</ul>
-</li>
-<li>态度影响行为的条件
-<ol>
-<li>把其他“因素的影响”最小化</li>
-<li>态度与预测的行为存在具体的相关</li>
-<li>态度是强有力的</li>
-</ol>
-</li>
-</ul>
-<h3 id="行为对态度的影响"><a class="markdownIt-Anchor" href="#行为对态度的影响"></a> 行为对态度的影响</h3>
-<ul>
-<li>角色扮演——津巴多的模拟监狱实验</li>
-<li>言语变成信念
-<ul>
-<li>我们的所说所写会强烈地影响我们随后所持的态度</li>
-<li>当一个人的言语缺乏令人信服的外在解释时，言语就会变成信念、</li>
-</ul>
-</li>
-<li><code>登门槛现象</code>
-<ul>
-<li>如果想要别人帮你一个大忙，一个有效的策略是先请他们帮一个小忙</li>
-<li>当人们承诺公众行为并且认为这些行为是自觉做出的时候，人们会更坚信自己的所作所为</li>
-<li>低价法策略</li>
-</ul>
-</li>
-<li>邪恶行为与道德行为
-<blockquote>
-<p>邪恶行为和道德行为都会塑造自我</p>
-</blockquote>
-<ul>
-<li>邪恶行为
-<ul>
-<li>一个不起眼的行为会侵蚀人的道德感，轻易引发一种更恶劣的行为</li>
-<li>伤害无辜通常会导致攻击者去贬损受害者，并以此为其行为的正当性辩护（人们会为自己的行为辩护）</li>
-</ul>
-</li>
-<li>道德行为
-<ul>
-<li>当我们认为没有人在场的时候，我们的所作所为会反映出自己的性格</li>
-<li>道德行为，特别是当可以选择而不是强迫接受时，会影响道德思维</li>
-<li>对他人的积极行为（提供帮助等）会增强对他人的好感</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>法律约束下的行为
-<ul>
-<li>种族隔离制度的废除影响了种族态度</li>
-</ul>
-</li>
-<li>政治和社会运动
-<ul>
-<li>政治仪式（升旗敬礼唱国歌）用公开的一致行为来构建个人的忠诚</li>
-<li>最强有力的社会教化：“洗脑”</li>
-</ul>
-</li>
-</ul>
-<h3 id="行为影响态度的原因"><a class="markdownIt-Anchor" href="#行为影响态度的原因"></a> 行为影响态度的原因</h3>
-<ul>
-<li>自我表露理论（印象管理）
-<ul>
-<li>人们适当调整自己的态度以使其看起来与行为一致</li>
-<li><u>不能</u>解释所有态度的变化</li>
-</ul>
-</li>
-<li><code>认知失调理论</code> （自我辩解）
-<ul>
-<li>当两种想法（“认知”）在心理上不一致时，我们会感到紧张（“失调”），为了减少这种不愉快的感觉体验，我们经常会调整自己的想法。</li>
-<li>认知失调理论主要用来解释<u>行为和态度之间的矛盾关系</u></li>
-<li>减轻认知失调（导致态度改变）的方式
-<ul>
-<li>选择性接触
-<ul>
-<li>选择性接触与自己观点一致的信息</li>
-</ul>
-</li>
-<li>理由不足——态度依从行为
-<ul>
-<li>在人们做出某种行为的理由不足（不能完全用外部报酬或强迫性因素来解释）时，他们可能会感到不适（失调）并因此更相信自己的所作所为</li>
-<li>当人们拥有选择权时，态度-依从-行为的效应是最强的</li>
-<li>我们不当行为的外在理由越少，我们越觉得自己对其负有责任，从而会产生越多失调，态度就改变得越多</li>
-<li>失调理论强调鼓励和诱导的力量应该足够引发所期望的行为，从而使态度依从行为</li>
-</ul>
-</li>
-<li>决策后失调——决定变成信念，选择影响偏好
-<ul>
-<li>做出重要决策以后，我们经常会高度评价自己的选择而贬低放弃的选择，从而减少失调</li>
-<li>决定-变成-信念效应会滋长自负</li>
-<li>偏好会影响决定，决定又会强化我们的偏好（选择-影响-偏好）</li>
-<li>一旦做出决定，它就会自圆其说。通常这些新支撑点非常坚固，即使失去一个支撑，决定也不会崩溃</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>失调的激活
-<ul>
-<li>失调会激活个体的不适感、紧张感</li>
-<li><code>自我肯定理论</code>
-<ul>
-<li>不当行为破坏了自我效能感和善良感，因此证明自己的行为和决定其实是一种自我肯定</li>
-<li>当人们开始做出引发失调的行为（非强迫性的逆态度行为），左额叶会有额外的兴奋</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>不足
-<ul>
-<li>不能解释非失调状态下的状态改变（立场与态度相符时，不适感的消除不能排除态度的改变）</li>
-<li>无法解释过度合理化效应（在有报酬的情况下去做自己喜欢的事不会唤起高度紧张感——自我知觉理论）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>自我知觉理论</code> （自我观察）
-<ul>
-<li>当我们的态度不很坚定时，我们就通过观察自己的行为及其环境来推断我们的态度。我们自由做出的行动正式对自我的揭露</li>
-<li>面部和躯体反馈效应（笑的动作会让自己感到快乐）</li>
-<li><code>过度合理化效应</code>
-<ul>
-<li>人们通过关注周围情境来解释自己的行为</li>
-<li>外部报酬或强迫性因素导致人们将行为归因于报酬，而削弱人们的自我知觉（兴趣）</li>
-<li>行为 → 有无外部影响 → 自我知觉（归因）→ 外在动机 / 内在动机</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>理论比较
-<ul>
-<li>自我表露理论解释了为什么从表面上看行为会影响态度</li>
-<li>认知失调理论和自我知觉理论解释了行为确实影响态度的原因
-<ul>
-<li>认知失调理论假定我们为自己的行为辩护来减少我们的不适</li>
-<li>自我知觉理论假定同观察和推断他人态度一样，我们会审视自己的行为并且做出合理的态度判断</li>
-</ul>
-</li>
-<li>失调理论解释态度的改变；自我知觉理论解释态度的形成</li>
+<li>
+<p>A kind of metaphor, being alone</p>
+<ul>
+<li>When we die, it’s as though we were alone. It’s like being alone.</li>
+<li>Maybe a psychological claim that the psychological state we are in when we die similar to loneliness</li>
+<li>Is it true that everybody dies alone in this psychological sense?</li>
 </ul>
 </li>
 </ul>
@@ -1912,8 +1416,7 @@ But how soul can create the consciousness? As far as i can see, right now nobody
         <category>Humanities</category>
       </categories>
       <tags>
-        <tag>Psychology</tag>
-        <tag>Sociology</tag>
+        <tag>Philosophy</tag>
       </tags>
   </entry>
   <entry>
@@ -2975,6 +2478,684 @@ But how soul can create the consciousness? As far as i can see, right now nobody
       </categories>
       <tags>
         <tag>Psychology</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>社会心理学（一）</title>
+    <url>//social-psychology-1/</url>
+    <content><![CDATA[<blockquote>
+<p>参考书籍：《社会心理学》第11版</p>
+</blockquote>
+<h1 id="导论"><a class="markdownIt-Anchor" href="#导论"></a> 导论</h1>
+<ul>
+<li>社会心理学是一门研究人们如何看待他人，如何相互影响，以及如何与他人互相关联的科学</li>
+</ul>
+<h3 id="重要观点"><a class="markdownIt-Anchor" href="#重要观点"></a> 重要观点</h3>
+<ul>
+<li>我们构建了社会现实</li>
+<li>社会直觉通常强大但有时也危险</li>
+<li>社会影响塑造行为</li>
+<li>个人态度和性格倾向塑造行为</li>
+<li>社会行为有其生物性基础</li>
+<li>社会心理学原理在日常生活中的应用（信念、态度、社会关系）</li>
+</ul>
+<h3 id="价值观影响心理学"><a class="markdownIt-Anchor" href="#价值观影响心理学"></a> 价值观影响心理学</h3>
+<ul>
+<li>直接影响
+<ul>
+<li>当选择研究课题时，价值观会对其产生影响</li>
+<li>价值观影响投身于不同学科的人群类型</li>
+<li>价值观是社会心理学分析的对象</li>
+</ul>
+</li>
+<li>间接影响
+<ul>
+<li>科学存在主观性的一面（科学并非全然客观；社会表征）</li>
+<li>隐含价值观的心理概念（陈述事实？价值判断！）</li>
+</ul>
+</li>
+</ul>
+<h3 id="社会心理学是常识吗"><a class="markdownIt-Anchor" href="#社会心理学是常识吗"></a> 社会心理学是常识吗</h3>
+<ul>
+<li><code>后见之明偏差</code></li>
+<li>常识总在事后证明是正确的，在事实揭晓之后才显得“显而易见”</li>
+</ul>
+<h3 id="研究方法"><a class="markdownIt-Anchor" href="#研究方法"></a> 研究方法</h3>
+<ul>
+<li>假设的形成与验证
+<ul>
+<li>理论：一套原则的整合，可以对观察到的事件进行概括（能有效概括大量结果）和预测（做出清晰预测，便于 确证或修正理论 / 激发新的探索 / 指出可能的应用方向）</li>
+</ul>
+</li>
+<li>相关研究（探寻两个或多个因素之间的自然关系）
+<ul>
+<li>相关与因果关系（X 导致 Y / Y 导致 X / 共同受到 Z 的影响）</li>
+<li>调查研究（可能会造成偏差）
+<ul>
+<li>是否有具有代表性的样本</li>
+<li>问题的顺序</li>
+<li>答案的选项</li>
+<li>问题的措辞</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>实验研究（通过操纵一些因素来考察它们对其他因素的影响）
+<ol>
+<li>控制（变量的操纵）</li>
+<li>随机分配（消除额外变量的干扰）</li>
+</ol>
+</li>
+</ul>
+<h1 id="社会思维"><a class="markdownIt-Anchor" href="#社会思维"></a> 社会思维</h1>
+<blockquote>
+<p>我们如何看待他人（社会认知）</p>
+</blockquote>
+<h2 id="社会中的自我"><a class="markdownIt-Anchor" href="#社会中的自我"></a> 社会中的自我</h2>
+<h3 id="焦点和错觉"><a class="markdownIt-Anchor" href="#焦点和错觉"></a> 焦点和错觉</h3>
+<ul>
+<li>焦点效应：人类往往会把自己看做一切的中心，并直觉地高估别人对我们的关注程度（物理方面）</li>
+<li>透明度错觉：我们能敏锐捕捉到自己的情绪但其他人并不如此（情绪方面）
+<ul>
+<li>社会环境对自我觉知的影响</li>
+<li>带有自我服务色彩的社会判断</li>
+<li>自我关注激发的社会行为</li>
+<li>社会关系有助于我们界定自我</li>
+</ul>
+</li>
+</ul>
+<h3 id="自我概念"><a class="markdownIt-Anchor" href="#自我概念"></a> 自我概念</h3>
+<ul>
+<li>自我的概念
+<ul>
+<li><code>自我图示</code> ：自我的概念构成要素以及定义自我的特殊信念</li>
+<li><code>可能自我</code> ：包括我们梦想中自己的样子，能对我们产生巨大的激励作用</li>
+</ul>
+</li>
+<li>社会自我的发展
+<ul>
+<li>我们在社会生活中扮演的角色</li>
+<li>社会比较：生活的大部分是围绕着社会比较进行的</li>
+<li>其他人的评价；<code>镜像自我</code></li>
+</ul>
+</li>
+<li>自我与文化
+<blockquote>
+<p>个人主义 &amp; 集体主义</p>
+</blockquote>
+<ul>
+<li>个人与社会文化的互动：个人观念创造了社会文化 ？社会文化影响了个人观念</li>
+<li>文化与认知：独立的自我 &amp; 相互依赖的自我</li>
+<li>文化和自尊
+<ul>
+<li>在集体主义中，自尊与“别人怎么评价我和我的群体”密切相关；自我概念是有弹性的（与特定情境有关）而不是固定不变的（夸情境的持久性）</li>
+<li>个人主义文化中，个体自尊更多是个人的而不是关系的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>自我认识
+<ul>
+<li>解释我们的行为</li>
+<li>预测我们的行为（<code>规划谬误</code>——低估完成事情的时间）</li>
+<li>预测我们的感受（<code>影响偏差</code>——高估情绪事件的持久性影响；<code>免疫忽视现象</code>——心理的免疫系统）</li>
+<li>自我分析的智慧和错觉（<code>双重态度系统</code>——控制我们社会行为的心理过程与解释我们行为的心理过程截然不同，关于人或事的自动的内隐态度通常与受意识控制的外显态度不同）</li>
+</ul>
+</li>
+</ul>
+<h3 id="自尊的实质及其动机力量"><a class="markdownIt-Anchor" href="#自尊的实质及其动机力量"></a> 自尊的实质及其动机力量</h3>
+<blockquote>
+<p>自尊 = 自我图示 + 可能自我？</p>
+</blockquote>
+<ul>
+<li>自尊动机
+<ul>
+<li>大多数人努力维持自己的自尊</li>
+<li>自尊的威胁：自尊水平会影响个体反应
+<ul>
+<li>高自尊的人会做出补偿反应（责怪别人、下次更努力），有助于保护积极的自我感觉</li>
+<li>低自尊的人更容易自责或放弃努力</li>
+</ul>
+</li>
+<li>人际关系对我们的生存和发展具有导向意义
+<ul>
+<li>社会拒绝会降低我们的自尊，同时增强我们渴望被接受的意愿</li>
+<li>驱使我们通过兴东来发展自我，在其他地方寻求社会接纳和认同</li>
+</ul>
+</li>
+<li>“恐惧管理理论”观点</li>
+</ul>
+</li>
+<li>自尊的阴暗面
+<ul>
+<li>自恋——当自尊变成自负
+<ul>
+<li>大多数高自尊的人都重视个人成功和他人的关系，但自恋的人缺失关心他人（自我为中心）
+<blockquote>
+<p>“黑暗三角”的消极特质：自恋、权术主义、反社会人格</p>
+</blockquote>
+</li>
+<li>高自尊且高自恋的人具有攻击性（报复）</li>
+<li>集体自恋</li>
+<li>自恋人数在增加：物质主义、同理心能力降低</li>
+</ul>
+</li>
+<li>低自尊与安全型自尊
+<ul>
+<li>低自尊的人容易面临各种临床问题：焦虑、孤独、饮食障碍</li>
+<li>安全型自尊：因为自己的内在特质而不是外在而感觉良好</li>
+<li>自我同情：不与他人比较，而是善待自己</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="知觉到的自我控制的意义"><a class="markdownIt-Anchor" href="#知觉到的自我控制的意义"></a> “知觉到的自我控制”的意义</h3>
+<ul>
+<li>自我的能量
+<ul>
+<li>努力做自我控制会消耗我们有限的意志力</li>
+<li>自我的力量会耗尽，但是自我概念会影响我们的行为</li>
+</ul>
+</li>
+<li>自我效能 <code>self-efficacy</code>
+<ul>
+<li>对自己能力与效率的乐观信念可以获得很大的回报</li>
+<li>自我效能感会随着辛苦付出换来的成就而增强</li>
+<li>自我效能和自尊的区别
+<ul>
+<li>自我效能：相信自己<u>有能力做一些事</u></li>
+<li>自尊：由衷地<u>喜欢自己</u></li>
+</ul>
+</li>
+<li>自我效能 = 社会说服 + 自我说服</li>
+<li>自我效能感的主要来源是成功的体验</li>
+</ul>
+</li>
+<li>控制点 locus of control
+<ul>
+<li>内部控制点：命运由自己掌控</li>
+<li>外部控制点：机会和外部力量决定了你的命运</li>
+<li>多大程度感觉到控制，取决于我们的挫折归因</li>
+</ul>
+</li>
+<li>习得性无助
+<ul>
+<li>无法控制的不利事件 → 知觉到缺乏控制 → 习得性无助</li>
+</ul>
+</li>
+<li>过度的自由
+<ul>
+<li>为人们提供较小的选择范围可能为他们提供较大的选择范围更能带来满足感</li>
+</ul>
+</li>
+</ul>
+<h3 id="自我服务偏差"><a class="markdownIt-Anchor" href="#自我服务偏差"></a> 自我服务偏差</h3>
+<ul>
+<li>自我服务偏差的表现
+<ul>
+<li><strong>自我服务归因</strong> <code>self-serving attributions</code>
+<ul>
+<li>把好的结果归因与自己，而把坏的结果归因于其他；将自我与成功相联系，而刻意避开失败对自我的影响</li>
+<li>可能的生理学解释：进行自我服务归因能够激活奖赏和愉悦相关的脑区</li>
+<li><code>偏见盲点</code>：我们的偏见会让我们无视自己的偏见（自己避免了自我服务偏差，但却认为别人持有这一偏见）</li>
+</ul>
+</li>
+<li>自我恭维的比较
+<ul>
+<li>拿自己和别人比较时也会出现自我服务偏差</li>
+<li>群体的每个成员对自己为工作所做贡献的评价之和总是超过 100%</li>
+<li>可能的原因：我们对自己行为的了解远多于对别人行为的了解，于是我们假设其他人的行为不会比自己更极端</li>
+<li>主观维度（自律的）将比客观维度（守时的）引发更强的自我服务偏差</li>
+</ul>
+</li>
+<li>盲目乐观
+<ul>
+<li>盲目乐观让我们更加脆弱</li>
+<li>防御性悲观主义（居安思危）</li>
+</ul>
+</li>
+<li><code>虚假普遍性</code>效应
+<ul>
+<li>过分高估或低估他人会想我们一样思考和行事的程度</li>
+<li>原因：归纳性结论只来自一个有限的样本，而这个样本还包括我们自己，于是用自己的内心投射他人</li>
+</ul>
+</li>
+<li><code>虚假独特性</code>效应
+<ul>
+<li>在能力方面，当我们获得成功时时常发生</li>
+<li>把自己的才智和品德看成超乎寻常的，以完善自我形象</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>对自我服务偏差的解释
+<ul>
+<li>知觉错误
+<ul>
+<li>加工和记忆有关个人信息的副产品：将自己与他人比较，要求我们去注意、评价、回忆自己和他人的行为，这就增加了信息加工过程中出错的机会</li>
+</ul>
+</li>
+<li>自我服务动机
+<ul>
+<li>渴望自我证实、验证我们的自我概念</li>
+<li>寻求自我确认，希望能提升自我形象</li>
+<li>自尊的动机也促进了自我服务偏差的出现</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>自尊和自我服务偏差的反思
+<ul>
+<li>适应性
+<ul>
+<li>保护人们免受抑郁的侵害</li>
+<li>帮助人们缓解压力</li>
+<li>在自我服务知觉中可能存在某种实践智慧，认为自己比真实中的自我更聪明、强大、成功。也许是一种有利的策略</li>
+<li>激发我们努力（自我实现的预言），在困境中保持希望</li>
+</ul>
+</li>
+<li>不良适应
+<ul>
+<li>自我服务知觉可以损害一个群体——认为自己更杰出——引发不和与嫉妒</li>
+<li>群体服务偏差：夸大人们对自己群体的评价</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="自我表露的管理"><a class="markdownIt-Anchor" href="#自我表露的管理"></a> 自我表露的管理</h3>
+<ul>
+<li>自我妨碍
+<ul>
+<li>设置障碍来阻挠自己的成功（而达到自我保护的目的：要不是因为 xxx，我肯定能干好）</li>
+<li>自我妨碍有利于我们把失败归因于一些暂时的或外在的因素（借口）</li>
+</ul>
+</li>
+<li>印象管理
+<ul>
+<li>自我表露：想要向外在的观众和内在的观众展现一种受赞许的形象</li>
+<li>出于对自我表露的关注，在失败时人们就会采取自我妨碍的方式</li>
+<li>自我监控：不断监控自己的行为，注意他人的反应，调整自己的社会行为以获得社会赞许</li>
+<li>人们了解的自我与表现出的自我是不同的</li>
+<li>高自我监控与低自我监控</li>
+</ul>
+</li>
+</ul>
+<h2 id="社会信念和判断"><a class="markdownIt-Anchor" href="#社会信念和判断"></a> 社会信念和判断</h2>
+<h3 id="社会世界的感知"><a class="markdownIt-Anchor" href="#社会世界的感知"></a> 社会世界的感知</h3>
+<blockquote>
+<p>我们并非如实地对现实进行反应，而是根据我们对现实的建构作出反应</p>
+</blockquote>
+<ul>
+<li>启动效应
+<ul>
+<li>记忆系统是一个相互联结的网络，而<strong>启动</strong>就是唤醒或者激活其中的某些特定联结</li>
+<li>启动一个念头（即使个体对此并无意识）会影响个体的另一个念头</li>
+<li>即使刺激信息是阈下呈现的（呈现时间极短使得意识无法捕捉），也会诱发启动效应</li>
+<li>我们对许多社会信息的加工是自动的</li>
+<li>具身认知：身体的感觉也会启动我们的社会判断</li>
+</ul>
+</li>
+<li>感知和解释事件
+<ul>
+<li>预先判断和期望效应</li>
+<li>先入之见（先入为主）</li>
+<li><code>自发性特性转移</code>：当我们说别人好话坏话时候，人们会试图讲那些特质与我们联系在一起</li>
+</ul>
+</li>
+<li>信念固着
+<ul>
+<li>指：人们执着于自己先前所持有的信念以及认可这一信念的原因，甚至在这种信念的基础被否定时仍是如此</li>
+<li>信念可以独立存在，并当支持它的证据被否定时仍会存活下来</li>
+<li>我们越想证明我们的理论和解释可能是正确的，我们就对挑战自己信念的信息越封闭</li>
+<li>如何纠正：解释相反的观点</li>
+</ul>
+</li>
+<li>建构记忆
+<ul>
+<li>记忆不是我们记忆库中信息的精确复制品，相反我们会在提取信息的同时对记忆进行建构</li>
+<li><code>误导信息效应</code>：人们会将误导性的信息整合在他们的记忆中</li>
+<li>重构过去的态度
+<ul>
+<li>积极的记忆建构可以美化我们的回忆</li>
+<li>我们同他人的关系改变时，我们关于他人的回忆也会改变</li>
+</ul>
+</li>
+<li>重构过去的行为
+<ul>
+<li>“在记忆中，事情有必要按照期望的方式发生”</li>
+<li>我们会改变我们（记忆中）过去的行为使其符合我们现在的观点</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="社会世界的判断"><a class="markdownIt-Anchor" href="#社会世界的判断"></a> 社会世界的判断</h3>
+<ul>
+<li>直觉判断
+<ul>
+<li>我们思维只有一部分是受控制加工（反应性的、深思熟虑的、有意识的），还有一部分是自动化加工（冲动的、无需努力的、无意识的）</li>
+<li>例子
+<ul>
+<li><code>schema</code>（图示）自发引导我们的知觉和解释</li>
+<li>情绪反应通常是即时的</li>
+<li>如果积累了足够多的专业知识，就可能凭直觉获得答案</li>
+<li>当面临需要做决定又缺乏专业知识快速做出决断时，我们的无意识思维会引导我们做出令人满意的答案</li>
+</ul>
+</li>
+<li>习惯化的认知功能是在没有觉察的状态下自动且无目的地发生的（阈下刺激）</li>
+<li>局限性：
+<ul>
+<li>阈下信息无法达到有意识的唤醒水平</li>
+<li>错觉思维：基于知觉的错误解释、想象和建构性的信念</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>过度自信
+<ul>
+<li>来源
+<ul>
+<li>自动化直觉有时候会出错并且我们通常意识不到</li>
+<li>我们更容易描绘自己正确而非错误的缘由</li>
+<li><code>智力自负</code>会影响知识的评价和未来行为的预测（规划谬误）</li>
+<li>能力不足会促进过度自信倾向；别人眼中的我们比自己眼中的我们更接近客观现实</li>
+</ul>
+</li>
+<li>验证性偏差
+<ul>
+<li>与寻找证据证伪自己的信念相比，我们更愿意证实它们</li>
+<li>验证性偏差有助于解释我们的自我意象不稳定</li>
+</ul>
+</li>
+<li>矫正
+<ul>
+<li>即时反馈</li>
+<li>分解任务（矫正规划谬误）</li>
+<li>让人们设想自己的判断可能出错的原因，迫使他们去考虑无法证实自己信念的信息</li>
+</ul>
+</li>
+<li>虽然过度自信会让我们会付出代价，但基于现实的自信是有适应意义的</li>
+</ul>
+</li>
+<li>启发式判断
+<ul>
+<li>代表性启发式判断：
+<ul>
+<li>对某个事物进行评价时，在直觉的引导下，将其与某一类别的心理表征进行比较</li>
+<li>对某人或某事是否属于某个类别的快速判断</li>
+</ul>
+</li>
+<li>易得性启发式判断
+<ul>
+<li>我们越容易回想起某个东西，那个东西就越可能是真的</li>
+<li>人们从一条一般公理演绎出一个具体例证的过程是缓慢的，但从一个鲜明的例证归纳出一般公理的过程是迅速的</li>
+<li><code>概率性忽视现象</code>：为了小概率事件忧心忡忡，却忽视了高概率事件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>反事实思维</code>
+<ul>
+<li>易于想象的事件会影响我们对负罪、遗憾、挫败、宽慰的体验，“差一点就可以达成目标的遗憾”</li>
+<li>反事实思维是构成我们幸运感的基础</li>
+<li>事件本身越重要，反事实思维的强度就越大</li>
+<li>绝大部分人对已做的事情的悔恨比没有做的事情的悔恨要少</li>
+</ul>
+</li>
+<li>错觉思维
+<ul>
+<li>错觉相关
+<ul>
+<li>当我们期待发现某种重要的联系时，我们很容易会将各种随机事件联系起来</li>
+<li>加入我们相信事件之间存在相关，我们更可能注意并回忆出某些支持性证据</li>
+</ul>
+</li>
+<li>控制错觉
+<ul>
+<li>将随机事件知觉为有联系的倾向容易产生控制错觉——认为各种随机事件受我们影响</li>
+<li>例证：赌博、股票、趋均数回归</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>情绪判断
+<ul>
+<li>情绪会影响我们的判断</li>
+<li>好的坏的情绪会激起个体对相关经历的回忆</li>
+<li>当情绪被唤起时，我们更可能在仓促间做决定，或根据刻板影响评价别人</li>
+</ul>
+</li>
+</ul>
+<h3 id="社会世界的解释"><a class="markdownIt-Anchor" href="#社会世界的解释"></a> 社会世界的解释</h3>
+<ul>
+<li><code>归因理论</code>
+<ul>
+<li>错误归因（是产生性骚扰的重要原因）</li>
+<li>自发性特质推论（推断个体行为背后的特质）</li>
+<li>三种因素影响归因：一致性、区别性、共同反应</li>
+</ul>
+</li>
+<li><code>基本归因错误</code>
+<ul>
+<li>也叫对应偏见</li>
+<li>当我们解释他人的行为时，会低估环境造成的影响，而高估个人的特质和态度造成的影响（但对自己不会）</li>
+<li>我们通常认为他人的行为就是其内在特点的直接反映</li>
+</ul>
+</li>
+<li>基本归因错误的原因
+<ul>
+<li>视角和情境意识
+<ul>
+<li>当我们作为行动者时，<strong>环境</strong>会支配我们的注意；观察别人行为时，作为行为载体的<strong>人</strong>会成为我们注意的中心</li>
+<li>当行为时有意而为且是好的，会将它归因为自己的优点，忽略情境的作用；表现得不好的时候，更可能归因于外部情境</li>
+<li>结论：我们从自己关注的地方寻找原因</li>
+</ul>
+</li>
+<li>文化差异
+<ul>
+<li>文化中普遍存在归因错误</li>
+<li>东亚文化的人对环境的作用格外敏感；集体主义文化通常更愿意做情境性归因；西方文化更倾向性格归因</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>研究归因错误的必要性
+<ul>
+<li>我们的思维模式总的来说具有一定的适应性，错觉通常是我们将复杂信息简单化的策略的副产品（类似知觉机制）</li>
+<li>一个关注诸如基本归因错误这类思维偏见的原因就是出于人道主义的考虑（人们不应该总是因为自己的问题而被责备）</li>
+<li>通常意识不到这种思维偏见，但了解这类思维偏见会给我们带来很大的好处</li>
+</ul>
+</li>
+</ul>
+<h3 id="社会期望的影响"><a class="markdownIt-Anchor" href="#社会期望的影响"></a> 社会期望的影响</h3>
+<ul>
+<li><code>自我实现预言</code>：信念能够导向自我实现
+<ul>
+<li>教师期望效应：教师的评价是学生行为的原因而不仅仅是结果（皮格马利翁效应）</li>
+<li>学生期望效应：对自己的老师抱有高期望的学生觉得老师更出色，学到的东西也更多</li>
+</ul>
+</li>
+<li><code>行为确证</code>：一旦形成错误的社会信念，就可能引发他人做出某些行为反应以支持这种信念</li>
+</ul>
+<h3 id="结论"><a class="markdownIt-Anchor" href="#结论"></a> 结论</h3>
+<ul>
+<li>我们的信息加工能力有很高的效率和适应性，但难以避免可预测性的错误和误判</li>
+<li>虽然我们在社会认知和判断中存在着各种偏差（<u>基本归因错误、虚假普遍性、对不完善的启发式判断的过度依赖、自我服务偏差等</u>），但对他人的感知却惊人的准确。</li>
+<li>人类理性的有限性→简化思维过程→启发式判断</li>
+</ul>
+<h2 id="态度和行为"><a class="markdownIt-Anchor" href="#态度和行为"></a> 态度和行为</h2>
+<h3 id="态度对行为的预测"><a class="markdownIt-Anchor" href="#态度对行为的预测"></a> 态度对行为的预测</h3>
+<blockquote>
+<p>人们表现出的态度很难预测他们的行为，那态度何时能预测行为？</p>
+</blockquote>
+<ul>
+<li>外显态度（受控制的思考）+内隐态度（自动的思考）
+<ul>
+<li>内隐联想测试 IAT</li>
+<li>内隐偏见普遍存在；内隐偏见存在个体差异；人们通常意识不到自己的内隐偏见</li>
+<li>外显态度和内隐态度都有助于预测个体的行为</li>
+</ul>
+</li>
+<li>面对的情境
+<ul>
+<li>观察人的总体的或通常的行为（而非某一次单独的），态度对于行为的预测效应会变得更明显</li>
+<li>特定且相关的态度能预测行为</li>
+<li><code>计划行为理论</code> ： 个体的态度、知觉到的社会规范和控制感共同决定了个体的动机，从而指导行为</li>
+</ul>
+</li>
+<li>强有力的态度
+<ul>
+<li><code>自我觉知</code></li>
+<li>通过经验建立的稳定的态度（可接近的、稳定的）</li>
+</ul>
+</li>
+<li>态度影响行为的条件
+<ol>
+<li>把其他“因素的影响”最小化</li>
+<li>态度与预测的行为存在具体的相关</li>
+<li>态度是强有力的</li>
+</ol>
+</li>
+</ul>
+<h3 id="行为对态度的影响"><a class="markdownIt-Anchor" href="#行为对态度的影响"></a> 行为对态度的影响</h3>
+<ul>
+<li>角色扮演——津巴多的模拟监狱实验</li>
+<li>言语变成信念
+<ul>
+<li>我们的所说所写会强烈地影响我们随后所持的态度</li>
+<li>当一个人的言语缺乏令人信服的外在解释时，言语就会变成信念、</li>
+</ul>
+</li>
+<li><code>登门槛现象</code>
+<ul>
+<li>如果想要别人帮你一个大忙，一个有效的策略是先请他们帮一个小忙</li>
+<li>当人们承诺公众行为并且认为这些行为是自觉做出的时候，人们会更坚信自己的所作所为</li>
+<li>低价法策略</li>
+</ul>
+</li>
+<li>邪恶行为与道德行为
+<blockquote>
+<p>邪恶行为和道德行为都会塑造自我</p>
+</blockquote>
+<ul>
+<li>邪恶行为
+<ul>
+<li>一个不起眼的行为会侵蚀人的道德感，轻易引发一种更恶劣的行为</li>
+<li>伤害无辜通常会导致攻击者去贬损受害者，并以此为其行为的正当性辩护（人们会为自己的行为辩护）</li>
+</ul>
+</li>
+<li>道德行为
+<ul>
+<li>当我们认为没有人在场的时候，我们的所作所为会反映出自己的性格</li>
+<li>道德行为，特别是当可以选择而不是强迫接受时，会影响道德思维</li>
+<li>对他人的积极行为（提供帮助等）会增强对他人的好感</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>法律约束下的行为
+<ul>
+<li>种族隔离制度的废除影响了种族态度</li>
+</ul>
+</li>
+<li>政治和社会运动
+<ul>
+<li>政治仪式（升旗敬礼唱国歌）用公开的一致行为来构建个人的忠诚</li>
+<li>最强有力的社会教化：“洗脑”</li>
+</ul>
+</li>
+</ul>
+<h3 id="行为影响态度的原因"><a class="markdownIt-Anchor" href="#行为影响态度的原因"></a> 行为影响态度的原因</h3>
+<ul>
+<li>自我表露理论（印象管理）
+<ul>
+<li>人们适当调整自己的态度以使其看起来与行为一致</li>
+<li><u>不能</u>解释所有态度的变化</li>
+</ul>
+</li>
+<li><code>认知失调理论</code> （自我辩解）
+<ul>
+<li>当两种想法（“认知”）在心理上不一致时，我们会感到紧张（“失调”），为了减少这种不愉快的感觉体验，我们经常会调整自己的想法。</li>
+<li>认知失调理论主要用来解释<u>行为和态度之间的矛盾关系</u></li>
+<li>减轻认知失调（导致态度改变）的方式
+<ul>
+<li>选择性接触
+<ul>
+<li>选择性接触与自己观点一致的信息</li>
+</ul>
+</li>
+<li>理由不足——态度依从行为
+<ul>
+<li>在人们做出某种行为的理由不足（不能完全用外部报酬或强迫性因素来解释）时，他们可能会感到不适（失调）并因此更相信自己的所作所为</li>
+<li>当人们拥有选择权时，态度-依从-行为的效应是最强的</li>
+<li>我们不当行为的外在理由越少，我们越觉得自己对其负有责任，从而会产生越多失调，态度就改变得越多</li>
+<li>失调理论强调鼓励和诱导的力量应该足够引发所期望的行为，从而使态度依从行为</li>
+</ul>
+</li>
+<li>决策后失调——决定变成信念，选择影响偏好
+<ul>
+<li>做出重要决策以后，我们经常会高度评价自己的选择而贬低放弃的选择，从而减少失调</li>
+<li>决定-变成-信念效应会滋长自负</li>
+<li>偏好会影响决定，决定又会强化我们的偏好（选择-影响-偏好）</li>
+<li>一旦做出决定，它就会自圆其说。通常这些新支撑点非常坚固，即使失去一个支撑，决定也不会崩溃</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>失调的激活
+<ul>
+<li>失调会激活个体的不适感、紧张感</li>
+<li><code>自我肯定理论</code>
+<ul>
+<li>不当行为破坏了自我效能感和善良感，因此证明自己的行为和决定其实是一种自我肯定</li>
+<li>当人们开始做出引发失调的行为（非强迫性的逆态度行为），左额叶会有额外的兴奋</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>不足
+<ul>
+<li>不能解释非失调状态下的状态改变（立场与态度相符时，不适感的消除不能排除态度的改变）</li>
+<li>无法解释过度合理化效应（在有报酬的情况下去做自己喜欢的事不会唤起高度紧张感——自我知觉理论）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>自我知觉理论</code> （自我观察）
+<ul>
+<li>当我们的态度不很坚定时，我们就通过观察自己的行为及其环境来推断我们的态度。我们自由做出的行动正式对自我的揭露</li>
+<li>面部和躯体反馈效应（笑的动作会让自己感到快乐）</li>
+<li><code>过度合理化效应</code>
+<ul>
+<li>人们通过关注周围情境来解释自己的行为</li>
+<li>外部报酬或强迫性因素导致人们将行为归因于报酬，而削弱人们的自我知觉（兴趣）</li>
+<li>行为 → 有无外部影响 → 自我知觉（归因）→ 外在动机 / 内在动机</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>理论比较
+<ul>
+<li>自我表露理论解释了为什么从表面上看行为会影响态度</li>
+<li>认知失调理论和自我知觉理论解释了行为确实影响态度的原因
+<ul>
+<li>认知失调理论假定我们为自己的行为辩护来减少我们的不适</li>
+<li>自我知觉理论假定同观察和推断他人态度一样，我们会审视自己的行为并且做出合理的态度判断</li>
+</ul>
+</li>
+<li>失调理论解释态度的改变；自我知觉理论解释态度的形成</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Humanities</category>
+      </categories>
+      <tags>
+        <tag>Psychology</tag>
+        <tag>Sociology</tag>
       </tags>
   </entry>
 </search>
