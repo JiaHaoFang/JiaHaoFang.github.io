@@ -1,5 +1,4 @@
 #!/bin/zsh
-# reload all articles from Notion repository
 git pull
 elog clean
 git add .
