@@ -47,6 +47,7 @@ module.exports = {
       outputDir: './source/_posts',
       filename: 'title',
       format: 'markdown',
+      catalog: true,
       frontMatter: {
         enable: true,
         include: [], // 只输出include包含的属性
