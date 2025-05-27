@@ -255,10 +255,6 @@ symbols_count_time:
   separated_meta: true
   item_text_post: true
   item_text_total: true
-  # 平均单词长度（单词的计数）。默认值:4。CN≈2 EN≈5 俄文≈6
-  awl: 2
-  # 每分钟的单词。默认值:275。缓慢≈200 正常≈275 快≈350
-  wpm: 275
 
 # Use icon instead of the symbol # to indicate the tag at the bottom of the post
 tag_icon: false
