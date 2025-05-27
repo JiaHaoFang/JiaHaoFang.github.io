@@ -15,7 +15,7 @@
     "version": "6.3.0"
   },
   "dependencies": {
-    "@elog/cli": "^0.0.3",
+    "@elog/cli": "^0.14.7",
     "@upupming/hexo-renderer-markdown-it-plus": "^2.0.2",
     "hexo": "^6.3.0",
     "hexo-deployer-git": "^3.0.0",
