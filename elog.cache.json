@@ -171,9 +171,69 @@
       "realName": "普通心理学",
       "relativePath": "/普通心理学.md",
       "docPath": "./source/_posts"
+    },
+    {
+      "id": "1d524191-cd14-80f8-ac04-d76fd2295795",
+      "doc_id": "1d524191-cd14-80f8-ac04-d76fd2295795",
+      "updated": 1748311620000,
+      "properties": {
+        "categories": "Humanities",
+        "tags": [
+          "Psychology",
+          "Sociology"
+        ],
+        "status": "已发布",
+        "description": "《社会心理学》第二编 社会影响",
+        "date": "2025-05-27 08:00:00",
+        "permalink": "social-psychology-2/",
+        "title": "社会心理学（二）",
+        "urlname": "1d524191-cd14-80f8-ac04-d76fd2295795",
+        "updated": "2025-05-27 10:07:00"
+      },
+      "realName": "社会心理学（二）",
+      "relativePath": "/社会心理学（二）.md",
+      "docPath": "./source/_posts"
     }
   ],
   "catalog": [
+    {
+      "object": "page",
+      "id": "1d524191-cd14-80f8-ac04-d76fd2295795",
+      "created_time": "2025-04-14T11:22:00.000Z",
+      "last_edited_time": "2025-05-27T02:07:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "f9e52dea-3218-4b01-ab60-006834c17e09"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "f9e52dea-3218-4b01-ab60-006834c17e09"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "1c724191-cd14-809d-a910-fde6198cd7de"
+      },
+      "archived": false,
+      "in_trash": false,
+      "properties": {
+        "categories": "Humanities",
+        "tags": [
+          "Psychology",
+          "Sociology"
+        ],
+        "status": "已发布",
+        "description": "《社会心理学》第二编 社会影响",
+        "date": "2025-05-27 08:00:00",
+        "permalink": "social-psychology-2/",
+        "title": "社会心理学（二）",
+        "urlname": "1d524191-cd14-80f8-ac04-d76fd2295795",
+        "updated": "2025-05-27 10:07:00"
+      },
+      "url": "https://www.notion.so/1d524191cd1480f8ac04d76fd2295795",
+      "public_url": "https://excellent-moonstone-c91.notion.site/1d524191cd1480f8ac04d76fd2295795"
+    },
     {
       "object": "page",
       "id": "1c924191-cd14-808b-80fb-fd09948fb231",
