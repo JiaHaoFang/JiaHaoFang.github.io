@@ -9,7 +9,7 @@ date: '2022-02-21 08:00:00'
 permalink: ios-send2cocoapods/
 title: iOS 代码发布为组件
 urlname: 1c824191-cd14-8096-8654-ce5869028b0f
-updated: '2025-05-26 19:12:00'
+updated: '2025-05-27 18:27:00'
 ---
 
 # 前期准备
@@ -52,13 +52,13 @@ updated: '2025-05-26 19:12:00'
 - 或者也可以选择发布到官方仓库。
 - 命令
 
-    ```ruby
+    ```shell
     pod repo add SFPod <https://github.com/JiaHaoFang/SFPodRepo.git>
     ```
 
 - 创建完成之后可通过命令查看目录结构
 
-    ```ruby
+    ```shell
     open ~/.cocoapods/repos/SFPod
     ```
 
@@ -67,7 +67,7 @@ updated: '2025-05-26 19:12:00'
 
 - 发布的组件需要按照Cocoapod严格遵守官方给出的目录结构，官方给出了命令可以直接生成模版
 
-    ```ruby
+    ```shell
     pod lib create SFAPPRealTimeLogCaughter
     ```
 
@@ -93,7 +93,7 @@ updated: '2025-05-26 19:12:00'
 
 - 当2中的步骤全部完成，我们可以使用下面的命令检验自己组件代码的合法性（主要是检验.podspec文件）
 
-    ```ruby
+    ```shell
     pod lib lint
     # 只从本地验证你的pod能否通过验证。
     pod spec lint
@@ -107,7 +107,7 @@ updated: '2025-05-26 19:12:00'
 
 - 提交源码到个人仓库
 
-    ```plain text
+    ```shell
     git add -a
     git commit -m "xxx"
     git push
@@ -120,7 +120,7 @@ updated: '2025-05-26 19:12:00'
 
 - 使用命令将.podspec文件添加到~/.cocoapods/repos/SFPod中，同时也发布到远程仓库
 
-    ```ruby
+    ```shell
     pod repo push SFPod SFAPPRealTimeLogCaughter.podspec
     ```
 
@@ -130,7 +130,7 @@ updated: '2025-05-26 19:12:00'
 
 - 搜索组件库
 
-    ```ruby
+    ```shell
     pod search SFAPPRealTimeLogCaughter
     ```
 
@@ -147,7 +147,7 @@ updated: '2025-05-26 19:12:00'
 
 - 添加pod
 
-    ```ruby
+    ```shell
     pod 'SFAPPRealTimeLogCaughter'
     ```
 

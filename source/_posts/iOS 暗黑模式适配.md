@@ -8,7 +8,7 @@ date: '2024-12-23 08:00:00'
 permalink: ios-darkmode-practice/
 title: iOS 暗黑模式适配
 urlname: 1c824191-cd14-80bc-8904-fcd2405aa86e
-updated: '2025-05-26 19:12:00'
+updated: '2025-05-27 18:37:00'
 ---
 > 本文已发表在微信公众号，[《当我们在谈论DarkMode时我们在谈论什么》](https://mp.weixin.qq.com/s/GolsykOfKmhaloVTjoZk3g)
 
@@ -37,7 +37,7 @@ updated: '2025-05-26 19:12:00'
 获取当前window之后，修改window的overrideUserInterfaceStyle属性，页面的颜色/图标会根据设置的模式同步更新，不需要手动操作。
 
 
-```plain text
+```swift
 guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene, let window = windowScene.windows.first else { return }
 // 设置为Light模式
 window.overrideUserInterfaceStyle = .light
@@ -54,7 +54,7 @@ public enum UIUserInterfaceStyle : Int {
 
 - 获取当前深色模式状态
 
-```plain text
+```swift
 /// 在 UIView 中
 let mode = self.traitCollection.userInterfaceStyle
 /// 不在 UIView 中
@@ -63,7 +63,7 @@ let mode = UITraitCollection.current.userInterfaceStyle
 
 - 监听深色模式切换
 
-```plain text
+```swift
 override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
     if UITraitCollection.current.userInterfaceStyle == .dark {
         // Do something
@@ -75,7 +75,7 @@ override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollect
 
 - 某个页面单独设置不支持深色模式
 
-```plain text
+```swift
 extension ViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -91,7 +91,7 @@ extension ViewController {
 系统提供了一种创建自定义颜色的方法
 
 
-```plain text
+```swift
 // 创建自定义颜色的方法
 public init(dynamicProvider: @escaping (UITraitCollection) -> UIColor)
 
@@ -293,7 +293,7 @@ iOS 使用 .xcassets 的方式储存颜色资源，配置好的颜色资源如�
 这一个个颜色资源本质上是`Contents.json`文件：
 
 
-```plain text
+```json
 {
   "colors" : [
     {
@@ -344,7 +344,7 @@ iOS 使用 .xcassets 的方式储存颜色资源，配置好的颜色资源如�
 这些颜色读取的脚本和模板代码应该单独抽离出来或生成一个可执行文件，为后续项目的开发新增颜色创造便利条件。
 
 
-```plain text
+```swift
 @objc public class VSColor: NSObject {}
 /// 语义化颜色
 public extension VSColor {

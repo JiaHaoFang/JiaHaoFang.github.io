@@ -8,7 +8,7 @@ date: '2024-05-14 08:00:00'
 permalink: ipad-adaption/
 title: iOS 横屏适配
 urlname: 1c824191-cd14-80f1-a0a9-fe3e818db109
-updated: '2025-05-26 19:12:00'
+updated: '2025-05-27 18:28:00'
 ---
 > 本文已发表在微信公众号，[《iPad 适配二三事》](https://mp.weixin.qq.com/s/mbZzBNYlzku2vn4ElUspXA)
 
@@ -57,7 +57,7 @@ updated: '2025-05-26 19:12:00'
 要处理屏幕旋转，首先我们要知道屏幕方向是怎么定义的。在 UIKit 中， 屏幕方向一般使用`UIApplication.shared.statusBarOrientation`进行判断。它的定义如下：
 
 
-```plain text
+```swift
 public enum UIInterfaceOrientation : Int, @unchecked Sendable {
     case unknown = 0
     case portrait = 1
@@ -79,7 +79,7 @@ public enum UIInterfaceOrientation : Int, @unchecked Sendable {
 1. Target - General - Deployment Info - iPad Orientation即 2.1 的工程配置，这里不再重复。
 2. AppDelegate
 
-```plain text
+```swift
 // 自定义属性, 用于控制全局旋转方向
 var supportOrientation: UIInterfaceOrientationMask = isPad ? .all : .portrait
 
@@ -96,7 +96,7 @@ func application(_ application: UIApplication, supportedInterfaceOrientationsFor
 同样地，通过在 UIViewController 中设置自己的`supportedInterfaceOrientations`，可以设置某一个 VC 支持的方向：
 
 
-```plain text
+```swift
 override var shouldAutorotate: Bool {
     return true
 }
@@ -119,7 +119,7 @@ override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientatio
 
 1. 在`UIViewController`中重写`viewWillTransition` 方法，系统在屏幕发生旋转的时候会调用该方法，我们在coordinator的闭包中即可处理业务。
 
-```plain text
+```swift
 override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
     super.viewWillTransition(to: size, with: coordinator)
     coordinator.animate { _ in
@@ -130,7 +130,7 @@ override func viewWillTransition(to size: CGSize, with coordinator: UIViewContro
 
 1. 监听通知 `UIApplication.didChangeStatusBarOrientationNotification` ；在使用NotificationCenter的方式进行监听时，需要注意通知的注册和移除时机，以免造成不必要的内存泄露问题。
 
-```plain text
+```swift
 func setupDeviceOrientationObserver() {
     // 开启并监听系统通知
     UIDevice.current.beginGeneratingDeviceOrientationNotifications()
@@ -156,7 +156,7 @@ func removeDeviceOrientationObserver() {
 另外，习惯使用 Rx 的小伙伴也可以使用 RxSwift 的方式监听：
 
 
-```plain text
+```swift
 NotificationCenter.default.rx
     .notification(UIApplication.didChangeStatusBarOrientationNotification)
     .subscribe(onNext: { [weak self] _ in
@@ -265,7 +265,7 @@ VeSync App 手机端用户居多，几乎所有的页面都只考虑了手机端
 在弹窗内的页面，获取容器大小的方式也要发生改变。大部分开发者会采用`UIScreen.main.bounds`的方式获取容器大小，这种方式在此方案下是有局限性的，无法获取到页面真正的大小。我们需要通过定义一个新的变量来获取当前容器的大小（W+H）。
 
 
-```plain text
+```swift
 /// 顶层控制器的宽度
 public static var adaptiveScreenW: CGFloat { adaptiveScreenSize.width }
 /// 顶层控制器的高度
@@ -297,7 +297,7 @@ public static var adaptiveScreenSize: CGSize {
 此外，一些作用于`keyWindow`的代码也要发生相应的变化，我们需要在获取 keyWindow 之前判断 keyWindow 是否有`presentedViewController`，如果有，我们处理的对象就应该变成`presentedViewController`。举个例子，对 keyWindow的 addSubview 操作在存在中心小窗业务的场景下应该变为：
 
 
-```plain text
+```swift
 if let presentedViewController = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController {
     presentedViewController.view.addSubview(someView)
 } else {
@@ -310,7 +310,7 @@ if let presentedViewController = UIApplication.shared.keyWindow?.rootViewControl
 
 1. 使用UISwipeGestureRecognizer造成手势冲突
 
-```plain text
+```swift
 // 1. 设置手势代理
 downGes.delegate = self
 // 2. 处理冲突
@@ -323,7 +323,7 @@ extension xxxx: UIGestureRecognizerDelegate {
 
 1. 使用 UIControl 造成手势冲突
 
-```plain text
+```swift
 override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
     return !(gestureRecognizer is UIPanGestureRecognizer)
 }
