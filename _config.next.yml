@@ -22,16 +22,16 @@ minify: false
 # Define custom file paths.
 # Create your custom files in site directory `source/_data` and uncomment needed files below.
 custom_file_path:
-  #head: source/_data/head.swig
+  head: source/_data/head.swig
   #header: source/_data/header.swig
   #sidebar: source/_data/sidebar.swig
   #postMeta: source/_data/post-meta.swig
-  #postBodyEnd: source/_data/post-body-end.swig
-  #footer: source/_data/footer.swig
+  postBodyEnd: source/_data/post-body-end.swig
+  footer: source/_data/footer.swig
   #bodyEnd: source/_data/body-end.swig
   #variable: source/_data/variables.styl
   #mixin: source/_data/mixins.styl
-  #style: source/_data/styles.styl
+  style: source/_data/styles.styl
 
 
 # ---------------------------------------------------------------
@@ -52,7 +52,7 @@ language_switcher: false
 
 footer:
   # Specify the date when the site was setup. If not defined, current year will be used.
-  #since: 2015
+  since: 2022
 
   # Icon between year and copyright info.
   icon:
@@ -98,12 +98,12 @@ creative_commons:
 
 # Schemes
 # scheme: Muse
-# scheme: Mist
+scheme: Mist
 # scheme: Pisces
-scheme: Gemini
+# scheme: Gemini
 
 # Dark Mode
-darkmode: true
+darkmode: auto
 
 
 # ---------------------------------------------------------------
@@ -122,7 +122,7 @@ menu:
   archives: /archives/ || fa fa-archive
   about: /about/ || fa fa-user
   #schedule: /schedule/ || fa fa-calendar
-  #sitemap: /sitemap.xml || fa fa-sitemap
+  sitemap: /sitemap.xml || fa fa-sitemap
   #commonweal: /404/ || fa fa-heartbeat
 
 # Enable / Disable menu icons / item badges.
@@ -254,7 +254,11 @@ post_meta:
 symbols_count_time:
   separated_meta: true
   item_text_post: true
-  item_text_total: false
+  item_text_total: true
+  # 平均单词长度（单词的计数）。默认值:4。CN≈2 EN≈5 俄文≈6
+  awl: 2
+  # 每分钟的单词。默认值:275。缓慢≈200 正常≈275 快≈350
+  wpm: 275
 
 # Use icon instead of the symbol # to indicate the tag at the bottom of the post
 tag_icon: false
@@ -286,13 +290,13 @@ follow_me:
 related_posts:
   enable: true
   title: Recommend # Custom header, leave empty to use the default one
-  display_in_home: true
+  display_in_home: false
   params:
     maxCount: 5
     PPMixingRate: 0.4
-    #isDate: false
+    isDate: true
     #isImage: false
-    #isExcerpt: false
+    isExcerpt: true
 
 # Post edit
 # Dependencies: https://github.com/hexojs/hexo-deployer-git
@@ -374,9 +378,9 @@ back2top:
 
 # Reading progress bar
 reading_progress:
-  enable: false
+  enable: true
   # Available values: top | bottom
-  position: top
+  position: bottom
   color: "#37c6c0"
   height: 3px
 

@@ -1,0 +1,65 @@
+// 去掉顶部黑线
+.headband{
+  display: none;
+}
+// 避免链接和代码过长，而导致样式问题
+.post-block code {
+  word-break: break-all;
+}
+.post-block a {
+  word-break: break-all;
+}
+// 图片圆角
+.post-body img {
+  border-radius: 0.5em 
+}
+// 将链接文本设置为蓝色，鼠标划过时文字颜色加深，并显示下划线。
+.post-body p a {
+  color: #0593d3;
+  border-bottom: none;
+  &:hover {
+    color: #0477ab;
+    text-decoration: underline;
+  }
+}
+// 适配暗黑模式下博客的 tag
+.posts-expand .post-tags a {
+  border-bottom: none;
+  padding: 1px 5px;
+  background: var(--content-bg-color);
+}
+// 针对Code代码标签的美化
+code {
+  padding: 2px 4px;
+  word-wrap: break-word;
+  color: #c7254e;
+  background: #f9f2f4;
+  border-radius: 3px;
+  font-size: 18px;
+}
+
+// 代码区背景
+.table-container{
+  background: rgba(240, 240, 222, 0.2);
+}
+.table-container :hover {
+  background: rgba(237,237, 225, 0.03);
+}
+// 代码背景
+table > tbody > tr:nth-of-type(odd) {
+  background-color: rgba(255, 255, 255, 0.0);
+}
+table > tbody > tr:hover {
+  background-color: rgba(233,230, 230, 0.0);
+}
+pre,
+.highlight {
+  background: rgba(200, 31, 33, 0);
+}
+//代码行标背景
+.highlight .gutter pre {
+  background: rgbargba(227, 235, 227, 0.3);
+}
+.highlight .code pre {
+  background: rgba(29, 31, 100, 0);
+}
