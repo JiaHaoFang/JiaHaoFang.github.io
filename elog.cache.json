@@ -109,25 +109,25 @@
       "docPath": "./source/_posts"
     },
     {
-      "id": "1d524191-cd14-80f8-ac04-d76fd2295795",
-      "doc_id": "1d524191-cd14-80f8-ac04-d76fd2295795",
-      "updated": 1748337360000,
+      "id": "1c824191-cd14-8096-8654-ce5869028b0f",
+      "doc_id": "1c824191-cd14-8096-8654-ce5869028b0f",
+      "updated": 1748341620000,
       "properties": {
-        "categories": "Humanities",
+        "categories": "Programming",
         "tags": [
-          "Psychology",
-          "Sociology"
+          "iOS",
+          "Cocoapods"
         ],
         "status": "已发布",
-        "description": "《社会心理学》第二编 社会影响",
-        "date": "2025-05-27 08:00:00",
-        "permalink": "social-psychology-2/",
-        "title": "社会心理学（二）",
-        "urlname": "1d524191-cd14-80f8-ac04-d76fd2295795",
-        "updated": "2025-05-27 17:16:00"
+        "description": "使用 Cocoapods 发布代码作为组件",
+        "date": "2022-02-21 08:00:00",
+        "permalink": "ios-send2cocoapods/",
+        "title": "iOS 代码发布为组件",
+        "urlname": "1c824191-cd14-8096-8654-ce5869028b0f",
+        "updated": "2025-05-27 18:27:00"
       },
-      "realName": "社会心理学（二）",
-      "relativePath": "/社会心理学（二）.md",
+      "realName": "iOS 代码发布为组件",
+      "relativePath": "/iOS 代码发布为组件.md",
       "docPath": "./source/_posts"
     },
     {
@@ -152,25 +152,25 @@
       "docPath": "./source/_posts"
     },
     {
-      "id": "1c824191-cd14-8096-8654-ce5869028b0f",
-      "doc_id": "1c824191-cd14-8096-8654-ce5869028b0f",
-      "updated": 1748341620000,
+      "id": "1d524191-cd14-80f8-ac04-d76fd2295795",
+      "doc_id": "1d524191-cd14-80f8-ac04-d76fd2295795",
+      "updated": 1748337360000,
       "properties": {
-        "categories": "Programming",
+        "categories": "Humanities",
         "tags": [
-          "iOS",
-          "Cocoapods"
+          "Psychology",
+          "Sociology"
         ],
         "status": "已发布",
-        "description": "使用 Cocoapods 发布代码作为组件",
-        "date": "2022-02-21 08:00:00",
-        "permalink": "ios-send2cocoapods/",
-        "title": "iOS 代码发布为组件",
-        "urlname": "1c824191-cd14-8096-8654-ce5869028b0f",
-        "updated": "2025-05-27 18:27:00"
+        "description": "《社会心理学》第二编 社会影响",
+        "date": "2025-05-27 08:00:00",
+        "permalink": "social-psychology-2/",
+        "title": "社会心理学（二）",
+        "urlname": "1d524191-cd14-80f8-ac04-d76fd2295795",
+        "updated": "2025-05-27 17:16:00"
       },
-      "realName": "iOS 代码发布为组件",
-      "relativePath": "/iOS 代码发布为组件.md",
+      "realName": "社会心理学（二）",
+      "relativePath": "/社会心理学（二）.md",
       "docPath": "./source/_posts"
     },
     {
