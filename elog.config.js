@@ -23,7 +23,9 @@ module.exports = {
       property: 'status', 
       select: {
         equals: '已发布'
-      }
+      },
+      imgToBase64: true, // 是否将图片转换为base64
+      catalog: true, // 是否生成目录
     },
     feishu: {
       type: 'space',
