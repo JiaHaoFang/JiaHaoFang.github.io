@@ -1,4 +1,4 @@
-name: Deploy To Github Pages
+name: Reload and deploy To Github Pages
 
 on:
   repository_dispatch:
