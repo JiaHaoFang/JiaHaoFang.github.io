@@ -15,6 +15,10 @@ module.exports = {
       repo: process.env.YUQUE_REPO,
       onlyPublic: false,
       onlyPublished: true,
+      catalog: {
+		    enable: true,
+		    property: "categories"
+	    },
     },
     notion: {
       token: process.env.NOTION_TOKEN,
