@@ -5,6 +5,7 @@ tags:
   - Cocoapods
 status: 已发布
 description: 使用 Cocoapods 发布代码作为组件
+latest edit: '2025-05-27T10:27:00.000Z'
 date: '2022-02-21 08:00:00'
 permalink: ios-send2cocoapods/
 title: iOS 代码发布为组件

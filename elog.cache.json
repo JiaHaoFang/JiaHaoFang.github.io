@@ -1,24 +1,25 @@
 {
   "docs": [
     {
-      "id": "1c824191-cd14-807d-8371-e8c0fbd2c416",
-      "doc_id": "1c824191-cd14-807d-8371-e8c0fbd2c416",
-      "updated": 1748253720000,
+      "id": "1dc24191-cd14-80e0-b2f3-de34f4c5287e",
+      "doc_id": "1dc24191-cd14-80e0-b2f3-de34f4c5287e",
+      "updated": 1749655980000,
       "properties": {
         "categories": "Humanities",
         "tags": [
           "Philosophy"
         ],
         "status": "已发布",
-        "description": "《哲学-死亡》第一部分（形而上学）",
-        "date": "2025-04-21 08:00:00",
-        "permalink": "philosophy-death-1/",
-        "title": "哲学-死亡（一）",
-        "urlname": "1c824191-cd14-807d-8371-e8c0fbd2c416",
-        "updated": "2025-05-26 18:02:00"
+        "description": "《哲学-死亡》第二部分（价值理论）",
+        "latest edit": "2025-06-11T15:33:00.000Z",
+        "date": "2025-06-11 08:00:00",
+        "permalink": "philosophy-death-2/",
+        "title": "哲学-死亡（二）",
+        "urlname": "1dc24191-cd14-80e0-b2f3-de34f4c5287e",
+        "updated": "2025-06-11 23:33:00"
       },
-      "realName": "哲学-死亡（一）",
-      "relativePath": "/哲学-死亡（一）.md",
+      "realName": "哲学-死亡（二）",
+      "relativePath": "/哲学-死亡（二）.md",
       "docPath": "./source/_posts"
     },
     {
@@ -33,6 +34,7 @@
         ],
         "status": "已发布",
         "description": "《社会心理学》第一编 社会思维",
+        "latest edit": "2025-05-26T10:01:00.000Z",
         "date": "2025-04-14 08:00:00",
         "permalink": "social-psychology-1/",
         "title": "社会心理学（一）",
@@ -41,6 +43,29 @@
       },
       "realName": "社会心理学（一）",
       "relativePath": "/社会心理学（一）.md",
+      "docPath": "./source/_posts"
+    },
+    {
+      "id": "1d524191-cd14-80f8-ac04-d76fd2295795",
+      "doc_id": "1d524191-cd14-80f8-ac04-d76fd2295795",
+      "updated": 1748337360000,
+      "properties": {
+        "categories": "Humanities",
+        "tags": [
+          "Psychology",
+          "Sociology"
+        ],
+        "status": "已发布",
+        "description": "《社会心理学》第二编 社会影响",
+        "latest edit": "2025-05-27T09:16:00.000Z",
+        "date": "2025-05-27 08:00:00",
+        "permalink": "social-psychology-2/",
+        "title": "社会心理学（二）",
+        "urlname": "1d524191-cd14-80f8-ac04-d76fd2295795",
+        "updated": "2025-05-27 17:16:00"
+      },
+      "realName": "社会心理学（二）",
+      "relativePath": "/社会心理学（二）.md",
       "docPath": "./source/_posts"
     },
     {
@@ -54,6 +79,7 @@
         ],
         "status": "已发布",
         "description": "iPad 适配的介绍和实践",
+        "latest edit": "2025-05-27T10:28:00.000Z",
         "date": "2024-05-14 08:00:00",
         "permalink": "ipad-adaption/",
         "title": "iOS 横屏适配",
@@ -75,6 +101,7 @@
         ],
         "status": "已发布",
         "description": "iOS 深色模式介绍和实践",
+        "latest edit": "2025-05-27T10:37:00.000Z",
         "date": "2024-12-23 08:00:00",
         "permalink": "ios-darkmode-practice/",
         "title": "iOS 暗黑模式适配",
@@ -83,6 +110,28 @@
       },
       "realName": "iOS 暗黑模式适配",
       "relativePath": "/iOS 暗黑模式适配.md",
+      "docPath": "./source/_posts"
+    },
+    {
+      "id": "1c824191-cd14-807d-8371-e8c0fbd2c416",
+      "doc_id": "1c824191-cd14-807d-8371-e8c0fbd2c416",
+      "updated": 1748253720000,
+      "properties": {
+        "categories": "Humanities",
+        "tags": [
+          "Philosophy"
+        ],
+        "status": "已发布",
+        "description": "《哲学-死亡》第一部分（形而上学）",
+        "latest edit": "2025-05-26T10:02:00.000Z",
+        "date": "2025-04-21 08:00:00",
+        "permalink": "philosophy-death-1/",
+        "title": "哲学-死亡（一）",
+        "urlname": "1c824191-cd14-807d-8371-e8c0fbd2c416",
+        "updated": "2025-05-26 18:02:00"
+      },
+      "realName": "哲学-死亡（一）",
+      "relativePath": "/哲学-死亡（一）.md",
       "docPath": "./source/_posts"
     },
     {
@@ -98,6 +147,7 @@
         ],
         "status": "已发布",
         "description": "使用 Notion + Hexo 开发，通过Slack + Pipedream + GitHub Action + Elog 部署的个人博客解决方案",
+        "latest edit": "2025-05-26T10:02:00.000Z",
         "date": "2025-04-01 08:00:00",
         "permalink": "notion-hexo-deploy/",
         "title": "Notion+Hexo 博客解决方案",
@@ -120,6 +170,7 @@
         ],
         "status": "已发布",
         "description": "使用 Cocoapods 发布代码作为组件",
+        "latest edit": "2025-05-27T10:27:00.000Z",
         "date": "2022-02-21 08:00:00",
         "permalink": "ios-send2cocoapods/",
         "title": "iOS 代码发布为组件",
@@ -141,6 +192,7 @@
         ],
         "status": "已发布",
         "description": "hexo搭建过程和问题记录",
+        "latest edit": "2025-05-26T11:11:00.000Z",
         "date": "2024-04-15 08:00:00",
         "permalink": "hexo-record/",
         "title": "Hexo 相关记录",
@@ -149,28 +201,6 @@
       },
       "realName": "Hexo 相关记录",
       "relativePath": "/Hexo 相关记录.md",
-      "docPath": "./source/_posts"
-    },
-    {
-      "id": "1d524191-cd14-80f8-ac04-d76fd2295795",
-      "doc_id": "1d524191-cd14-80f8-ac04-d76fd2295795",
-      "updated": 1748337360000,
-      "properties": {
-        "categories": "Humanities",
-        "tags": [
-          "Psychology",
-          "Sociology"
-        ],
-        "status": "已发布",
-        "description": "《社会心理学》第二编 社会影响",
-        "date": "2025-05-27 08:00:00",
-        "permalink": "social-psychology-2/",
-        "title": "社会心理学（二）",
-        "urlname": "1d524191-cd14-80f8-ac04-d76fd2295795",
-        "updated": "2025-05-27 17:16:00"
-      },
-      "realName": "社会心理学（二）",
-      "relativePath": "/社会心理学（二）.md",
       "docPath": "./source/_posts"
     },
     {
@@ -184,6 +214,7 @@
         ],
         "status": "已发布",
         "description": "《普通心理学》北师大",
+        "latest edit": "2025-05-26T10:02:00.000Z",
         "date": "2025-04-02 08:00:00",
         "permalink": "general-psychology/",
         "title": "普通心理学",
@@ -193,28 +224,6 @@
       "realName": "普通心理学",
       "relativePath": "/普通心理学.md",
       "docPath": "./source/_posts"
-    },
-    {
-      "id": "1dc24191-cd14-80e0-b2f3-de34f4c5287e",
-      "doc_id": "1dc24191-cd14-80e0-b2f3-de34f4c5287e",
-      "updated": 1749655560000,
-      "properties": {
-        "categories": "Humanities",
-        "tags": [
-          "Philosophy"
-        ],
-        "status": "已发布",
-        "description": "《哲学-死亡》第二部分（价值理论）",
-        "latest edit": "2025-06-11T15:26:00.000Z",
-        "date": "2025-06-11 08:00:00",
-        "permalink": "philosophy-death-2/",
-        "title": "哲学-死亡（二）",
-        "urlname": "1dc24191-cd14-80e0-b2f3-de34f4c5287e",
-        "updated": "2025-06-11 23:26:00"
-      },
-      "realName": "哲学-死亡（二）",
-      "relativePath": "/哲学-死亡（二）.md",
-      "docPath": "./source/_posts"
     }
   ],
   "catalog": [
@@ -222,7 +231,7 @@
       "object": "page",
       "id": "1dc24191-cd14-80e0-b2f3-de34f4c5287e",
       "created_time": "2025-04-21T15:44:00.000Z",
-      "last_edited_time": "2025-06-11T15:26:00.000Z",
+      "last_edited_time": "2025-06-11T15:33:00.000Z",
       "created_by": {
         "object": "user",
         "id": "f9e52dea-3218-4b01-ab60-006834c17e09"
@@ -246,12 +255,12 @@
         ],
         "status": "已发布",
         "description": "《哲学-死亡》第二部分（价值理论）",
-        "latest edit": "2025-06-11T15:26:00.000Z",
+        "latest edit": "2025-06-11T15:33:00.000Z",
         "date": "2025-06-11 08:00:00",
         "permalink": "philosophy-death-2/",
         "title": "哲学-死亡（二）",
         "urlname": "1dc24191-cd14-80e0-b2f3-de34f4c5287e",
-        "updated": "2025-06-11 23:26:00"
+        "updated": "2025-06-11 23:33:00"
       },
       "url": "https://www.notion.so/1dc24191cd1480e0b2f3de34f4c5287e",
       "public_url": "https://excellent-moonstone-c91.notion.site/1dc24191cd1480e0b2f3de34f4c5287e"

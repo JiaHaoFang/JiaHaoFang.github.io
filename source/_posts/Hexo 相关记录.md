@@ -4,6 +4,7 @@ tags:
   - hexo
 status: 已发布
 description: hexo搭建过程和问题记录
+latest edit: '2025-05-26T11:11:00.000Z'
 date: '2024-04-15 08:00:00'
 permalink: hexo-record/
 title: Hexo 相关记录

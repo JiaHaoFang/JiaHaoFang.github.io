@@ -6,6 +6,7 @@ tags:
   - notion
 status: 已发布
 description: 使用 Notion + Hexo 开发，通过Slack + Pipedream + GitHub Action + Elog 部署的个人博客解决方案
+latest edit: '2025-05-26T10:02:00.000Z'
 date: '2025-04-01 08:00:00'
 permalink: notion-hexo-deploy/
 title: Notion+Hexo 博客解决方案

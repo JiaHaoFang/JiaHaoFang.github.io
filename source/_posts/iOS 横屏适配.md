@@ -4,6 +4,7 @@ tags:
   - iOS
 status: 已发布
 description: iPad 适配的介绍和实践
+latest edit: '2025-05-27T10:28:00.000Z'
 date: '2024-05-14 08:00:00'
 permalink: ipad-adaption/
 title: iOS 横屏适配
