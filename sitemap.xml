@@ -4,7 +4,16 @@
   <url>
     <loc>https://jiahaofang.github.io/philosophy-death-2/</loc>
     
-    <lastmod>2025-06-11</lastmod>
+    <lastmod>2025-06-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jiahaofang.github.io/social-psychology-2/</loc>
+    
+    <lastmod>2025-06-12</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -74,15 +83,6 @@
   </url>
   
   <url>
-    <loc>https://jiahaofang.github.io/social-psychology-2/</loc>
-    
-    <lastmod>2025-05-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://jiahaofang.github.io/hexo-record/</loc>
     
     <lastmod>2025-05-26</lastmod>
@@ -144,20 +144,6 @@
   </url>
   
   <url>
-    <loc>https://jiahaofang.github.io/tags/iOS/</loc>
-    <lastmod>2025-06-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://jiahaofang.github.io/tags/Cocoapods/</loc>
-    <lastmod>2025-06-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://jiahaofang.github.io/tags/elog/</loc>
     <lastmod>2025-06-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -166,6 +152,20 @@
   
   <url>
     <loc>https://jiahaofang.github.io/tags/notion/</loc>
+    <lastmod>2025-06-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jiahaofang.github.io/tags/iOS/</loc>
+    <lastmod>2025-06-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jiahaofang.github.io/tags/Cocoapods/</loc>
     <lastmod>2025-06-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
