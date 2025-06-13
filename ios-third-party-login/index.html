@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/moon-cat.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/moon-cat.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/moon-cat.png">
+  <link rel="mask-icon" href="/favicon/moon-cat.png" color="#222">
+  <meta name="google-site-verification" content="JXha4BvTgO89eWQaKW-9LD0MGEUp-Q4OtE3QLHZWvAs">
+  <meta name="msvalidate.01" content="24EA09381FB8FF1E61E8AB18C3807D81">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,300italic,400,400italic,700,700italic%7CNoto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jiahaofang.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":"auto","version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"style":"mac","show_result":true},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="iOS 第三方登录全流程梳理和实践">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 第三方登录">
+<meta property="og:url" content="https://jiahaofang.github.io/ios-third-party-login/index.html">
+<meta property="og:site_name" content="阿告今天学习了吗">
+<meta property="og:description" content="iOS 第三方登录全流程梳理和实践">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jiahaofang.github.io/images/87247ec539b0c21ffb0767926a7eff38.png">
+<meta property="og:image" content="https://jiahaofang.github.io/images/5d3a41352ef9c39cf26e3b11f6c524d2.png">
+<meta property="og:image" content="https://jiahaofang.github.io/images/bd8c1e247c9406ca02b64d49f28a467d.png">
+<meta property="og:image" content="https://jiahaofang.github.io/images/fa59812d0ac3e304b73090bc93e85ee2.png">
+<meta property="og:image" content="https://jiahaofang.github.io/images/3b9ddd9fb23a06a5cadfd6df464a64ea.png">
+<meta property="article:published_time" content="2025-06-10T08:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-13T17:38:00.000Z">
+<meta property="article:author" content="阿告2426">
+<meta property="article:tag" content="iOS">
+<meta property="article:tag" content="OAuth">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jiahaofang.github.io/images/87247ec539b0c21ffb0767926a7eff38.png">
+
+
+<link rel="canonical" href="https://jiahaofang.github.io/ios-third-party-login/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiahaofang.github.io/ios-third-party-login/","path":"/ios-third-party-login/","title":"iOS 第三方登录"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>iOS 第三方登录 | 阿告今天学习了吗</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">阿告今天学习了吗</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text"> 前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">2.</span> <span class="nav-text"> 概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#oauth-20"><span class="nav-number">2.1.</span> <span class="nav-text"> OAuth 2.0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%A6%E7%BB%86%E6%B5%81%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text"> 详细流程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%8E%88%E6%9D%83%E4%BF%A1%E6%81%AF"><span class="nav-number">3.</span> <span class="nav-text"> 获取授权信息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#apple"><span class="nav-number">3.1.</span> <span class="nav-text"> Apple</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">3.1.1.</span> <span class="nav-text"> 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.1.2.</span> <span class="nav-text"> 实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#google"><span class="nav-number">3.2.</span> <span class="nav-text"> Google</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-2"><span class="nav-number">3.2.1.</span> <span class="nav-text"> 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0-2"><span class="nav-number">3.2.2.</span> <span class="nav-text"> 实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%A1%E9%AA%8C%E6%8E%88%E6%9D%83%E4%BF%A1%E6%81%AF"><span class="nav-number">4.</span> <span class="nav-text"> 校验授权信息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#apple-2"><span class="nav-number">4.1.</span> <span class="nav-text"> Apple</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E6%8E%88%E6%9D%83%E7%A0%81%E7%9A%84%E9%AA%8C%E8%AF%81"><span class="nav-number">4.1.1.</span> <span class="nav-text"> 基于授权码的验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E-jwt-%E7%9A%84%E7%AE%97%E6%B3%95%E9%AA%8C%E8%AF%81"><span class="nav-number">4.1.2.</span> <span class="nav-text"> 基于 JWT 的算法验证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#google-2"><span class="nav-number">4.2.</span> <span class="nav-text"> Google</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%A1%E9%AA%8C%E7%BB%93%E6%9E%9C%E5%A4%84%E7%90%86"><span class="nav-number">5.</span> <span class="nav-text"> 校验结果处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%BE%E5%A3%B0"><span class="nav-number">6.</span> <span class="nav-text"> 尾声</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="阿告2426"
+      src="/favicon/cat.jpeg">
+  <p class="site-author-name" itemprop="name">阿告2426</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/JiaHaoFang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;JiaHaoFang" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:473993067@qq.com" title="E-Mail → mailto:473993067@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiahaofang.github.io/ios-third-party-login/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/favicon/cat.jpeg">
+      <meta itemprop="name" content="阿告2426">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿告今天学习了吗">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="iOS 第三方登录 | 阿告今天学习了吗">
+      <meta itemprop="description" content="iOS 第三方登录全流程梳理和实践">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          iOS 第三方登录
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-06-10 08:00:00" itemprop="dateCreated datePublished" datetime="2025-06-10T08:00:00+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-06-13 17:38:00" itemprop="dateModified" datetime="2025-06-13T17:38:00+00:00">2025-06-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>12k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>21 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">iOS 第三方登录全流程梳理和实践</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
+<p>现在市面上常见的 App 都开放了第三方平台登录的功能，为用户注册账号和登录账号带来了较大的便利，有效提升了用户的使用体验。近期，我司也引入了 Apple 和 Google 两个平台的第三方账号登录，本文将会对本次第三方平台接入的开发流程做详细的介绍。</p>
+<h1 id="概述"><a class="markdownIt-Anchor" href="#概述"></a> 概述</h1>
+<p>总的来说，App 要实现第三方账号登录的功能，大体可以按照以下三个步骤来实现：</p>
+<pre class="mermaid">graph LR
+login_with_sdk[获取授权信息] ---> verify_info[校验授权信息] ---> other_process[校验结果处理]</pre>
+<ol>
+<li>获取用户授权：通过第三方 SDK 获得用户授权，并获取授权数据用于接入第三方平台服务；</li>
+<li>校验授权信息：通过第三方服务校验获得的授权数据，校验成功即可认为是第三方账号认证成功；</li>
+<li>校验结果处理：从前两步中，我们可以获得第三方账号的邮箱（或其它的唯一标识），通过这个唯一标识我们可以对接自己平台的账号系统，校验该账号是否已经注册过。如果该账号已经注册或绑定过，则直接登录成功，否则引导用户创建新账号或绑定已有账号。</li>
+</ol>
+<p>本小节将会稍微扩展上面的框图的内容，让读者对完整的流程有一个更具体的认知。而后本文后续章节将会以三个步骤作为主题分别进行详细阐述。</p>
+<h2 id="oauth-20"><a class="markdownIt-Anchor" href="#oauth-20"></a> OAuth 2.0</h2>
+<p>在进入正文之前，我们先提一下 OAuth 协议。</p>
+<p>OAuth 2.0 协议是一种三方授权协议，目前大部分的第三方登录与授权都是基于该协议的标准或改进实现，通过这个授权流程，服务提供方允许用户授权第三方应用访问他们存储在另外的服务提供者上的信息，而不需要将用户名和密码提供给第三方移动应用或分享他们数据的所有内容。其基本流程如下所示：</p>
+<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">+--------+                               +---------------+</span><br><span class="line">     |        |--(A)- Authorization Request -&gt;|   Resource    |</span><br><span class="line">     |        |                               |     Owner     |</span><br><span class="line">     |        |&lt;-(B)-- Authorization Grant ---|               |</span><br><span class="line">     |        |                               +---------------+</span><br><span class="line">     |        |</span><br><span class="line">     |        |                               +---------------+</span><br><span class="line">     |        |--(C)-- Authorization Grant --&gt;| Authorization |</span><br><span class="line">     | Client |                               |     Server    |</span><br><span class="line">     |        |&lt;-(D)----- Access Token -------|               |</span><br><span class="line">     |        |                               +---------------+</span><br><span class="line">     |        |</span><br><span class="line">     |        |                               +---------------+</span><br><span class="line">     |        |--(E)----- Access Token ------&gt;|    Resource   |</span><br><span class="line">     |        |                               |     Server    |</span><br><span class="line">     |        |&lt;-(F)--- Protected Resource ---|               |</span><br><span class="line">     +--------+                               +---------------+</span><br></pre></td></tr></table></figure>
+<p>这里提及 OAuth2.0 不是为了详细介绍该协议的原理、设计和实现，而是想让读者带着一个高的视角看待第三方登录的流程设计。</p>
+<p>实际上，本文是围绕着上图的步骤 A 到步骤 D来进行介绍的，从 A 到 D 即可完成第三方平台账号的授权和验证。由于 VeSync 有自己的账号体系和资源体系，目前也没有使用第三方平台的服务的需求，步骤 E 和 F 在这篇文章中将不会提及。</p>
+<h2 id="详细流程"><a class="markdownIt-Anchor" href="#详细流程"></a> 详细流程</h2>
+<pre class="mermaid">graph TB
+select_login(用户选择第三方账号登录) ---> start_verification[发起授权请求，用户登录第三方账号]
+subgraph 获取第三方授权
+start_verification ---> request_verification[客户端获取授权信息]
+request_verification ---> server_verify[提交授权信息给云]
+end
+server_verify ---> check_account{授权信息是否验证成功}
+subgraph 校验授权信息
+check_account --YES--> check_binding{第三方账号是否已绑定 VeSync 账号}
+end
+check_binding --NO(账号不存在)--> create_or_bind_account{用户选择创建/绑定账号}
+subgraph 校验结果处理
+check_account --NO(验证失败)--> login_failed(失败)
+check_binding -- YES(登录成功) --> login_success_and_go_home_page(登录/注册成功)
+create_or_bind_account --绑定--> bind_account[绑定账号流程]
+create_or_bind_account --创建--> create_account[创建账号流程]
+end
+bind_account ---> login_success_and_go_home_page
+create_account ---> login_success_and_go_home_page</pre>
+<p>概述中的三个步骤在上图中进行了适当的细节扩充，本文将会围绕其进行具体的实现方式介绍，并有一些在开发过程中的踩坑分享。</p>
+<p>实际上，上图省略了一些具体业务需求的处理步骤，如检查第三方账号的合法性、第三方账号怎么和 VeSync 账号绑定、各种用户引导及错误处理。这些步骤虽重要，但不具有代表性和通用性，不会在本文作详细说明。</p>
+<h1 id="获取授权信息"><a class="markdownIt-Anchor" href="#获取授权信息"></a> 获取授权信息</h1>
+<p>从用户视角看来，点击第三方登录的按钮之后，会有输入框让用户登录第三方账号并请求授权，在登录成功并完成授权动作之后，App 就会开启第三方账号登录的流程。流程的第一步就是通过 SDK 或其它官方途径者获取授权信息。</p>
+<p>下面以 iOS 平台为例，介绍获取 Apple 和 Google 的用户授权信息的方式。</p>
+<h2 id="apple"><a class="markdownIt-Anchor" href="#apple"></a> Apple</h2>
+<blockquote>
+<p>⚠️ 注意</p>
+<p>从 <strong>iOS13</strong> 开始，如果 <strong>App</strong> 提供第三方登录，就必须添加 <strong>苹果登录 Sign in with Apple</strong> 选项，并要求所有开发者于 <strong>2020年4月之前</strong> 完成现有应用的更新，否则审核不通过。</p>
+</blockquote>
+<h3 id="配置"><a class="markdownIt-Anchor" href="#配置"></a> 配置</h3>
+<blockquote>
+<p>要在 App 实现 Apple 登录，需要在工程及开发者账号中都配置相关的功能。</p>
+</blockquote>
+<ol>
+<li>
+<p>账户配置</p>
+<p>在 Apple 开发者账户中开启 AppID 对应的 Apple 登录的功能，具体流程可以参考<a target="_blank" rel="noopener" href="https://developer.apple.com/cn/help/account/capabilities/about-sign-in-with-apple/">官方文档</a>，创建完成后应如下图：</p>
+<p><img src="../images/87247ec539b0c21ffb0767926a7eff38.png" alt="image.png" /></p>
+</li>
+<li>
+<p>工程配置</p>
+<p>如下图所示在 Xcode 中配置工程的 Capabilities 开启 App 的 Apple 登录功能。</p>
+<p><img src="../images/5d3a41352ef9c39cf26e3b11f6c524d2.png" alt="image.png" /></p>
+</li>
+</ol>
+<h3 id="实现"><a class="markdownIt-Anchor" href="#实现"></a> 实现</h3>
+<blockquote>
+<p>在 iPhone 上，使用原生方式开发的 APP 可以直接调用苹果的框架 <code>AppleService</code> 获取 Apple 授权并登录。本部分主要参考 <a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/authenticationservices/implementing-user-authentication-with-sign-in-with-apple">Apple 官方文档</a>。</p>
+</blockquote>
+<ol>
+<li>
+<p>发起授权请求</p>
+<p>在这个过程中我们需要使用 <code>ASAuthorization</code> 服务调起获取 Apple 授权的弹窗。</p>
+<p>我们需要配置的信息有：</p>
+<ul>
+<li>需要获取的授权方式<code>ASAuthorizationAppleIDCredential</code> ，这个授权方式决定了 Apple 会返回给我们的信息，需要在代理方法中处理。</li>
+<li>代理对象 <code>delegate</code> ，授权结果会通过代理方法返回给调用方。</li>
+<li>需要获取的用户信息<code>requestedScopes</code> 在用户首次获取授权的时候，Apple 会通过代理返回这些信息。</li>
+<li>配置弹窗上下文 <code>presentationContextProvider</code> ，Apple 的授权系统弹窗会在给定的页面弹出，一般来说，这里只要获取导航堆栈中的栈顶控制器即可。</li>
+</ul>
+<p>配置好这些信息后，通过<code>performRequests()</code> 调用即可唤起系统弹窗，获取授权。</p>
+ <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> appleIDProvider <span class="operator">=</span> <span class="type">ASAuthorizationAppleIDProvider</span>()</span><br><span class="line"><span class="keyword">let</span> request <span class="operator">=</span> appleIDProvider.createRequest()</span><br><span class="line">request.requestedScopes <span class="operator">=</span> [.fullName, .email]</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> authorizationController <span class="operator">=</span> <span class="type">ASAuthorizationController</span>(authorizationRequests: [request])</span><br><span class="line">authorizationController.delegate <span class="operator">=</span> <span class="keyword">self</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> topVc <span class="operator">=</span> <span class="type">Tool</span>.topViewController() <span class="keyword">as?</span> <span class="type">ASAuthorizationControllerPresentationContextProviding</span> &#123;</span><br><span class="line">		authorizationController.presentationContextProvider <span class="operator">=</span> topVc</span><br><span class="line">&#125;</span><br><span class="line">authorizationController.performRequests()</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>处理回调事件</p>
+<p>在用户授权成功或授权失败后，会通过两个代理方法通知业务方。</p>
+<ul>
+<li>
+<p><code>didCompleteWithAuthorization</code></p>
+<p>通过回调方法中的 authorization 对象可以获取我们需要的授权信息。在前一步中我们选择获取 AppleID 的授权信息，用于认证授权的参数包括<code>authorizationCode</code> 和 <code>identityToken</code>，这两个参数的作用和区别将会在下文“校验授权信息”这一小节中详细介绍。</p>
+<p>在用户首次获得用户授权时，SDK 还会提供 <code>userID</code> 这个参数给我们。这是一个苹果用户唯一标识符，它在同一个开发者账号下的所有 App 下是一样的，我们可以用它来与后台的账号体系绑定起来。</p>
+</li>
+<li>
+<p><code>didCompleteWithError</code></p>
+<p>在授权失败时 Apple 会调用该方法，我们可以在这里面做错误处理。</p>
+</li>
+</ul>
+ <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extension</span> <span class="title class_">XXX</span>: <span class="title class_">ASAuthorizationControllerDelegate</span> &#123;</span><br><span class="line">    <span class="comment">/// - Tag: did_complete_authorization</span></span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">authorizationController</span>(<span class="params">controller</span>: <span class="type">ASAuthorizationController</span>, <span class="params">didCompleteWithAuthorization</span> <span class="params">authorization</span>: <span class="type">ASAuthorization</span>) &#123;</span><br><span class="line">        <span class="keyword">switch</span> authorization.credential &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="keyword">let</span> appleIDCredential <span class="keyword">as</span> <span class="type">ASAuthorizationAppleIDCredential</span>:</span><br><span class="line">            <span class="keyword">guard</span> <span class="keyword">let</span> identityTokenData <span class="operator">=</span> appleIDCredential.identityToken,</span><br><span class="line">                  <span class="keyword">let</span> identityToken <span class="operator">=</span> <span class="type">String</span>(data: identityTokenData, encoding: .utf8),</span><br><span class="line">                  <span class="keyword">let</span> authorizationCodeData <span class="operator">=</span> appleIDCredential.authorizationCode,</span><br><span class="line">                  <span class="keyword">let</span> authorizationCode <span class="operator">=</span> <span class="type">String</span>(data: authorizationCodeData, encoding: .utf8) <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">            <span class="keyword">let</span> userID <span class="operator">=</span> appleIDCredential.user</span><br><span class="line">            <span class="keyword">self</span>.tryLogin(identityToken: identityToken, </span><br><span class="line">							            authorizationCode: authorizationCode, </span><br><span class="line">								          userID: userID)</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="comment">/// - Tag: did_complete_error</span></span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">authorizationController</span>(<span class="params">controller</span>: <span class="type">ASAuthorizationController</span>, <span class="params">didCompleteWithError</span> <span class="params">error</span>: <span class="type">Error</span>) &#123;</span><br><span class="line">        <span class="comment">// Handle error.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>校验授权状态</p>
+<p>除了通过如下方法主动获取用户的授权信息，我们还可以以通知的方式监听用户是否取消了授权，苹果提供的通知名称为<code>ASAuthorizationAppleIDProvider.credentialRevokedNotification</code> 。</p>
+ <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> appleIDProvider <span class="operator">=</span> <span class="type">ASAuthorizationAppleIDProvider</span>()</span><br><span class="line">appleIDProvider.getCredentialState(forUserID: <span class="type">KeychainItem</span>.currentUserIdentifier) &#123; (credentialState, error) <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">switch</span> credentialState &#123;</span><br><span class="line">    <span class="keyword">case</span> .authorized:</span><br><span class="line">        <span class="keyword">break</span> <span class="comment">// The Apple ID credential is valid.</span></span><br><span class="line">    <span class="keyword">case</span> .revoked, .notFound:</span><br><span class="line">        <span class="comment">// The Apple ID credential is either revoked or was not found, so show the sign-in UI.</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>主动撤销授权</p>
+<p>根据苹果<a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/signinwithapplerestapi/revoke_tokens">官方文档</a>，调用 URL（<a target="_blank" rel="noopener" href="https://appleid.apple.com/auth/revoke">https://appleid.apple.com/auth/revoke</a>）以撤销用户授权。但考虑到以下原因，主动撤销授权的操作应由服务端进行操作。</p>
+<ul>
+<li>接口调用需要的参数都保存在云端</li>
+<li>多端调用场景（iOS、Android、Web）</li>
+<li>数据安全</li>
+</ul>
+</li>
+</ol>
+<h2 id="google"><a class="markdownIt-Anchor" href="#google"></a> Google</h2>
+<blockquote>
+<p>在 iPhone 上的原生 APP 可以使用 Google 提供的框架 GoogleSignIn 获取用户授权。</p>
+</blockquote>
+<h3 id="配置-2"><a class="markdownIt-Anchor" href="#配置-2"></a> 配置</h3>
+<ol>
+<li>
+<p>Google 开发者账号配置</p>
+<blockquote>
+<p>这里的配置流程主要参考<a target="_blank" rel="noopener" href="https://developers.google.com/identity/sign-in/ios/start-integrating?hl=zh-cn#configure_app_project">官方文档</a></p>
+</blockquote>
+<p>在 Google 开发者账号中创建/获取客户端 ID 和服务器客户端 ID。</p>
+<p>创建好的客户端 ID 如图：</p>
+<p><img src="../images/bd8c1e247c9406ca02b64d49f28a467d.png" alt="image.png" /></p>
+<p>创建好的服务器客户端 ID 如图：</p>
+<p><img src="../images/fa59812d0ac3e304b73090bc93e85ee2.png" alt="image.png" /></p>
+</li>
+<li>
+<p>Xcode 项目配置</p>
+<p>需要在 Xcode 工程配置中添加 Google 开发者账号相关配置信息，把第一步中获取的两个 ID 添加到 <code>Info.plist</code> 文件中，形式如下：</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>GIDClientID<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>YOUR_IOS_CLIENT_ID<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>CFBundleURLTypes<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">key</span>&gt;</span>CFBundleURLSchemes<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">		        <span class="tag">&lt;<span class="name">string</span>&gt;</span>YOUR_DOT_REVERSED_IOS_CLIENT_ID<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>GIDServerClientID<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>YOUR_SERVER_CLIENT_ID<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>其中有两点需要注意：</p>
+<ol>
+<li>如果你的 App 在开发环境与线上环境使用的是不同的 AppID，那上面的账号和项目配置也需要创建两套不同的账号，同时在 plist 文件中也需要按环境区分不同的配置</li>
+<li><code>GIDServerClientID</code> 是后端使用的 ID，当 App 的授权流程需要后端身份验证的时候，需要配置该 ID。</li>
+</ol>
+</li>
+</ol>
+<h3 id="实现-2"><a class="markdownIt-Anchor" href="#实现-2"></a> 实现</h3>
+<p>Google 登录流程比 Apple 登录流程简单，具体如下。</p>
+<ol>
+<li>
+<p>通过 Cocoapods 或者 SPM 集成 <a target="_blank" rel="noopener" href="https://github.com/google/GoogleSignIn-iOS">GoogleSignIn</a> SDK。</p>
+</li>
+<li>
+<p>发起授权请求</p>
+<p>通过 SDK 的方法获取 Google 授权。授权成功后会执行闭包中的代码，可以在 <code>signInResult</code> 中可以获取 userInfo、idToken 等必要信息，进而处理登录业务。</p>
+ <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">GIDSignIn</span>.sharedInstance.signIn(withPresenting: <span class="keyword">self</span>) &#123; signInResult, error <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">guard</span> error <span class="operator">==</span> <span class="literal">nil</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>校验授权状态</p>
+<p>通过 SDK 提供的方法校验用户授权状态</p>
+ <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">GIDSignIn</span>.sharedInstance.restorePreviousSignIn &#123; user, error <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">if</span> error <span class="operator">!=</span> <span class="literal">nil</span> <span class="operator">||</span> user <span class="operator">==</span> <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="comment">// Show the app&#x27;s signed-out state.</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// Show the app&#x27;s signed-in state.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>撤销授权</p>
+<p>通过 SDK 提供的方法主动撤销用户授权</p>
+ <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">GIDSignIn</span>.sharedInstance.disconnect &#123; error <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">guard</span> error <span class="operator">==</span> <span class="literal">nil</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// Google Account disconnected from your app.</span></span><br><span class="line">    <span class="comment">// Perform clean-up actions, such as deleting data associated with the</span></span><br><span class="line">    <span class="comment">//   disconnected account.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="校验授权信息"><a class="markdownIt-Anchor" href="#校验授权信息"></a> 校验授权信息</h1>
+<p>在 App 成功获取授权信息之后，会调用云接口将授权数据传给云端，云端需要校验此信息是否合法，根据采用的获取到的授权信息类型不同，会有不同的校验方式。在这一步骤中，主要是云与第三方平台服务端的交互。</p>
+<pre class="mermaid">sequenceDiagram
+    participant 应用
+    participant 第三方SDK
+    participant 云
+    participant 第三方服务器
+
+    应用->>第三方SDK: 1. 发起登陆请求
+    第三方SDK-->>第三方服务器: 
+    第三方服务器-->>第三方SDK: 
+    第三方SDK-->>应用: 2. 返回授权数据
+    应用->>云: 3. 客户端向后台提交授权数据
+    云->>第三方服务器: 4. 后台向第三方服务器验证授权信息
+    第三方服务器-->>云: 5. 返回验证结果
+    云-->>应用: 6. 告知客户端验证结果</pre>
+<p>在第三方登录过程中。几个相关角色的交互大致如上图所示，其中步骤 1、2 已经在上文详细介绍过了，本小节将会以 Apple 登录数据验证为例子，围绕步骤 4 和步骤 5 进行介绍。</p>
+<h2 id="apple-2"><a class="markdownIt-Anchor" href="#apple-2"></a> Apple</h2>
+<p>在上文已经提到， iOS App 从 Apple SDK 中可以获取两种授权数据，分别是<code>authorizationCode</code> 和 <code>identityToken</code>，针对不同的数据，苹果提供了对应的验证方式。</p>
+<p>在这里我们介绍一下两种数据：</p>
+<ol>
+<li>
+<p>authorizationCode</p>
+<p>本质上是 Apple 颁发的授权码。App 把数据传给云，然后由云端再向苹果的身份验证服务端验证本次授权登录请求数据的有效性和真实性。这是类似 OAuth2 的授权码验证方式。</p>
+</li>
+<li>
+<p>identityToken</p>
+<p>identityToken 是一个经过签名的 JWT 数据 （<a href="https://link.juejin.im/?target=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FJSON_Web_Token">JSON Web Token</a>），通过向苹果身份验证服务器获取公钥再进行解密、匹配等步骤，我们可以验证此数据是否被篡改、是否合法。</p>
+</li>
+</ol>
+<p>云端可以自由选择这两个参数进行校验，只要有一个验证方式能够通过，即可视为本次授权校验成功。</p>
+<h3 id="基于授权码的验证"><a class="markdownIt-Anchor" href="#基于授权码的验证"></a> 基于授权码的验证</h3>
+<blockquote>
+<p>该算法用来验证<code>authorizationCode</code></p>
+</blockquote>
+<p>使用 authorizationCode 进行验证，调用 URL <a target="_blank" rel="noopener" href="https://appleid.apple.com/auth/token">https://appleid.apple.com/auth/token</a> 进行验证</p>
+<p>该流程可参考<a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/signinwithapplerestapi/generate_and_validate_tokens">官方文档</a>，简单的说，就是构建一个网络请求，成功返回即验证成功。</p>
+<p>在构建的 request 中有一个 <code>client_secret</code> 字段需要我们自行<a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/accountorganizationaldatasharing/creating-a-client-secret">构建一个 JWT 数据</a>，里面包含了开发者账户信息（TeamID、KeyID），应用信息（App 的 BundleID）相关的配置。在构建数据的时候需要注意区分不同开发环境、不同登录客户端，这些差异会导致参数的值不同。</p>
+<h3 id="基于-jwt-的算法验证"><a class="markdownIt-Anchor" href="#基于-jwt-的算法验证"></a> 基于 JWT 的算法验证</h3>
+<blockquote>
+<p>该算法用来验证<code>identityToken</code> 参数</p>
+</blockquote>
+<p>一个 JWT 有三个部分：header、payload、signature，如下图所示</p>
+<p><img src="../images/3b9ddd9fb23a06a5cadfd6df464a64ea.png" alt="image.png" /></p>
+<blockquote>
+<p>这里附上一个<a target="_blank" rel="noopener" href="https://jwt.io/">JWT 在线解析</a>的工具</p>
+</blockquote>
+<p>服务端在获取客户端发出的<code>identityToken</code>后，需要进行如下步骤：</p>
+<ol>
+<li>需要逆向构造过程，decode出JWT的三个部分</li>
+<li>从<a href="https://link.juejin.cn/?target=https%3A%2F%2Fappleid.apple.com%2Fauth%2Fkeys">appleid.apple.com/auth/keys</a>中获取公钥，并将公钥<a href="https://link.juejin.cn/?target=https%3A%2F%2F8gwifi.org%2Fjwkconvertfunctions.jsp">转换</a>为<code>pem</code>对JWT进行验证；获取到的公钥会有多个，需要根据 head 里的 kid 和 alg 去选取正确的公钥</li>
+<li>如<code>identityToken</code>通过验证，则可以根据其payload中的内容进行验证等操作</li>
+</ol>
+<p>这里需要再补充说明一下 identityToken 验证原理和方式：<code>idnetityToken</code>使用非对称加密 RSASSA（RSA签名算法） 和 ECDSA（椭圆曲线数据签名算法），当验证签名的时候，利用公钥来解密Singature，满足下列条件时，验证通过：</p>
+<ol>
+<li>与<code>base64UrlEncode(header) + &quot;.&quot; + base64UrlEncode(payload)</code>的内容完全一样</li>
+<li><code>iss</code> 与 <code>aud</code> 字段匹配</li>
+<li><code>exp</code> 过期时间未过</li>
+</ol>
+<p>另外，我们从解析出来的 JWT 文件中还能获取到一些其他信息</p>
+<ol>
+<li>
+<p>email</p>
+<p>Apple 账号的邮箱。上文已经提过，<code>ASAuthorization</code> 服务的登录成功回调事件只有在首次授权的时候才会返回用户信息（用户邮箱），如果后端业务需要使用到用户邮箱，则可以在 JWT 里获取。</p>
+</li>
+<li>
+<p>email_verified</p>
+<p>该字段表明用户邮箱是否已经经过认证</p>
+</li>
+<li>
+<p>is_private_email</p>
+<p>这个字段表明用户是否隐藏邮箱，即用户的邮箱是否为中转邮箱。</p>
+<p>Apple 在首次获取用户授权时会询问用户是否要分享自己的邮件地址给第三方平台。如果用户选择不分享，即隐藏邮件地址，Apple 会生成一个中转邮箱（类似<u><a href="mailto:xxxxxx@privaterelay.appleid.com">xxxxxx@privaterelay.appleid.com</a></u>）给到第三方平台以进行必要的业务操作，如第三方平台账号的邮箱信息、发送营销或通知邮件等。</p>
+<blockquote>
+<p>如果需要通过中转邮箱给用户发送邮件，需要在 Apple 开发者账号配置信任邮箱，只有在信任列表里的邮箱才能通过中转邮箱给用户发送邮件、接收用户的邮件。</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="google-2"><a class="markdownIt-Anchor" href="#google-2"></a> Google</h2>
+<p>Google 登录的验证流程与 Apple 的 JWT 验证流程基本一致（参考<a target="_blank" rel="noopener" href="https://developers.google.com/identity/sign-in/ios/backend-auth?hl=zh-cn">官方文档</a>），其中 App 从 SDK 获取的 JWT 数据参数名为 <code>idToken</code> 。</p>
+<h1 id="校验结果处理"><a class="markdownIt-Anchor" href="#校验结果处理"></a> 校验结果处理</h1>
+<p>来到这一步，说明我们已经完成第三方账号的授权获取和校验了，此时我们可以将第三方账号的数据对接我们已有的账号系统。</p>
+<p>在这个步骤中，业务流程是具体业务需求决定的，并不是一个通用规范的做法，在不同业务主体可能会有不同的设计方案。这里简单介绍一下 VeSync App 的做法。</p>
+<p>VeSync 采用邮箱作为 Key 来链接第三方账号和 VeSync 账号。其中，Apple 登录方式的邮箱可以从 JWT 数据中解析出来，Google 登录方式的邮箱则是由 SDK 直接返回，由 App 传给云端即可。</p>
+<p>云会校验该邮箱是否已经绑定过 VeSync 账号：</p>
+<ol>
+<li>
+<p>已绑定</p>
+<p>这意味着这个第三方账号的用户已经通过三方登录的方式创建过账号，或绑定过账号。此时我们可以直接为该用户颁发通行密钥（token），App 拿到密钥之后可以直接登录，使用 VeSync 的服务，此时我们获取第三方账号的信息是用来<strong>登录</strong>的</p>
+</li>
+<li>
+<p>未绑定</p>
+<p>此时 App 需要引导用户绑定已有账号或创建新账号，大致流程如下所示。就是此时我们获取第三方账号的信息可能用来<strong>登录</strong>或<strong>注册</strong> 。流程结束后，用户即可成功登录使用 VeSync 的服务。</p>
+<p>需要额外说明的是，在建立已有账号与第三方账号的绑定关系的过程中，需要校验已有账号是否已经绑定过同一平台的第三方账号，如果已经绑定过，则需要额外的流程（如直接替换，或提示用户选择其中一个）进行处理。</p>
+</li>
+</ol>
+<pre class="mermaid">graph LR
+
+create_or_bind_account{创建/绑定账号}
+create_or_bind_account --绑定--> bind_account[通过邮箱登录已有账号]
+create_or_bind_account --创建--> create_new_account[使用邮箱创建新账号]
+subgraph 创建账号流程
+create_new_account ---> user_login_with_region1[建立新账号与第三方账号的绑定关系]
+end
+subgraph 绑定账号流程
+bind_account ---> user_login_with_region2[建立已有账号与第三方账号的绑定关系]
+end
+user_login_with_region1 ---> login_success_and_go_home_page
+
+user_login_with_region2 ---> login_success_and_go_home_page(登录成功)</pre>
+<p>在完成账号的创建和绑定过程之后，与第三方账号相关的业务流程就结束了。此时我们会处于登录状态，用户就可以使用 App 了。</p>
+<h1 id="尾声"><a class="markdownIt-Anchor" href="#尾声"></a> 尾声</h1>
+<p>通过本文的介绍，我们了解了第三方授权信息的获取和校验的流程，同时大致梳理了现行账号体系接入第三方账号的流程，希望这些内容能够帮助到您。</p>
+<p>感谢您的阅读，希望本文对您在接入第三方平台登录方面有所启发。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><div>
+    <div style="text-align:center;color: #ccc;font-size:14px;">------------- <i class="fa fa-paw"></i> END -------------</div>
+</div>
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>阿告2426
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://jiahaofang.github.io/ios-third-party-login/" title="iOS 第三方登录">https://jiahaofang.github.io/ios-third-party-login/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i> iOS</a>
+              <a href="/tags/OAuth/" rel="tag"><i class="fa fa-tag"></i> OAuth</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/social-psychology-2/" rel="prev" title="社会心理学（二）">
+                  <i class="fa fa-angle-left"></i> 社会心理学（二）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/philosophy-death-2/" rel="next" title="哲学-死亡（二）">
+                  哲学-死亡（二） <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2022 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-pen"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">阿告2426</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">117k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:33</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":"default","cdn":"//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.min.js","integrity":"sha256-TtLOdUA8mstPoO6sGvHIGx2ceXrrX4KgIItO06XOn8A="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","mhchem":false,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
