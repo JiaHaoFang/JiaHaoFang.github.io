@@ -2982,7 +2982,7 @@ header.header {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #6c7e2d;
+  background: #1daf88;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -3074,4 +3074,9 @@ code {
 ::-moz-selection {
   background: #dfa710;
   color: #f7f7f7;
+}
+/* 修改Mermaid渲染样式-修改背景色为透明 */
+.article-entry pre,
+.mermaid {
+  background: #a0a0a0;
 }
