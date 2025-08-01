@@ -4,12 +4,12 @@ tags:
   - iOS
 status: 已发布
 description: iOS 深色模式介绍和实践
-latest edit: '2025-05-27T10:37:00.000Z'
+latest edit: '2025-06-22T07:11:00.000Z'
 date: '2024-12-23 08:00:00'
 permalink: ios-darkmode-practice/
 title: iOS 暗黑模式适配
 urlname: 1c824191-cd14-80bc-8904-fcd2405aa86e
-updated: '2025-05-27 18:37:00'
+updated: '2025-06-22 15:11:00'
 ---
 > 本文已发表在微信公众号，[《当我们在谈论DarkMode时我们在谈论什么》](https://mp.weixin.qq.com/s/GolsykOfKmhaloVTjoZk3g)
 
