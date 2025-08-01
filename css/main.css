@@ -2982,7 +2982,7 @@ header.header {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #b401b4;
+  background: #81ff05;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -3042,7 +3042,7 @@ header.header {
   word-break: break-all;
 }
 .post-body img {
-  border-radius: 1em;
+  border-radius: 0.5em;
 }
 .post-body p a {
   color: #0593d3;
@@ -3078,6 +3078,6 @@ code {
 /* 修改Mermaid背景色 */
 .article-entry pre,
 .mermaid {
-  background: #f7f7f7;
-  border-radius: 1em;
+  background: #fff;
+  border-radius: 3px;
 }
