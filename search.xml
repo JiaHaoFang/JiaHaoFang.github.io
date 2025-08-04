@@ -436,6 +436,140 @@
       </tags>
   </entry>
   <entry>
+    <title>iOS 横屏适配</title>
+    <url>//ipad-adaption/</url>
+    <content><![CDATA[<blockquote>
+<p>本文已发表在微信公众号，<a href="https://mp.weixin.qq.com/s/mbZzBNYlzku2vn4ElUspXA">《iPad 适配二三事》</a></p>
+</blockquote>
+<h1 id="背景前言"><a class="markdownIt-Anchor" href="#背景前言"></a> <strong>背景&amp;前言</strong></h1>
+<p>当谈及移动设备的应用程序开发时，iPad是一个备受关注的平台。作为一款功能强大且备受欢迎的设备，iPad是许多人日常生活中不可或缺的工具之一。对于开发者来说，确保他们的应用在iPad上的完美适配是至关重要的。</p>
+<p>然而，大部分公司都会选择优先开发和推广手机端 app 的发展策略，前期不会花费过多精力在iPad 端进行适配，在 app 有了一定体量之后，用户对 iPad 端的体验提出需求之后，才会开始考虑进行 iPad 的适配。这就势必造成 iPad 的适配必须要考虑原有业务代码对适配工作造成的影响——这并不是一个简单的任务。</p>
+<p>在本文中，我们将探讨一些iPad应用适配策略和最佳实践，介绍一些常见的适配问题，并提供解决方案和建议，帮助开发人员克服这些障碍。无论您是一个经验丰富的开发人员还是一个新手，我们相信这篇文章将为您提供有关在iPad上适配应用程序的经验建议和指导。</p>
+<h1 id="技术储备"><a class="markdownIt-Anchor" href="#技术储备"></a> <strong>技术储备</strong></h1>
+<h2 id="工程配置"><a class="markdownIt-Anchor" href="#工程配置"></a> <strong>工程配置</strong></h2>
+<p>要让原本为 iPhone 平台开发的 app 能在 iPad 上使用，第一步就是要在 target 中添加对 iPad 平台的支持，这个配置项能让 app 在 iPad 平台运行。</p>
+<p><img src="../images/d10025b4724e56a9cde4c45d77a283dc.png" alt="image.png" /></p>
+<p>经常用 iPad 的朋友们都知道，一个 app 在 iPad 端的呈现方式是十分多样化的，可以有横屏竖屏分屏浮窗等样式。在实际开发中，iPad 横竖屏的支持在 <code>iPad Orientation</code> 配置项中设置；浮窗/分屏的支持由 <code>Requires full screen</code>决定，勾选了此项之后即不支持浮窗或分屏。</p>
+<p>本文主要涉及的是 iPad 横竖屏的适配，不涉及浮窗/分屏的适配。</p>
+<p><img src="../images/0ae78ee0bc2e45d6a08478f96083e335.png" alt="image.png" /></p>
+<p>到这里为止，我们的应用就可以在 iPad 上跑起来了。</p>
+<h2 id="屏幕方向的定义"><a class="markdownIt-Anchor" href="#屏幕方向的定义"></a> 屏幕方向的定义</h2>
+<p>对于开发者来说，app 在 iPad 上和 iPhone 上运行最大的区别就是对屏幕旋转的处理，绝大多数应用在手机上都是固定一个方向，但是在 iPad 上则需要支持多个方向的展示。另外在实际项目中，可能有一些场景，比如视频播放，需要强制应用变成横屏/竖屏，这需要我们在代码里做特殊处理。</p>
+<p>要处理屏幕旋转，首先我们要知道屏幕方向是怎么定义的。在 UIKit 中， 屏幕方向一般使用<code>UIApplication.shared.statusBarOrientation</code>进行判断。它的定义如下：</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">UIInterfaceOrientation</span> : <span class="title class_">Int</span>, @<span class="title class_">unchecked</span> <span class="title class_">Sendable</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> unknown <span class="operator">=</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">case</span> portrait <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">case</span> portraitUpsideDown <span class="operator">=</span> <span class="number">2</span></span><br><span class="line">    <span class="keyword">case</span> landscapeLeft <span class="operator">=</span> <span class="number">4</span></span><br><span class="line">    <span class="keyword">case</span> landscapeRight <span class="operator">=</span> <span class="number">3</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>要注意的是，有另外一个易混用的方向：<code>UIDevice.current.orientation</code>。这个变量的含义是设备的方向，为<code>UIDeviceOrientation</code>类型，包含有<code>FaceUp</code>、<code>FaceDown</code>的信息，但我们只想要屏幕的方向（横/竖），过多的类型会影响我们的判断，<strong>不推荐</strong>使用这个方式。</p>
+<h2 id="设置屏幕方向"><a class="markdownIt-Anchor" href="#设置屏幕方向"></a> <strong>设置屏幕方向</strong></h2>
+<p>在知道如何判断屏幕方向之后，我们就可以处理屏幕方向的旋转问题了。在开发过程中，除了 2.1 中的工程配置，常见的有两种设置方向的方式：</p>
+<ol>
+<li>Target - General - Deployment Info - iPad Orientation即 2.1 的工程配置，这里不再重复。</li>
+<li>AppDelegate</li>
+</ol>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 自定义属性, 用于控制全局旋转方向</span></span><br><span class="line"><span class="keyword">var</span> supportOrientation: <span class="type">UIInterfaceOrientationMask</span> <span class="operator">=</span> isPad <span class="operator">?</span> .all : .portrait</span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> <span class="title function_">application</span>(<span class="keyword">_</span> <span class="params">application</span>: <span class="type">UIApplication</span>, <span class="params">supportedInterfaceOrientationsFor</span> <span class="params">window</span>: <span class="type">UIWindow</span>?) -&gt; <span class="type">UIInterfaceOrientationMask</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>.supportOrientation</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在 AppDelegate 中有一个方法<strong>全局</strong>可以配置 App 的展示方向，这样设置的屏幕方向优先级会高于 Target 中设置的屏幕方向。此外，这里使用一个自定义变量来存放支持的屏幕方向的原因是，我们在特定场景下可以修改<code>supportOrientation</code>的值强制更改应用的方向。</p>
+<ol>
+<li>UIViewController</li>
+</ol>
+<p>同样地，通过在 UIViewController 中设置自己的<code>supportedInterfaceOrientations</code>，可以设置某一个 VC 支持的方向：</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="keyword">var</span> shouldAutorotate: <span class="type">Bool</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">override</span> <span class="keyword">var</span> supportedInterfaceOrientations: <span class="type">UIInterfaceOrientationMask</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> [.landscapeLeft, .landscapeRight]</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">override</span> <span class="keyword">var</span> preferredInterfaceOrientationForPresentation: <span class="type">UIInterfaceOrientation</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> .landscapeRight</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里需要特别说明的是，上面三个设置横竖屏的方式是有<strong>优先级顺序</strong>的，从上到下优先级依次提高。另外在实际开发中，对于每个根控制器 (<code>UITabBarController</code> 和 <code>UINavigationController</code>)，我们都需要设置上述第三点的三个方法</p>
+<h2 id="监听屏幕旋转"><a class="markdownIt-Anchor" href="#监听屏幕旋转"></a> <strong>监听屏幕旋转</strong></h2>
+<p>我们不只是希望能设置屏幕方向，我们还希望在屏幕旋转的时候我们的获取到这一事件的通知。比较常见的有几种方式获取横竖屏切换事件：</p>
+<ol>
+<li>在<code>UIViewController</code>中重写<code>viewWillTransition</code> 方法，系统在屏幕发生旋转的时候会调用该方法，我们在coordinator的闭包中即可处理业务。</li>
+</ol>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="keyword">func</span> <span class="title function_">viewWillTransition</span>(<span class="params">to</span> <span class="params">size</span>: <span class="type">CGSize</span>, <span class="params">with</span> <span class="params">coordinator</span>: <span class="type">UIViewControllerTransitionCoordinator</span>) &#123;</span><br><span class="line">    <span class="keyword">super</span>.viewWillTransition(to: size, with: coordinator)</span><br><span class="line">    coordinator.animate &#123; <span class="keyword">_</span> <span class="keyword">in</span></span><br><span class="line">        <span class="comment">// 更新UI</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>监听通知 <code>UIApplication.didChangeStatusBarOrientationNotification</code> ；在使用NotificationCenter的方式进行监听时，需要注意通知的注册和移除时机，以免造成不必要的内存泄露问题。</li>
+</ol>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">func</span> <span class="title function_">setupDeviceOrientationObserver</span>() &#123;</span><br><span class="line">    <span class="comment">// 开启并监听系统通知</span></span><br><span class="line">    <span class="type">UIDevice</span>.current.beginGeneratingDeviceOrientationNotifications()</span><br><span class="line">    <span class="type">NotificationCenter</span>.default.addObserver(<span class="keyword">self</span>, selector: <span class="keyword">#selector</span>(onDeviceOrientationChange), name: <span class="type">UIApplication</span>.didChangeStatusBarOrientationNotification, object: <span class="literal">nil</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@objc</span> <span class="keyword">func</span> <span class="title function_">onDeviceOrientationChange</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> currentDeviceOrientation <span class="operator">=</span> <span class="type">UIDevice</span>.current.orientation</span><br><span class="line">    <span class="comment">// 只处理竖屏或横屏的情况（可能出现unknow或屏幕朝上/朝下）</span></span><br><span class="line">    <span class="keyword">guard</span> currentDeviceOrientation.isPortrait <span class="operator">||</span> currentDeviceOrientation.isLandscape <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> <span class="title function_">removeDeviceOrientationObserver</span>() &#123;</span><br><span class="line">    <span class="type">NotificationCenter</span>.default.removeObserver(<span class="keyword">self</span>, name: <span class="type">UIDevice</span>.orientationDidChangeNotification, object: <span class="literal">nil</span>)</span><br><span class="line">    <span class="comment">// 记得关闭使计数器-1</span></span><br><span class="line">    <span class="type">UIDevice</span>.current.endGeneratingDeviceOrientationNotifications()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>另外，习惯使用 Rx 的小伙伴也可以使用 RxSwift 的方式监听：</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">NotificationCenter</span>.default.rx</span><br><span class="line">    .notification(<span class="type">UIApplication</span>.didChangeStatusBarOrientationNotification)</span><br><span class="line">    .subscribe(onNext: &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] <span class="keyword">_</span> <span class="keyword">in</span></span><br><span class="line">       <span class="comment">// 重绘 UI</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .disposed(by: rx.disposeBag)</span><br></pre></td></tr></table></figure>
+<p>在监听设备方向的通知时，我们需要注意上文提到过的<code>UIDevice.current.orientation</code>。相对应的，<code>UIDevice.current.orientation</code>也有类似的通知方法<code>UIDevice.orientationDidChangeNotification</code>。我们使用<code>UIApplication.didChangeStatusOrientationNotification</code>通知而不是<code>UIDevice.orientationDidChangeNotification</code>通知的原因是：</p>
+<ul>
+<li>UIDevice 的通知会在从后台进入前台时调用三次，调用次数过多且不必要；
+<ul>
+<li>UIDevice 会有多个方向的通知，比如从 faceUp 转向 faceDown 时也会发出一个通知，而这个事件我们是不需要关注的</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>除了上述的两种获取屏幕旋转事件的方式以外， 系统在发生屏幕旋转的行为的时候，会调用这 UIView 的<code>layoutSubviews</code> 方法和 UIViewController 的 <code>viewWillLayoutSubviews</code> 方法，我们还可以在这两个方法中进行 UI 的布局和刷新。</li>
+</ol>
+<h2 id="在旋转时刷新-ui"><a class="markdownIt-Anchor" href="#在旋转时刷新-ui"></a> <strong>在旋转时刷新 UI</strong></h2>
+<p>在知道了如何监听屏幕旋转之后，我们接下来要做的事情就是在屏幕旋转的时候去刷新 UI。</p>
+<p>在 ios 开发中，常见的页面布局方式有两种，一种是使用 <code>frame</code> 的<strong>绝对布局</strong>，一种是使用 AutoLayout 或 Masonry、SnapKit等框架的<strong>相对布局</strong>（下称<code>AutoLayout</code>）。</p>
+<p>在屏幕尺寸会变化的情况下，绝对布局的方式受影响比较大，业务方需要在屏幕尺寸发生变化的时候更新这些 frame 的值。对于某些比较简单的 frame 布局的 UI，可以使用 UIView 的 <code>AutoresizingMask</code> 属性进行适配，系统会根据设置的属性对对应的 view 进行拉伸等操作。但是在实际使用中，这种方法的表现并不尽如人意，这个设置项并不能保证你的自定义视图根据你需要的方式变化。我们推荐的方案是在<code>layoutSubviews</code>方法中进行视图的 frame 的计算和赋值，这保证了代码的简洁性和 UI 的正确性。</p>
+<p>而正确使用<code>AutoLayout</code>的布局方式能使页面较好地适应动态变化的屏幕尺寸，且在屏幕旋转时过渡效果流畅丝滑。 在使用自动布局的时候，我们应该摒弃手动计算尺寸的方式，譬如在处理一个横向三等分的布局的时候，我们不应该使用 “父视图宽度÷3” 的方式手动计算三个子视图的宽度，而应该在<code>AutoLayout</code> 中设置子视图的左右约束、三个子视图宽度相等，如此一来，我们就不需要再为变化的屏幕尺寸做多余的工作了。</p>
+<p>根据以上原因，笔者建议在开发/适配 iPad 时应尽量使用<code>AutoLayout</code>，在遇到难以处理的 frame 布局方式时，可以考虑将其改写为<code>AutoLayout</code>。</p>
+<p>此外，除了布局的原因需要刷新 UI，有些系统控件控件也需要手动刷新使其正确展示，常见的有：</p>
+<ol>
+<li>UICollectionView 需要调用 <code>collectionView.collectionViewLayout.invalidateLayout()</code>方法使其刷新 itemSize；</li>
+<li>使用 UIScrollView 实现一些多页滑动效果的页面需要重新计算<code>contentOffset</code>使其有正确的偏移量；</li>
+<li>有使用 CALayer 绘制颜色/圆角/渐变色的业务需要重新绘制 layer 使其尺寸正确。</li>
+</ol>
+<h1 id="落地方案"><a class="markdownIt-Anchor" href="#落地方案"></a> <strong>落地方案</strong></h1>
+<p>本文前半段聊的都是专注于某一处业务细节如何处理屏幕旋转、尺寸变化，但实际上具体到业务落地还有很关键的一点是整体的适配方案，也就是页面的排版。</p>
+<h2 id="常见适配方案介绍"><a class="markdownIt-Anchor" href="#常见适配方案介绍"></a> <strong>常见适配方案介绍</strong></h2>
+<h3 id="左右分栏"><a class="markdownIt-Anchor" href="#左右分栏"></a> 左右分栏</h3>
+<p>iPad 原生应用程序，如信息、相册、备忘录等，绝大部分采用了左右分栏的形式（如下图所示）。这种设计形式的好处在于分栏的设计能够最大化利用 iPad 的大屏，合理地利用横屏展示更多的内容。但是这种方案对原有架构的改动较大，从 UI 样式到页面交互都会发生比较大的变动，需要开发人员单独为 iPad 编写业务代码。</p>
+<p><img src="../images/9722c1080f6d5d149e3af96dac4c3edd.png" alt="image.png" /></p>
+<h3 id="内容响应式布局"><a class="markdownIt-Anchor" href="#内容响应式布局"></a> 内容响应式布局</h3>
+<p>App Store 的设计方案采用的则是内容响应式布局，根据页面的宽度和高度按照特定的规则调整布局。这种方案灵活性更佳，用户体验好， 但是对设计人员和开发人员的要求也会更高。</p>
+<p><img src="../images/6083a0643ec2e4b2d4670c14ce12ab74.png" alt="image.png" /></p>
+<h3 id="横向拉伸页面"><a class="markdownIt-Anchor" href="#横向拉伸页面"></a> 横向拉伸页面</h3>
+<p>最常见的适配方案就是横向拉伸页面，页面的元素按照原有的布局逻辑横向拉伸，与手机端的布局基本保持一致。这种方式既保证了页面布局的合理性，同时也不需要开发人员过多地为 iPad 单独编写代码，是一种相对折中的适配方案。</p>
+<p><img src="../images/61d91799d9c561d21709e0d552fddeec.png" alt="image.png" /></p>
+<h2 id="vesync-适配方案"><a class="markdownIt-Anchor" href="#vesync-适配方案"></a> <strong>VeSync 适配方案</strong></h2>
+<p>VeSync App 手机端用户居多，几乎所有的页面都只考虑了手机端的展示，在适配 iPad 之前，iPad 对于我们来说只是一个屏幕稍微大点的 iPhone。此外，由于 iPad 用户占比不高，公司也暂时没有在 iPad 端大力推广 VeSync App 的计划，如果要所有业务都使用 3.1 中提及的前几种方案适配，这对于我们来说成本过高。</p>
+<p>由于 VeSync 是一个智能家庭类软件，大部分功能业务都与设备相关，而品类繁多的设备和功能导致业务代码体量庞大，要每个页面都完美适配 iPad 横屏/竖屏/旋转的工作量巨大。综合考虑适配成本和用户体验后，决定采用以下的适配方案：</p>
+<ul>
+<li>对 App 首页（即设备列表页、wellness首页、论坛、商城）这类使用频率最高的页面使用响应式布局的适配方式，最大化保证用户体验；</li>
+<li>对登录页、设置页这类功能页直接横向拉伸进行适配；</li>
+<li>涉及到设备业务的设备主页的业务采用<code>弹出位于屏幕中心的小窗口</code>（下称<strong>中心小窗</strong>）的适配方案。</li>
+</ul>
+<p>这种适配方案实际上是对 3.1 中提及的方案进行了“混搭”，再根据 VeSync 的实际情况进行调整（中心小窗）。方案综合考虑了用户体验和开发周期，在有限的开发时间内保证用户能有良好的使用体验。此外，对于开发者来说，这种方案不需要单独为 iPad 适配编写过多代码，保证了业务代码的纯净。</p>
+<h3 id="弹出的中心小窗"><a class="markdownIt-Anchor" href="#弹出的中心小窗"></a> <strong>“弹出”的中心小窗</strong></h3>
+<p><img src="../images/fb2aad38a5e32c0c8f8094b30a0513b1.png" alt="image.png" /></p>
+<p>中心小窗的方案实际效果如图所示，用文字大致描述如下：</p>
+<ol>
+<li>涉及<strong>设备</strong>的页面都使用 Modal 的方式弹出，用一个已封装好的<code>UINavigationController</code>（下称<strong>容器</strong>）进行管理；</li>
+<li>中心小窗大小根据屏幕高度计算得出，通过重写容器的<code>preferredContentSize</code>属性实现，其大小在 iPad 的横竖屏状态下均保持不变；</li>
+<li>在进入中心小窗之后，后续的页面导航都在容器的导航栈里进行管理，直到这个容器被 dismiss。</li>
+</ol>
+<p>由于中心小窗的大小不会发生变化，大量的业务代码不需要再关心屏幕是否旋转、窗口是否发生变化，更直白地说，在中心小窗的页面的展示模式和 iPhone 基本保持一致了。这大幅减少了开发人员在这部分内容的适配工作，同时也保证了良好的用户体验。</p>
+<p>在弹窗内的页面，获取容器大小的方式也要发生改变。大部分开发者会采用<code>UIScreen.main.bounds</code>的方式获取容器大小，这种方式在此方案下是有局限性的，无法获取到页面真正的大小。我们需要通过定义一个新的变量来获取当前容器的大小（W+H）。</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="comment">/// 顶层控制器的宽度</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> adaptiveScreenW: <span class="type">CGFloat</span> &#123; adaptiveScreenSize.width &#125;</span><br><span class="line"><span class="comment">/// 顶层控制器的高度</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> adaptiveScreenH: <span class="type">CGFloat</span> &#123; adaptiveScreenSize.height &#125;</span><br><span class="line"><span class="comment">/// 顶层控制器的尺寸</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> adaptiveScreenSize: <span class="type">CGSize</span> &#123;</span><br><span class="line">    <span class="keyword">guard</span> <span class="type">VS</span>.isPad, <span class="keyword">let</span> window <span class="operator">=</span> <span class="type">UIApplication</span>.shared.keyWindow <span class="keyword">else</span> &#123; <span class="keyword">return</span> screenSize &#125;</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> present <span class="operator">=</span> window.rootViewController<span class="operator">?</span>.presentedViewController, present.preferredContentSize <span class="operator">!=</span> .zero &#123;</span><br><span class="line">        <span class="keyword">return</span> present.preferredContentSize</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> window.bounds.size</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看出，<code>adaptiveScreenSize</code>优先获取容器的大小，否则返回屏幕大小。无论是iPhone、iPad 全屏、iPad 中心小窗，通过这种定义方式，设备方的业务代码只需要使用这一套屏幕尺寸变量即可获取正确的容器大小。</p>
+<h3 id="中心小窗带来的变化及问题"><a class="markdownIt-Anchor" href="#中心小窗带来的变化及问题"></a> 中心小窗带来的变化及问题</h3>
+<p>上文已经提到，中心小窗实际上是通过 present 一个封装的<code>UINavigationController</code>实现的，这样的导航管理与 iPhone 端是有区别的——从一个导航栈管理变成两个导航栈管理，这势必导致原有业务代码的导航的更新，具体需要更新的内容包括但不限于：</p>
+<ol>
+<li>原有的<code>popToRoot</code>事件在小窗口内会变成<code>dismiss</code>事件</li>
+<li>在设备主页（此时该页面为<code>rootViewController</code>）的返回 <code>pop</code> 事件会变成<code>dismiss</code>事件，其他二级页面的返回事件保持不变</li>
+<li>有些业务代码对整个栈的 <code>VC</code> 做了处理，简单地用&quot;栈内的第i个<code>VC</code>&quot;处理业务（此处的 i 指代一个代码里固定的 index 值），由于此时的导航栈结构与之前发生了变化，不能简单地用 <code>VC</code> 的 index 判断，而应该用 <code>firstIndex(of:)</code>去获取目标 VC 的下标。</li>
+</ol>
+<p>此外，一些作用于<code>keyWindow</code>的代码也要发生相应的变化，我们需要在获取 keyWindow 之前判断 keyWindow 是否有<code>presentedViewController</code>，如果有，我们处理的对象就应该变成<code>presentedViewController</code>。举个例子，对 keyWindow的 addSubview 操作在存在中心小窗业务的场景下应该变为：</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> presentedViewController <span class="operator">=</span> <span class="type">UIApplication</span>.shared.keyWindow<span class="operator">?</span>.rootViewController<span class="operator">?</span>.presentedViewController &#123;</span><br><span class="line">    presentedViewController.view.addSubview(someView)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="type">UIApplication</span>.shared.keyWindow<span class="operator">?</span>.addSubview(someView)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在中心小窗的页面还可能遇到手势冲突的问题。ios 系统原生的 Modal 支持手势下滑dismiss，如果容器内的页面有其他手势操作的业务，可能会有手势冲突的情况，常见的问题及解决方式如下：</p>
+<ol>
+<li>使用UISwipeGestureRecognizer造成手势冲突</li>
+</ol>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. 设置手势代理</span></span><br><span class="line">downGes.delegate <span class="operator">=</span> <span class="keyword">self</span></span><br><span class="line"><span class="comment">// 2. 处理冲突</span></span><br><span class="line"><span class="keyword">extension</span> <span class="title class_">xxxx</span>: <span class="title class_">UIGestureRecognizerDelegate</span> &#123;</span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">gestureRecognizer</span>(<span class="keyword">_</span> <span class="params">gestureRecognizer</span>: <span class="type">UIGestureRecognizer</span>, <span class="params">shouldBeRequiredToFailBy</span> <span class="params">otherGestureRecognizer</span>: <span class="type">UIGestureRecognizer</span>) -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="operator">!</span>(gestureRecognizer <span class="keyword">is</span> <span class="type">UIPanGestureRecognizer</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>使用 UIControl 造成手势冲突</li>
+</ol>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="keyword">func</span> <span class="title function_">gestureRecognizerShouldBegin</span>(<span class="keyword">_</span> <span class="params">gestureRecognizer</span>: <span class="type">UIGestureRecognizer</span>) -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="operator">!</span>(gestureRecognizer <span class="keyword">is</span> <span class="type">UIPanGestureRecognizer</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="结语"><a class="markdownIt-Anchor" href="#结语"></a> <strong>结语</strong></h1>
+<p>通过本文的介绍，我们大致了解了应用程序适配 iPad 平台的方式和技术实践。值得一提的是，在适配过程中，不断地测试和反馈是至关重要的。通过与用户进行互动和收集意见反馈，开发人员可以及时发现和解决潜在的问题，不断改进应用的性能和用户体验。</p>
+<p>最后的最后，感谢您的阅读，希望本文对您在iPad应用适配方面有所启发。</p>
+]]></content>
+      <categories>
+        <category>Programming</category>
+      </categories>
+      <tags>
+        <tag>iOS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>iOS 暗黑模式适配</title>
     <url>//ios-darkmode-practice/</url>
     <content><![CDATA[<blockquote>
@@ -635,429 +769,6 @@ H ---> I(替换完成，结束)</pre>
       </categories>
       <tags>
         <tag>iOS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>iOS 横屏适配</title>
-    <url>//ipad-adaption/</url>
-    <content><![CDATA[<blockquote>
-<p>本文已发表在微信公众号，<a href="https://mp.weixin.qq.com/s/mbZzBNYlzku2vn4ElUspXA">《iPad 适配二三事》</a></p>
-</blockquote>
-<h1 id="背景前言"><a class="markdownIt-Anchor" href="#背景前言"></a> <strong>背景&amp;前言</strong></h1>
-<p>当谈及移动设备的应用程序开发时，iPad是一个备受关注的平台。作为一款功能强大且备受欢迎的设备，iPad是许多人日常生活中不可或缺的工具之一。对于开发者来说，确保他们的应用在iPad上的完美适配是至关重要的。</p>
-<p>然而，大部分公司都会选择优先开发和推广手机端 app 的发展策略，前期不会花费过多精力在iPad 端进行适配，在 app 有了一定体量之后，用户对 iPad 端的体验提出需求之后，才会开始考虑进行 iPad 的适配。这就势必造成 iPad 的适配必须要考虑原有业务代码对适配工作造成的影响——这并不是一个简单的任务。</p>
-<p>在本文中，我们将探讨一些iPad应用适配策略和最佳实践，介绍一些常见的适配问题，并提供解决方案和建议，帮助开发人员克服这些障碍。无论您是一个经验丰富的开发人员还是一个新手，我们相信这篇文章将为您提供有关在iPad上适配应用程序的经验建议和指导。</p>
-<h1 id="技术储备"><a class="markdownIt-Anchor" href="#技术储备"></a> <strong>技术储备</strong></h1>
-<h2 id="工程配置"><a class="markdownIt-Anchor" href="#工程配置"></a> <strong>工程配置</strong></h2>
-<p>要让原本为 iPhone 平台开发的 app 能在 iPad 上使用，第一步就是要在 target 中添加对 iPad 平台的支持，这个配置项能让 app 在 iPad 平台运行。</p>
-<p><img src="../images/d10025b4724e56a9cde4c45d77a283dc.png" alt="image.png" /></p>
-<p>经常用 iPad 的朋友们都知道，一个 app 在 iPad 端的呈现方式是十分多样化的，可以有横屏竖屏分屏浮窗等样式。在实际开发中，iPad 横竖屏的支持在 <code>iPad Orientation</code> 配置项中设置；浮窗/分屏的支持由 <code>Requires full screen</code>决定，勾选了此项之后即不支持浮窗或分屏。</p>
-<p>本文主要涉及的是 iPad 横竖屏的适配，不涉及浮窗/分屏的适配。</p>
-<p><img src="../images/0ae78ee0bc2e45d6a08478f96083e335.png" alt="image.png" /></p>
-<p>到这里为止，我们的应用就可以在 iPad 上跑起来了。</p>
-<h2 id="屏幕方向的定义"><a class="markdownIt-Anchor" href="#屏幕方向的定义"></a> 屏幕方向的定义</h2>
-<p>对于开发者来说，app 在 iPad 上和 iPhone 上运行最大的区别就是对屏幕旋转的处理，绝大多数应用在手机上都是固定一个方向，但是在 iPad 上则需要支持多个方向的展示。另外在实际项目中，可能有一些场景，比如视频播放，需要强制应用变成横屏/竖屏，这需要我们在代码里做特殊处理。</p>
-<p>要处理屏幕旋转，首先我们要知道屏幕方向是怎么定义的。在 UIKit 中， 屏幕方向一般使用<code>UIApplication.shared.statusBarOrientation</code>进行判断。它的定义如下：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">UIInterfaceOrientation</span> : <span class="title class_">Int</span>, @<span class="title class_">unchecked</span> <span class="title class_">Sendable</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> unknown <span class="operator">=</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">case</span> portrait <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">case</span> portraitUpsideDown <span class="operator">=</span> <span class="number">2</span></span><br><span class="line">    <span class="keyword">case</span> landscapeLeft <span class="operator">=</span> <span class="number">4</span></span><br><span class="line">    <span class="keyword">case</span> landscapeRight <span class="operator">=</span> <span class="number">3</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>要注意的是，有另外一个易混用的方向：<code>UIDevice.current.orientation</code>。这个变量的含义是设备的方向，为<code>UIDeviceOrientation</code>类型，包含有<code>FaceUp</code>、<code>FaceDown</code>的信息，但我们只想要屏幕的方向（横/竖），过多的类型会影响我们的判断，<strong>不推荐</strong>使用这个方式。</p>
-<h2 id="设置屏幕方向"><a class="markdownIt-Anchor" href="#设置屏幕方向"></a> <strong>设置屏幕方向</strong></h2>
-<p>在知道如何判断屏幕方向之后，我们就可以处理屏幕方向的旋转问题了。在开发过程中，除了 2.1 中的工程配置，常见的有两种设置方向的方式：</p>
-<ol>
-<li>Target - General - Deployment Info - iPad Orientation即 2.1 的工程配置，这里不再重复。</li>
-<li>AppDelegate</li>
-</ol>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 自定义属性, 用于控制全局旋转方向</span></span><br><span class="line"><span class="keyword">var</span> supportOrientation: <span class="type">UIInterfaceOrientationMask</span> <span class="operator">=</span> isPad <span class="operator">?</span> .all : .portrait</span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> <span class="title function_">application</span>(<span class="keyword">_</span> <span class="params">application</span>: <span class="type">UIApplication</span>, <span class="params">supportedInterfaceOrientationsFor</span> <span class="params">window</span>: <span class="type">UIWindow</span>?) -&gt; <span class="type">UIInterfaceOrientationMask</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>.supportOrientation</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在 AppDelegate 中有一个方法<strong>全局</strong>可以配置 App 的展示方向，这样设置的屏幕方向优先级会高于 Target 中设置的屏幕方向。此外，这里使用一个自定义变量来存放支持的屏幕方向的原因是，我们在特定场景下可以修改<code>supportOrientation</code>的值强制更改应用的方向。</p>
-<ol>
-<li>UIViewController</li>
-</ol>
-<p>同样地，通过在 UIViewController 中设置自己的<code>supportedInterfaceOrientations</code>，可以设置某一个 VC 支持的方向：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="keyword">var</span> shouldAutorotate: <span class="type">Bool</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">override</span> <span class="keyword">var</span> supportedInterfaceOrientations: <span class="type">UIInterfaceOrientationMask</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> [.landscapeLeft, .landscapeRight]</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">override</span> <span class="keyword">var</span> preferredInterfaceOrientationForPresentation: <span class="type">UIInterfaceOrientation</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> .landscapeRight</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里需要特别说明的是，上面三个设置横竖屏的方式是有<strong>优先级顺序</strong>的，从上到下优先级依次提高。另外在实际开发中，对于每个根控制器 (<code>UITabBarController</code> 和 <code>UINavigationController</code>)，我们都需要设置上述第三点的三个方法</p>
-<h2 id="监听屏幕旋转"><a class="markdownIt-Anchor" href="#监听屏幕旋转"></a> <strong>监听屏幕旋转</strong></h2>
-<p>我们不只是希望能设置屏幕方向，我们还希望在屏幕旋转的时候我们的获取到这一事件的通知。比较常见的有几种方式获取横竖屏切换事件：</p>
-<ol>
-<li>在<code>UIViewController</code>中重写<code>viewWillTransition</code> 方法，系统在屏幕发生旋转的时候会调用该方法，我们在coordinator的闭包中即可处理业务。</li>
-</ol>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="keyword">func</span> <span class="title function_">viewWillTransition</span>(<span class="params">to</span> <span class="params">size</span>: <span class="type">CGSize</span>, <span class="params">with</span> <span class="params">coordinator</span>: <span class="type">UIViewControllerTransitionCoordinator</span>) &#123;</span><br><span class="line">    <span class="keyword">super</span>.viewWillTransition(to: size, with: coordinator)</span><br><span class="line">    coordinator.animate &#123; <span class="keyword">_</span> <span class="keyword">in</span></span><br><span class="line">        <span class="comment">// 更新UI</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>监听通知 <code>UIApplication.didChangeStatusBarOrientationNotification</code> ；在使用NotificationCenter的方式进行监听时，需要注意通知的注册和移除时机，以免造成不必要的内存泄露问题。</li>
-</ol>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">func</span> <span class="title function_">setupDeviceOrientationObserver</span>() &#123;</span><br><span class="line">    <span class="comment">// 开启并监听系统通知</span></span><br><span class="line">    <span class="type">UIDevice</span>.current.beginGeneratingDeviceOrientationNotifications()</span><br><span class="line">    <span class="type">NotificationCenter</span>.default.addObserver(<span class="keyword">self</span>, selector: <span class="keyword">#selector</span>(onDeviceOrientationChange), name: <span class="type">UIApplication</span>.didChangeStatusBarOrientationNotification, object: <span class="literal">nil</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@objc</span> <span class="keyword">func</span> <span class="title function_">onDeviceOrientationChange</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> currentDeviceOrientation <span class="operator">=</span> <span class="type">UIDevice</span>.current.orientation</span><br><span class="line">    <span class="comment">// 只处理竖屏或横屏的情况（可能出现unknow或屏幕朝上/朝下）</span></span><br><span class="line">    <span class="keyword">guard</span> currentDeviceOrientation.isPortrait <span class="operator">||</span> currentDeviceOrientation.isLandscape <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> <span class="title function_">removeDeviceOrientationObserver</span>() &#123;</span><br><span class="line">    <span class="type">NotificationCenter</span>.default.removeObserver(<span class="keyword">self</span>, name: <span class="type">UIDevice</span>.orientationDidChangeNotification, object: <span class="literal">nil</span>)</span><br><span class="line">    <span class="comment">// 记得关闭使计数器-1</span></span><br><span class="line">    <span class="type">UIDevice</span>.current.endGeneratingDeviceOrientationNotifications()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>另外，习惯使用 Rx 的小伙伴也可以使用 RxSwift 的方式监听：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">NotificationCenter</span>.default.rx</span><br><span class="line">    .notification(<span class="type">UIApplication</span>.didChangeStatusBarOrientationNotification)</span><br><span class="line">    .subscribe(onNext: &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] <span class="keyword">_</span> <span class="keyword">in</span></span><br><span class="line">       <span class="comment">// 重绘 UI</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .disposed(by: rx.disposeBag)</span><br></pre></td></tr></table></figure>
-<p>在监听设备方向的通知时，我们需要注意上文提到过的<code>UIDevice.current.orientation</code>。相对应的，<code>UIDevice.current.orientation</code>也有类似的通知方法<code>UIDevice.orientationDidChangeNotification</code>。我们使用<code>UIApplication.didChangeStatusOrientationNotification</code>通知而不是<code>UIDevice.orientationDidChangeNotification</code>通知的原因是：</p>
-<ul>
-<li>UIDevice 的通知会在从后台进入前台时调用三次，调用次数过多且不必要；
-<ul>
-<li>UIDevice 会有多个方向的通知，比如从 faceUp 转向 faceDown 时也会发出一个通知，而这个事件我们是不需要关注的</li>
-</ul>
-</li>
-</ul>
-<ol>
-<li>除了上述的两种获取屏幕旋转事件的方式以外， 系统在发生屏幕旋转的行为的时候，会调用这 UIView 的<code>layoutSubviews</code> 方法和 UIViewController 的 <code>viewWillLayoutSubviews</code> 方法，我们还可以在这两个方法中进行 UI 的布局和刷新。</li>
-</ol>
-<h2 id="在旋转时刷新-ui"><a class="markdownIt-Anchor" href="#在旋转时刷新-ui"></a> <strong>在旋转时刷新 UI</strong></h2>
-<p>在知道了如何监听屏幕旋转之后，我们接下来要做的事情就是在屏幕旋转的时候去刷新 UI。</p>
-<p>在 ios 开发中，常见的页面布局方式有两种，一种是使用 <code>frame</code> 的<strong>绝对布局</strong>，一种是使用 AutoLayout 或 Masonry、SnapKit等框架的<strong>相对布局</strong>（下称<code>AutoLayout</code>）。</p>
-<p>在屏幕尺寸会变化的情况下，绝对布局的方式受影响比较大，业务方需要在屏幕尺寸发生变化的时候更新这些 frame 的值。对于某些比较简单的 frame 布局的 UI，可以使用 UIView 的 <code>AutoresizingMask</code> 属性进行适配，系统会根据设置的属性对对应的 view 进行拉伸等操作。但是在实际使用中，这种方法的表现并不尽如人意，这个设置项并不能保证你的自定义视图根据你需要的方式变化。我们推荐的方案是在<code>layoutSubviews</code>方法中进行视图的 frame 的计算和赋值，这保证了代码的简洁性和 UI 的正确性。</p>
-<p>而正确使用<code>AutoLayout</code>的布局方式能使页面较好地适应动态变化的屏幕尺寸，且在屏幕旋转时过渡效果流畅丝滑。 在使用自动布局的时候，我们应该摒弃手动计算尺寸的方式，譬如在处理一个横向三等分的布局的时候，我们不应该使用 “父视图宽度÷3” 的方式手动计算三个子视图的宽度，而应该在<code>AutoLayout</code> 中设置子视图的左右约束、三个子视图宽度相等，如此一来，我们就不需要再为变化的屏幕尺寸做多余的工作了。</p>
-<p>根据以上原因，笔者建议在开发/适配 iPad 时应尽量使用<code>AutoLayout</code>，在遇到难以处理的 frame 布局方式时，可以考虑将其改写为<code>AutoLayout</code>。</p>
-<p>此外，除了布局的原因需要刷新 UI，有些系统控件控件也需要手动刷新使其正确展示，常见的有：</p>
-<ol>
-<li>UICollectionView 需要调用 <code>collectionView.collectionViewLayout.invalidateLayout()</code>方法使其刷新 itemSize；</li>
-<li>使用 UIScrollView 实现一些多页滑动效果的页面需要重新计算<code>contentOffset</code>使其有正确的偏移量；</li>
-<li>有使用 CALayer 绘制颜色/圆角/渐变色的业务需要重新绘制 layer 使其尺寸正确。</li>
-</ol>
-<h1 id="落地方案"><a class="markdownIt-Anchor" href="#落地方案"></a> <strong>落地方案</strong></h1>
-<p>本文前半段聊的都是专注于某一处业务细节如何处理屏幕旋转、尺寸变化，但实际上具体到业务落地还有很关键的一点是整体的适配方案，也就是页面的排版。</p>
-<h2 id="常见适配方案介绍"><a class="markdownIt-Anchor" href="#常见适配方案介绍"></a> <strong>常见适配方案介绍</strong></h2>
-<h3 id="左右分栏"><a class="markdownIt-Anchor" href="#左右分栏"></a> 左右分栏</h3>
-<p>iPad 原生应用程序，如信息、相册、备忘录等，绝大部分采用了左右分栏的形式（如下图所示）。这种设计形式的好处在于分栏的设计能够最大化利用 iPad 的大屏，合理地利用横屏展示更多的内容。但是这种方案对原有架构的改动较大，从 UI 样式到页面交互都会发生比较大的变动，需要开发人员单独为 iPad 编写业务代码。</p>
-<p><img src="../images/9722c1080f6d5d149e3af96dac4c3edd.png" alt="image.png" /></p>
-<h3 id="内容响应式布局"><a class="markdownIt-Anchor" href="#内容响应式布局"></a> 内容响应式布局</h3>
-<p>App Store 的设计方案采用的则是内容响应式布局，根据页面的宽度和高度按照特定的规则调整布局。这种方案灵活性更佳，用户体验好， 但是对设计人员和开发人员的要求也会更高。</p>
-<p><img src="../images/6083a0643ec2e4b2d4670c14ce12ab74.png" alt="image.png" /></p>
-<h3 id="横向拉伸页面"><a class="markdownIt-Anchor" href="#横向拉伸页面"></a> 横向拉伸页面</h3>
-<p>最常见的适配方案就是横向拉伸页面，页面的元素按照原有的布局逻辑横向拉伸，与手机端的布局基本保持一致。这种方式既保证了页面布局的合理性，同时也不需要开发人员过多地为 iPad 单独编写代码，是一种相对折中的适配方案。</p>
-<p><img src="../images/61d91799d9c561d21709e0d552fddeec.png" alt="image.png" /></p>
-<h2 id="vesync-适配方案"><a class="markdownIt-Anchor" href="#vesync-适配方案"></a> <strong>VeSync 适配方案</strong></h2>
-<p>VeSync App 手机端用户居多，几乎所有的页面都只考虑了手机端的展示，在适配 iPad 之前，iPad 对于我们来说只是一个屏幕稍微大点的 iPhone。此外，由于 iPad 用户占比不高，公司也暂时没有在 iPad 端大力推广 VeSync App 的计划，如果要所有业务都使用 3.1 中提及的前几种方案适配，这对于我们来说成本过高。</p>
-<p>由于 VeSync 是一个智能家庭类软件，大部分功能业务都与设备相关，而品类繁多的设备和功能导致业务代码体量庞大，要每个页面都完美适配 iPad 横屏/竖屏/旋转的工作量巨大。综合考虑适配成本和用户体验后，决定采用以下的适配方案：</p>
-<ul>
-<li>对 App 首页（即设备列表页、wellness首页、论坛、商城）这类使用频率最高的页面使用响应式布局的适配方式，最大化保证用户体验；</li>
-<li>对登录页、设置页这类功能页直接横向拉伸进行适配；</li>
-<li>涉及到设备业务的设备主页的业务采用<code>弹出位于屏幕中心的小窗口</code>（下称<strong>中心小窗</strong>）的适配方案。</li>
-</ul>
-<p>这种适配方案实际上是对 3.1 中提及的方案进行了“混搭”，再根据 VeSync 的实际情况进行调整（中心小窗）。方案综合考虑了用户体验和开发周期，在有限的开发时间内保证用户能有良好的使用体验。此外，对于开发者来说，这种方案不需要单独为 iPad 适配编写过多代码，保证了业务代码的纯净。</p>
-<h3 id="弹出的中心小窗"><a class="markdownIt-Anchor" href="#弹出的中心小窗"></a> <strong>“弹出”的中心小窗</strong></h3>
-<p><img src="../images/fb2aad38a5e32c0c8f8094b30a0513b1.png" alt="image.png" /></p>
-<p>中心小窗的方案实际效果如图所示，用文字大致描述如下：</p>
-<ol>
-<li>涉及<strong>设备</strong>的页面都使用 Modal 的方式弹出，用一个已封装好的<code>UINavigationController</code>（下称<strong>容器</strong>）进行管理；</li>
-<li>中心小窗大小根据屏幕高度计算得出，通过重写容器的<code>preferredContentSize</code>属性实现，其大小在 iPad 的横竖屏状态下均保持不变；</li>
-<li>在进入中心小窗之后，后续的页面导航都在容器的导航栈里进行管理，直到这个容器被 dismiss。</li>
-</ol>
-<p>由于中心小窗的大小不会发生变化，大量的业务代码不需要再关心屏幕是否旋转、窗口是否发生变化，更直白地说，在中心小窗的页面的展示模式和 iPhone 基本保持一致了。这大幅减少了开发人员在这部分内容的适配工作，同时也保证了良好的用户体验。</p>
-<p>在弹窗内的页面，获取容器大小的方式也要发生改变。大部分开发者会采用<code>UIScreen.main.bounds</code>的方式获取容器大小，这种方式在此方案下是有局限性的，无法获取到页面真正的大小。我们需要通过定义一个新的变量来获取当前容器的大小（W+H）。</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="comment">/// 顶层控制器的宽度</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> adaptiveScreenW: <span class="type">CGFloat</span> &#123; adaptiveScreenSize.width &#125;</span><br><span class="line"><span class="comment">/// 顶层控制器的高度</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> adaptiveScreenH: <span class="type">CGFloat</span> &#123; adaptiveScreenSize.height &#125;</span><br><span class="line"><span class="comment">/// 顶层控制器的尺寸</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> adaptiveScreenSize: <span class="type">CGSize</span> &#123;</span><br><span class="line">    <span class="keyword">guard</span> <span class="type">VS</span>.isPad, <span class="keyword">let</span> window <span class="operator">=</span> <span class="type">UIApplication</span>.shared.keyWindow <span class="keyword">else</span> &#123; <span class="keyword">return</span> screenSize &#125;</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> present <span class="operator">=</span> window.rootViewController<span class="operator">?</span>.presentedViewController, present.preferredContentSize <span class="operator">!=</span> .zero &#123;</span><br><span class="line">        <span class="keyword">return</span> present.preferredContentSize</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> window.bounds.size</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以看出，<code>adaptiveScreenSize</code>优先获取容器的大小，否则返回屏幕大小。无论是iPhone、iPad 全屏、iPad 中心小窗，通过这种定义方式，设备方的业务代码只需要使用这一套屏幕尺寸变量即可获取正确的容器大小。</p>
-<h3 id="中心小窗带来的变化及问题"><a class="markdownIt-Anchor" href="#中心小窗带来的变化及问题"></a> 中心小窗带来的变化及问题</h3>
-<p>上文已经提到，中心小窗实际上是通过 present 一个封装的<code>UINavigationController</code>实现的，这样的导航管理与 iPhone 端是有区别的——从一个导航栈管理变成两个导航栈管理，这势必导致原有业务代码的导航的更新，具体需要更新的内容包括但不限于：</p>
-<ol>
-<li>原有的<code>popToRoot</code>事件在小窗口内会变成<code>dismiss</code>事件</li>
-<li>在设备主页（此时该页面为<code>rootViewController</code>）的返回 <code>pop</code> 事件会变成<code>dismiss</code>事件，其他二级页面的返回事件保持不变</li>
-<li>有些业务代码对整个栈的 <code>VC</code> 做了处理，简单地用&quot;栈内的第i个<code>VC</code>&quot;处理业务（此处的 i 指代一个代码里固定的 index 值），由于此时的导航栈结构与之前发生了变化，不能简单地用 <code>VC</code> 的 index 判断，而应该用 <code>firstIndex(of:)</code>去获取目标 VC 的下标。</li>
-</ol>
-<p>此外，一些作用于<code>keyWindow</code>的代码也要发生相应的变化，我们需要在获取 keyWindow 之前判断 keyWindow 是否有<code>presentedViewController</code>，如果有，我们处理的对象就应该变成<code>presentedViewController</code>。举个例子，对 keyWindow的 addSubview 操作在存在中心小窗业务的场景下应该变为：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> presentedViewController <span class="operator">=</span> <span class="type">UIApplication</span>.shared.keyWindow<span class="operator">?</span>.rootViewController<span class="operator">?</span>.presentedViewController &#123;</span><br><span class="line">    presentedViewController.view.addSubview(someView)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="type">UIApplication</span>.shared.keyWindow<span class="operator">?</span>.addSubview(someView)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在中心小窗的页面还可能遇到手势冲突的问题。ios 系统原生的 Modal 支持手势下滑dismiss，如果容器内的页面有其他手势操作的业务，可能会有手势冲突的情况，常见的问题及解决方式如下：</p>
-<ol>
-<li>使用UISwipeGestureRecognizer造成手势冲突</li>
-</ol>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. 设置手势代理</span></span><br><span class="line">downGes.delegate <span class="operator">=</span> <span class="keyword">self</span></span><br><span class="line"><span class="comment">// 2. 处理冲突</span></span><br><span class="line"><span class="keyword">extension</span> <span class="title class_">xxxx</span>: <span class="title class_">UIGestureRecognizerDelegate</span> &#123;</span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">gestureRecognizer</span>(<span class="keyword">_</span> <span class="params">gestureRecognizer</span>: <span class="type">UIGestureRecognizer</span>, <span class="params">shouldBeRequiredToFailBy</span> <span class="params">otherGestureRecognizer</span>: <span class="type">UIGestureRecognizer</span>) -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="operator">!</span>(gestureRecognizer <span class="keyword">is</span> <span class="type">UIPanGestureRecognizer</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>使用 UIControl 造成手势冲突</li>
-</ol>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="keyword">func</span> <span class="title function_">gestureRecognizerShouldBegin</span>(<span class="keyword">_</span> <span class="params">gestureRecognizer</span>: <span class="type">UIGestureRecognizer</span>) -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="operator">!</span>(gestureRecognizer <span class="keyword">is</span> <span class="type">UIPanGestureRecognizer</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="结语"><a class="markdownIt-Anchor" href="#结语"></a> <strong>结语</strong></h1>
-<p>通过本文的介绍，我们大致了解了应用程序适配 iPad 平台的方式和技术实践。值得一提的是，在适配过程中，不断地测试和反馈是至关重要的。通过与用户进行互动和收集意见反馈，开发人员可以及时发现和解决潜在的问题，不断改进应用的性能和用户体验。</p>
-<p>最后的最后，感谢您的阅读，希望本文对您在iPad应用适配方面有所启发。</p>
-]]></content>
-      <categories>
-        <category>Programming</category>
-      </categories>
-      <tags>
-        <tag>iOS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>iOS 第三方登录</title>
-    <url>//ios-third-party-login/</url>
-    <content><![CDATA[<h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
-<p>现在市面上常见的 App 都开放了第三方平台登录的功能，为用户注册账号和登录账号带来了较大的便利，有效提升了用户的使用体验。近期，我司也引入了 Apple 和 Google 两个平台的第三方账号登录，本文将会对本次第三方平台接入的开发流程做详细的介绍。</p>
-<h1 id="概述"><a class="markdownIt-Anchor" href="#概述"></a> 概述</h1>
-<p>总的来说，App 要实现第三方账号登录的功能，大体可以按照以下三个步骤来实现：</p>
-<pre class="mermaid">graph LR
-login_with_sdk[获取授权信息] ---> verify_info[校验授权信息] ---> other_process[校验结果处理]</pre>
-<ol>
-<li>获取用户授权：通过第三方 SDK 获得用户授权，并获取授权数据用于接入第三方平台服务；</li>
-<li>校验授权信息：通过第三方服务校验获得的授权数据，校验成功即可认为是第三方账号认证成功；</li>
-<li>校验结果处理：从前两步中，我们可以获得第三方账号的邮箱（或其它的唯一标识），通过这个唯一标识我们可以对接自己平台的账号系统，校验该账号是否已经注册过。如果该账号已经注册或绑定过，则直接登录成功，否则引导用户创建新账号或绑定已有账号。</li>
-</ol>
-<p>本小节将会稍微扩展上面的框图的内容，让读者对完整的流程有一个更具体的认知。而后本文后续章节将会以三个步骤作为主题分别进行详细阐述。</p>
-<h2 id="oauth-20"><a class="markdownIt-Anchor" href="#oauth-20"></a> OAuth 2.0</h2>
-<p>在进入正文之前，我们先提一下 OAuth 协议。</p>
-<p>OAuth 2.0 协议是一种三方授权协议，目前大部分的第三方登录与授权都是基于该协议的标准或改进实现，通过这个授权流程，服务提供方允许用户授权第三方应用访问他们存储在另外的服务提供者上的信息，而不需要将用户名和密码提供给第三方移动应用或分享他们数据的所有内容。其基本流程如下所示：</p>
-<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">+--------+                               +---------------+</span><br><span class="line">     |        |--(A)- Authorization Request -&gt;|   Resource    |</span><br><span class="line">     |        |                               |     Owner     |</span><br><span class="line">     |        |&lt;-(B)-- Authorization Grant ---|               |</span><br><span class="line">     |        |                               +---------------+</span><br><span class="line">     |        |</span><br><span class="line">     |        |                               +---------------+</span><br><span class="line">     |        |--(C)-- Authorization Grant --&gt;| Authorization |</span><br><span class="line">     | Client |                               |     Server    |</span><br><span class="line">     |        |&lt;-(D)----- Access Token -------|               |</span><br><span class="line">     |        |                               +---------------+</span><br><span class="line">     |        |</span><br><span class="line">     |        |                               +---------------+</span><br><span class="line">     |        |--(E)----- Access Token ------&gt;|    Resource   |</span><br><span class="line">     |        |                               |     Server    |</span><br><span class="line">     |        |&lt;-(F)--- Protected Resource ---|               |</span><br><span class="line">     +--------+                               +---------------+</span><br></pre></td></tr></table></figure>
-<p>这里提及 OAuth2.0 不是为了详细介绍该协议的原理、设计和实现，而是想让读者带着一个高的视角看待第三方登录的流程设计。</p>
-<p>实际上，本文是围绕着上图的步骤 A 到步骤 D来进行介绍的，从 A 到 D 即可完成第三方平台账号的授权和验证。由于 VeSync 有自己的账号体系和资源体系，目前也没有使用第三方平台的服务的需求，步骤 E 和 F 在这篇文章中将不会提及。</p>
-<h2 id="详细流程"><a class="markdownIt-Anchor" href="#详细流程"></a> 详细流程</h2>
-<pre class="mermaid">graph TB
-select_login(用户选择第三方账号登录) ---> start_verification[发起授权请求，用户登录第三方账号]
-subgraph 获取第三方授权
-start_verification ---> request_verification[客户端获取授权信息]
-request_verification ---> server_verify[提交授权信息给云]
-end
-server_verify ---> check_account{授权信息是否验证成功}
-subgraph 校验授权信息
-check_account --YES--> check_binding{第三方账号是否已绑定 VeSync 账号}
-end
-check_binding --NO(账号不存在)--> create_or_bind_account{用户选择创建/绑定账号}
-subgraph 校验结果处理
-check_account --NO(验证失败)--> login_failed(失败)
-check_binding -- YES(登录成功) --> login_success_and_go_home_page(登录/注册成功)
-create_or_bind_account --绑定--> bind_account[绑定账号流程]
-create_or_bind_account --创建--> create_account[创建账号流程]
-end
-bind_account ---> login_success_and_go_home_page
-create_account ---> login_success_and_go_home_page</pre>
-<p>概述中的三个步骤在上图中进行了适当的细节扩充，本文将会围绕其进行具体的实现方式介绍，并有一些在开发过程中的踩坑分享。</p>
-<p>实际上，上图省略了一些具体业务需求的处理步骤，如检查第三方账号的合法性、第三方账号怎么和 VeSync 账号绑定、各种用户引导及错误处理。这些步骤虽重要，但不具有代表性和通用性，不会在本文作详细说明。</p>
-<h1 id="获取授权信息"><a class="markdownIt-Anchor" href="#获取授权信息"></a> 获取授权信息</h1>
-<p>从用户视角看来，点击第三方登录的按钮之后，会有输入框让用户登录第三方账号并请求授权，在登录成功并完成授权动作之后，App 就会开启第三方账号登录的流程。流程的第一步就是通过 SDK 或其它官方途径者获取授权信息。</p>
-<p>下面以 iOS 平台为例，介绍获取 Apple 和 Google 的用户授权信息的方式。</p>
-<h2 id="apple"><a class="markdownIt-Anchor" href="#apple"></a> Apple</h2>
-<blockquote>
-<p>⚠️ 注意</p>
-<p>从 <strong>iOS13</strong> 开始，如果 <strong>App</strong> 提供第三方登录，就必须添加 <strong>苹果登录 Sign in with Apple</strong> 选项，并要求所有开发者于 <strong>2020年4月之前</strong> 完成现有应用的更新，否则审核不通过。</p>
-</blockquote>
-<h3 id="配置"><a class="markdownIt-Anchor" href="#配置"></a> 配置</h3>
-<blockquote>
-<p>要在 App 实现 Apple 登录，需要在工程及开发者账号中都配置相关的功能。</p>
-</blockquote>
-<ol>
-<li>
-<p>账户配置</p>
-<p>在 Apple 开发者账户中开启 AppID 对应的 Apple 登录的功能，具体流程可以参考<a href="https://developer.apple.com/cn/help/account/capabilities/about-sign-in-with-apple/">官方文档</a>，创建完成后应如下图：</p>
-<p><img src="../images/87247ec539b0c21ffb0767926a7eff38.png" alt="image.png" /></p>
-</li>
-<li>
-<p>工程配置</p>
-<p>如下图所示在 Xcode 中配置工程的 Capabilities 开启 App 的 Apple 登录功能。</p>
-<p><img src="../images/5d3a41352ef9c39cf26e3b11f6c524d2.png" alt="image.png" /></p>
-</li>
-</ol>
-<h3 id="实现"><a class="markdownIt-Anchor" href="#实现"></a> 实现</h3>
-<blockquote>
-<p>在 iPhone 上，使用原生方式开发的 APP 可以直接调用苹果的框架 <code>AppleService</code> 获取 Apple 授权并登录。本部分主要参考 <a href="https://developer.apple.com/documentation/authenticationservices/implementing-user-authentication-with-sign-in-with-apple">Apple 官方文档</a>。</p>
-</blockquote>
-<ol>
-<li>
-<p>发起授权请求</p>
-<p>在这个过程中我们需要使用 <code>ASAuthorization</code> 服务调起获取 Apple 授权的弹窗。</p>
-<p>我们需要配置的信息有：</p>
-<ul>
-<li>需要获取的授权方式<code>ASAuthorizationAppleIDCredential</code> ，这个授权方式决定了 Apple 会返回给我们的信息，需要在代理方法中处理。</li>
-<li>代理对象 <code>delegate</code> ，授权结果会通过代理方法返回给调用方。</li>
-<li>需要获取的用户信息<code>requestedScopes</code> 在用户首次获取授权的时候，Apple 会通过代理返回这些信息。</li>
-<li>配置弹窗上下文 <code>presentationContextProvider</code> ，Apple 的授权系统弹窗会在给定的页面弹出，一般来说，这里只要获取导航堆栈中的栈顶控制器即可。</li>
-</ul>
-<p>配置好这些信息后，通过<code>performRequests()</code> 调用即可唤起系统弹窗，获取授权。</p>
- <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> appleIDProvider <span class="operator">=</span> <span class="type">ASAuthorizationAppleIDProvider</span>()</span><br><span class="line"><span class="keyword">let</span> request <span class="operator">=</span> appleIDProvider.createRequest()</span><br><span class="line">request.requestedScopes <span class="operator">=</span> [.fullName, .email]</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> authorizationController <span class="operator">=</span> <span class="type">ASAuthorizationController</span>(authorizationRequests: [request])</span><br><span class="line">authorizationController.delegate <span class="operator">=</span> <span class="keyword">self</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> topVc <span class="operator">=</span> <span class="type">Tool</span>.topViewController() <span class="keyword">as?</span> <span class="type">ASAuthorizationControllerPresentationContextProviding</span> &#123;</span><br><span class="line">		authorizationController.presentationContextProvider <span class="operator">=</span> topVc</span><br><span class="line">&#125;</span><br><span class="line">authorizationController.performRequests()</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>处理回调事件</p>
-<p>在用户授权成功或授权失败后，会通过两个代理方法通知业务方。</p>
-<ul>
-<li>
-<p><code>didCompleteWithAuthorization</code></p>
-<p>通过回调方法中的 authorization 对象可以获取我们需要的授权信息。在前一步中我们选择获取 AppleID 的授权信息，用于认证授权的参数包括<code>authorizationCode</code> 和 <code>identityToken</code>，这两个参数的作用和区别将会在下文“校验授权信息”这一小节中详细介绍。</p>
-<p>在用户首次获得用户授权时，SDK 还会提供 <code>userID</code> 这个参数给我们。这是一个苹果用户唯一标识符，它在同一个开发者账号下的所有 App 下是一样的，我们可以用它来与后台的账号体系绑定起来。</p>
-</li>
-<li>
-<p><code>didCompleteWithError</code></p>
-<p>在授权失败时 Apple 会调用该方法，我们可以在这里面做错误处理。</p>
-</li>
-</ul>
- <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">extension</span> <span class="title class_">XXX</span>: <span class="title class_">ASAuthorizationControllerDelegate</span> &#123;</span><br><span class="line">    <span class="comment">/// - Tag: did_complete_authorization</span></span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">authorizationController</span>(<span class="params">controller</span>: <span class="type">ASAuthorizationController</span>, <span class="params">didCompleteWithAuthorization</span> <span class="params">authorization</span>: <span class="type">ASAuthorization</span>) &#123;</span><br><span class="line">        <span class="keyword">switch</span> authorization.credential &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="keyword">let</span> appleIDCredential <span class="keyword">as</span> <span class="type">ASAuthorizationAppleIDCredential</span>:</span><br><span class="line">            <span class="keyword">guard</span> <span class="keyword">let</span> identityTokenData <span class="operator">=</span> appleIDCredential.identityToken,</span><br><span class="line">                  <span class="keyword">let</span> identityToken <span class="operator">=</span> <span class="type">String</span>(data: identityTokenData, encoding: .utf8),</span><br><span class="line">                  <span class="keyword">let</span> authorizationCodeData <span class="operator">=</span> appleIDCredential.authorizationCode,</span><br><span class="line">                  <span class="keyword">let</span> authorizationCode <span class="operator">=</span> <span class="type">String</span>(data: authorizationCodeData, encoding: .utf8) <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">            <span class="keyword">let</span> userID <span class="operator">=</span> appleIDCredential.user</span><br><span class="line">            <span class="keyword">self</span>.tryLogin(identityToken: identityToken, </span><br><span class="line">							            authorizationCode: authorizationCode, </span><br><span class="line">								          userID: userID)</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="comment">/// - Tag: did_complete_error</span></span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">authorizationController</span>(<span class="params">controller</span>: <span class="type">ASAuthorizationController</span>, <span class="params">didCompleteWithError</span> <span class="params">error</span>: <span class="type">Error</span>) &#123;</span><br><span class="line">        <span class="comment">// Handle error.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>校验授权状态</p>
-<p>除了通过如下方法主动获取用户的授权信息，我们还可以以通知的方式监听用户是否取消了授权，苹果提供的通知名称为<code>ASAuthorizationAppleIDProvider.credentialRevokedNotification</code> 。</p>
- <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> appleIDProvider <span class="operator">=</span> <span class="type">ASAuthorizationAppleIDProvider</span>()</span><br><span class="line">appleIDProvider.getCredentialState(forUserID: <span class="type">KeychainItem</span>.currentUserIdentifier) &#123; (credentialState, error) <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">switch</span> credentialState &#123;</span><br><span class="line">    <span class="keyword">case</span> .authorized:</span><br><span class="line">        <span class="keyword">break</span> <span class="comment">// The Apple ID credential is valid.</span></span><br><span class="line">    <span class="keyword">case</span> .revoked, .notFound:</span><br><span class="line">        <span class="comment">// The Apple ID credential is either revoked or was not found, so show the sign-in UI.</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>主动撤销授权</p>
-<p>根据苹果<a href="https://developer.apple.com/documentation/signinwithapplerestapi/revoke_tokens">官方文档</a>，调用 URL（<a href="https://appleid.apple.com/auth/revoke">https://appleid.apple.com/auth/revoke</a>）以撤销用户授权。但考虑到以下原因，主动撤销授权的操作应由服务端进行操作。</p>
-<ul>
-<li>接口调用需要的参数都保存在云端</li>
-<li>多端调用场景（iOS、Android、Web）</li>
-<li>数据安全</li>
-</ul>
-</li>
-</ol>
-<h2 id="google"><a class="markdownIt-Anchor" href="#google"></a> Google</h2>
-<blockquote>
-<p>在 iPhone 上的原生 APP 可以使用 Google 提供的框架 GoogleSignIn 获取用户授权。</p>
-</blockquote>
-<h3 id="配置-2"><a class="markdownIt-Anchor" href="#配置-2"></a> 配置</h3>
-<ol>
-<li>
-<p>Google 开发者账号配置</p>
-<blockquote>
-<p>这里的配置流程主要参考<a href="https://developers.google.com/identity/sign-in/ios/start-integrating?hl=zh-cn#configure_app_project">官方文档</a></p>
-</blockquote>
-<p>在 Google 开发者账号中创建/获取客户端 ID 和服务器客户端 ID。</p>
-<p>创建好的客户端 ID 如图：</p>
-<p><img src="../images/bd8c1e247c9406ca02b64d49f28a467d.png" alt="image.png" /></p>
-<p>创建好的服务器客户端 ID 如图：</p>
-<p><img src="../images/fa59812d0ac3e304b73090bc93e85ee2.png" alt="image.png" /></p>
-</li>
-<li>
-<p>Xcode 项目配置</p>
-<p>需要在 Xcode 工程配置中添加 Google 开发者账号相关配置信息，把第一步中获取的两个 ID 添加到 <code>Info.plist</code> 文件中，形式如下：</p>
- <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>GIDClientID<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>YOUR_IOS_CLIENT_ID<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>CFBundleURLTypes<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">key</span>&gt;</span>CFBundleURLSchemes<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">		        <span class="tag">&lt;<span class="name">string</span>&gt;</span>YOUR_DOT_REVERSED_IOS_CLIENT_ID<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>GIDServerClientID<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>YOUR_SERVER_CLIENT_ID<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>其中有两点需要注意：</p>
-<ol>
-<li>如果你的 App 在开发环境与线上环境使用的是不同的 AppID，那上面的账号和项目配置也需要创建两套不同的账号，同时在 plist 文件中也需要按环境区分不同的配置</li>
-<li><code>GIDServerClientID</code> 是后端使用的 ID，当 App 的授权流程需要后端身份验证的时候，需要配置该 ID。</li>
-</ol>
-</li>
-</ol>
-<h3 id="实现-2"><a class="markdownIt-Anchor" href="#实现-2"></a> 实现</h3>
-<p>Google 登录流程比 Apple 登录流程简单，具体如下。</p>
-<ol>
-<li>
-<p>通过 Cocoapods 或者 SPM 集成 <a href="https://github.com/google/GoogleSignIn-iOS">GoogleSignIn</a> SDK。</p>
-</li>
-<li>
-<p>发起授权请求</p>
-<p>通过 SDK 的方法获取 Google 授权。授权成功后会执行闭包中的代码，可以在 <code>signInResult</code> 中可以获取 userInfo、idToken 等必要信息，进而处理登录业务。</p>
- <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">GIDSignIn</span>.sharedInstance.signIn(withPresenting: <span class="keyword">self</span>) &#123; signInResult, error <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">guard</span> error <span class="operator">==</span> <span class="literal">nil</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>校验授权状态</p>
-<p>通过 SDK 提供的方法校验用户授权状态</p>
- <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">GIDSignIn</span>.sharedInstance.restorePreviousSignIn &#123; user, error <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">if</span> error <span class="operator">!=</span> <span class="literal">nil</span> <span class="operator">||</span> user <span class="operator">==</span> <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="comment">// Show the app&#x27;s signed-out state.</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// Show the app&#x27;s signed-in state.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>撤销授权</p>
-<p>通过 SDK 提供的方法主动撤销用户授权</p>
- <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">GIDSignIn</span>.sharedInstance.disconnect &#123; error <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">guard</span> error <span class="operator">==</span> <span class="literal">nil</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// Google Account disconnected from your app.</span></span><br><span class="line">    <span class="comment">// Perform clean-up actions, such as deleting data associated with the</span></span><br><span class="line">    <span class="comment">//   disconnected account.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="校验授权信息"><a class="markdownIt-Anchor" href="#校验授权信息"></a> 校验授权信息</h1>
-<p>在 App 成功获取授权信息之后，会调用云接口将授权数据传给云端，云端需要校验此信息是否合法，根据采用的获取到的授权信息类型不同，会有不同的校验方式。在这一步骤中，主要是云与第三方平台服务端的交互。</p>
-<pre class="mermaid">sequenceDiagram
-    participant 应用
-    participant 第三方SDK
-    participant 云
-    participant 第三方服务器
-
-    应用->>第三方SDK: 1. 发起登陆请求
-    第三方SDK-->>第三方服务器: 
-    第三方服务器-->>第三方SDK: 
-    第三方SDK-->>应用: 2. 返回授权数据
-    应用->>云: 3. 客户端向后台提交授权数据
-    云->>第三方服务器: 4. 后台向第三方服务器验证授权信息
-    第三方服务器-->>云: 5. 返回验证结果
-    云-->>应用: 6. 告知客户端验证结果</pre>
-<p>在第三方登录过程中。几个相关角色的交互大致如上图所示，其中步骤 1、2 已经在上文详细介绍过了，本小节将会以 Apple 登录数据验证为例子，围绕步骤 4 和步骤 5 进行介绍。</p>
-<h2 id="apple-2"><a class="markdownIt-Anchor" href="#apple-2"></a> Apple</h2>
-<p>在上文已经提到， iOS App 从 Apple SDK 中可以获取两种授权数据，分别是<code>authorizationCode</code> 和 <code>identityToken</code>，针对不同的数据，苹果提供了对应的验证方式。</p>
-<p>在这里我们介绍一下两种数据：</p>
-<ol>
-<li>
-<p>authorizationCode</p>
-<p>本质上是 Apple 颁发的授权码。App 把数据传给云，然后由云端再向苹果的身份验证服务端验证本次授权登录请求数据的有效性和真实性。这是类似 OAuth2 的授权码验证方式。</p>
-</li>
-<li>
-<p>identityToken</p>
-<p>identityToken 是一个经过签名的 JWT 数据 （<a href="https://link.juejin.im/?target=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FJSON_Web_Token">JSON Web Token</a>），通过向苹果身份验证服务器获取公钥再进行解密、匹配等步骤，我们可以验证此数据是否被篡改、是否合法。</p>
-</li>
-</ol>
-<p>云端可以自由选择这两个参数进行校验，只要有一个验证方式能够通过，即可视为本次授权校验成功。</p>
-<h3 id="基于授权码的验证"><a class="markdownIt-Anchor" href="#基于授权码的验证"></a> 基于授权码的验证</h3>
-<blockquote>
-<p>该算法用来验证<code>authorizationCode</code></p>
-</blockquote>
-<p>使用 authorizationCode 进行验证，调用 URL <a href="https://appleid.apple.com/auth/token">https://appleid.apple.com/auth/token</a> 进行验证</p>
-<p>该流程可参考<a href="https://developer.apple.com/documentation/signinwithapplerestapi/generate_and_validate_tokens">官方文档</a>，简单的说，就是构建一个网络请求，成功返回即验证成功。</p>
-<p>在构建的 request 中有一个 <code>client_secret</code> 字段需要我们自行<a href="https://developer.apple.com/documentation/accountorganizationaldatasharing/creating-a-client-secret">构建一个 JWT 数据</a>，里面包含了开发者账户信息（TeamID、KeyID），应用信息（App 的 BundleID）相关的配置。在构建数据的时候需要注意区分不同开发环境、不同登录客户端，这些差异会导致参数的值不同。</p>
-<h3 id="基于-jwt-的算法验证"><a class="markdownIt-Anchor" href="#基于-jwt-的算法验证"></a> 基于 JWT 的算法验证</h3>
-<blockquote>
-<p>该算法用来验证<code>identityToken</code> 参数</p>
-</blockquote>
-<p>一个 JWT 有三个部分：header、payload、signature，如下图所示</p>
-<p><img src="../images/3b9ddd9fb23a06a5cadfd6df464a64ea.png" alt="image.png" /></p>
-<blockquote>
-<p>这里附上一个<a href="https://jwt.io/">JWT 在线解析</a>的工具</p>
-</blockquote>
-<p>服务端在获取客户端发出的<code>identityToken</code>后，需要进行如下步骤：</p>
-<ol>
-<li>需要逆向构造过程，decode出JWT的三个部分</li>
-<li>从<a href="https://link.juejin.cn/?target=https%3A%2F%2Fappleid.apple.com%2Fauth%2Fkeys">appleid.apple.com/auth/keys</a>中获取公钥，并将公钥<a href="https://link.juejin.cn/?target=https%3A%2F%2F8gwifi.org%2Fjwkconvertfunctions.jsp">转换</a>为<code>pem</code>对JWT进行验证；获取到的公钥会有多个，需要根据 head 里的 kid 和 alg 去选取正确的公钥</li>
-<li>如<code>identityToken</code>通过验证，则可以根据其payload中的内容进行验证等操作</li>
-</ol>
-<p>这里需要再补充说明一下 identityToken 验证原理和方式：<code>idnetityToken</code>使用非对称加密 RSASSA（RSA签名算法） 和 ECDSA（椭圆曲线数据签名算法），当验证签名的时候，利用公钥来解密Singature，满足下列条件时，验证通过：</p>
-<ol>
-<li>与<code>base64UrlEncode(header) + &quot;.&quot; + base64UrlEncode(payload)</code>的内容完全一样</li>
-<li><code>iss</code> 与 <code>aud</code> 字段匹配</li>
-<li><code>exp</code> 过期时间未过</li>
-</ol>
-<p>另外，我们从解析出来的 JWT 文件中还能获取到一些其他信息</p>
-<ol>
-<li>
-<p>email</p>
-<p>Apple 账号的邮箱。上文已经提过，<code>ASAuthorization</code> 服务的登录成功回调事件只有在首次授权的时候才会返回用户信息（用户邮箱），如果后端业务需要使用到用户邮箱，则可以在 JWT 里获取。</p>
-</li>
-<li>
-<p>email_verified</p>
-<p>该字段表明用户邮箱是否已经经过认证</p>
-</li>
-<li>
-<p>is_private_email</p>
-<p>这个字段表明用户是否隐藏邮箱，即用户的邮箱是否为中转邮箱。</p>
-<p>Apple 在首次获取用户授权时会询问用户是否要分享自己的邮件地址给第三方平台。如果用户选择不分享，即隐藏邮件地址，Apple 会生成一个中转邮箱（类似<u><a href="mailto:xxxxxx@privaterelay.appleid.com">xxxxxx@privaterelay.appleid.com</a></u>）给到第三方平台以进行必要的业务操作，如第三方平台账号的邮箱信息、发送营销或通知邮件等。</p>
-<blockquote>
-<p>如果需要通过中转邮箱给用户发送邮件，需要在 Apple 开发者账号配置信任邮箱，只有在信任列表里的邮箱才能通过中转邮箱给用户发送邮件、接收用户的邮件。</p>
-</blockquote>
-</li>
-</ol>
-<h2 id="google-2"><a class="markdownIt-Anchor" href="#google-2"></a> Google</h2>
-<p>Google 登录的验证流程与 Apple 的 JWT 验证流程基本一致（参考<a href="https://developers.google.com/identity/sign-in/ios/backend-auth?hl=zh-cn">官方文档</a>），其中 App 从 SDK 获取的 JWT 数据参数名为 <code>idToken</code> 。</p>
-<h1 id="校验结果处理"><a class="markdownIt-Anchor" href="#校验结果处理"></a> 校验结果处理</h1>
-<p>来到这一步，说明我们已经完成第三方账号的授权获取和校验了，此时我们可以将第三方账号的数据对接我们已有的账号系统。</p>
-<p>在这个步骤中，业务流程是具体业务需求决定的，并不是一个通用规范的做法，在不同业务主体可能会有不同的设计方案。这里简单介绍一下 VeSync App 的做法。</p>
-<p>VeSync 采用邮箱作为 Key 来链接第三方账号和 VeSync 账号。其中，Apple 登录方式的邮箱可以从 JWT 数据中解析出来，Google 登录方式的邮箱则是由 SDK 直接返回，由 App 传给云端即可。</p>
-<p>云会校验该邮箱是否已经绑定过 VeSync 账号：</p>
-<ol>
-<li>
-<p>已绑定</p>
-<p>这意味着这个第三方账号的用户已经通过三方登录的方式创建过账号，或绑定过账号。此时我们可以直接为该用户颁发通行密钥（token），App 拿到密钥之后可以直接登录，使用 VeSync 的服务，此时我们获取第三方账号的信息是用来<strong>登录</strong>的</p>
-</li>
-<li>
-<p>未绑定</p>
-<p>此时 App 需要引导用户绑定已有账号或创建新账号，大致流程如下所示。就是此时我们获取第三方账号的信息可能用来<strong>登录</strong>或<strong>注册</strong> 。流程结束后，用户即可成功登录使用 VeSync 的服务。</p>
-<p>需要额外说明的是，在建立已有账号与第三方账号的绑定关系的过程中，需要校验已有账号是否已经绑定过同一平台的第三方账号，如果已经绑定过，则需要额外的流程（如直接替换，或提示用户选择其中一个）进行处理。</p>
-</li>
-</ol>
-<pre class="mermaid">graph LR
-
-create_or_bind_account{创建/绑定账号}
-create_or_bind_account --绑定--> bind_account[通过邮箱登录已有账号]
-create_or_bind_account --创建--> create_new_account[使用邮箱创建新账号]
-subgraph 创建账号流程
-create_new_account ---> user_login_with_region1[建立新账号与第三方账号的绑定关系]
-end
-subgraph 绑定账号流程
-bind_account ---> user_login_with_region2[建立已有账号与第三方账号的绑定关系]
-end
-user_login_with_region1 ---> login_success_and_go_home_page
-
-user_login_with_region2 ---> login_success_and_go_home_page(登录成功)</pre>
-<p>在完成账号的创建和绑定过程之后，与第三方账号相关的业务流程就结束了。此时我们会处于登录状态，用户就可以使用 App 了。</p>
-<h1 id="尾声"><a class="markdownIt-Anchor" href="#尾声"></a> 尾声</h1>
-<p>通过本文的介绍，我们了解了第三方授权信息的获取和校验的流程，同时大致梳理了现行账号体系接入第三方账号的流程，希望这些内容能够帮助到您。</p>
-<p>感谢您的阅读，希望本文对您在接入第三方平台登录方面有所启发。</p>
-]]></content>
-      <categories>
-        <category>Programming</category>
-      </categories>
-      <tags>
-        <tag>iOS</tag>
-        <tag>OAuth</tag>
       </tags>
   </entry>
   <entry>
@@ -1706,6 +1417,295 @@ Phase A —— B-functioning only; Phase B —— B-functioning and P-functionin
       </categories>
       <tags>
         <tag>Philosophy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>iOS 第三方登录</title>
+    <url>//ios-third-party-login/</url>
+    <content><![CDATA[<h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
+<p>现在市面上常见的 App 都开放了第三方平台登录的功能，为用户注册账号和登录账号带来了较大的便利，有效提升了用户的使用体验。近期，我司也引入了 Apple 和 Google 两个平台的第三方账号登录，本文将会对本次第三方平台接入的开发流程做详细的介绍。</p>
+<h1 id="概述"><a class="markdownIt-Anchor" href="#概述"></a> 概述</h1>
+<p>总的来说，App 要实现第三方账号登录的功能，大体可以按照以下三个步骤来实现：</p>
+<pre class="mermaid">graph LR
+login_with_sdk[获取授权信息] ---> verify_info[校验授权信息] ---> other_process[校验结果处理]</pre>
+<ol>
+<li>获取用户授权：通过第三方 SDK 获得用户授权，并获取授权数据用于接入第三方平台服务；</li>
+<li>校验授权信息：通过第三方服务校验获得的授权数据，校验成功即可认为是第三方账号认证成功；</li>
+<li>校验结果处理：从前两步中，我们可以获得第三方账号的邮箱（或其它的唯一标识），通过这个唯一标识我们可以对接自己平台的账号系统，校验该账号是否已经注册过。如果该账号已经注册或绑定过，则直接登录成功，否则引导用户创建新账号或绑定已有账号。</li>
+</ol>
+<p>本小节将会稍微扩展上面的框图的内容，让读者对完整的流程有一个更具体的认知。而后本文后续章节将会以三个步骤作为主题分别进行详细阐述。</p>
+<h2 id="oauth-20"><a class="markdownIt-Anchor" href="#oauth-20"></a> OAuth 2.0</h2>
+<p>在进入正文之前，我们先提一下 OAuth 协议。</p>
+<p>OAuth 2.0 协议是一种三方授权协议，目前大部分的第三方登录与授权都是基于该协议的标准或改进实现，通过这个授权流程，服务提供方允许用户授权第三方应用访问他们存储在另外的服务提供者上的信息，而不需要将用户名和密码提供给第三方移动应用或分享他们数据的所有内容。其基本流程如下所示：</p>
+<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">+--------+                               +---------------+</span><br><span class="line">     |        |--(A)- Authorization Request -&gt;|   Resource    |</span><br><span class="line">     |        |                               |     Owner     |</span><br><span class="line">     |        |&lt;-(B)-- Authorization Grant ---|               |</span><br><span class="line">     |        |                               +---------------+</span><br><span class="line">     |        |</span><br><span class="line">     |        |                               +---------------+</span><br><span class="line">     |        |--(C)-- Authorization Grant --&gt;| Authorization |</span><br><span class="line">     | Client |                               |     Server    |</span><br><span class="line">     |        |&lt;-(D)----- Access Token -------|               |</span><br><span class="line">     |        |                               +---------------+</span><br><span class="line">     |        |</span><br><span class="line">     |        |                               +---------------+</span><br><span class="line">     |        |--(E)----- Access Token ------&gt;|    Resource   |</span><br><span class="line">     |        |                               |     Server    |</span><br><span class="line">     |        |&lt;-(F)--- Protected Resource ---|               |</span><br><span class="line">     +--------+                               +---------------+</span><br></pre></td></tr></table></figure>
+<p>这里提及 OAuth2.0 不是为了详细介绍该协议的原理、设计和实现，而是想让读者带着一个高的视角看待第三方登录的流程设计。</p>
+<p>实际上，本文是围绕着上图的步骤 A 到步骤 D来进行介绍的，从 A 到 D 即可完成第三方平台账号的授权和验证。由于 VeSync 有自己的账号体系和资源体系，目前也没有使用第三方平台的服务的需求，步骤 E 和 F 在这篇文章中将不会提及。</p>
+<h2 id="详细流程"><a class="markdownIt-Anchor" href="#详细流程"></a> 详细流程</h2>
+<pre class="mermaid">graph TB
+select_login(用户选择第三方账号登录) ---> start_verification[发起授权请求，用户登录第三方账号]
+subgraph 获取第三方授权
+start_verification ---> request_verification[客户端获取授权信息]
+request_verification ---> server_verify[提交授权信息给云]
+end
+server_verify ---> check_account{授权信息是否验证成功}
+subgraph 校验授权信息
+check_account --YES--> check_binding{第三方账号是否已绑定 VeSync 账号}
+end
+check_binding --NO(账号不存在)--> create_or_bind_account{用户选择创建/绑定账号}
+subgraph 校验结果处理
+check_account --NO(验证失败)--> login_failed(失败)
+check_binding -- YES(登录成功) --> login_success_and_go_home_page(登录/注册成功)
+create_or_bind_account --绑定--> bind_account[绑定账号流程]
+create_or_bind_account --创建--> create_account[创建账号流程]
+end
+bind_account ---> login_success_and_go_home_page
+create_account ---> login_success_and_go_home_page</pre>
+<p>概述中的三个步骤在上图中进行了适当的细节扩充，本文将会围绕其进行具体的实现方式介绍，并有一些在开发过程中的踩坑分享。</p>
+<p>实际上，上图省略了一些具体业务需求的处理步骤，如检查第三方账号的合法性、第三方账号怎么和 VeSync 账号绑定、各种用户引导及错误处理。这些步骤虽重要，但不具有代表性和通用性，不会在本文作详细说明。</p>
+<h1 id="获取授权信息"><a class="markdownIt-Anchor" href="#获取授权信息"></a> 获取授权信息</h1>
+<p>从用户视角看来，点击第三方登录的按钮之后，会有输入框让用户登录第三方账号并请求授权，在登录成功并完成授权动作之后，App 就会开启第三方账号登录的流程。流程的第一步就是通过 SDK 或其它官方途径者获取授权信息。</p>
+<p>下面以 iOS 平台为例，介绍获取 Apple 和 Google 的用户授权信息的方式。</p>
+<h2 id="apple"><a class="markdownIt-Anchor" href="#apple"></a> Apple</h2>
+<blockquote>
+<p>⚠️ 注意</p>
+<p>从 <strong>iOS13</strong> 开始，如果 <strong>App</strong> 提供第三方登录，就必须添加 <strong>苹果登录 Sign in with Apple</strong> 选项，并要求所有开发者于 <strong>2020年4月之前</strong> 完成现有应用的更新，否则审核不通过。</p>
+</blockquote>
+<h3 id="配置"><a class="markdownIt-Anchor" href="#配置"></a> 配置</h3>
+<blockquote>
+<p>要在 App 实现 Apple 登录，需要在工程及开发者账号中都配置相关的功能。</p>
+</blockquote>
+<ol>
+<li>
+<p>账户配置</p>
+<p>在 Apple 开发者账户中开启 AppID 对应的 Apple 登录的功能，具体流程可以参考<a href="https://developer.apple.com/cn/help/account/capabilities/about-sign-in-with-apple/">官方文档</a>，创建完成后应如下图：</p>
+<p><img src="../images/87247ec539b0c21ffb0767926a7eff38.png" alt="image.png" /></p>
+</li>
+<li>
+<p>工程配置</p>
+<p>如下图所示在 Xcode 中配置工程的 Capabilities 开启 App 的 Apple 登录功能。</p>
+<p><img src="../images/5d3a41352ef9c39cf26e3b11f6c524d2.png" alt="image.png" /></p>
+</li>
+</ol>
+<h3 id="实现"><a class="markdownIt-Anchor" href="#实现"></a> 实现</h3>
+<blockquote>
+<p>在 iPhone 上，使用原生方式开发的 APP 可以直接调用苹果的框架 <code>AppleService</code> 获取 Apple 授权并登录。本部分主要参考 <a href="https://developer.apple.com/documentation/authenticationservices/implementing-user-authentication-with-sign-in-with-apple">Apple 官方文档</a>。</p>
+</blockquote>
+<ol>
+<li>
+<p>发起授权请求</p>
+<p>在这个过程中我们需要使用 <code>ASAuthorization</code> 服务调起获取 Apple 授权的弹窗。</p>
+<p>我们需要配置的信息有：</p>
+<ul>
+<li>需要获取的授权方式<code>ASAuthorizationAppleIDCredential</code> ，这个授权方式决定了 Apple 会返回给我们的信息，需要在代理方法中处理。</li>
+<li>代理对象 <code>delegate</code> ，授权结果会通过代理方法返回给调用方。</li>
+<li>需要获取的用户信息<code>requestedScopes</code> 在用户首次获取授权的时候，Apple 会通过代理返回这些信息。</li>
+<li>配置弹窗上下文 <code>presentationContextProvider</code> ，Apple 的授权系统弹窗会在给定的页面弹出，一般来说，这里只要获取导航堆栈中的栈顶控制器即可。</li>
+</ul>
+<p>配置好这些信息后，通过<code>performRequests()</code> 调用即可唤起系统弹窗，获取授权。</p>
+ <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> appleIDProvider <span class="operator">=</span> <span class="type">ASAuthorizationAppleIDProvider</span>()</span><br><span class="line"><span class="keyword">let</span> request <span class="operator">=</span> appleIDProvider.createRequest()</span><br><span class="line">request.requestedScopes <span class="operator">=</span> [.fullName, .email]</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> authorizationController <span class="operator">=</span> <span class="type">ASAuthorizationController</span>(authorizationRequests: [request])</span><br><span class="line">authorizationController.delegate <span class="operator">=</span> <span class="keyword">self</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> topVc <span class="operator">=</span> <span class="type">Tool</span>.topViewController() <span class="keyword">as?</span> <span class="type">ASAuthorizationControllerPresentationContextProviding</span> &#123;</span><br><span class="line">		authorizationController.presentationContextProvider <span class="operator">=</span> topVc</span><br><span class="line">&#125;</span><br><span class="line">authorizationController.performRequests()</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>处理回调事件</p>
+<p>在用户授权成功或授权失败后，会通过两个代理方法通知业务方。</p>
+<ul>
+<li>
+<p><code>didCompleteWithAuthorization</code></p>
+<p>通过回调方法中的 authorization 对象可以获取我们需要的授权信息。在前一步中我们选择获取 AppleID 的授权信息，用于认证授权的参数包括<code>authorizationCode</code> 和 <code>identityToken</code>，这两个参数的作用和区别将会在下文“校验授权信息”这一小节中详细介绍。</p>
+<p>在用户首次获得用户授权时，SDK 还会提供 <code>userID</code> 这个参数给我们。这是一个苹果用户唯一标识符，它在同一个开发者账号下的所有 App 下是一样的，我们可以用它来与后台的账号体系绑定起来。</p>
+</li>
+<li>
+<p><code>didCompleteWithError</code></p>
+<p>在授权失败时 Apple 会调用该方法，我们可以在这里面做错误处理。</p>
+</li>
+</ul>
+ <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">extension</span> <span class="title class_">XXX</span>: <span class="title class_">ASAuthorizationControllerDelegate</span> &#123;</span><br><span class="line">    <span class="comment">/// - Tag: did_complete_authorization</span></span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">authorizationController</span>(<span class="params">controller</span>: <span class="type">ASAuthorizationController</span>, <span class="params">didCompleteWithAuthorization</span> <span class="params">authorization</span>: <span class="type">ASAuthorization</span>) &#123;</span><br><span class="line">        <span class="keyword">switch</span> authorization.credential &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="keyword">let</span> appleIDCredential <span class="keyword">as</span> <span class="type">ASAuthorizationAppleIDCredential</span>:</span><br><span class="line">            <span class="keyword">guard</span> <span class="keyword">let</span> identityTokenData <span class="operator">=</span> appleIDCredential.identityToken,</span><br><span class="line">                  <span class="keyword">let</span> identityToken <span class="operator">=</span> <span class="type">String</span>(data: identityTokenData, encoding: .utf8),</span><br><span class="line">                  <span class="keyword">let</span> authorizationCodeData <span class="operator">=</span> appleIDCredential.authorizationCode,</span><br><span class="line">                  <span class="keyword">let</span> authorizationCode <span class="operator">=</span> <span class="type">String</span>(data: authorizationCodeData, encoding: .utf8) <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">            <span class="keyword">let</span> userID <span class="operator">=</span> appleIDCredential.user</span><br><span class="line">            <span class="keyword">self</span>.tryLogin(identityToken: identityToken, </span><br><span class="line">							            authorizationCode: authorizationCode, </span><br><span class="line">								          userID: userID)</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="comment">/// - Tag: did_complete_error</span></span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">authorizationController</span>(<span class="params">controller</span>: <span class="type">ASAuthorizationController</span>, <span class="params">didCompleteWithError</span> <span class="params">error</span>: <span class="type">Error</span>) &#123;</span><br><span class="line">        <span class="comment">// Handle error.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>校验授权状态</p>
+<p>除了通过如下方法主动获取用户的授权信息，我们还可以以通知的方式监听用户是否取消了授权，苹果提供的通知名称为<code>ASAuthorizationAppleIDProvider.credentialRevokedNotification</code> 。</p>
+ <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> appleIDProvider <span class="operator">=</span> <span class="type">ASAuthorizationAppleIDProvider</span>()</span><br><span class="line">appleIDProvider.getCredentialState(forUserID: <span class="type">KeychainItem</span>.currentUserIdentifier) &#123; (credentialState, error) <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">switch</span> credentialState &#123;</span><br><span class="line">    <span class="keyword">case</span> .authorized:</span><br><span class="line">        <span class="keyword">break</span> <span class="comment">// The Apple ID credential is valid.</span></span><br><span class="line">    <span class="keyword">case</span> .revoked, .notFound:</span><br><span class="line">        <span class="comment">// The Apple ID credential is either revoked or was not found, so show the sign-in UI.</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>主动撤销授权</p>
+<p>根据苹果<a href="https://developer.apple.com/documentation/signinwithapplerestapi/revoke_tokens">官方文档</a>，调用 URL（<a href="https://appleid.apple.com/auth/revoke">https://appleid.apple.com/auth/revoke</a>）以撤销用户授权。但考虑到以下原因，主动撤销授权的操作应由服务端进行操作。</p>
+<ul>
+<li>接口调用需要的参数都保存在云端</li>
+<li>多端调用场景（iOS、Android、Web）</li>
+<li>数据安全</li>
+</ul>
+</li>
+</ol>
+<h2 id="google"><a class="markdownIt-Anchor" href="#google"></a> Google</h2>
+<blockquote>
+<p>在 iPhone 上的原生 APP 可以使用 Google 提供的框架 GoogleSignIn 获取用户授权。</p>
+</blockquote>
+<h3 id="配置-2"><a class="markdownIt-Anchor" href="#配置-2"></a> 配置</h3>
+<ol>
+<li>
+<p>Google 开发者账号配置</p>
+<blockquote>
+<p>这里的配置流程主要参考<a href="https://developers.google.com/identity/sign-in/ios/start-integrating?hl=zh-cn#configure_app_project">官方文档</a></p>
+</blockquote>
+<p>在 Google 开发者账号中创建/获取客户端 ID 和服务器客户端 ID。</p>
+<p>创建好的客户端 ID 如图：</p>
+<p><img src="../images/bd8c1e247c9406ca02b64d49f28a467d.png" alt="image.png" /></p>
+<p>创建好的服务器客户端 ID 如图：</p>
+<p><img src="../images/fa59812d0ac3e304b73090bc93e85ee2.png" alt="image.png" /></p>
+</li>
+<li>
+<p>Xcode 项目配置</p>
+<p>需要在 Xcode 工程配置中添加 Google 开发者账号相关配置信息，把第一步中获取的两个 ID 添加到 <code>Info.plist</code> 文件中，形式如下：</p>
+ <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>GIDClientID<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>YOUR_IOS_CLIENT_ID<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>CFBundleURLTypes<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">key</span>&gt;</span>CFBundleURLSchemes<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">		        <span class="tag">&lt;<span class="name">string</span>&gt;</span>YOUR_DOT_REVERSED_IOS_CLIENT_ID<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>GIDServerClientID<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>YOUR_SERVER_CLIENT_ID<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>其中有两点需要注意：</p>
+<ol>
+<li>如果你的 App 在开发环境与线上环境使用的是不同的 AppID，那上面的账号和项目配置也需要创建两套不同的账号，同时在 plist 文件中也需要按环境区分不同的配置</li>
+<li><code>GIDServerClientID</code> 是后端使用的 ID，当 App 的授权流程需要后端身份验证的时候，需要配置该 ID。</li>
+</ol>
+</li>
+</ol>
+<h3 id="实现-2"><a class="markdownIt-Anchor" href="#实现-2"></a> 实现</h3>
+<p>Google 登录流程比 Apple 登录流程简单，具体如下。</p>
+<ol>
+<li>
+<p>通过 Cocoapods 或者 SPM 集成 <a href="https://github.com/google/GoogleSignIn-iOS">GoogleSignIn</a> SDK。</p>
+</li>
+<li>
+<p>发起授权请求</p>
+<p>通过 SDK 的方法获取 Google 授权。授权成功后会执行闭包中的代码，可以在 <code>signInResult</code> 中可以获取 userInfo、idToken 等必要信息，进而处理登录业务。</p>
+ <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">GIDSignIn</span>.sharedInstance.signIn(withPresenting: <span class="keyword">self</span>) &#123; signInResult, error <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">guard</span> error <span class="operator">==</span> <span class="literal">nil</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>校验授权状态</p>
+<p>通过 SDK 提供的方法校验用户授权状态</p>
+ <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">GIDSignIn</span>.sharedInstance.restorePreviousSignIn &#123; user, error <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">if</span> error <span class="operator">!=</span> <span class="literal">nil</span> <span class="operator">||</span> user <span class="operator">==</span> <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="comment">// Show the app&#x27;s signed-out state.</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// Show the app&#x27;s signed-in state.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>撤销授权</p>
+<p>通过 SDK 提供的方法主动撤销用户授权</p>
+ <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">GIDSignIn</span>.sharedInstance.disconnect &#123; error <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">guard</span> error <span class="operator">==</span> <span class="literal">nil</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// Google Account disconnected from your app.</span></span><br><span class="line">    <span class="comment">// Perform clean-up actions, such as deleting data associated with the</span></span><br><span class="line">    <span class="comment">//   disconnected account.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="校验授权信息"><a class="markdownIt-Anchor" href="#校验授权信息"></a> 校验授权信息</h1>
+<p>在 App 成功获取授权信息之后，会调用云接口将授权数据传给云端，云端需要校验此信息是否合法，根据采用的获取到的授权信息类型不同，会有不同的校验方式。在这一步骤中，主要是云与第三方平台服务端的交互。</p>
+<pre class="mermaid">sequenceDiagram
+    participant 应用
+    participant 第三方SDK
+    participant 云
+    participant 第三方服务器
+
+    应用->>第三方SDK: 1. 发起登陆请求
+    第三方SDK-->>第三方服务器: 
+    第三方服务器-->>第三方SDK: 
+    第三方SDK-->>应用: 2. 返回授权数据
+    应用->>云: 3. 客户端向后台提交授权数据
+    云->>第三方服务器: 4. 后台向第三方服务器验证授权信息
+    第三方服务器-->>云: 5. 返回验证结果
+    云-->>应用: 6. 告知客户端验证结果</pre>
+<p>在第三方登录过程中。几个相关角色的交互大致如上图所示，其中步骤 1、2 已经在上文详细介绍过了，本小节将会以 Apple 登录数据验证为例子，围绕步骤 4 和步骤 5 进行介绍。</p>
+<h2 id="apple-2"><a class="markdownIt-Anchor" href="#apple-2"></a> Apple</h2>
+<p>在上文已经提到， iOS App 从 Apple SDK 中可以获取两种授权数据，分别是<code>authorizationCode</code> 和 <code>identityToken</code>，针对不同的数据，苹果提供了对应的验证方式。</p>
+<p>在这里我们介绍一下两种数据：</p>
+<ol>
+<li>
+<p>authorizationCode</p>
+<p>本质上是 Apple 颁发的授权码。App 把数据传给云，然后由云端再向苹果的身份验证服务端验证本次授权登录请求数据的有效性和真实性。这是类似 OAuth2 的授权码验证方式。</p>
+</li>
+<li>
+<p>identityToken</p>
+<p>identityToken 是一个经过签名的 JWT 数据 （<a href="https://link.juejin.im/?target=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FJSON_Web_Token">JSON Web Token</a>），通过向苹果身份验证服务器获取公钥再进行解密、匹配等步骤，我们可以验证此数据是否被篡改、是否合法。</p>
+</li>
+</ol>
+<p>云端可以自由选择这两个参数进行校验，只要有一个验证方式能够通过，即可视为本次授权校验成功。</p>
+<h3 id="基于授权码的验证"><a class="markdownIt-Anchor" href="#基于授权码的验证"></a> 基于授权码的验证</h3>
+<blockquote>
+<p>该算法用来验证<code>authorizationCode</code></p>
+</blockquote>
+<p>使用 authorizationCode 进行验证，调用 URL <a href="https://appleid.apple.com/auth/token">https://appleid.apple.com/auth/token</a> 进行验证</p>
+<p>该流程可参考<a href="https://developer.apple.com/documentation/signinwithapplerestapi/generate_and_validate_tokens">官方文档</a>，简单的说，就是构建一个网络请求，成功返回即验证成功。</p>
+<p>在构建的 request 中有一个 <code>client_secret</code> 字段需要我们自行<a href="https://developer.apple.com/documentation/accountorganizationaldatasharing/creating-a-client-secret">构建一个 JWT 数据</a>，里面包含了开发者账户信息（TeamID、KeyID），应用信息（App 的 BundleID）相关的配置。在构建数据的时候需要注意区分不同开发环境、不同登录客户端，这些差异会导致参数的值不同。</p>
+<h3 id="基于-jwt-的算法验证"><a class="markdownIt-Anchor" href="#基于-jwt-的算法验证"></a> 基于 JWT 的算法验证</h3>
+<blockquote>
+<p>该算法用来验证<code>identityToken</code> 参数</p>
+</blockquote>
+<p>一个 JWT 有三个部分：header、payload、signature，如下图所示</p>
+<p><img src="../images/3b9ddd9fb23a06a5cadfd6df464a64ea.png" alt="image.png" /></p>
+<blockquote>
+<p>这里附上一个<a href="https://jwt.io/">JWT 在线解析</a>的工具</p>
+</blockquote>
+<p>服务端在获取客户端发出的<code>identityToken</code>后，需要进行如下步骤：</p>
+<ol>
+<li>需要逆向构造过程，decode出JWT的三个部分</li>
+<li>从<a href="https://link.juejin.cn/?target=https%3A%2F%2Fappleid.apple.com%2Fauth%2Fkeys">appleid.apple.com/auth/keys</a>中获取公钥，并将公钥<a href="https://link.juejin.cn/?target=https%3A%2F%2F8gwifi.org%2Fjwkconvertfunctions.jsp">转换</a>为<code>pem</code>对JWT进行验证；获取到的公钥会有多个，需要根据 head 里的 kid 和 alg 去选取正确的公钥</li>
+<li>如<code>identityToken</code>通过验证，则可以根据其payload中的内容进行验证等操作</li>
+</ol>
+<p>这里需要再补充说明一下 identityToken 验证原理和方式：<code>idnetityToken</code>使用非对称加密 RSASSA（RSA签名算法） 和 ECDSA（椭圆曲线数据签名算法），当验证签名的时候，利用公钥来解密Singature，满足下列条件时，验证通过：</p>
+<ol>
+<li>与<code>base64UrlEncode(header) + &quot;.&quot; + base64UrlEncode(payload)</code>的内容完全一样</li>
+<li><code>iss</code> 与 <code>aud</code> 字段匹配</li>
+<li><code>exp</code> 过期时间未过</li>
+</ol>
+<p>另外，我们从解析出来的 JWT 文件中还能获取到一些其他信息</p>
+<ol>
+<li>
+<p>email</p>
+<p>Apple 账号的邮箱。上文已经提过，<code>ASAuthorization</code> 服务的登录成功回调事件只有在首次授权的时候才会返回用户信息（用户邮箱），如果后端业务需要使用到用户邮箱，则可以在 JWT 里获取。</p>
+</li>
+<li>
+<p>email_verified</p>
+<p>该字段表明用户邮箱是否已经经过认证</p>
+</li>
+<li>
+<p>is_private_email</p>
+<p>这个字段表明用户是否隐藏邮箱，即用户的邮箱是否为中转邮箱。</p>
+<p>Apple 在首次获取用户授权时会询问用户是否要分享自己的邮件地址给第三方平台。如果用户选择不分享，即隐藏邮件地址，Apple 会生成一个中转邮箱（类似<u><a href="mailto:xxxxxx@privaterelay.appleid.com">xxxxxx@privaterelay.appleid.com</a></u>）给到第三方平台以进行必要的业务操作，如第三方平台账号的邮箱信息、发送营销或通知邮件等。</p>
+<blockquote>
+<p>如果需要通过中转邮箱给用户发送邮件，需要在 Apple 开发者账号配置信任邮箱，只有在信任列表里的邮箱才能通过中转邮箱给用户发送邮件、接收用户的邮件。</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="google-2"><a class="markdownIt-Anchor" href="#google-2"></a> Google</h2>
+<p>Google 登录的验证流程与 Apple 的 JWT 验证流程基本一致（参考<a href="https://developers.google.com/identity/sign-in/ios/backend-auth?hl=zh-cn">官方文档</a>），其中 App 从 SDK 获取的 JWT 数据参数名为 <code>idToken</code> 。</p>
+<h1 id="校验结果处理"><a class="markdownIt-Anchor" href="#校验结果处理"></a> 校验结果处理</h1>
+<p>来到这一步，说明我们已经完成第三方账号的授权获取和校验了，此时我们可以将第三方账号的数据对接我们已有的账号系统。</p>
+<p>在这个步骤中，业务流程是具体业务需求决定的，并不是一个通用规范的做法，在不同业务主体可能会有不同的设计方案。这里简单介绍一下 VeSync App 的做法。</p>
+<p>VeSync 采用邮箱作为 Key 来链接第三方账号和 VeSync 账号。其中，Apple 登录方式的邮箱可以从 JWT 数据中解析出来，Google 登录方式的邮箱则是由 SDK 直接返回，由 App 传给云端即可。</p>
+<p>云会校验该邮箱是否已经绑定过 VeSync 账号：</p>
+<ol>
+<li>
+<p>已绑定</p>
+<p>这意味着这个第三方账号的用户已经通过三方登录的方式创建过账号，或绑定过账号。此时我们可以直接为该用户颁发通行密钥（token），App 拿到密钥之后可以直接登录，使用 VeSync 的服务，此时我们获取第三方账号的信息是用来<strong>登录</strong>的</p>
+</li>
+<li>
+<p>未绑定</p>
+<p>此时 App 需要引导用户绑定已有账号或创建新账号，大致流程如下所示。就是此时我们获取第三方账号的信息可能用来<strong>登录</strong>或<strong>注册</strong> 。流程结束后，用户即可成功登录使用 VeSync 的服务。</p>
+<p>需要额外说明的是，在建立已有账号与第三方账号的绑定关系的过程中，需要校验已有账号是否已经绑定过同一平台的第三方账号，如果已经绑定过，则需要额外的流程（如直接替换，或提示用户选择其中一个）进行处理。</p>
+</li>
+</ol>
+<pre class="mermaid">graph LR
+
+create_or_bind_account{创建/绑定账号}
+create_or_bind_account --绑定--> bind_account[通过邮箱登录已有账号]
+create_or_bind_account --创建--> create_new_account[使用邮箱创建新账号]
+subgraph 创建账号流程
+create_new_account ---> user_login_with_region1[建立新账号与第三方账号的绑定关系]
+end
+subgraph 绑定账号流程
+bind_account ---> user_login_with_region2[建立已有账号与第三方账号的绑定关系]
+end
+user_login_with_region1 ---> login_success_and_go_home_page
+
+user_login_with_region2 ---> login_success_and_go_home_page(登录成功)</pre>
+<p>在完成账号的创建和绑定过程之后，与第三方账号相关的业务流程就结束了。此时我们会处于登录状态，用户就可以使用 App 了。</p>
+<h1 id="尾声"><a class="markdownIt-Anchor" href="#尾声"></a> 尾声</h1>
+<p>通过本文的介绍，我们了解了第三方授权信息的获取和校验的流程，同时大致梳理了现行账号体系接入第三方账号的流程，希望这些内容能够帮助到您。</p>
+<p>感谢您的阅读，希望本文对您在接入第三方平台登录方面有所启发。</p>
+]]></content>
+      <categories>
+        <category>Programming</category>
+      </categories>
+      <tags>
+        <tag>iOS</tag>
+        <tag>OAuth</tag>
       </tags>
   </entry>
   <entry>
@@ -4102,6 +4102,737 @@ Phase A —— B-functioning only; Phase B —— B-functioning and P-functionin
       </categories>
       <tags>
         <tag>Psychology</tag>
+        <tag>Sociology</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>社会学概论（一）</title>
+    <url>//introduction-to-sociology-1/</url>
+    <content><![CDATA[<blockquote>
+<p>source: BV1XK4y1n7gp</p>
+</blockquote>
+<p>社会学：从社会整体出发，通过社会关系和社会行为来研究社会的结构、功能、发生、发展规律的综合性学科。</p>
+<p>社会学特点：对研究对象有一定的熟悉</p>
+<details>
+<summary>相关文献</summary>
+1. C. Wright Mills. "The promise of Sociology."《社会学想象力》
+2. Peter Berger. Invitation to Sociology.
+3. 金耀基：“中国人对隐私权的——中国人文鼎细等线的‘公’、‘私’观念“（？）（只找到了自选集中题目相似的一篇文章（中国人的“公”、“私”观念
+――兼论中国人对私隐权的理解））
+4. 林语堂：《中国人》第四章”人生的理想“
+5. Horace Miner. Body Ritual among the Nacirema
+6. George Herbert Mead:" The Self"
+7. David Y. F. Ho, "Socialization in China"
+8. 林语堂：”理想的女性“”女子教育“
+9. James Henslin "On becoming male"（成为男人）
+10. 怀特（William Whyte）”诺顿帮的成员“”保龄球和社会地位“，载《街角社会》。
+11. Erving Goffman. "The Presentation of Self"《自我呈现》
+12. Charles H. Cooley. "Primary Groups"（首属群体或初级群体）
+13. Max Weber. "The Characteristics of Bureaucracy"
+14. D. L. Rosenhan. "On Being Sane in Insane Places"
+15. Emile Durkheim. "The Functions of Crime"《犯罪的功能》
+</details>
+<h1 id="社会学的视角"><a class="markdownIt-Anchor" href="#社会学的视角"></a> 社会学的视角</h1>
+<h2 id="社会学诞生"><a class="markdownIt-Anchor" href="#社会学诞生"></a> 社会学诞生</h2>
+<ul>
+<li>社会学创始人 <u>孔德</u> 1838 年 实证哲学教程</li>
+<li><code>社会学</code>：对于社会现象所固有的全部基本规律的实证研究</li>
+<li><code>实证主义</code>：强调感觉经验，排斥形而上学传统的西方哲学派别</li>
+<li>观察社会事件视角：偶然性、背后的可理解性</li>
+<li>时代背景
+<ul>
+<li>中世纪的封建教权社会，黑暗时代；</li>
+<li>十八世纪启蒙运动（关于人的社会的启蒙），启蒙年代——理性年代：敢于去了解，质疑秩序是怎么来的，启蒙思潮； 人人生而平等</li>
+<li>启蒙运动影响：讲科学运用于社会的研究，发现社会的内在规律</li>
+</ul>
+</li>
+<li>双元革命：1789年法国大革命与同期的工业革命
+<ul>
+<li>人用理性改变不合理的旧制度</li>
+<li>伯克，保守主义</li>
+<li>工业革命改变了技术生产，也改变了社会，冲击了传统的文化观念、习俗、思想</li>
+<li>科技进步的文明带来的野蛮，从自给自足到没有限制的过度劳动。生产力进步导致乡土社会的结构改变</li>
+<li>由于生产目的改变，本是流通手段的货币变成了财富主体。由自然天然的生产目的变成了增加商品的使用价值的生产目的。</li>
+<li>社会学产生从<u>社会意义</u>讲是“双元革命”之子</li>
+</ul>
+</li>
+<li>乌托邦色彩
+<ul>
+<li>孔德认为有科学的理论能认识社会，使得社会更人性，建立新的道德，摆脱不道德，恢复<code>道德意涵</code></li>
+<li>想象了一个又社会学家领导的家庭式秩序</li>
+<li>针对当时不道德的社会带来的不道德的社会现象，用科学的方式的道德关怀</li>
+</ul>
+</li>
+</ul>
+<h2 id="社会学发展"><a class="markdownIt-Anchor" href="#社会学发展"></a> 社会学发展</h2>
+<blockquote>
+<p>社会学发展的三位奠基人，三位思想家，处理社会危机问题（资本主义带来的社会危机）</p>
+</blockquote>
+<p>卡尔·马克思：科学共产主义创始人，《资本论》《共产党宣言》</p>
+<pre><code>- 批评资本主义的极端非人性的制度
+- 研究社会学的角度：阶级分层，否认资本主义的合法性
+</code></pre>
+<p>埃米尔·涂尔干：法国社会学家</p>
+<pre><code>- 使社会学学院化，建立社会学学科的合法性
+- 研究社会学的观点：
+    1. 社会是一个整体，其整体大于各个部分之和
+    2. 社会事实外在于个体，社会是客观存在的
+    3. 社会团结 Solidarity （《自杀论》）因信称义？
+</code></pre>
+<p>马克斯·韦伯：现代社会学和公共行政学最重要的创始人之一</p>
+<pre><code>- 对社会学最重要的研究：
+    1. 资本主义的兴
+
+        从“精神氛围”研究资本主义的兴起，资本主义精神，从历史角度看是一个成就（比较宗教研究）
+
+    2. 提出科层制：理性化的安排生活
+
+        `工具理性` 通过实践的途径确认工具的有用性，从未追求事务的最大功效，为人的某种功利的实现服务。极致的工具理性 → 非人性化
+
+
+        `价值理性` 通过有意识地对一个特定的行为（伦理的、美学的、宗教的或做任何其他阐释的）无条件的固有价值的纯粹信仰，不管是否取得成就
+
+    3. 社会分层
+</code></pre>
+<ul>
+<li>社会学的<code>三大理论视角</code>
+<ol>
+<li>
+<p>冲突理论——马克思</p>
+<p>生产资料的不同占有，占有生产资料的人通过剥夺不占有（只能出卖劳动力）的人来积累财富</p>
+</li>
+<li>
+<p>结构功能主义——涂尔干</p>
+<p>有某些外在于人的结构把人团结在一起（信仰、宗教、制度）</p>
+<p>从宏观的社会制度的角度研究社会</p>
+</li>
+<li>
+<p>符号互动论——韦伯（成型于米德）</p>
+<p>微观的角度：社会行动者，研究有意义的社会行动，典型的社会行动都是社会互动（另外两个都是从宏观角度）</p>
+<p>人从具体的行动中界定规则，规则产生作用是人承认规则，强调人与人的联系，强调变化</p>
+</li>
+</ol>
+</li>
+</ul>
+<h1 id="社会与文化"><a class="markdownIt-Anchor" href="#社会与文化"></a> 社会与文化</h1>
+<h2 id="社会"><a class="markdownIt-Anchor" href="#社会"></a> 社会</h2>
+<ul>
+<li>
+<p>汉语中的社会</p>
+<p>说文解字：社会 = 社+ 会</p>
+<p>社：土地神 → 里舍，乡舍 → 志趣相投的人组成的团体（社团）</p>
+</li>
+<li>
+<p>社会学中的社会（马克思的观点）</p>
+<p>社会是人们交互作用的产物。生产关系总和起来就构成为所谓社会关系，构成为社会。</p>
+<p>马克思定义的社会是一个实体概念，但不是具体的实体。是通过观察，体会其效用才能证明其效用的实体。</p>
+</li>
+<li>
+<p>社会学的范围</p>
+<p>村庄社会、民族国家、全球社会&amp;世界社会</p>
+</li>
+<li>
+<p>社会模型</p>
+<p>怎么看待社会，三大社会模型</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>典型思想</th>
+<th>代表人物</th>
+<th>社会形象</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>系统模型</td>
+<td>结构功能主义</td>
+<td>帕累托、斯宾塞、涂尔干、帕森斯</td>
+<td>系统、有秩序的<u>整体</u>、共识、一套功能机制</td>
+</tr>
+<tr>
+<td>冲突模型</td>
+<td>马克思理论</td>
+<td>马克思、韦伯、达伦道夫、米尔斯</td>
+<td>共识→意识形态（在每一个时代，统治阶级的思想就是主导思想，“虚假意识”）</td>
+</tr>
+<tr>
+<td>互动模型</td>
+<td>符号互动论</td>
+<td>韦伯、米德</td>
+<td>把社会看作相互作用、沟通、谈判</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h2 id="文化"><a class="markdownIt-Anchor" href="#文化"></a> 文化</h2>
+<ul>
+<li>
+<p>文化有很多不同角度/方面的定义：受教育程度，精致艺术</p>
+</li>
+<li>
+<p>社会学意义上的文化</p>
+<p>定义：一个社会或群体共同承认的<u>价值观</u>，遵从的规范，连同他们创造的物质产品</p>
+<p>更关注事件，关注具体的现象而非静态的事物</p>
+<p>文化界定人之所在</p>
+</li>
+<li>
+<p>社会学/人类学意义上的人类</p>
+<p>人是意义型的动物，从社会学意义上的人类来说，绝大多数的行为都涉及到意义</p>
+<p>人是文化型的动物，不存在没有文化的人</p>
+</li>
+<li>
+<p>文化定义的演变——从泰勒到格尔兹</p>
+<ul>
+<li>
+<p>泰勒的定义：文化或文明是一个复杂的整体，包括知识、信仰、艺术、伦理道德、法律、风俗和作为一个社会成员的人通过学习而获得的任何其他能力和习惯。</p>
+<p>特点：几乎无所不包（没有包含人创造的物质文化），面面俱到</p>
+</li>
+<li>
+<p>马林诺夫斯基（功能主义学派）在泰勒的基础上增加了<u>物质文化</u></p>
+<p>掺杂了人为因素的东西都是文化</p>
+</li>
+<li>
+<p>格尔茨：文化是人类用来解释他们的经验，指导他们行动的<code>意义结构</code></p>
+<p>特点：将文化看作可以为大众获得的象征形态，人们通过这些象征形态来体验和表达意义。这一界定抛弃了泰勒大而全的定义，将文化定义集中到<code>意义系统</code></p>
+<blockquote>
+<p>人是悬挂在由他们自己编织的意义之网上的动物——韦伯</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<pre><code>    意义之网 → 文化
+</code></pre>
+</blockquote>
+<pre><code>    文化的意义系统：分享的、共享的
+</code></pre>
+<ul>
+<li>
+<p>女性主体意识的觉醒</p>
+<ul>
+<li>
+<p>理想传统女性的形象：低眉顺目，相夫教子</p>
+<p>女性的客体性（男性为主体），“贤惠、温顺”带有对主体的讨好性，强调社会性属性</p>
+</li>
+<li>
+<p>近代女性强调个体特质：千娇百媚、风情万种</p>
+<p>仍然是男性中心，强调身体和性格（对男性的吸引）</p>
+</li>
+<li>
+<p>当代女性：我的标准我做主</p>
+</li>
+</ul>
+</li>
+<li>
+<p>非主流文化</p>
+<p>文化在一定范围内有共享性，但也存在边界</p>
+<ul>
+<li>
+<p>亚文化</p>
+<p>当在社会中的某一群体中，形成一种既<u>包括一些主流文化特征</u>，也包括某些<u>独特的文化要素</u>时，这一群体的文化就叫做亚文化</p>
+<p>亚文化与主流文化具有相对性，但在核心价值观上与主流文化一致，在发展过程中可能会被主流文化吸收</p>
+<p>e.g.: disco</p>
+</li>
+<li>
+<p>反文化</p>
+<p>反文化是一种从个根本上与社会主流文化相对立的文化，它<u>有意识的对抗</u>社会上某些最重要的价值和规范，并为此感到自豪</p>
+<p>e.g.: 波西米亚人、嬉皮士</p>
+</li>
+</ul>
+</li>
+<li>
+<p>文化的构成</p>
+<ul>
+<li>
+<p><code>价值观</code>：价值观是指社会成员关于好坏、对错、符合或违背人们愿望等的共同看法，是文化中最核心的部分</p>
+</li>
+<li>
+<p><code>规范</code>：规范是指人们共同遵守的对特定环境中人的正当行为方式做出规定的准则</p>
+<p>规范类型：社会习俗 → 道德 → 法律；强制性↑</p>
+</li>
+<li>
+<p>价值观与规范的关系</p>
+<p>价值观是抽象的一般观念，规范是具体情况下指导人们行为的准则</p>
+<p>价值观被用作判断规范的尺度，规范是价值观的体现</p>
+<p>具体的规范往往受到抽象的价值观的影响</p>
+<p>仁义礼智信，仁是儒家核心价值观，礼是规范</p>
+</li>
+<li>
+<p><code>物质文化</code> ：反映人与自然的关系，包括生产工具、生活用品等物质成果</p>
+</li>
+</ul>
+</li>
+<li>
+<p>文化的变迁</p>
+<p>文化是会发生变化的，价值观变化得慢，物质文化变化得快，但这种变化对我们不会造成很大影响（相对于价值观变化来说）；三种文化构成惰性逐渐减弱（文化堕距）</p>
+<p>每个人都在参与文化的创造与变化，“自己编织的意义之网”</p>
+</li>
+<li>
+<p>文化整体性</p>
+<p>一个部分发生变化会引起另一个部分的适应性变化（物质文化变了会影响规范），</p>
+<p>文化不是简单的combination，价值观是界定&amp;区分文化的最重要的部分；但文化也不是天衣无缝的嵌套，文化内部有张力 → 变迁</p>
+</li>
+</ul>
+<h1 id="社会互动与社会结构"><a class="markdownIt-Anchor" href="#社会互动与社会结构"></a> 社会互动与社会结构</h1>
+<p>定义：</p>
+<ul>
+<li>社会互动
+<ul>
+<li>社会互动是指社会上个人与个人、个人与群体、群体与群体之间通过信息的传播而发生的相互依赖性的社会交往活动</li>
+</ul>
+</li>
+<li>社会结构
+<ul>
+<li>社会结构就是用来统摄人们关系，<u>有组织的行为模式</u>（斯梅尔瑟）</li>
+<li>社会结构是个体与群体之间的互动模式，社会生活并不是随机发生的，我们的大部分活动都是结构化的，它是以一种<u>有规律的，反复的方式组织在一起</u>的</li>
+<li>是一套<code>模式化的社会互动</code></li>
+<li>社会结构的要素：地位、角色、群体、组织、制度等</li>
+</ul>
+</li>
+</ul>
+<h2 id="社会地位和社会角色"><a class="markdownIt-Anchor" href="#社会地位和社会角色"></a> 社会地位和社会角色</h2>
+<ul>
+<li>社会地位
+<ul>
+<li>
+<p>社会地位是个人在社会关系体系中所处的位置</p>
+<p>与平时所说的“有地位”不是一回事，社会地位是没有高下之分的</p>
+</li>
+<li>
+<p>人们获得地位的两种途径：</p>
+<ol>
+<li>
+<p>先赋地位：出生时获得的地位（年龄、性别、种族）</p>
+</li>
+<li>
+<p>自致地位/成就地位：后天努力获得的社会地位，可以改变的地位（职业）</p>
+<p>等级&amp;阶级：等级是先赋地位，阶级是具有流动性的自致地位</p>
+</li>
+</ol>
+</li>
+<li>
+<p>主导地位</p>
+<p>人可以有很多种地位（位置），有一种地位是主要的 → 主导地位</p>
+<p>主导地位会随着社交场景、他人期望、刻板印象不同而不同；当这种主导地位，即社会认同与个人期望不符合时会给人带来痛苦</p>
+<p>重要的主导地位：种族、性别、特殊群体（女强人、黑人律师、残疾人作家）</p>
+</li>
+<li>
+<p>地位丛</p>
+<ul>
+<li>不同的社会地位集聚在同一个人身上，即一个人所有的社会地位的集合</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>社会角色
+<ul>
+<li>
+<p>社会角色是指人们在社会生活中形成的，与人们在社会关系体系中所处的地位相一致的、社会所期望的<code>一套行为模式</code></p>
+<p>占据了特定社会地位的人，我们对其会有一套内置的（由规则、规矩、道德等）框定的社会期期待，期待其按照特定的“脚本”扮演特定角色</p>
+</li>
+<li>
+<p>角色紧张和角色冲突</p>
+<p>角色紧张：扮演<u>某一特定角色</u>时，对角色不同期望的内在张力之间可能会存在冲突，造成角色紧张</p>
+<p>e.g.: 学生的创造性和尊重权威之间的平衡和矛盾</p>
+<p>角色冲突：扮演<u>不同角色</u>时，角色之间发生矛盾、对立和抵触，妨碍角色扮演的顺利进行</p>
+<p>e.g.: “忠孝难两全”，不同角色的期望互相冲突</p>
+</li>
+<li>
+<p>角色丛</p>
+<p>一个社会角色是多种更细分的社会关系的角色的集合</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="社会行动"><a class="markdownIt-Anchor" href="#社会行动"></a> 社会行动</h2>
+<blockquote>
+<p>social action 社会行动，区别于 social behavior 社会行为</p>
+</blockquote>
+<ul>
+<li>
+<p>社会行动是指行动的个人赋予其行为以<u>主观意义</u>行动时，<u>考虑到他人</u>的行为</p>
+<p>社会行动在满足自己需求的同时，也是他人指向的</p>
+<p>社会行为 behavior 是物理层面的，社会行动 action 强调其意义和动机</p>
+</li>
+</ul>
+<h2 id="社会互动"><a class="markdownIt-Anchor" href="#社会互动"></a> 社会互动</h2>
+<p>个体之间的任何形式的社会接触，是个人做出互动及他人做出反应的过程</p>
+<ul>
+<li>
+<p>日常中的社会互动</p>
+<ul>
+<li>文明的疏忽（有礼貌的不注意）：刻意当对方不存在，刻意忽视对方</li>
+<li>反应性惊呼：反应性惊呼是人们对于社会生活细节的控制性管理的一部分（戈夫曼）</li>
+</ul>
+</li>
+<li>
+<p>社会互动的研究在社会学中的意义</p>
+<ol>
+<li>我们的那些几乎是恒定的与他人交往的日常例行活动，赋予我们的所作所为一定的结构和形式（模式化的）</li>
+<li>研究日常生活能让我们了解到人类是如何通过创造性的行为来塑造现实的（变化的）</li>
+<li>研究日常生活中的社会互动有利于我们理解更大的社会系统和社会制度（从微观到宏观，微观体现了本质规律）</li>
+</ol>
+</li>
+<li>
+<p>研究社会互动的理论：Ethnomethodology <code>常人方法学</code></p>
+<p>日常谈话 like：昨天干什么了/没干什么，出去干啥/不干啥</p>
+<p>人们的日常互动包含了很多隐含假设、预先假设、未曾言明但彼此了然于心的共识/背景，依赖于双方建构的共享的背景</p>
+</li>
+<li>
+<p>无焦点互动和有焦点互动</p>
+<ul>
+<li><code>无焦点互动</code>：一旦在场个体表现出彼此的相互觉察，无焦点的互动就发生了</li>
+<li><code>有焦点互动</code>：一旦个体直接关注别人的言行，有焦点的互动就发生了（接触）</li>
+</ul>
+<p>社会互动通常两者兼具</p>
+<p>某些场景下，无焦点互动会转化为有焦点互动（搭讪）</p>
+</li>
+<li>
+<p>印象管理</p>
+<p>互动中行动者本人的<u>主动性</u>，通过一些主动的行为塑造他人对自己的印象，表现在前台和后台两个方面（戏剧的概念），<code>拟剧理论</code></p>
+<p>前台：和别人互动的场景</p>
+<p>后台：没有和别人发生互动的场景</p>
+</li>
+<li>
+<p><code>符号互动论</code>的四个要点</p>
+<ol>
+<li>
+<p>人类最本质的特征是运用符号</p>
+</li>
+<li>
+<p>社会世界是一个动态辩证的网络，互动情境总是伴随着不稳定的结果，生活永远是在变动和生成当中</p>
+</li>
+<li>
+<p>社会世界是互动的世界，不存在独立的个人</p>
+<p>自我是通过与他人互动产生的，封闭的个人是没有自我的</p>
+</li>
+<li>
+<p>符号互动论者的目的是从符号过程及互动背后发现社会生活潜藏的模式和形式</p>
+</li>
+</ol>
+</li>
+</ul>
+<p>微观的社会互动怎么和宏观的社会现象联系起来？</p>
+<ul>
+<li>
+<p>格奥尔格·齐美尔指出，现代城市生活要求个体和其社会环境保持一种距离（齐美尔《现代性的碎片》）</p>
+<p>现代城市人冷漠的特点其实是在寻求某种形式的自我保护，寻求精神和心灵的距离</p>
+<p>旅途中的相识通常都发展出一种没有真正内在理由的亲密和坦诚。有三个因素在起作用：非常规状态、瞬间印象和邂逅产生的心意相通感，以及对接踵而至的必然分手的共识。你遇到的是一个无需承担责任，很快就要永远分手的人，且都是匿名的。而在长期关系中，我们学会了根据（预先）体验其后果来控制那种表达自己的冲动。</p>
+</li>
+</ul>
+<p>互动形式的变化导致的社会变迁、人际关系的变化</p>
+<ul>
+<li>
+<p>新的互动技术和沟通手段（沟通媒介）变化 → 互动特点变化 → 人际关系变化</p>
+<p>面对面 → 书信 → 通信 → 互联网</p>
+</li>
+</ul>
+<h1 id="越轨行为与社会控制"><a class="markdownIt-Anchor" href="#越轨行为与社会控制"></a> 越轨行为与社会控制</h1>
+<h2 id="越轨行为"><a class="markdownIt-Anchor" href="#越轨行为"></a> 越轨行为</h2>
+<blockquote>
+<p>社会学对越轨行为的解释</p>
+</blockquote>
+<p>失落理论（社会失范）</p>
+<ul>
+<li>
+<p>也叫<code>结构紧张理论</code></p>
+</li>
+<li>
+<p>指当社会规范不得力、不存在，或者彼此相互矛盾时，个人和社会所出现的混乱、不知所措状态（涂尔干——社会分工论）</p>
+</li>
+<li>
+<p>在理想社会状态下，社会结构为人们实现理想目标提供了比较充分的合法的制度化手段，社会合法目标、制度化手段之间是协调的。</p>
+<p>而“失范”则是理想目标和实现手段之间的背离，社会成员的行为缺乏明确的社会规范约束，出现一种社会规范权威失落，人们会采取不合法的手段去实现自己的目标。（默顿、功能主义）</p>
+</li>
+<li>
+<p>默顿关于个人对文化目标的选择模式</p>
+<table>
+<thead>
+<tr>
+<th>适应类型</th>
+<th>文化目标</th>
+<th>制度化手段</th>
+<th>特征</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>遵从主义者</td>
+<td>接受</td>
+<td>接受</td>
+<td>认同文化并循规蹈矩</td>
+</tr>
+<tr>
+<td>创新主义者</td>
+<td>接受</td>
+<td>不接受</td>
+<td>认同文化但有新的手段和行为</td>
+</tr>
+<tr>
+<td>仪式主义者</td>
+<td>不接受</td>
+<td>接受</td>
+<td>循规蹈矩但对其背后的目标失去了信心，不接受文化提供的目标</td>
+</tr>
+<tr>
+<td>退却主义者</td>
+<td>不接受</td>
+<td>不接受</td>
+<td>不接受现有目标也不采纳现有的手段，表现出否定的倾向，对现有的脱离</td>
+</tr>
+<tr>
+<td>反叛主义者</td>
+<td>不接受</td>
+<td>不接受</td>
+<td>不接受现有目标也不采纳现有的手段，但同时代替以新的目标和新的手段（革命者）</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>文化目标：个人是否认同社会提供的文化价值和目标（价值观？）</li>
+<li>制度化手段：遵照社会认同、社会规范等控制个人的行为？——循规蹈矩（接受教育、努力工作、严格财务规划等）</li>
+</ul>
+</li>
+<li>
+<p>过渡性社区的解释（城市社会学、芝加哥学派、帕克）</p>
+<p>同心圆理论-伯吉斯：中心商务区、过渡区、工人居住区、良好住宅区、通勤区（从内到外），研究芝加哥犯罪高发，越轨行为普遍的原因</p>
+<p>中心区、过渡区没有正常完善的社区功能（社区解组），帮派在某种意义上起到了维护社会秩序的作用；另一方面提供了被主流社会排挤的情感上的出口</p>
+</li>
+</ul>
+<p><code>差异交往理论</code></p>
+<ul>
+<li>
+<p>通过置身于个体的亲密群体中，人们学会守法与违反的定义，学会了规范的意义和价值，学会了对违法行为支持或不论的态度。</p>
+<p>一个人之所以越轨或犯罪，是因为在行为人脑中，支持犯罪行为的解说远远地超过了支持遵纪守法的解说。</p>
+</li>
+<li>
+<p>与过渡性社区的解释有联系</p>
+</li>
+</ul>
+<p>亚文化</p>
+<ul>
+<li>经过社会变迁，原本被视为越轨行为的行为变成了正常的行为（同性恋、精神疾病、流浪汉）</li>
+<li>降低越轨标准，越轨行为就减少了）</li>
+</ul>
+<p><code>标签理论</code></p>
+<ul>
+<li>
+<p>符号互动论+冲突理论的解释，解释怎么样会成为越轨行为（贴标签的过程）</p>
+<p>标签理论者把越轨行为理解为越轨行为者与非越轨行为者之间的一种<u>互动过程</u>，而不是个人或群体以及行为本身所具有的一套特征</p>
+</li>
+<li>
+<p>有权力的人、维持秩序的人有能力贴标签，有能力定义什么是越轨、定义什么人做什么事是越轨</p>
+<p>实际上标签表达的是社会的权力结构，规则是由富人为穷、男性为女性、年长者为年轻者以及大族群为较小族群制定的——冲突理论</p>
+</li>
+<li>
+<p>贴标签+自我实现预言=越轨行为</p>
+</li>
+<li>
+<p>行为结果的差异化影响：人难免有越轨行为，重要的不是越轨行为，是其他非越轨行为人（这些人或许对你很重要，对你的影响很大）的反应，当非越轨行为的人给越轨人贴上标签的时候（社会强加给他的标签），会影响他的认同，改变他的行为</p>
+<p>行为本身并不是某人成为越轨者的决定性因素，而在于贴标签的过程（他人的反应）</p>
+<p>e.g.: 小孩子偷拿一支笔 → 小偷？→ 孤立 → 导向更严重的越轨行为</p>
+</li>
+<li>
+<p>越轨行为就是被人们贴上如许标签的行为（霍华德·贝克尔）</p>
+<p>他猛烈抨击那些认定正常与越轨之间，有泾渭分明界限的传统犯罪学思维</p>
+</li>
+<li>
+<p>标签理论把越轨行为分为初级越轨和次级越轨</p>
+<p>最初的越轨行为被定义为<code>初级越轨</code>，处于越轨临界状态，对个人认同不会产生实质性影响，多数人都会走上规范化的过程</p>
+<p>但是在有些场景下规范化没有发生，ta 被贴上标签（被识别并界定为越轨），自省行为被打断，反方向发展，此时就变成了次级越轨；</p>
+<p><code>次级越轨</code>：越轨者逐渐接受这些标签，并把自己当做越轨者的情形，此时标签就成了个人身份认同的核心，并导致越轨行为的延续和强化（态度影响行为）</p>
+</li>
+</ul>
+<h2 id="越轨之于社会的作用"><a class="markdownIt-Anchor" href="#越轨之于社会的作用"></a> 越轨之于社会的作用</h2>
+<ul>
+<li>
+<p>对犯罪事件的“公愤”把正直的意识团结在一起，集中在一起，从负向强化了对社会规范、价值的认同</p>
+<p>e.g.: 犯人被公开执行绞刑，公众狂欢：公众看到正义被伸张，体现公众对规则和价值观的认同和拥护，是一个<code>重申社会</code>的过程</p>
+</li>
+<li>
+<p>从某种意义上促进了社会变迁，新的行为或价值观可能带来巨大的社会变动（革命，对同性恋的看法）</p>
+</li>
+</ul>
+<h1 id="不平等-阶级与社会分层"><a class="markdownIt-Anchor" href="#不平等-阶级与社会分层"></a> 不平等、阶级与社会分层</h1>
+<h2 id="不平等"><a class="markdownIt-Anchor" href="#不平等"></a> 不平等</h2>
+<ul>
+<li>
+<p><code>社会分化</code>：进化论或结构功能意义上的分化：从简单到复杂，从功能一体到专业分工的过程</p>
+<p>自然经济是一个高度不分化的经济体系（小而全）；现代社会体系是一个高度分化的经济体系（高度社会分工）</p>
+</li>
+<li>
+<p>不平等是社会分化导致的</p>
+<p>社会分化造成个体差异，差异本质上不存在高下之别。但由于某些原因，不同分工的人有不同的职业、收入、地位和权利，由此导致了不平等现象的发生</p>
+<p>不平等不是个例，是系统性/结构性的原因造成的，分化/阶级/阶层都是用来<u>刻画</u>不平等的方式</p>
+<blockquote>
+<p>逆城市化；穷人缺少政治影响力（亦见《新穷人》）；社会财富分布不均匀（28 定律）</p>
+</blockquote>
+</li>
+<li>
+<p>人在社会中的位置是一个复杂的组合（出身/继承、运气、努力），重要性分先后</p>
+<p>但由于自我实现的预言效应和归因理论，我们倾向于认为努力是最重要的</p>
+</li>
+</ul>
+<p>三种制造不平等的机制：</p>
+<pre><code>1. 等级：典型存在于欧洲封建体制（贵族，平民、农奴）；在中国，更接近与西周的分封制
+
+    &lt;u&gt;明确存在&lt;/u&gt;于（习俗、体制、法律）社会中的等级分隔，不同等级的&lt;u&gt;流动很困难&lt;/u&gt;，鸿沟是很清晰的（区别于阶层）
+
+
+    等级制在欧洲结束于双元革命（启蒙运动），中国新文化运动
+
+2. 种姓：典型存在于印度的种姓制度
+
+    一个人的社会地位是毕生注定的，不同种姓之间是&lt;u&gt;封闭&lt;/u&gt;的，一个人的种姓来源于亲代，是不可改变的
+
+3. 阶级：相对于等级制，是一个`”开放“`的层级体系，没有明确的限制阶级的改变，是一个新的不平等的体系
+</code></pre>
+<ul>
+<li>
+<p>阶级制的特点</p>
+<ol>
+<li>
+<p>阶级体制是<code>流动</code>的</p>
+<p>没有明确限制阶级的流动（理论上没有，但实际上阻力很大），阶级之间的界线没有明确的划分</p>
+</li>
+<li>
+<p>阶级位置在一定程度上是<code>获致</code>的</p>
+<p>个体的地位不是生来就注定的，是可以通过自身行动改变的</p>
+</li>
+<li>
+<p>阶级是以经济角度为基础的</p>
+</li>
+<li>
+<p>阶级体制是大规模的，非人身性的</p>
+</li>
+</ol>
+</li>
+<li>
+<p>古代中国</p>
+<p>从秦至清朝的体制并不是典型的等级或阶级制（钱穆：平铺社会），它具有等级或阶级制的一些特点，不同等级之间有一定的流动性和获致性（科举制），但这种流动性与现在的资本主义体系下的流动性不同，从形式上看具有阶级体制的特征</p>
+</li>
+</ul>
+<h2 id="阶级"><a class="markdownIt-Anchor" href="#阶级"></a> 阶级</h2>
+<ul>
+<li>
+<p>马克思的阶级概念</p>
+<p>所谓上层阶级/中产阶级，固然存在不平等，但更多的是秩序方面的含义（社会可以划分成不同的阶级）</p>
+<p>马克思的阶级（对抗性、冲突性）：<u>资产阶级、无产阶级</u>，通过对<code>生产资料</code>的占有来定义阶级，占有生产资料的人通过比较隐蔽的方式（剩余价值）来占有其他人的劳动。</p>
+<p>资产阶级的革命产生在旧社会的不平等制度之上，在获得法律意义上政治意义上的不平等之后，又造成了<u>事实上的不平等</u>；马克思认为这种平等本质上是维护拥有生产资料的人（资产阶级），压榨无产阶级的暴力机器 → 对抗性。</p>
+<p>马克思的分析过于理想化，他认为两个阶级是对立的，中间的过渡阶级是在萎缩的（中产阶级），只是临时性的形态。（现代社会中产阶级不断壮大）</p>
+<p>现代社会的两个阶级的冲突对立体现在更复杂的形式上（中产阶级的矛盾、不同阶层的内在的困扰）。现代欧美的冲突似乎并不剧烈（福利国家出现，工人待遇变好），实际上资本主义内在的对立冲突并没有消失，而是变换了方式（在地理上的转移，将矛盾转移到第三世界，其他地区的劳工的状况恶化）</p>
+<blockquote>
+<p><code>依附理论</code>、世界体系理论</p>
+</blockquote>
+</li>
+<li>
+<p>韦伯的阶级概念</p>
+<p>马克思·韦伯认为社会是以围绕权力和财富的冲突为特征的；马克思把两极化的阶级关系的经济问题视为所有社会冲突的核心</p>
+<p>韦伯认为除了经济上的不平等，还有其他维度的不平等有同样的重要性（阶级-经济、地位-社会、党派-政治）</p>
+<p>马克思强调的经济不平等指的是<code>生产资料</code>，韦伯认为阶级的划分不仅源自于生产资料的控制，而且源自于对财产没有直接影响的的经济差别（技能、文凭、资格、岗位），即<code>市场位置</code> ，这会影响人们的<code>生活机会</code></p>
+<blockquote>
+<p>马克思只关注生产资料的片面性和深刻性：</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<pre><code>农民工拥有技能，但技能不被重视：分配体制和生产体制决定了农民工的技能能够有多大的价值（技术的政治性，我们愿意赋予技术什么样的位置）
+</code></pre>
+</blockquote>
+<h2 id="社会分层"><a class="markdownIt-Anchor" href="#社会分层"></a> 社会分层</h2>
+<ul>
+<li>
+<p>存在韦伯的阶级概念中，强调一个人生活机会的差别（对应马克思的劳工研究）</p>
+</li>
+<li>
+<p>社会分层是根据某种标准将社会成员分属为相应社会阶层的过程</p>
+<p>社会分层从三个层面来描述不平等（划分社会阶层的三个标准）</p>
+<ol>
+<li>经济层面（收入、财富）</li>
+<li>政治层面（权力）</li>
+<li>社会层面（声望、地位）</li>
+</ol>
+<p>社会分层是对不平等现象的揭示，是一种既成事实，这种解释有其合理合法性</p>
+<p>社会分层承认不平等，可以通过流动改变，承认可以通过制度修补减弱不平等，达成相对公平的社会</p>
+</li>
+<li>
+<p>功能主义和冲突理论对分层的区分</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>冲突理论</th>
+<th>功能主义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>不平等</td>
+<td>拥有资源的人剥夺没有资源的人的结果（不需要的）</td>
+<td>激发人们填充社会需要的位置的机制（必要的）</td>
+</tr>
+<tr>
+<td>阶级结构</td>
+<td>不同的人为了竞争资源而造成的结果</td>
+<td>为了更加团结相互依赖的社会所必需的（分化是必需的）</td>
+</tr>
+<tr>
+<td>生活机会</td>
+<td>重要的职位可能反而获得的最少（如何赋予重要性？）</td>
+<td>工作最辛苦的人、成功的人有更大的生活机会</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>橄榄型的社会结构，西方世界阶级结构稳定是因为中产阶级不断壮大（中产阶级求稳大于求变）</p>
+<p>中国有相当大一部分的底层群体在过去二三十年间，上升为中产阶级的通路被阻断了（why？），在今天的社会经济体制下，走向橄榄型的社会结构并不乐观（非正规经济 like 进城农民工、低端工作者，有 2 亿左右的人口），西方社会的中产阶级图示对中国社会的土壤并不适用（福利国家 → 中产阶级）</p>
+<p><code>福利国家</code>和中产阶级是紧密联系的，资本主义国家从边缘半边缘地区获取大量利润，缓解资本主义危机，给员工比较高的福利，出现了中产阶级</p>
+</li>
+<li>
+<p>新的不平等</p>
+<p>2000 年以前制造业积累资本，2000 年以后转移为地产、金融积累高额资本 → 高房价 → 中产阶级消亡</p>
+<p>无数的选择（选择什么工作） → 为个人负责、个体竞争（服务于资本主义市场体制的意识形态）实际上是隐蔽地服务于今天的经济体制以及经济体制产生的巨大的不平等的意识形态 → 新时代的不平等的形式（找不到制造不平等的敌人）</p>
+</li>
+</ul>
+<h2 id="中国社会的不平等情况"><a class="markdownIt-Anchor" href="#中国社会的不平等情况"></a> 中国社会的不平等情况</h2>
+<ul>
+<li>
+<p>回顾</p>
+<p>新中国建立，意图改变过去不平等的机制，建立平等的国家（1949～1978）：尝试探索平等（获得一定成效）但留下了很多问题</p>
+<p>改革开放引入市场机制尝试解决问题（后社会主义时代，社会主义政体+资本主义经济制度）：不平等的问题又重新出现，不平等急剧加剧</p>
+<blockquote>
+<p>衡量不平等的指标</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<pre><code>- 基尼系数：改革开放前 0.2，2023 年 0.47（相当不平等）
+- 五分位法：1990年 4.2 倍，1998 年 9.6 倍
+</code></pre>
+</blockquote>
+<pre><code>经济结构的变化是同社会结构的变化联系在一起的
+</code></pre>
+<ul>
+<li>
+<p>阶级不平等</p>
+<p>中国社会分层的金字塔型结构，底层人口最多，付出最多的劳动，被汲取最多资源（2000 年左右）</p>
+</li>
+<li>
+<p>城乡不平等</p>
+<p>户口制度：以前农村户口无法改变；服务于国家工业化；城乡户口分隔是一种弱化的种姓制度，收入差别大到无法忽视</p>
+<p>对农村收入有高估的倾向，对城市收入有低估的倾向（再加上教育住房医疗的福利）</p>
+<p>结构性的不平等（体制的不平等）</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Humanities</category>
+      </categories>
+      <tags>
         <tag>Sociology</tag>
       </tags>
   </entry>
