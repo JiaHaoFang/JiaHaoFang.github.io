@@ -1,16 +1,16 @@
 ---
-categories: Programming
+categories: Coding
 tags:
   - iOS
   - Cocoapods
 status: 已发布
 description: 使用 Cocoapods 发布代码作为组件
-latest edit: '2025-05-27T10:27:00.000Z'
+latest edit: '2025-08-13T13:53:00.000Z'
 date: '2022-02-21 08:00:00'
 permalink: ios-send2cocoapods/
 title: iOS 代码发布为组件
 urlname: 1c824191-cd14-8096-8654-ce5869028b0f
-updated: '2025-05-27 18:27:00'
+updated: '2025-08-13 21:53:00'
 ---
 
 # 前期准备

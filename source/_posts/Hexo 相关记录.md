@@ -1,15 +1,15 @@
 ---
-categories: Blog
+categories: Coding
 tags:
   - hexo
 status: 已发布
 description: hexo搭建过程和问题记录
-latest edit: '2025-05-26T11:11:00.000Z'
+latest edit: '2025-08-13T13:53:00.000Z'
 date: '2024-04-15 08:00:00'
 permalink: hexo-record/
 title: Hexo 相关记录
 urlname: 1c824191-cd14-805c-a745-fdf1f4f8ecd9
-updated: '2025-05-26 19:11:00'
+updated: '2025-08-13 21:53:00'
 ---
 
 ## 使用git分支保存源码

@@ -1,16 +1,16 @@
 ---
-categories: Programming
+categories: Coding
 tags:
   - iOS
   - OAuth
 status: 已发布
 description: iOS 第三方登录全流程梳理和实践
-latest edit: '2025-06-13T09:38:00.000Z'
+latest edit: '2025-08-13T13:53:00.000Z'
 date: '2025-06-10 08:00:00'
 permalink: ios-third-party-login/
 title: iOS 第三方登录
 urlname: 1c924191-cd14-80c1-b72d-cb85ace6fc56
-updated: '2025-06-13 17:38:00'
+updated: '2025-08-13 21:53:00'
 ---
 
 # 前言

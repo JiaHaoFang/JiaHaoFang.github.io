@@ -1,15 +1,15 @@
 ---
-categories: Programming
+categories: Coding
 tags:
   - iOS
 status: 已发布
 description: iPad 适配的介绍和实践
-latest edit: '2025-05-27T10:28:00.000Z'
+latest edit: '2025-08-13T13:53:00.000Z'
 date: '2024-05-14 08:00:00'
 permalink: ipad-adaption/
 title: iOS 横屏适配
 urlname: 1c824191-cd14-80f1-a0a9-fe3e818db109
-updated: '2025-05-27 18:28:00'
+updated: '2025-08-13 21:53:00'
 ---
 > 本文已发表在微信公众号，[《iPad 适配二三事》](https://mp.weixin.qq.com/s/mbZzBNYlzku2vn4ElUspXA)
 

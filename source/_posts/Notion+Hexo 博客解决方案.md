@@ -1,17 +1,17 @@
 ---
-categories: Blog
+categories: Coding
 tags:
   - hexo
   - elog
   - notion
 status: 已发布
 description: 使用 Notion + Hexo 开发，通过Slack + Pipedream + GitHub Action + Elog 部署的个人博客解决方案
-latest edit: '2025-05-26T10:02:00.000Z'
+latest edit: '2025-08-13T13:53:00.000Z'
 date: '2025-04-01 08:00:00'
 permalink: notion-hexo-deploy/
 title: Notion+Hexo 博客解决方案
 urlname: 1c824191-cd14-80de-997d-d5804b90b61f
-updated: '2025-05-26 18:02:00'
+updated: '2025-08-13 21:53:00'
 ---
 
 # 创作&开发
