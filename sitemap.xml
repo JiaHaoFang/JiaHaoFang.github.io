@@ -2,9 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://jiahaofang.github.io/introduction-to-sociology-1/</loc>
+    <loc>https://jiahaofang.github.io/introduction-to-sociology-2/</loc>
     
-    <lastmod>2025-08-25</lastmod>
+    <lastmod>2025-11-10</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -13,7 +13,7 @@
   <url>
     <loc>https://jiahaofang.github.io/tags/index.html</loc>
     
-    <lastmod>2025-08-25</lastmod>
+    <lastmod>2025-11-09</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -22,7 +22,7 @@
   <url>
     <loc>https://jiahaofang.github.io/about/index.html</loc>
     
-    <lastmod>2025-08-25</lastmod>
+    <lastmod>2025-11-09</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -31,7 +31,7 @@
   <url>
     <loc>https://jiahaofang.github.io/categories/index.html</loc>
     
-    <lastmod>2025-08-25</lastmod>
+    <lastmod>2025-11-09</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -39,6 +39,15 @@
   
   <url>
     <loc>https://jiahaofang.github.io/404.html</loc>
+    
+    <lastmod>2025-11-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jiahaofang.github.io/introduction-to-sociology-1/</loc>
     
     <lastmod>2025-08-25</lastmod>
     
@@ -56,7 +65,7 @@
   </url>
   
   <url>
-    <loc>https://jiahaofang.github.io/ios-send2cocoapods/</loc>
+    <loc>https://jiahaofang.github.io/notion-hexo-deploy/</loc>
     
     <lastmod>2025-08-13</lastmod>
     
@@ -65,7 +74,7 @@
   </url>
   
   <url>
-    <loc>https://jiahaofang.github.io/notion-hexo-deploy/</loc>
+    <loc>https://jiahaofang.github.io/ios-send2cocoapods/</loc>
     
     <lastmod>2025-08-13</lastmod>
     
@@ -148,7 +157,7 @@
 
   <url>
     <loc>https://jiahaofang.github.io/</loc>
-    <lastmod>2025-08-25</lastmod>
+    <lastmod>2025-11-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -156,63 +165,63 @@
   
   <url>
     <loc>https://jiahaofang.github.io/tags/hexo/</loc>
-    <lastmod>2025-08-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://jiahaofang.github.io/tags/iOS/</loc>
-    <lastmod>2025-08-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://jiahaofang.github.io/tags/Cocoapods/</loc>
-    <lastmod>2025-08-25</lastmod>
+    <lastmod>2025-11-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jiahaofang.github.io/tags/elog/</loc>
-    <lastmod>2025-08-25</lastmod>
+    <lastmod>2025-11-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jiahaofang.github.io/tags/notion/</loc>
-    <lastmod>2025-08-25</lastmod>
+    <lastmod>2025-11-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jiahaofang.github.io/tags/Philosophy/</loc>
-    <lastmod>2025-08-25</lastmod>
+    <loc>https://jiahaofang.github.io/tags/iOS/</loc>
+    <lastmod>2025-11-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jiahaofang.github.io/tags/Cocoapods/</loc>
+    <lastmod>2025-11-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jiahaofang.github.io/tags/OAuth/</loc>
-    <lastmod>2025-08-25</lastmod>
+    <lastmod>2025-11-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jiahaofang.github.io/tags/Philosophy/</loc>
+    <lastmod>2025-11-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jiahaofang.github.io/tags/Psychology/</loc>
-    <lastmod>2025-08-25</lastmod>
+    <lastmod>2025-11-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jiahaofang.github.io/tags/Sociology/</loc>
-    <lastmod>2025-08-25</lastmod>
+    <lastmod>2025-11-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -221,14 +230,14 @@
   
   <url>
     <loc>https://jiahaofang.github.io/categories/Coding/</loc>
-    <lastmod>2025-08-25</lastmod>
+    <lastmod>2025-11-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jiahaofang.github.io/categories/Humanities/</loc>
-    <lastmod>2025-08-25</lastmod>
+    <lastmod>2025-11-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

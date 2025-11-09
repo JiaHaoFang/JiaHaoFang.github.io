@@ -126,153 +126,6 @@
       </tags>
   </entry>
   <entry>
-    <title>iOS 代码发布为组件</title>
-    <url>//ios-send2cocoapods/</url>
-    <content><![CDATA[<h1 id="前期准备"><a class="markdownIt-Anchor" href="#前期准备"></a> 前期准备</h1>
-<h2 id="远程仓库"><a class="markdownIt-Anchor" href="#远程仓库"></a> 远程仓库</h2>
-<blockquote>
-<p>准备好两个远程仓库，在GitHub上创建即可；</p>
-<p>权限建议为public</p>
-</blockquote>
-<ul>
-<li>
-<p>用来存放源码的仓库，该仓库用来存放自己编写的组件的源码，其应为正确的目录结构，如何模板创建下文详细说；</p>
-  <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">&lt;https://github.com/JiaHaoFang/SFAPPRealTimeLogCaughter.git&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>用来存放组件的仓库，相当于xxxRepo、CocoaPods/Spec，是自己私有的组件仓库，用来存放.podspec文件；</p>
-  <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">&lt;https://github.com/JiaHaoFang/SFPodRepo.git&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>注：该仓库非必要，可以使用官方仓库，此处为了熟悉流程使用自己创建的仓库</li>
-</ul>
-</li>
-</ul>
-<h2 id="本地代码"><a class="markdownIt-Anchor" href="#本地代码"></a> 本地代码</h2>
-<blockquote>
-<p>由于该组件为一个完整工程作为组件发布，需要抽离</p>
-</blockquote>
-<ul>
-<li>保证需要发布为组件的工程，其核心功能完整，去耦，能够实现核心功能的抽离</li>
-<li>保证编译可通过，同时核心功能具备可移植性</li>
-</ul>
-<h1 id="本地目录创建"><a class="markdownIt-Anchor" href="#本地目录创建"></a> 本地目录创建</h1>
-<h2 id="创建私有repo目录"><a class="markdownIt-Anchor" href="#创建私有repo目录"></a> 创建私有Repo目录</h2>
-<ul>
-<li>
-<p>在～/.cocoapods/repo中能看到本地有的repo仓库，其中cocoapods为官方仓库，trunk也是官方仓库（历史遗留问题）；xxxRepo为公司私有仓库。</p>
-</li>
-<li>
-<p>该步骤将创建私人仓库SFRepo，作用类似上文的官方仓库，后续将用来存放个人的组件。</p>
-</li>
-<li>
-<p>或者也可以选择发布到官方仓库。</p>
-</li>
-<li>
-<p>命令</p>
-  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pod repo add SFPod &lt;https://github.com/JiaHaoFang/SFPodRepo.git&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>创建完成之后可通过命令查看目录结构</p>
-  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">open ~/.cocoapods/repos/SFPod</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="创建个人组件目录"><a class="markdownIt-Anchor" href="#创建个人组件目录"></a> 创建个人组件目录</h2>
-<ul>
-<li>
-<p>发布的组件需要按照Cocoapod严格遵守官方给出的目录结构，官方给出了命令可以直接生成模版</p>
-  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pod lib create SFAPPRealTimeLogCaughter</span><br></pre></td></tr></table></figure>
-<ul>
-<li>过程中终端会向我们提出一系列问题，包括开发语言是OC还是Swift，demo程序，测试框架，界面测试。我选择了包含demo程序，没有测试框架.</li>
-</ul>
-</li>
-<li>
-<p>生成模版后可以使用tree命令查看该文件夹下的目录结构</p>
-</li>
-</ul>
-<h2 id="编辑模版"><a class="markdownIt-Anchor" href="#编辑模版"></a> 编辑模版</h2>
-<blockquote>
-<p>在2.2创建的公共模版就是组件的模板，我们需要将我们的代码添加进去将其作为自己的组件</p>
-</blockquote>
-<ul>
-<li>我们需要发布的组件核心功能代码存放在/SFPod/Pod/Classes文件夹中</li>
-<li>另外在Example中编写Demo测试自己的组件是否能正常工作，点击.xcworkspace可以作为一个完整工程运行</li>
-<li>在写Example的时候，如果修改了Classes中文件的，需要pod install一下，将组件在自己的Demo中更新一下</li>
-</ul>
-<h2 id="编辑podspec文件"><a class="markdownIt-Anchor" href="#编辑podspec文件"></a> 编辑.podspec文件</h2>
-<ul>
-<li>自行Google</li>
-</ul>
-<h1 id="发布组件"><a class="markdownIt-Anchor" href="#发布组件"></a> 发布组件</h1>
-<blockquote>
-<p>如果上面的步骤完成了，恭喜，完成了一半</p>
-</blockquote>
-<h2 id="校验"><a class="markdownIt-Anchor" href="#校验"></a> 校验</h2>
-<ul>
-<li>
-<p>当2中的步骤全部完成，我们可以使用下面的命令检验自己组件代码的合法性（主要是检验.podspec文件）</p>
-  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pod lib lint</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">只从本地验证你的pod能否通过验证。</span></span><br><span class="line">pod spec lint</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">从本地和远程验证你的pod能否通过验证，建议使用这个</span></span><br><span class="line">--allow-warnings</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如何库代码中有警告导致通不过验证。加上这个忽略警告</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="提交源码"><a class="markdownIt-Anchor" href="#提交源码"></a> 提交源码</h2>
-<ul>
-<li>
-<p>提交源码到个人仓库</p>
-  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git add -a</span><br><span class="line">git commit -m &quot;xxx&quot;</span><br><span class="line">git push</span><br><span class="line">git tag 0.1.0</span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="发布组件到个人repo"><a class="markdownIt-Anchor" href="#发布组件到个人repo"></a> 发布组件到个人Repo</h2>
-<ul>
-<li>
-<p>使用命令将.podspec文件添加到~/.cocoapods/repos/SFPod中，同时也发布到远程仓库</p>
-  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pod repo push SFPod SFAPPRealTimeLogCaughter.podspec</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>执行完该步骤后， ~/.cocoapods/repos/SFPod会新增对应版本的.podspec文件</p>
-</li>
-</ul>
-<h2 id="查询"><a class="markdownIt-Anchor" href="#查询"></a> 查询</h2>
-<ul>
-<li>
-<p>搜索组件库</p>
-  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pod search SFAPPRealTimeLogCaughter</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>搜索到了说明安装成功</p>
-</li>
-</ul>
-<h1 id="使用组件"><a class="markdownIt-Anchor" href="#使用组件"></a> 使用组件</h1>
-<ul>
-<li>
-<p>在Podfile文件新增源</p>
-  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">source <span class="string">&#x27;&lt;https://github.com/JiaHaoFang/SFPodRepo.git&gt;&#x27;</span></span><br><span class="line">source <span class="string">&#x27;&lt;https://github.com/CocoaPods/Specs.git&gt;&#x27;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>添加pod</p>
-  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pod &#x27;SFAPPRealTimeLogCaughter&#x27;</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>上面两项可以合起来写，合不起来。。。</p>
-</li>
-<li>
-<p>执行 pod install</p>
-</li>
-<li>
-<p>运行代码</p>
-</li>
-</ul>
-<blockquote>
-<p>参考资料：<a href="https://www.jianshu.com/p/103a6f0bf3a4">https://www.jianshu.com/p/103a6f0bf3a4</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Coding</category>
-      </categories>
-      <tags>
-        <tag>iOS</tag>
-        <tag>Cocoapods</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Notion+Hexo 博客解决方案</title>
     <url>//notion-hexo-deploy/</url>
     <content><![CDATA[<h1 id="创作开发"><a class="markdownIt-Anchor" href="#创作开发"></a> 创作&amp;开发</h1>
@@ -433,6 +286,153 @@
         <tag>hexo</tag>
         <tag>elog</tag>
         <tag>notion</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>iOS 代码发布为组件</title>
+    <url>//ios-send2cocoapods/</url>
+    <content><![CDATA[<h1 id="前期准备"><a class="markdownIt-Anchor" href="#前期准备"></a> 前期准备</h1>
+<h2 id="远程仓库"><a class="markdownIt-Anchor" href="#远程仓库"></a> 远程仓库</h2>
+<blockquote>
+<p>准备好两个远程仓库，在GitHub上创建即可；</p>
+<p>权限建议为public</p>
+</blockquote>
+<ul>
+<li>
+<p>用来存放源码的仓库，该仓库用来存放自己编写的组件的源码，其应为正确的目录结构，如何模板创建下文详细说；</p>
+  <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">&lt;https://github.com/JiaHaoFang/SFAPPRealTimeLogCaughter.git&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>用来存放组件的仓库，相当于xxxRepo、CocoaPods/Spec，是自己私有的组件仓库，用来存放.podspec文件；</p>
+  <figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">&lt;https://github.com/JiaHaoFang/SFPodRepo.git&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注：该仓库非必要，可以使用官方仓库，此处为了熟悉流程使用自己创建的仓库</li>
+</ul>
+</li>
+</ul>
+<h2 id="本地代码"><a class="markdownIt-Anchor" href="#本地代码"></a> 本地代码</h2>
+<blockquote>
+<p>由于该组件为一个完整工程作为组件发布，需要抽离</p>
+</blockquote>
+<ul>
+<li>保证需要发布为组件的工程，其核心功能完整，去耦，能够实现核心功能的抽离</li>
+<li>保证编译可通过，同时核心功能具备可移植性</li>
+</ul>
+<h1 id="本地目录创建"><a class="markdownIt-Anchor" href="#本地目录创建"></a> 本地目录创建</h1>
+<h2 id="创建私有repo目录"><a class="markdownIt-Anchor" href="#创建私有repo目录"></a> 创建私有Repo目录</h2>
+<ul>
+<li>
+<p>在～/.cocoapods/repo中能看到本地有的repo仓库，其中cocoapods为官方仓库，trunk也是官方仓库（历史遗留问题）；xxxRepo为公司私有仓库。</p>
+</li>
+<li>
+<p>该步骤将创建私人仓库SFRepo，作用类似上文的官方仓库，后续将用来存放个人的组件。</p>
+</li>
+<li>
+<p>或者也可以选择发布到官方仓库。</p>
+</li>
+<li>
+<p>命令</p>
+  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pod repo add SFPod &lt;https://github.com/JiaHaoFang/SFPodRepo.git&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>创建完成之后可通过命令查看目录结构</p>
+  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">open ~/.cocoapods/repos/SFPod</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="创建个人组件目录"><a class="markdownIt-Anchor" href="#创建个人组件目录"></a> 创建个人组件目录</h2>
+<ul>
+<li>
+<p>发布的组件需要按照Cocoapod严格遵守官方给出的目录结构，官方给出了命令可以直接生成模版</p>
+  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pod lib create SFAPPRealTimeLogCaughter</span><br></pre></td></tr></table></figure>
+<ul>
+<li>过程中终端会向我们提出一系列问题，包括开发语言是OC还是Swift，demo程序，测试框架，界面测试。我选择了包含demo程序，没有测试框架.</li>
+</ul>
+</li>
+<li>
+<p>生成模版后可以使用tree命令查看该文件夹下的目录结构</p>
+</li>
+</ul>
+<h2 id="编辑模版"><a class="markdownIt-Anchor" href="#编辑模版"></a> 编辑模版</h2>
+<blockquote>
+<p>在2.2创建的公共模版就是组件的模板，我们需要将我们的代码添加进去将其作为自己的组件</p>
+</blockquote>
+<ul>
+<li>我们需要发布的组件核心功能代码存放在/SFPod/Pod/Classes文件夹中</li>
+<li>另外在Example中编写Demo测试自己的组件是否能正常工作，点击.xcworkspace可以作为一个完整工程运行</li>
+<li>在写Example的时候，如果修改了Classes中文件的，需要pod install一下，将组件在自己的Demo中更新一下</li>
+</ul>
+<h2 id="编辑podspec文件"><a class="markdownIt-Anchor" href="#编辑podspec文件"></a> 编辑.podspec文件</h2>
+<ul>
+<li>自行Google</li>
+</ul>
+<h1 id="发布组件"><a class="markdownIt-Anchor" href="#发布组件"></a> 发布组件</h1>
+<blockquote>
+<p>如果上面的步骤完成了，恭喜，完成了一半</p>
+</blockquote>
+<h2 id="校验"><a class="markdownIt-Anchor" href="#校验"></a> 校验</h2>
+<ul>
+<li>
+<p>当2中的步骤全部完成，我们可以使用下面的命令检验自己组件代码的合法性（主要是检验.podspec文件）</p>
+  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pod lib lint</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">只从本地验证你的pod能否通过验证。</span></span><br><span class="line">pod spec lint</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">从本地和远程验证你的pod能否通过验证，建议使用这个</span></span><br><span class="line">--allow-warnings</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如何库代码中有警告导致通不过验证。加上这个忽略警告</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="提交源码"><a class="markdownIt-Anchor" href="#提交源码"></a> 提交源码</h2>
+<ul>
+<li>
+<p>提交源码到个人仓库</p>
+  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git add -a</span><br><span class="line">git commit -m &quot;xxx&quot;</span><br><span class="line">git push</span><br><span class="line">git tag 0.1.0</span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="发布组件到个人repo"><a class="markdownIt-Anchor" href="#发布组件到个人repo"></a> 发布组件到个人Repo</h2>
+<ul>
+<li>
+<p>使用命令将.podspec文件添加到~/.cocoapods/repos/SFPod中，同时也发布到远程仓库</p>
+  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pod repo push SFPod SFAPPRealTimeLogCaughter.podspec</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>执行完该步骤后， ~/.cocoapods/repos/SFPod会新增对应版本的.podspec文件</p>
+</li>
+</ul>
+<h2 id="查询"><a class="markdownIt-Anchor" href="#查询"></a> 查询</h2>
+<ul>
+<li>
+<p>搜索组件库</p>
+  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pod search SFAPPRealTimeLogCaughter</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>搜索到了说明安装成功</p>
+</li>
+</ul>
+<h1 id="使用组件"><a class="markdownIt-Anchor" href="#使用组件"></a> 使用组件</h1>
+<ul>
+<li>
+<p>在Podfile文件新增源</p>
+  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">source <span class="string">&#x27;&lt;https://github.com/JiaHaoFang/SFPodRepo.git&gt;&#x27;</span></span><br><span class="line">source <span class="string">&#x27;&lt;https://github.com/CocoaPods/Specs.git&gt;&#x27;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>添加pod</p>
+  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pod &#x27;SFAPPRealTimeLogCaughter&#x27;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>上面两项可以合起来写，合不起来。。。</p>
+</li>
+<li>
+<p>执行 pod install</p>
+</li>
+<li>
+<p>运行代码</p>
+</li>
+</ul>
+<blockquote>
+<p>参考资料：<a href="https://www.jianshu.com/p/103a6f0bf3a4">https://www.jianshu.com/p/103a6f0bf3a4</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Coding</category>
+      </categories>
+      <tags>
+        <tag>iOS</tag>
+        <tag>Cocoapods</tag>
       </tags>
   </entry>
   <entry>
@@ -769,6 +769,295 @@ H ---> I(替换完成，结束)</pre>
       </categories>
       <tags>
         <tag>iOS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>iOS 第三方登录</title>
+    <url>//ios-third-party-login/</url>
+    <content><![CDATA[<h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
+<p>现在市面上常见的 App 都开放了第三方平台登录的功能，为用户注册账号和登录账号带来了较大的便利，有效提升了用户的使用体验。近期，我司也引入了 Apple 和 Google 两个平台的第三方账号登录，本文将会对本次第三方平台接入的开发流程做详细的介绍。</p>
+<h1 id="概述"><a class="markdownIt-Anchor" href="#概述"></a> 概述</h1>
+<p>总的来说，App 要实现第三方账号登录的功能，大体可以按照以下三个步骤来实现：</p>
+<pre class="mermaid">graph LR
+login_with_sdk[获取授权信息] ---> verify_info[校验授权信息] ---> other_process[校验结果处理]</pre>
+<ol>
+<li>获取用户授权：通过第三方 SDK 获得用户授权，并获取授权数据用于接入第三方平台服务；</li>
+<li>校验授权信息：通过第三方服务校验获得的授权数据，校验成功即可认为是第三方账号认证成功；</li>
+<li>校验结果处理：从前两步中，我们可以获得第三方账号的邮箱（或其它的唯一标识），通过这个唯一标识我们可以对接自己平台的账号系统，校验该账号是否已经注册过。如果该账号已经注册或绑定过，则直接登录成功，否则引导用户创建新账号或绑定已有账号。</li>
+</ol>
+<p>本小节将会稍微扩展上面的框图的内容，让读者对完整的流程有一个更具体的认知。而后本文后续章节将会以三个步骤作为主题分别进行详细阐述。</p>
+<h2 id="oauth-20"><a class="markdownIt-Anchor" href="#oauth-20"></a> OAuth 2.0</h2>
+<p>在进入正文之前，我们先提一下 OAuth 协议。</p>
+<p>OAuth 2.0 协议是一种三方授权协议，目前大部分的第三方登录与授权都是基于该协议的标准或改进实现，通过这个授权流程，服务提供方允许用户授权第三方应用访问他们存储在另外的服务提供者上的信息，而不需要将用户名和密码提供给第三方移动应用或分享他们数据的所有内容。其基本流程如下所示：</p>
+<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">+--------+                               +---------------+</span><br><span class="line">     |        |--(A)- Authorization Request -&gt;|   Resource    |</span><br><span class="line">     |        |                               |     Owner     |</span><br><span class="line">     |        |&lt;-(B)-- Authorization Grant ---|               |</span><br><span class="line">     |        |                               +---------------+</span><br><span class="line">     |        |</span><br><span class="line">     |        |                               +---------------+</span><br><span class="line">     |        |--(C)-- Authorization Grant --&gt;| Authorization |</span><br><span class="line">     | Client |                               |     Server    |</span><br><span class="line">     |        |&lt;-(D)----- Access Token -------|               |</span><br><span class="line">     |        |                               +---------------+</span><br><span class="line">     |        |</span><br><span class="line">     |        |                               +---------------+</span><br><span class="line">     |        |--(E)----- Access Token ------&gt;|    Resource   |</span><br><span class="line">     |        |                               |     Server    |</span><br><span class="line">     |        |&lt;-(F)--- Protected Resource ---|               |</span><br><span class="line">     +--------+                               +---------------+</span><br></pre></td></tr></table></figure>
+<p>这里提及 OAuth2.0 不是为了详细介绍该协议的原理、设计和实现，而是想让读者带着一个高的视角看待第三方登录的流程设计。</p>
+<p>实际上，本文是围绕着上图的步骤 A 到步骤 D来进行介绍的，从 A 到 D 即可完成第三方平台账号的授权和验证。由于 VeSync 有自己的账号体系和资源体系，目前也没有使用第三方平台的服务的需求，步骤 E 和 F 在这篇文章中将不会提及。</p>
+<h2 id="详细流程"><a class="markdownIt-Anchor" href="#详细流程"></a> 详细流程</h2>
+<pre class="mermaid">graph TB
+select_login(用户选择第三方账号登录) ---> start_verification[发起授权请求，用户登录第三方账号]
+subgraph 获取第三方授权
+start_verification ---> request_verification[客户端获取授权信息]
+request_verification ---> server_verify[提交授权信息给云]
+end
+server_verify ---> check_account{授权信息是否验证成功}
+subgraph 校验授权信息
+check_account --YES--> check_binding{第三方账号是否已绑定 VeSync 账号}
+end
+check_binding --NO(账号不存在)--> create_or_bind_account{用户选择创建/绑定账号}
+subgraph 校验结果处理
+check_account --NO(验证失败)--> login_failed(失败)
+check_binding -- YES(登录成功) --> login_success_and_go_home_page(登录/注册成功)
+create_or_bind_account --绑定--> bind_account[绑定账号流程]
+create_or_bind_account --创建--> create_account[创建账号流程]
+end
+bind_account ---> login_success_and_go_home_page
+create_account ---> login_success_and_go_home_page</pre>
+<p>概述中的三个步骤在上图中进行了适当的细节扩充，本文将会围绕其进行具体的实现方式介绍，并有一些在开发过程中的踩坑分享。</p>
+<p>实际上，上图省略了一些具体业务需求的处理步骤，如检查第三方账号的合法性、第三方账号怎么和 VeSync 账号绑定、各种用户引导及错误处理。这些步骤虽重要，但不具有代表性和通用性，不会在本文作详细说明。</p>
+<h1 id="获取授权信息"><a class="markdownIt-Anchor" href="#获取授权信息"></a> 获取授权信息</h1>
+<p>从用户视角看来，点击第三方登录的按钮之后，会有输入框让用户登录第三方账号并请求授权，在登录成功并完成授权动作之后，App 就会开启第三方账号登录的流程。流程的第一步就是通过 SDK 或其它官方途径者获取授权信息。</p>
+<p>下面以 iOS 平台为例，介绍获取 Apple 和 Google 的用户授权信息的方式。</p>
+<h2 id="apple"><a class="markdownIt-Anchor" href="#apple"></a> Apple</h2>
+<blockquote>
+<p>⚠️ 注意</p>
+<p>从 <strong>iOS13</strong> 开始，如果 <strong>App</strong> 提供第三方登录，就必须添加 <strong>苹果登录 Sign in with Apple</strong> 选项，并要求所有开发者于 <strong>2020年4月之前</strong> 完成现有应用的更新，否则审核不通过。</p>
+</blockquote>
+<h3 id="配置"><a class="markdownIt-Anchor" href="#配置"></a> 配置</h3>
+<blockquote>
+<p>要在 App 实现 Apple 登录，需要在工程及开发者账号中都配置相关的功能。</p>
+</blockquote>
+<ol>
+<li>
+<p>账户配置</p>
+<p>在 Apple 开发者账户中开启 AppID 对应的 Apple 登录的功能，具体流程可以参考<a href="https://developer.apple.com/cn/help/account/capabilities/about-sign-in-with-apple/">官方文档</a>，创建完成后应如下图：</p>
+<p><img src="../images/87247ec539b0c21ffb0767926a7eff38.png" alt="image.png" /></p>
+</li>
+<li>
+<p>工程配置</p>
+<p>如下图所示在 Xcode 中配置工程的 Capabilities 开启 App 的 Apple 登录功能。</p>
+<p><img src="../images/5d3a41352ef9c39cf26e3b11f6c524d2.png" alt="image.png" /></p>
+</li>
+</ol>
+<h3 id="实现"><a class="markdownIt-Anchor" href="#实现"></a> 实现</h3>
+<blockquote>
+<p>在 iPhone 上，使用原生方式开发的 APP 可以直接调用苹果的框架 <code>AppleService</code> 获取 Apple 授权并登录。本部分主要参考 <a href="https://developer.apple.com/documentation/authenticationservices/implementing-user-authentication-with-sign-in-with-apple">Apple 官方文档</a>。</p>
+</blockquote>
+<ol>
+<li>
+<p>发起授权请求</p>
+<p>在这个过程中我们需要使用 <code>ASAuthorization</code> 服务调起获取 Apple 授权的弹窗。</p>
+<p>我们需要配置的信息有：</p>
+<ul>
+<li>需要获取的授权方式<code>ASAuthorizationAppleIDCredential</code> ，这个授权方式决定了 Apple 会返回给我们的信息，需要在代理方法中处理。</li>
+<li>代理对象 <code>delegate</code> ，授权结果会通过代理方法返回给调用方。</li>
+<li>需要获取的用户信息<code>requestedScopes</code> 在用户首次获取授权的时候，Apple 会通过代理返回这些信息。</li>
+<li>配置弹窗上下文 <code>presentationContextProvider</code> ，Apple 的授权系统弹窗会在给定的页面弹出，一般来说，这里只要获取导航堆栈中的栈顶控制器即可。</li>
+</ul>
+<p>配置好这些信息后，通过<code>performRequests()</code> 调用即可唤起系统弹窗，获取授权。</p>
+ <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> appleIDProvider <span class="operator">=</span> <span class="type">ASAuthorizationAppleIDProvider</span>()</span><br><span class="line"><span class="keyword">let</span> request <span class="operator">=</span> appleIDProvider.createRequest()</span><br><span class="line">request.requestedScopes <span class="operator">=</span> [.fullName, .email]</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> authorizationController <span class="operator">=</span> <span class="type">ASAuthorizationController</span>(authorizationRequests: [request])</span><br><span class="line">authorizationController.delegate <span class="operator">=</span> <span class="keyword">self</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> topVc <span class="operator">=</span> <span class="type">Tool</span>.topViewController() <span class="keyword">as?</span> <span class="type">ASAuthorizationControllerPresentationContextProviding</span> &#123;</span><br><span class="line">		authorizationController.presentationContextProvider <span class="operator">=</span> topVc</span><br><span class="line">&#125;</span><br><span class="line">authorizationController.performRequests()</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>处理回调事件</p>
+<p>在用户授权成功或授权失败后，会通过两个代理方法通知业务方。</p>
+<ul>
+<li>
+<p><code>didCompleteWithAuthorization</code></p>
+<p>通过回调方法中的 authorization 对象可以获取我们需要的授权信息。在前一步中我们选择获取 AppleID 的授权信息，用于认证授权的参数包括<code>authorizationCode</code> 和 <code>identityToken</code>，这两个参数的作用和区别将会在下文“校验授权信息”这一小节中详细介绍。</p>
+<p>在用户首次获得用户授权时，SDK 还会提供 <code>userID</code> 这个参数给我们。这是一个苹果用户唯一标识符，它在同一个开发者账号下的所有 App 下是一样的，我们可以用它来与后台的账号体系绑定起来。</p>
+</li>
+<li>
+<p><code>didCompleteWithError</code></p>
+<p>在授权失败时 Apple 会调用该方法，我们可以在这里面做错误处理。</p>
+</li>
+</ul>
+ <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">extension</span> <span class="title class_">XXX</span>: <span class="title class_">ASAuthorizationControllerDelegate</span> &#123;</span><br><span class="line">    <span class="comment">/// - Tag: did_complete_authorization</span></span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">authorizationController</span>(<span class="params">controller</span>: <span class="type">ASAuthorizationController</span>, <span class="params">didCompleteWithAuthorization</span> <span class="params">authorization</span>: <span class="type">ASAuthorization</span>) &#123;</span><br><span class="line">        <span class="keyword">switch</span> authorization.credential &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="keyword">let</span> appleIDCredential <span class="keyword">as</span> <span class="type">ASAuthorizationAppleIDCredential</span>:</span><br><span class="line">            <span class="keyword">guard</span> <span class="keyword">let</span> identityTokenData <span class="operator">=</span> appleIDCredential.identityToken,</span><br><span class="line">                  <span class="keyword">let</span> identityToken <span class="operator">=</span> <span class="type">String</span>(data: identityTokenData, encoding: .utf8),</span><br><span class="line">                  <span class="keyword">let</span> authorizationCodeData <span class="operator">=</span> appleIDCredential.authorizationCode,</span><br><span class="line">                  <span class="keyword">let</span> authorizationCode <span class="operator">=</span> <span class="type">String</span>(data: authorizationCodeData, encoding: .utf8) <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">            <span class="keyword">let</span> userID <span class="operator">=</span> appleIDCredential.user</span><br><span class="line">            <span class="keyword">self</span>.tryLogin(identityToken: identityToken, </span><br><span class="line">							            authorizationCode: authorizationCode, </span><br><span class="line">								          userID: userID)</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="comment">/// - Tag: did_complete_error</span></span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">authorizationController</span>(<span class="params">controller</span>: <span class="type">ASAuthorizationController</span>, <span class="params">didCompleteWithError</span> <span class="params">error</span>: <span class="type">Error</span>) &#123;</span><br><span class="line">        <span class="comment">// Handle error.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>校验授权状态</p>
+<p>除了通过如下方法主动获取用户的授权信息，我们还可以以通知的方式监听用户是否取消了授权，苹果提供的通知名称为<code>ASAuthorizationAppleIDProvider.credentialRevokedNotification</code> 。</p>
+ <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> appleIDProvider <span class="operator">=</span> <span class="type">ASAuthorizationAppleIDProvider</span>()</span><br><span class="line">appleIDProvider.getCredentialState(forUserID: <span class="type">KeychainItem</span>.currentUserIdentifier) &#123; (credentialState, error) <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">switch</span> credentialState &#123;</span><br><span class="line">    <span class="keyword">case</span> .authorized:</span><br><span class="line">        <span class="keyword">break</span> <span class="comment">// The Apple ID credential is valid.</span></span><br><span class="line">    <span class="keyword">case</span> .revoked, .notFound:</span><br><span class="line">        <span class="comment">// The Apple ID credential is either revoked or was not found, so show the sign-in UI.</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>主动撤销授权</p>
+<p>根据苹果<a href="https://developer.apple.com/documentation/signinwithapplerestapi/revoke_tokens">官方文档</a>，调用 URL（<a href="https://appleid.apple.com/auth/revoke">https://appleid.apple.com/auth/revoke</a>）以撤销用户授权。但考虑到以下原因，主动撤销授权的操作应由服务端进行操作。</p>
+<ul>
+<li>接口调用需要的参数都保存在云端</li>
+<li>多端调用场景（iOS、Android、Web）</li>
+<li>数据安全</li>
+</ul>
+</li>
+</ol>
+<h2 id="google"><a class="markdownIt-Anchor" href="#google"></a> Google</h2>
+<blockquote>
+<p>在 iPhone 上的原生 APP 可以使用 Google 提供的框架 GoogleSignIn 获取用户授权。</p>
+</blockquote>
+<h3 id="配置-2"><a class="markdownIt-Anchor" href="#配置-2"></a> 配置</h3>
+<ol>
+<li>
+<p>Google 开发者账号配置</p>
+<blockquote>
+<p>这里的配置流程主要参考<a href="https://developers.google.com/identity/sign-in/ios/start-integrating?hl=zh-cn#configure_app_project">官方文档</a></p>
+</blockquote>
+<p>在 Google 开发者账号中创建/获取客户端 ID 和服务器客户端 ID。</p>
+<p>创建好的客户端 ID 如图：</p>
+<p><img src="../images/bd8c1e247c9406ca02b64d49f28a467d.png" alt="image.png" /></p>
+<p>创建好的服务器客户端 ID 如图：</p>
+<p><img src="../images/fa59812d0ac3e304b73090bc93e85ee2.png" alt="image.png" /></p>
+</li>
+<li>
+<p>Xcode 项目配置</p>
+<p>需要在 Xcode 工程配置中添加 Google 开发者账号相关配置信息，把第一步中获取的两个 ID 添加到 <code>Info.plist</code> 文件中，形式如下：</p>
+ <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>GIDClientID<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>YOUR_IOS_CLIENT_ID<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>CFBundleURLTypes<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">key</span>&gt;</span>CFBundleURLSchemes<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">		        <span class="tag">&lt;<span class="name">string</span>&gt;</span>YOUR_DOT_REVERSED_IOS_CLIENT_ID<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>GIDServerClientID<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>YOUR_SERVER_CLIENT_ID<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>其中有两点需要注意：</p>
+<ol>
+<li>如果你的 App 在开发环境与线上环境使用的是不同的 AppID，那上面的账号和项目配置也需要创建两套不同的账号，同时在 plist 文件中也需要按环境区分不同的配置</li>
+<li><code>GIDServerClientID</code> 是后端使用的 ID，当 App 的授权流程需要后端身份验证的时候，需要配置该 ID。</li>
+</ol>
+</li>
+</ol>
+<h3 id="实现-2"><a class="markdownIt-Anchor" href="#实现-2"></a> 实现</h3>
+<p>Google 登录流程比 Apple 登录流程简单，具体如下。</p>
+<ol>
+<li>
+<p>通过 Cocoapods 或者 SPM 集成 <a href="https://github.com/google/GoogleSignIn-iOS">GoogleSignIn</a> SDK。</p>
+</li>
+<li>
+<p>发起授权请求</p>
+<p>通过 SDK 的方法获取 Google 授权。授权成功后会执行闭包中的代码，可以在 <code>signInResult</code> 中可以获取 userInfo、idToken 等必要信息，进而处理登录业务。</p>
+ <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">GIDSignIn</span>.sharedInstance.signIn(withPresenting: <span class="keyword">self</span>) &#123; signInResult, error <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">guard</span> error <span class="operator">==</span> <span class="literal">nil</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>校验授权状态</p>
+<p>通过 SDK 提供的方法校验用户授权状态</p>
+ <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">GIDSignIn</span>.sharedInstance.restorePreviousSignIn &#123; user, error <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">if</span> error <span class="operator">!=</span> <span class="literal">nil</span> <span class="operator">||</span> user <span class="operator">==</span> <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="comment">// Show the app&#x27;s signed-out state.</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// Show the app&#x27;s signed-in state.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>撤销授权</p>
+<p>通过 SDK 提供的方法主动撤销用户授权</p>
+ <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">GIDSignIn</span>.sharedInstance.disconnect &#123; error <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">guard</span> error <span class="operator">==</span> <span class="literal">nil</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// Google Account disconnected from your app.</span></span><br><span class="line">    <span class="comment">// Perform clean-up actions, such as deleting data associated with the</span></span><br><span class="line">    <span class="comment">//   disconnected account.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="校验授权信息"><a class="markdownIt-Anchor" href="#校验授权信息"></a> 校验授权信息</h1>
+<p>在 App 成功获取授权信息之后，会调用云接口将授权数据传给云端，云端需要校验此信息是否合法，根据采用的获取到的授权信息类型不同，会有不同的校验方式。在这一步骤中，主要是云与第三方平台服务端的交互。</p>
+<pre class="mermaid">sequenceDiagram
+    participant 应用
+    participant 第三方SDK
+    participant 云
+    participant 第三方服务器
+
+    应用->>第三方SDK: 1. 发起登陆请求
+    第三方SDK-->>第三方服务器: 
+    第三方服务器-->>第三方SDK: 
+    第三方SDK-->>应用: 2. 返回授权数据
+    应用->>云: 3. 客户端向后台提交授权数据
+    云->>第三方服务器: 4. 后台向第三方服务器验证授权信息
+    第三方服务器-->>云: 5. 返回验证结果
+    云-->>应用: 6. 告知客户端验证结果</pre>
+<p>在第三方登录过程中。几个相关角色的交互大致如上图所示，其中步骤 1、2 已经在上文详细介绍过了，本小节将会以 Apple 登录数据验证为例子，围绕步骤 4 和步骤 5 进行介绍。</p>
+<h2 id="apple-2"><a class="markdownIt-Anchor" href="#apple-2"></a> Apple</h2>
+<p>在上文已经提到， iOS App 从 Apple SDK 中可以获取两种授权数据，分别是<code>authorizationCode</code> 和 <code>identityToken</code>，针对不同的数据，苹果提供了对应的验证方式。</p>
+<p>在这里我们介绍一下两种数据：</p>
+<ol>
+<li>
+<p>authorizationCode</p>
+<p>本质上是 Apple 颁发的授权码。App 把数据传给云，然后由云端再向苹果的身份验证服务端验证本次授权登录请求数据的有效性和真实性。这是类似 OAuth2 的授权码验证方式。</p>
+</li>
+<li>
+<p>identityToken</p>
+<p>identityToken 是一个经过签名的 JWT 数据 （<a href="https://link.juejin.im/?target=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FJSON_Web_Token">JSON Web Token</a>），通过向苹果身份验证服务器获取公钥再进行解密、匹配等步骤，我们可以验证此数据是否被篡改、是否合法。</p>
+</li>
+</ol>
+<p>云端可以自由选择这两个参数进行校验，只要有一个验证方式能够通过，即可视为本次授权校验成功。</p>
+<h3 id="基于授权码的验证"><a class="markdownIt-Anchor" href="#基于授权码的验证"></a> 基于授权码的验证</h3>
+<blockquote>
+<p>该算法用来验证<code>authorizationCode</code></p>
+</blockquote>
+<p>使用 authorizationCode 进行验证，调用 URL <a href="https://appleid.apple.com/auth/token">https://appleid.apple.com/auth/token</a> 进行验证</p>
+<p>该流程可参考<a href="https://developer.apple.com/documentation/signinwithapplerestapi/generate_and_validate_tokens">官方文档</a>，简单的说，就是构建一个网络请求，成功返回即验证成功。</p>
+<p>在构建的 request 中有一个 <code>client_secret</code> 字段需要我们自行<a href="https://developer.apple.com/documentation/accountorganizationaldatasharing/creating-a-client-secret">构建一个 JWT 数据</a>，里面包含了开发者账户信息（TeamID、KeyID），应用信息（App 的 BundleID）相关的配置。在构建数据的时候需要注意区分不同开发环境、不同登录客户端，这些差异会导致参数的值不同。</p>
+<h3 id="基于-jwt-的算法验证"><a class="markdownIt-Anchor" href="#基于-jwt-的算法验证"></a> 基于 JWT 的算法验证</h3>
+<blockquote>
+<p>该算法用来验证<code>identityToken</code> 参数</p>
+</blockquote>
+<p>一个 JWT 有三个部分：header、payload、signature，如下图所示</p>
+<p><img src="../images/3b9ddd9fb23a06a5cadfd6df464a64ea.png" alt="image.png" /></p>
+<blockquote>
+<p>这里附上一个<a href="https://jwt.io/">JWT 在线解析</a>的工具</p>
+</blockquote>
+<p>服务端在获取客户端发出的<code>identityToken</code>后，需要进行如下步骤：</p>
+<ol>
+<li>需要逆向构造过程，decode出JWT的三个部分</li>
+<li>从<a href="https://link.juejin.cn/?target=https%3A%2F%2Fappleid.apple.com%2Fauth%2Fkeys">appleid.apple.com/auth/keys</a>中获取公钥，并将公钥<a href="https://link.juejin.cn/?target=https%3A%2F%2F8gwifi.org%2Fjwkconvertfunctions.jsp">转换</a>为<code>pem</code>对JWT进行验证；获取到的公钥会有多个，需要根据 head 里的 kid 和 alg 去选取正确的公钥</li>
+<li>如<code>identityToken</code>通过验证，则可以根据其payload中的内容进行验证等操作</li>
+</ol>
+<p>这里需要再补充说明一下 identityToken 验证原理和方式：<code>idnetityToken</code>使用非对称加密 RSASSA（RSA签名算法） 和 ECDSA（椭圆曲线数据签名算法），当验证签名的时候，利用公钥来解密Singature，满足下列条件时，验证通过：</p>
+<ol>
+<li>与<code>base64UrlEncode(header) + &quot;.&quot; + base64UrlEncode(payload)</code>的内容完全一样</li>
+<li><code>iss</code> 与 <code>aud</code> 字段匹配</li>
+<li><code>exp</code> 过期时间未过</li>
+</ol>
+<p>另外，我们从解析出来的 JWT 文件中还能获取到一些其他信息</p>
+<ol>
+<li>
+<p>email</p>
+<p>Apple 账号的邮箱。上文已经提过，<code>ASAuthorization</code> 服务的登录成功回调事件只有在首次授权的时候才会返回用户信息（用户邮箱），如果后端业务需要使用到用户邮箱，则可以在 JWT 里获取。</p>
+</li>
+<li>
+<p>email_verified</p>
+<p>该字段表明用户邮箱是否已经经过认证</p>
+</li>
+<li>
+<p>is_private_email</p>
+<p>这个字段表明用户是否隐藏邮箱，即用户的邮箱是否为中转邮箱。</p>
+<p>Apple 在首次获取用户授权时会询问用户是否要分享自己的邮件地址给第三方平台。如果用户选择不分享，即隐藏邮件地址，Apple 会生成一个中转邮箱（类似<u><a href="mailto:xxxxxx@privaterelay.appleid.com">xxxxxx@privaterelay.appleid.com</a></u>）给到第三方平台以进行必要的业务操作，如第三方平台账号的邮箱信息、发送营销或通知邮件等。</p>
+<blockquote>
+<p>如果需要通过中转邮箱给用户发送邮件，需要在 Apple 开发者账号配置信任邮箱，只有在信任列表里的邮箱才能通过中转邮箱给用户发送邮件、接收用户的邮件。</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="google-2"><a class="markdownIt-Anchor" href="#google-2"></a> Google</h2>
+<p>Google 登录的验证流程与 Apple 的 JWT 验证流程基本一致（参考<a href="https://developers.google.com/identity/sign-in/ios/backend-auth?hl=zh-cn">官方文档</a>），其中 App 从 SDK 获取的 JWT 数据参数名为 <code>idToken</code> 。</p>
+<h1 id="校验结果处理"><a class="markdownIt-Anchor" href="#校验结果处理"></a> 校验结果处理</h1>
+<p>来到这一步，说明我们已经完成第三方账号的授权获取和校验了，此时我们可以将第三方账号的数据对接我们已有的账号系统。</p>
+<p>在这个步骤中，业务流程是具体业务需求决定的，并不是一个通用规范的做法，在不同业务主体可能会有不同的设计方案。这里简单介绍一下 VeSync App 的做法。</p>
+<p>VeSync 采用邮箱作为 Key 来链接第三方账号和 VeSync 账号。其中，Apple 登录方式的邮箱可以从 JWT 数据中解析出来，Google 登录方式的邮箱则是由 SDK 直接返回，由 App 传给云端即可。</p>
+<p>云会校验该邮箱是否已经绑定过 VeSync 账号：</p>
+<ol>
+<li>
+<p>已绑定</p>
+<p>这意味着这个第三方账号的用户已经通过三方登录的方式创建过账号，或绑定过账号。此时我们可以直接为该用户颁发通行密钥（token），App 拿到密钥之后可以直接登录，使用 VeSync 的服务，此时我们获取第三方账号的信息是用来<strong>登录</strong>的</p>
+</li>
+<li>
+<p>未绑定</p>
+<p>此时 App 需要引导用户绑定已有账号或创建新账号，大致流程如下所示。就是此时我们获取第三方账号的信息可能用来<strong>登录</strong>或<strong>注册</strong> 。流程结束后，用户即可成功登录使用 VeSync 的服务。</p>
+<p>需要额外说明的是，在建立已有账号与第三方账号的绑定关系的过程中，需要校验已有账号是否已经绑定过同一平台的第三方账号，如果已经绑定过，则需要额外的流程（如直接替换，或提示用户选择其中一个）进行处理。</p>
+</li>
+</ol>
+<pre class="mermaid">graph LR
+
+create_or_bind_account{创建/绑定账号}
+create_or_bind_account --绑定--> bind_account[通过邮箱登录已有账号]
+create_or_bind_account --创建--> create_new_account[使用邮箱创建新账号]
+subgraph 创建账号流程
+create_new_account ---> user_login_with_region1[建立新账号与第三方账号的绑定关系]
+end
+subgraph 绑定账号流程
+bind_account ---> user_login_with_region2[建立已有账号与第三方账号的绑定关系]
+end
+user_login_with_region1 ---> login_success_and_go_home_page
+
+user_login_with_region2 ---> login_success_and_go_home_page(登录成功)</pre>
+<p>在完成账号的创建和绑定过程之后，与第三方账号相关的业务流程就结束了。此时我们会处于登录状态，用户就可以使用 App 了。</p>
+<h1 id="尾声"><a class="markdownIt-Anchor" href="#尾声"></a> 尾声</h1>
+<p>通过本文的介绍，我们了解了第三方授权信息的获取和校验的流程，同时大致梳理了现行账号体系接入第三方账号的流程，希望这些内容能够帮助到您。</p>
+<p>感谢您的阅读，希望本文对您在接入第三方平台登录方面有所启发。</p>
+]]></content>
+      <categories>
+        <category>Coding</category>
+      </categories>
+      <tags>
+        <tag>iOS</tag>
+        <tag>OAuth</tag>
       </tags>
   </entry>
   <entry>
@@ -1417,295 +1706,6 @@ Phase A —— B-functioning only; Phase B —— B-functioning and P-functionin
       </categories>
       <tags>
         <tag>Philosophy</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>iOS 第三方登录</title>
-    <url>//ios-third-party-login/</url>
-    <content><![CDATA[<h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
-<p>现在市面上常见的 App 都开放了第三方平台登录的功能，为用户注册账号和登录账号带来了较大的便利，有效提升了用户的使用体验。近期，我司也引入了 Apple 和 Google 两个平台的第三方账号登录，本文将会对本次第三方平台接入的开发流程做详细的介绍。</p>
-<h1 id="概述"><a class="markdownIt-Anchor" href="#概述"></a> 概述</h1>
-<p>总的来说，App 要实现第三方账号登录的功能，大体可以按照以下三个步骤来实现：</p>
-<pre class="mermaid">graph LR
-login_with_sdk[获取授权信息] ---> verify_info[校验授权信息] ---> other_process[校验结果处理]</pre>
-<ol>
-<li>获取用户授权：通过第三方 SDK 获得用户授权，并获取授权数据用于接入第三方平台服务；</li>
-<li>校验授权信息：通过第三方服务校验获得的授权数据，校验成功即可认为是第三方账号认证成功；</li>
-<li>校验结果处理：从前两步中，我们可以获得第三方账号的邮箱（或其它的唯一标识），通过这个唯一标识我们可以对接自己平台的账号系统，校验该账号是否已经注册过。如果该账号已经注册或绑定过，则直接登录成功，否则引导用户创建新账号或绑定已有账号。</li>
-</ol>
-<p>本小节将会稍微扩展上面的框图的内容，让读者对完整的流程有一个更具体的认知。而后本文后续章节将会以三个步骤作为主题分别进行详细阐述。</p>
-<h2 id="oauth-20"><a class="markdownIt-Anchor" href="#oauth-20"></a> OAuth 2.0</h2>
-<p>在进入正文之前，我们先提一下 OAuth 协议。</p>
-<p>OAuth 2.0 协议是一种三方授权协议，目前大部分的第三方登录与授权都是基于该协议的标准或改进实现，通过这个授权流程，服务提供方允许用户授权第三方应用访问他们存储在另外的服务提供者上的信息，而不需要将用户名和密码提供给第三方移动应用或分享他们数据的所有内容。其基本流程如下所示：</p>
-<figure class="highlight plaintext"><figcaption><span>text</span></figcaption><table><tr><td class="code"><pre><span class="line">+--------+                               +---------------+</span><br><span class="line">     |        |--(A)- Authorization Request -&gt;|   Resource    |</span><br><span class="line">     |        |                               |     Owner     |</span><br><span class="line">     |        |&lt;-(B)-- Authorization Grant ---|               |</span><br><span class="line">     |        |                               +---------------+</span><br><span class="line">     |        |</span><br><span class="line">     |        |                               +---------------+</span><br><span class="line">     |        |--(C)-- Authorization Grant --&gt;| Authorization |</span><br><span class="line">     | Client |                               |     Server    |</span><br><span class="line">     |        |&lt;-(D)----- Access Token -------|               |</span><br><span class="line">     |        |                               +---------------+</span><br><span class="line">     |        |</span><br><span class="line">     |        |                               +---------------+</span><br><span class="line">     |        |--(E)----- Access Token ------&gt;|    Resource   |</span><br><span class="line">     |        |                               |     Server    |</span><br><span class="line">     |        |&lt;-(F)--- Protected Resource ---|               |</span><br><span class="line">     +--------+                               +---------------+</span><br></pre></td></tr></table></figure>
-<p>这里提及 OAuth2.0 不是为了详细介绍该协议的原理、设计和实现，而是想让读者带着一个高的视角看待第三方登录的流程设计。</p>
-<p>实际上，本文是围绕着上图的步骤 A 到步骤 D来进行介绍的，从 A 到 D 即可完成第三方平台账号的授权和验证。由于 VeSync 有自己的账号体系和资源体系，目前也没有使用第三方平台的服务的需求，步骤 E 和 F 在这篇文章中将不会提及。</p>
-<h2 id="详细流程"><a class="markdownIt-Anchor" href="#详细流程"></a> 详细流程</h2>
-<pre class="mermaid">graph TB
-select_login(用户选择第三方账号登录) ---> start_verification[发起授权请求，用户登录第三方账号]
-subgraph 获取第三方授权
-start_verification ---> request_verification[客户端获取授权信息]
-request_verification ---> server_verify[提交授权信息给云]
-end
-server_verify ---> check_account{授权信息是否验证成功}
-subgraph 校验授权信息
-check_account --YES--> check_binding{第三方账号是否已绑定 VeSync 账号}
-end
-check_binding --NO(账号不存在)--> create_or_bind_account{用户选择创建/绑定账号}
-subgraph 校验结果处理
-check_account --NO(验证失败)--> login_failed(失败)
-check_binding -- YES(登录成功) --> login_success_and_go_home_page(登录/注册成功)
-create_or_bind_account --绑定--> bind_account[绑定账号流程]
-create_or_bind_account --创建--> create_account[创建账号流程]
-end
-bind_account ---> login_success_and_go_home_page
-create_account ---> login_success_and_go_home_page</pre>
-<p>概述中的三个步骤在上图中进行了适当的细节扩充，本文将会围绕其进行具体的实现方式介绍，并有一些在开发过程中的踩坑分享。</p>
-<p>实际上，上图省略了一些具体业务需求的处理步骤，如检查第三方账号的合法性、第三方账号怎么和 VeSync 账号绑定、各种用户引导及错误处理。这些步骤虽重要，但不具有代表性和通用性，不会在本文作详细说明。</p>
-<h1 id="获取授权信息"><a class="markdownIt-Anchor" href="#获取授权信息"></a> 获取授权信息</h1>
-<p>从用户视角看来，点击第三方登录的按钮之后，会有输入框让用户登录第三方账号并请求授权，在登录成功并完成授权动作之后，App 就会开启第三方账号登录的流程。流程的第一步就是通过 SDK 或其它官方途径者获取授权信息。</p>
-<p>下面以 iOS 平台为例，介绍获取 Apple 和 Google 的用户授权信息的方式。</p>
-<h2 id="apple"><a class="markdownIt-Anchor" href="#apple"></a> Apple</h2>
-<blockquote>
-<p>⚠️ 注意</p>
-<p>从 <strong>iOS13</strong> 开始，如果 <strong>App</strong> 提供第三方登录，就必须添加 <strong>苹果登录 Sign in with Apple</strong> 选项，并要求所有开发者于 <strong>2020年4月之前</strong> 完成现有应用的更新，否则审核不通过。</p>
-</blockquote>
-<h3 id="配置"><a class="markdownIt-Anchor" href="#配置"></a> 配置</h3>
-<blockquote>
-<p>要在 App 实现 Apple 登录，需要在工程及开发者账号中都配置相关的功能。</p>
-</blockquote>
-<ol>
-<li>
-<p>账户配置</p>
-<p>在 Apple 开发者账户中开启 AppID 对应的 Apple 登录的功能，具体流程可以参考<a href="https://developer.apple.com/cn/help/account/capabilities/about-sign-in-with-apple/">官方文档</a>，创建完成后应如下图：</p>
-<p><img src="../images/87247ec539b0c21ffb0767926a7eff38.png" alt="image.png" /></p>
-</li>
-<li>
-<p>工程配置</p>
-<p>如下图所示在 Xcode 中配置工程的 Capabilities 开启 App 的 Apple 登录功能。</p>
-<p><img src="../images/5d3a41352ef9c39cf26e3b11f6c524d2.png" alt="image.png" /></p>
-</li>
-</ol>
-<h3 id="实现"><a class="markdownIt-Anchor" href="#实现"></a> 实现</h3>
-<blockquote>
-<p>在 iPhone 上，使用原生方式开发的 APP 可以直接调用苹果的框架 <code>AppleService</code> 获取 Apple 授权并登录。本部分主要参考 <a href="https://developer.apple.com/documentation/authenticationservices/implementing-user-authentication-with-sign-in-with-apple">Apple 官方文档</a>。</p>
-</blockquote>
-<ol>
-<li>
-<p>发起授权请求</p>
-<p>在这个过程中我们需要使用 <code>ASAuthorization</code> 服务调起获取 Apple 授权的弹窗。</p>
-<p>我们需要配置的信息有：</p>
-<ul>
-<li>需要获取的授权方式<code>ASAuthorizationAppleIDCredential</code> ，这个授权方式决定了 Apple 会返回给我们的信息，需要在代理方法中处理。</li>
-<li>代理对象 <code>delegate</code> ，授权结果会通过代理方法返回给调用方。</li>
-<li>需要获取的用户信息<code>requestedScopes</code> 在用户首次获取授权的时候，Apple 会通过代理返回这些信息。</li>
-<li>配置弹窗上下文 <code>presentationContextProvider</code> ，Apple 的授权系统弹窗会在给定的页面弹出，一般来说，这里只要获取导航堆栈中的栈顶控制器即可。</li>
-</ul>
-<p>配置好这些信息后，通过<code>performRequests()</code> 调用即可唤起系统弹窗，获取授权。</p>
- <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> appleIDProvider <span class="operator">=</span> <span class="type">ASAuthorizationAppleIDProvider</span>()</span><br><span class="line"><span class="keyword">let</span> request <span class="operator">=</span> appleIDProvider.createRequest()</span><br><span class="line">request.requestedScopes <span class="operator">=</span> [.fullName, .email]</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> authorizationController <span class="operator">=</span> <span class="type">ASAuthorizationController</span>(authorizationRequests: [request])</span><br><span class="line">authorizationController.delegate <span class="operator">=</span> <span class="keyword">self</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> topVc <span class="operator">=</span> <span class="type">Tool</span>.topViewController() <span class="keyword">as?</span> <span class="type">ASAuthorizationControllerPresentationContextProviding</span> &#123;</span><br><span class="line">		authorizationController.presentationContextProvider <span class="operator">=</span> topVc</span><br><span class="line">&#125;</span><br><span class="line">authorizationController.performRequests()</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>处理回调事件</p>
-<p>在用户授权成功或授权失败后，会通过两个代理方法通知业务方。</p>
-<ul>
-<li>
-<p><code>didCompleteWithAuthorization</code></p>
-<p>通过回调方法中的 authorization 对象可以获取我们需要的授权信息。在前一步中我们选择获取 AppleID 的授权信息，用于认证授权的参数包括<code>authorizationCode</code> 和 <code>identityToken</code>，这两个参数的作用和区别将会在下文“校验授权信息”这一小节中详细介绍。</p>
-<p>在用户首次获得用户授权时，SDK 还会提供 <code>userID</code> 这个参数给我们。这是一个苹果用户唯一标识符，它在同一个开发者账号下的所有 App 下是一样的，我们可以用它来与后台的账号体系绑定起来。</p>
-</li>
-<li>
-<p><code>didCompleteWithError</code></p>
-<p>在授权失败时 Apple 会调用该方法，我们可以在这里面做错误处理。</p>
-</li>
-</ul>
- <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">extension</span> <span class="title class_">XXX</span>: <span class="title class_">ASAuthorizationControllerDelegate</span> &#123;</span><br><span class="line">    <span class="comment">/// - Tag: did_complete_authorization</span></span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">authorizationController</span>(<span class="params">controller</span>: <span class="type">ASAuthorizationController</span>, <span class="params">didCompleteWithAuthorization</span> <span class="params">authorization</span>: <span class="type">ASAuthorization</span>) &#123;</span><br><span class="line">        <span class="keyword">switch</span> authorization.credential &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="keyword">let</span> appleIDCredential <span class="keyword">as</span> <span class="type">ASAuthorizationAppleIDCredential</span>:</span><br><span class="line">            <span class="keyword">guard</span> <span class="keyword">let</span> identityTokenData <span class="operator">=</span> appleIDCredential.identityToken,</span><br><span class="line">                  <span class="keyword">let</span> identityToken <span class="operator">=</span> <span class="type">String</span>(data: identityTokenData, encoding: .utf8),</span><br><span class="line">                  <span class="keyword">let</span> authorizationCodeData <span class="operator">=</span> appleIDCredential.authorizationCode,</span><br><span class="line">                  <span class="keyword">let</span> authorizationCode <span class="operator">=</span> <span class="type">String</span>(data: authorizationCodeData, encoding: .utf8) <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">            <span class="keyword">let</span> userID <span class="operator">=</span> appleIDCredential.user</span><br><span class="line">            <span class="keyword">self</span>.tryLogin(identityToken: identityToken, </span><br><span class="line">							            authorizationCode: authorizationCode, </span><br><span class="line">								          userID: userID)</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="comment">/// - Tag: did_complete_error</span></span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">authorizationController</span>(<span class="params">controller</span>: <span class="type">ASAuthorizationController</span>, <span class="params">didCompleteWithError</span> <span class="params">error</span>: <span class="type">Error</span>) &#123;</span><br><span class="line">        <span class="comment">// Handle error.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>校验授权状态</p>
-<p>除了通过如下方法主动获取用户的授权信息，我们还可以以通知的方式监听用户是否取消了授权，苹果提供的通知名称为<code>ASAuthorizationAppleIDProvider.credentialRevokedNotification</code> 。</p>
- <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> appleIDProvider <span class="operator">=</span> <span class="type">ASAuthorizationAppleIDProvider</span>()</span><br><span class="line">appleIDProvider.getCredentialState(forUserID: <span class="type">KeychainItem</span>.currentUserIdentifier) &#123; (credentialState, error) <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">switch</span> credentialState &#123;</span><br><span class="line">    <span class="keyword">case</span> .authorized:</span><br><span class="line">        <span class="keyword">break</span> <span class="comment">// The Apple ID credential is valid.</span></span><br><span class="line">    <span class="keyword">case</span> .revoked, .notFound:</span><br><span class="line">        <span class="comment">// The Apple ID credential is either revoked or was not found, so show the sign-in UI.</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>主动撤销授权</p>
-<p>根据苹果<a href="https://developer.apple.com/documentation/signinwithapplerestapi/revoke_tokens">官方文档</a>，调用 URL（<a href="https://appleid.apple.com/auth/revoke">https://appleid.apple.com/auth/revoke</a>）以撤销用户授权。但考虑到以下原因，主动撤销授权的操作应由服务端进行操作。</p>
-<ul>
-<li>接口调用需要的参数都保存在云端</li>
-<li>多端调用场景（iOS、Android、Web）</li>
-<li>数据安全</li>
-</ul>
-</li>
-</ol>
-<h2 id="google"><a class="markdownIt-Anchor" href="#google"></a> Google</h2>
-<blockquote>
-<p>在 iPhone 上的原生 APP 可以使用 Google 提供的框架 GoogleSignIn 获取用户授权。</p>
-</blockquote>
-<h3 id="配置-2"><a class="markdownIt-Anchor" href="#配置-2"></a> 配置</h3>
-<ol>
-<li>
-<p>Google 开发者账号配置</p>
-<blockquote>
-<p>这里的配置流程主要参考<a href="https://developers.google.com/identity/sign-in/ios/start-integrating?hl=zh-cn#configure_app_project">官方文档</a></p>
-</blockquote>
-<p>在 Google 开发者账号中创建/获取客户端 ID 和服务器客户端 ID。</p>
-<p>创建好的客户端 ID 如图：</p>
-<p><img src="../images/bd8c1e247c9406ca02b64d49f28a467d.png" alt="image.png" /></p>
-<p>创建好的服务器客户端 ID 如图：</p>
-<p><img src="../images/fa59812d0ac3e304b73090bc93e85ee2.png" alt="image.png" /></p>
-</li>
-<li>
-<p>Xcode 项目配置</p>
-<p>需要在 Xcode 工程配置中添加 Google 开发者账号相关配置信息，把第一步中获取的两个 ID 添加到 <code>Info.plist</code> 文件中，形式如下：</p>
- <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>GIDClientID<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>YOUR_IOS_CLIENT_ID<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>CFBundleURLTypes<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">key</span>&gt;</span>CFBundleURLSchemes<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">		        <span class="tag">&lt;<span class="name">string</span>&gt;</span>YOUR_DOT_REVERSED_IOS_CLIENT_ID<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>GIDServerClientID<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>YOUR_SERVER_CLIENT_ID<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>其中有两点需要注意：</p>
-<ol>
-<li>如果你的 App 在开发环境与线上环境使用的是不同的 AppID，那上面的账号和项目配置也需要创建两套不同的账号，同时在 plist 文件中也需要按环境区分不同的配置</li>
-<li><code>GIDServerClientID</code> 是后端使用的 ID，当 App 的授权流程需要后端身份验证的时候，需要配置该 ID。</li>
-</ol>
-</li>
-</ol>
-<h3 id="实现-2"><a class="markdownIt-Anchor" href="#实现-2"></a> 实现</h3>
-<p>Google 登录流程比 Apple 登录流程简单，具体如下。</p>
-<ol>
-<li>
-<p>通过 Cocoapods 或者 SPM 集成 <a href="https://github.com/google/GoogleSignIn-iOS">GoogleSignIn</a> SDK。</p>
-</li>
-<li>
-<p>发起授权请求</p>
-<p>通过 SDK 的方法获取 Google 授权。授权成功后会执行闭包中的代码，可以在 <code>signInResult</code> 中可以获取 userInfo、idToken 等必要信息，进而处理登录业务。</p>
- <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">GIDSignIn</span>.sharedInstance.signIn(withPresenting: <span class="keyword">self</span>) &#123; signInResult, error <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">guard</span> error <span class="operator">==</span> <span class="literal">nil</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>校验授权状态</p>
-<p>通过 SDK 提供的方法校验用户授权状态</p>
- <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">GIDSignIn</span>.sharedInstance.restorePreviousSignIn &#123; user, error <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">if</span> error <span class="operator">!=</span> <span class="literal">nil</span> <span class="operator">||</span> user <span class="operator">==</span> <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="comment">// Show the app&#x27;s signed-out state.</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// Show the app&#x27;s signed-in state.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>撤销授权</p>
-<p>通过 SDK 提供的方法主动撤销用户授权</p>
- <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">GIDSignIn</span>.sharedInstance.disconnect &#123; error <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">guard</span> error <span class="operator">==</span> <span class="literal">nil</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// Google Account disconnected from your app.</span></span><br><span class="line">    <span class="comment">// Perform clean-up actions, such as deleting data associated with the</span></span><br><span class="line">    <span class="comment">//   disconnected account.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="校验授权信息"><a class="markdownIt-Anchor" href="#校验授权信息"></a> 校验授权信息</h1>
-<p>在 App 成功获取授权信息之后，会调用云接口将授权数据传给云端，云端需要校验此信息是否合法，根据采用的获取到的授权信息类型不同，会有不同的校验方式。在这一步骤中，主要是云与第三方平台服务端的交互。</p>
-<pre class="mermaid">sequenceDiagram
-    participant 应用
-    participant 第三方SDK
-    participant 云
-    participant 第三方服务器
-
-    应用->>第三方SDK: 1. 发起登陆请求
-    第三方SDK-->>第三方服务器: 
-    第三方服务器-->>第三方SDK: 
-    第三方SDK-->>应用: 2. 返回授权数据
-    应用->>云: 3. 客户端向后台提交授权数据
-    云->>第三方服务器: 4. 后台向第三方服务器验证授权信息
-    第三方服务器-->>云: 5. 返回验证结果
-    云-->>应用: 6. 告知客户端验证结果</pre>
-<p>在第三方登录过程中。几个相关角色的交互大致如上图所示，其中步骤 1、2 已经在上文详细介绍过了，本小节将会以 Apple 登录数据验证为例子，围绕步骤 4 和步骤 5 进行介绍。</p>
-<h2 id="apple-2"><a class="markdownIt-Anchor" href="#apple-2"></a> Apple</h2>
-<p>在上文已经提到， iOS App 从 Apple SDK 中可以获取两种授权数据，分别是<code>authorizationCode</code> 和 <code>identityToken</code>，针对不同的数据，苹果提供了对应的验证方式。</p>
-<p>在这里我们介绍一下两种数据：</p>
-<ol>
-<li>
-<p>authorizationCode</p>
-<p>本质上是 Apple 颁发的授权码。App 把数据传给云，然后由云端再向苹果的身份验证服务端验证本次授权登录请求数据的有效性和真实性。这是类似 OAuth2 的授权码验证方式。</p>
-</li>
-<li>
-<p>identityToken</p>
-<p>identityToken 是一个经过签名的 JWT 数据 （<a href="https://link.juejin.im/?target=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FJSON_Web_Token">JSON Web Token</a>），通过向苹果身份验证服务器获取公钥再进行解密、匹配等步骤，我们可以验证此数据是否被篡改、是否合法。</p>
-</li>
-</ol>
-<p>云端可以自由选择这两个参数进行校验，只要有一个验证方式能够通过，即可视为本次授权校验成功。</p>
-<h3 id="基于授权码的验证"><a class="markdownIt-Anchor" href="#基于授权码的验证"></a> 基于授权码的验证</h3>
-<blockquote>
-<p>该算法用来验证<code>authorizationCode</code></p>
-</blockquote>
-<p>使用 authorizationCode 进行验证，调用 URL <a href="https://appleid.apple.com/auth/token">https://appleid.apple.com/auth/token</a> 进行验证</p>
-<p>该流程可参考<a href="https://developer.apple.com/documentation/signinwithapplerestapi/generate_and_validate_tokens">官方文档</a>，简单的说，就是构建一个网络请求，成功返回即验证成功。</p>
-<p>在构建的 request 中有一个 <code>client_secret</code> 字段需要我们自行<a href="https://developer.apple.com/documentation/accountorganizationaldatasharing/creating-a-client-secret">构建一个 JWT 数据</a>，里面包含了开发者账户信息（TeamID、KeyID），应用信息（App 的 BundleID）相关的配置。在构建数据的时候需要注意区分不同开发环境、不同登录客户端，这些差异会导致参数的值不同。</p>
-<h3 id="基于-jwt-的算法验证"><a class="markdownIt-Anchor" href="#基于-jwt-的算法验证"></a> 基于 JWT 的算法验证</h3>
-<blockquote>
-<p>该算法用来验证<code>identityToken</code> 参数</p>
-</blockquote>
-<p>一个 JWT 有三个部分：header、payload、signature，如下图所示</p>
-<p><img src="../images/3b9ddd9fb23a06a5cadfd6df464a64ea.png" alt="image.png" /></p>
-<blockquote>
-<p>这里附上一个<a href="https://jwt.io/">JWT 在线解析</a>的工具</p>
-</blockquote>
-<p>服务端在获取客户端发出的<code>identityToken</code>后，需要进行如下步骤：</p>
-<ol>
-<li>需要逆向构造过程，decode出JWT的三个部分</li>
-<li>从<a href="https://link.juejin.cn/?target=https%3A%2F%2Fappleid.apple.com%2Fauth%2Fkeys">appleid.apple.com/auth/keys</a>中获取公钥，并将公钥<a href="https://link.juejin.cn/?target=https%3A%2F%2F8gwifi.org%2Fjwkconvertfunctions.jsp">转换</a>为<code>pem</code>对JWT进行验证；获取到的公钥会有多个，需要根据 head 里的 kid 和 alg 去选取正确的公钥</li>
-<li>如<code>identityToken</code>通过验证，则可以根据其payload中的内容进行验证等操作</li>
-</ol>
-<p>这里需要再补充说明一下 identityToken 验证原理和方式：<code>idnetityToken</code>使用非对称加密 RSASSA（RSA签名算法） 和 ECDSA（椭圆曲线数据签名算法），当验证签名的时候，利用公钥来解密Singature，满足下列条件时，验证通过：</p>
-<ol>
-<li>与<code>base64UrlEncode(header) + &quot;.&quot; + base64UrlEncode(payload)</code>的内容完全一样</li>
-<li><code>iss</code> 与 <code>aud</code> 字段匹配</li>
-<li><code>exp</code> 过期时间未过</li>
-</ol>
-<p>另外，我们从解析出来的 JWT 文件中还能获取到一些其他信息</p>
-<ol>
-<li>
-<p>email</p>
-<p>Apple 账号的邮箱。上文已经提过，<code>ASAuthorization</code> 服务的登录成功回调事件只有在首次授权的时候才会返回用户信息（用户邮箱），如果后端业务需要使用到用户邮箱，则可以在 JWT 里获取。</p>
-</li>
-<li>
-<p>email_verified</p>
-<p>该字段表明用户邮箱是否已经经过认证</p>
-</li>
-<li>
-<p>is_private_email</p>
-<p>这个字段表明用户是否隐藏邮箱，即用户的邮箱是否为中转邮箱。</p>
-<p>Apple 在首次获取用户授权时会询问用户是否要分享自己的邮件地址给第三方平台。如果用户选择不分享，即隐藏邮件地址，Apple 会生成一个中转邮箱（类似<u><a href="mailto:xxxxxx@privaterelay.appleid.com">xxxxxx@privaterelay.appleid.com</a></u>）给到第三方平台以进行必要的业务操作，如第三方平台账号的邮箱信息、发送营销或通知邮件等。</p>
-<blockquote>
-<p>如果需要通过中转邮箱给用户发送邮件，需要在 Apple 开发者账号配置信任邮箱，只有在信任列表里的邮箱才能通过中转邮箱给用户发送邮件、接收用户的邮件。</p>
-</blockquote>
-</li>
-</ol>
-<h2 id="google-2"><a class="markdownIt-Anchor" href="#google-2"></a> Google</h2>
-<p>Google 登录的验证流程与 Apple 的 JWT 验证流程基本一致（参考<a href="https://developers.google.com/identity/sign-in/ios/backend-auth?hl=zh-cn">官方文档</a>），其中 App 从 SDK 获取的 JWT 数据参数名为 <code>idToken</code> 。</p>
-<h1 id="校验结果处理"><a class="markdownIt-Anchor" href="#校验结果处理"></a> 校验结果处理</h1>
-<p>来到这一步，说明我们已经完成第三方账号的授权获取和校验了，此时我们可以将第三方账号的数据对接我们已有的账号系统。</p>
-<p>在这个步骤中，业务流程是具体业务需求决定的，并不是一个通用规范的做法，在不同业务主体可能会有不同的设计方案。这里简单介绍一下 VeSync App 的做法。</p>
-<p>VeSync 采用邮箱作为 Key 来链接第三方账号和 VeSync 账号。其中，Apple 登录方式的邮箱可以从 JWT 数据中解析出来，Google 登录方式的邮箱则是由 SDK 直接返回，由 App 传给云端即可。</p>
-<p>云会校验该邮箱是否已经绑定过 VeSync 账号：</p>
-<ol>
-<li>
-<p>已绑定</p>
-<p>这意味着这个第三方账号的用户已经通过三方登录的方式创建过账号，或绑定过账号。此时我们可以直接为该用户颁发通行密钥（token），App 拿到密钥之后可以直接登录，使用 VeSync 的服务，此时我们获取第三方账号的信息是用来<strong>登录</strong>的</p>
-</li>
-<li>
-<p>未绑定</p>
-<p>此时 App 需要引导用户绑定已有账号或创建新账号，大致流程如下所示。就是此时我们获取第三方账号的信息可能用来<strong>登录</strong>或<strong>注册</strong> 。流程结束后，用户即可成功登录使用 VeSync 的服务。</p>
-<p>需要额外说明的是，在建立已有账号与第三方账号的绑定关系的过程中，需要校验已有账号是否已经绑定过同一平台的第三方账号，如果已经绑定过，则需要额外的流程（如直接替换，或提示用户选择其中一个）进行处理。</p>
-</li>
-</ol>
-<pre class="mermaid">graph LR
-
-create_or_bind_account{创建/绑定账号}
-create_or_bind_account --绑定--> bind_account[通过邮箱登录已有账号]
-create_or_bind_account --创建--> create_new_account[使用邮箱创建新账号]
-subgraph 创建账号流程
-create_new_account ---> user_login_with_region1[建立新账号与第三方账号的绑定关系]
-end
-subgraph 绑定账号流程
-bind_account ---> user_login_with_region2[建立已有账号与第三方账号的绑定关系]
-end
-user_login_with_region1 ---> login_success_and_go_home_page
-
-user_login_with_region2 ---> login_success_and_go_home_page(登录成功)</pre>
-<p>在完成账号的创建和绑定过程之后，与第三方账号相关的业务流程就结束了。此时我们会处于登录状态，用户就可以使用 App 了。</p>
-<h1 id="尾声"><a class="markdownIt-Anchor" href="#尾声"></a> 尾声</h1>
-<p>通过本文的介绍，我们了解了第三方授权信息的获取和校验的流程，同时大致梳理了现行账号体系接入第三方账号的流程，希望这些内容能够帮助到您。</p>
-<p>感谢您的阅读，希望本文对您在接入第三方平台登录方面有所启发。</p>
-]]></content>
-      <categories>
-        <category>Coding</category>
-      </categories>
-      <tags>
-        <tag>iOS</tag>
-        <tag>OAuth</tag>
       </tags>
   </entry>
   <entry>
@@ -4134,6 +4134,681 @@ user_login_with_region2 ---> login_success_and_go_home_page(登录成功)</pre>
 <p>户口制度：以前农村户口无法改变；服务于国家工业化；城乡户口分隔是一种弱化的种姓制度，收入差别大到无法忽视</p>
 <p>对农村收入有高估的倾向，对城市收入有低估的倾向（再加上教育住房医疗的福利）</p>
 <p>结构性的不平等（体制的不平等）</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Humanities</category>
+      </categories>
+      <tags>
+        <tag>Sociology</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>社会学概论（二）</title>
+    <url>//introduction-to-sociology-2/</url>
+    <content><![CDATA[<h1 id="性和性别"><a class="markdownIt-Anchor" href="#性和性别"></a> 性和性别</h1>
+<blockquote>
+<p>性，不仅有生物学的一面，还有社会文化建构的一面</p>
+</blockquote>
+<h2 id="人类对性的态度"><a class="markdownIt-Anchor" href="#人类对性的态度"></a> 人类对性的态度</h2>
+<ul>
+<li>
+<p>西方基督教文化认为，除非是生育必需，其他一切性行为都是值得质疑的——避讳的方式</p>
+<p>在人类历史上很长一段时间内，性和生育是联系在一起的（缺乏避孕技术），认为只有生育子女为目的的性行为才是道德的</p>
+<p>但在现实生活中人们的需求用另一种方式来满足（娼妓普遍）</p>
+</li>
+<li>
+<p>阿尔弗莱德·金赛开始进性的研究</p>
+<p>关于性的双重标准 ：男性对于自身的行为非常宽容，对于女性的要求很严苛（美国 20 世纪 60 年代的调查显示，84% 的男人有过婚前性行为，40% 的男人要求妻子在结婚时是处女）</p>
+</li>
+</ul>
+<p>性取向</p>
+<ul>
+<li>
+<p>人的性取向是源于生物性因素和<code>社会习得</code>之间复杂性作用</p>
+</li>
+<li>
+<p>生物性因素对同性恋影响的研究不成功</p>
+<ol>
+<li>案例少、可信度不高，实验方法受伦理影响的限制大</li>
+<li>要区分生物影响和社会影响几乎是不可能的</li>
+</ol>
+<p>对双胞胎的同性恋的研究表明：同性恋是属于生物性因素和社会性因素综合的结果</p>
+</li>
+<li>
+<p>四种同性恋类型（肯尼斯·普鲁默）</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>偶然性同性恋</td>
+<td>有过同性恋的偶然经历，但没有影响性生活的整体结构</td>
+</tr>
+<tr>
+<td>情境性活动</td>
+<td>同性恋行为在特定情境中定期发生，但并没有成为个人的首要偏好，而是对异性性行为的替代</td>
+</tr>
+<tr>
+<td>人格化同性恋</td>
+<td>有些人对同性恋活动有偏好，但又能轻松接受这类行为的群体隔离（深柜）</td>
+</tr>
+<tr>
+<td>作为生活方式的同性恋</td>
+<td>公开不隐瞒的同性恋取向（出柜），形成同性恋亚文化（彩虹群体）</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>在金赛的样本报告中显示，根据青春期及以后的性活动/性倾向判断，只有一半的美国的男人是完全的异性恋，8% 的男人有过长达 3年或以上的排他性的同性恋关系（这个比例在女性中是 2%）</p>
+</li>
+<li>
+<p>同性恋从一开始的被抑制，到后来被人们勉强接受，到今天在多数文化中被人们理解、同性恋婚姻合法化 —— 社会文化演进的过程</p>
+</li>
+</ul>
+<h2 id="社会性别"><a class="markdownIt-Anchor" href="#社会性别"></a> 社会性别</h2>
+<ul>
+<li>
+<p>sex 生理性别/指派性别；<code>gender</code> 社会性别（反对性别是生理学的结果，强调社会习得、建构的结果）</p>
+<p>性别研究：一个多元跨学科的课程，涉及心理学、社会学、文化研究、人类学、历史和语言学等多个学术领域</p>
+<p>是挑战既有社会科学研究范式的倾向，批判性的倾向</p>
+</li>
+<li>
+<p>社会性别如何产生</p>
+<p>区分生理性别和社会性别是非常重要的，因为男性和女性之间的很多差异在起源上并非生物性的，而是后天习得、社会习得的结果（文化建构）</p>
+<p>基于动物行为得出的结论（雄性攻击性强）并不很好适用于人类行为，人类行为的原因更加复杂</p>
+</li>
+</ul>
+<p>社会性别的社会化</p>
+<ul>
+<li>
+<p>出生时就有了生理性别，随后通过社会化过程发展出社会性别，随后逐渐将其与生理性别相符的社会性别的<strong>社会规范加以内化</strong>，是社会化过程赋予的不同的方向</p>
+<p>性别在社会化的过程中，会受到一系列被认为是男性或女性生理性别相符合特征的正向或负向的约束</p>
+<p>社会性别的差异是文化的产物，不是由生物学决定的，是人为的选择</p>
+</li>
+<li>
+<p>文化和人辩证的关系：文化影响人，人有主观能动性，人在创造文化</p>
+<p>在社会性别的形成过程中，个人的选择会影响建构的结果</p>
+</li>
+</ul>
+<p>康奈尔</p>
+<blockquote>
+<p>《社会性别与权力》《男人与男孩》</p>
+</blockquote>
+<ul>
+<li>
+<p>把男权制社会、男性特质整合成一套综合性的社会性别关系理论，对社会学有很大影响</p>
+<p>在他看来，男性特质是社会性别秩序的重要部分，不能同社会性别秩序或与之相伴的女性特质分开理解。他关注男性把持的社会权力：如何创造并维持<code>社会性别的不平等</code></p>
+<p>在西方资本主义社会，社会性别关系仍然是由男权制权力决定的（反应在个体层次到制度层次）—— 男性对女性的支配，女性从属于男性</p>
+<p>这是日常实践和互动的产物，在日常生活中不断地再生产出来</p>
+</li>
+<li>
+<p>社会的三个方面（劳动、权力和倾注）相互作用构成了一个社会中的<code>社会性别秩序</code> ，代表了建构和约束社会性别关系的主要场所</p>
+<ul>
+<li>劳动：生理性别分工（家庭内部、劳动力市场）</li>
+<li>权力：通过组织（国家的政治制度、组织的权力结构、军队、家庭生活的权威、社会中的暴力、意识形态）起作用</li>
+<li>倾注：婚姻、性、育儿等私密性、情感性的的个人关系</li>
+</ul>
+</li>
+<li>
+<p>社会性别的等级秩序</p>
+  <pre class="mermaid">    graph TD
+  	subgraph A[霸权式的男性特质]
+  		a[霸权式的男性特质] -.- b[共谋的男性特质]
+    end
+  
+  A --- c[从属性的男性特质] -.- 同性恋的男性特质
+  A --- d[从属性的女性特质] -.- e[受强调的女性特质]
+  e -.- 反抗的女性特质</pre>
+<ul>
+<li>
+<p>霸权式的男性特质</p>
+<p>霸权并非通过暴力和强制，而是通过延伸到私人生活和社会领域的文化动力、意识形态等来维持主导地位</p>
+<p>霸权通过传媒、教育等形式不断被强化，大部分男性并不具备霸权式的男性特质（belike 施瓦辛格），但依然从霸权式的男性特质占主导地位中获益（男权制的回报），从而体现出共谋的男性特质，强调男性的主宰。</p>
+</li>
+<li>
+<p>从属性的男性特质</p>
+<p>在从属性的男性特质中，最重要的是同性恋的男性特质</p>
+<p>同性恋者被视为于真男人完全不同的人，不符合霸权式男性特质的理想，并经常具有许多为霸权式男性特质所摒弃的特性（重申霸权的男性特质的优越性）</p>
+</li>
+<li>
+<p>从属性的女性特质</p>
+<p>受强调的女性特质是女性特质的主流形式，也是霸权式男性特质的重要补充</p>
+<p>受强调的女性特质：倾向于满足男人的利益和欲望，以低眉顺眼、关心体贴、善解人意为特征。在年轻女性中表现为与性接受能力相关，在中老年妇女中则于母性相关</p>
+</li>
+<li>
+<p>非从属性的女性特质</p>
+<p>形成非从属性地认同社会生活方式的女性包括女性主义者、女同、老处女、女巫等。（表现为反抗的女性特质）</p>
+</li>
+</ul>
+</li>
+<li>
+<p>不平等：人类社会中最基础、最根深蒂固的不平等就是男女之间的不平等</p>
+</li>
+<li>
+<p>康奈尔拒绝认为社会性别关系是固定或静止的，而是动态过程的结果，易于发生改变或受到挑战</p>
+<p>人有主观能动性、文化于人的辩证的关系；发展出女性主义者的意识会使社会性别的等级秩序受到挑战和反抗</p>
+</li>
+</ul>
+<p>康奈尔认为西方社会正在经历社会性别秩序危机，呈现出三种形式（<code>挑战</code>）</p>
+<ol>
+<li>
+<p>制度化危机</p>
+<p>传统支持男性权力的制度（国家、家庭方面）正在逐步瓦解</p>
+</li>
+<li>
+<p>性的危机</p>
+<p>霸权式异性恋（男性对女性的支配）的主导地位不如从前，女性和同性恋的力量不断增长</p>
+</li>
+<li>
+<p>利益形态危机</p>
+<p>社会利益有了与现存社会性别秩序相矛盾的新的基础，包括已婚女性的权利、同性恋运动、男性中反性别歧视态度的挣扎，都对目前社会性别秩序构成一种挑战</p>
+</li>
+</ol>
+<p>商品化市场化社会形态对社会性别秩序的影响（<code>强化</code>）</p>
+<ul>
+<li>
+<p>一方面，女性更多进入到工作市场中：传统工作领域、新兴领域如拉拉队比赛。这种新的职业的创造，给女性提供了更多的工作机会</p>
+</li>
+<li>
+<p>另一方面这种市场经济和社会商品化强化了妇女的从属属性，这种新的职业为女性带来了收入和名声，但这些职业特点恰恰是对女性从属于男性的特质的强调（女性身体特征的强调）。</p>
+<p>在市场化的商业世界中女性的形象是一个消费的主体，其背后隐含，逻辑是从属于男性，从某种意义上讲是女性平权的退步</p>
+</li>
+<li>
+<p>当今网上所谓“女权主义”的矛盾在于他们接受市场带来的女性权利，却拒绝承认对于妇女从属地位的强调</p>
+</li>
+</ul>
+<p>男女不平等在社会分工中的体现</p>
+<ul>
+<li>
+<p>结构性的分工</p>
+<p>很多高报酬的工作其实与工作性质没有很大关系，单纯从工作性质很难解释，从社会性别秩序的角度看，男性主导女性从属，我们把男性做的工种赋予更高的声望价值和地位（程序员？），女性从事的工种低（家务劳动没有金钱来衡量）</p>
+<p>换言之，工作价值高低并不直接取决于工作性质，而是取决于这份工作是谁去做，本质上是社会性别秩序的结果，定义工作价值的话语权掌握在男性的手中</p>
+</li>
+<li>
+<p>从结构上讲，所有的男性都从中受益</p>
+</li>
+</ul>
+<h1 id="权力-权威和国家"><a class="markdownIt-Anchor" href="#权力-权威和国家"></a> 权力、权威和国家</h1>
+<blockquote>
+<p>政治相关的话题，政治社会学</p>
+</blockquote>
+<h2 id="权力-权威"><a class="markdownIt-Anchor" href="#权力-权威"></a> 权力、权威</h2>
+<p>政治</p>
+<ul>
+<li>政治是一种社会过程，一种个体、个人或群体，获取或者<code>行使权力及权威</code>的社会过程（宽泛的定义</li>
+<li>国家的政治（狭隘的定义）</li>
+</ul>
+<p>权力</p>
+<ul>
+<li>马克思韦伯认为：权力是一个<u>行动者</u>在一种<u>社会关系</u>中，即使是一种反抗（的关系），也有能够贯彻他自己<u>意志</u>和意图的可能性</li>
+<li>行动：指向他人，一定是涉及到他人的 → 社会关系</li>
+<li>权力贯彻的基础：暴力、交换、冲突</li>
+<li>权力的资源：行动者占有的用来影响或控制他人的任何东西（金钱、暴力、智慧、品格、美貌，etc.）</li>
+</ul>
+<p>权威</p>
+<ul>
+<li>权威是一种权力，一个拥有权威的人能够贯彻自己意志和意图的可能性就越大</li>
+<li>并不是所有的权力都是权威，但所有的权威都是权力</li>
+<li>无论是权力的拥有者还是服从者，都将权威看作是一种合法的、正当的权力</li>
+</ul>
+<p>权力要怎么获取正当性（变成权威）？马克思韦伯的权威类型划分</p>
+<table>
+<thead>
+<tr>
+<th>权威类型</th>
+<th>来源</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>传统型权威</td>
+<td>通过敬重长久确定的<code>文化模式</code>而得到的合法化/正当性的权力</td>
+<td>皇帝、礼、先生、宗教、长老统治</td>
+</tr>
+<tr>
+<td>Charisma 型权威（魅力型）</td>
+<td>对于领袖人格特质的崇拜和信服从而激发起的忠诚、献身之情，由此获得正当性的权力。（个人品质+时代背景）</td>
+<td>希特勒、毛泽东</td>
+</tr>
+<tr>
+<td>法理型权威</td>
+<td>通过依法实施的规章条例而得到合法化的权力</td>
+<td>现代国家的政治体制领袖（总统、主席）</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>乡土中国中的长老统治/爸爸式权力，传统是其正当性的来源</li>
+<li>毛主席革命挑战传统、挑战权威，同时是公平正义的化身，这是其正当性的来源。这其中时代背景也起了巨大的作用，时代创造了无法化解的社会矛盾，传统已经无法解决社会矛盾，打破传统的人加上个人的禀赋特质打破传统来寻找新的希望，是民众意志的载体（偶然性和必然性）</li>
+<li>Charisma 型权威是传统型权威的克星：传统权威维持已久出现危机时，往往被 Charisma 型权威打破（like农民起义）</li>
+<li>每一个社会行动都是一种行使权力的行为，每一种社会关系都是一种权力的均衡，每一个社会团体或制度、体制都是一种权力的组织</li>
+</ul>
+<p>福柯对权力的论述</p>
+<ul>
+<li>权力不是被某一个群体所占有，权力的运作体现在社会运作的所有层面，无所不在
+<ul>
+<li>男女的不平等关系不是通过制度体现，而是一种长久的文化模式，通过每一个人有意识无意识来强化这样的秩序</li>
+<li>公共卫生领域，医生的权力</li>
+</ul>
+</li>
+<li>权力和知识是密切联系的，是相互巩固的</li>
+</ul>
+<p>权力的理想型建构</p>
+<ul>
+<li>现实中的权威是多种类型结合
+<ul>
+<li>美国总统的权威是法理型权威和魅力型权威的结合：法理型权威试图获得 Charisma 型权威</li>
+<li>毛泽东是魅力型权威和法理型权威的结合：Charisma 型权威想要获得法理型权威</li>
+</ul>
+</li>
+<li>Charisma 型权威的危机是很难持久，很难长期延续
+<ul>
+<li>毛泽东的魅力型权威来自于打破常规，但是在新中国建立后需要建设，政治生活要常规化，刘少奇周恩来需要经济手段解决经济问题，毛的 Charisma 型权威受到挑战</li>
+</ul>
+</li>
+</ul>
+<h2 id="国家"><a class="markdownIt-Anchor" href="#国家"></a> 国家</h2>
+<blockquote>
+<p>国家是合法的垄断暴力的机构，一旦有一套政府治理的政治机器统治一块给定领土，其权威受到法定制度和用武力执行其政策的能力的支撑，我们就可以说存在一个国家（政治机器、领土、法律、武装）</p>
+</blockquote>
+<p>民主国家：绝大数人口都自视为某一单一民族的公民</p>
+<p>现代民主国家的主要特点</p>
+<ul>
+<li>
+<p>主权：一个国家的政府对于一个有着明确边界的地域拥有权威，并且在这一地域中享有至高无上的权力</p>
+<p>——主权对于传统国家是没有切实意义的（中国在鸦片战争中给予了治外法权、关税协定），传统国家统治的领土是界限不清的，中央对领土的控制相当微弱</p>
+</li>
+<li>
+<p>公民权：在政治体系内生活的绝大多数人都是公民，都有其权利和义务，病把自己看作是整个民族的一部分</p>
+<p>——传统国家的百姓和皇帝没有很大关系，帝力于我何加焉</p>
+</li>
+<li>
+<p>民族主义：民族主义是近代民主国家产生的象征</p>
+</li>
+</ul>
+<h2 id="政治体制"><a class="markdownIt-Anchor" href="#政治体制"></a> 政治体制</h2>
+<p>威权体制</p>
+<ul>
+<li>威权体制的不同形态
+<ul>
+<li>世袭君主制：朝野-民间，老百姓不参与政治（合法性来源于传统）</li>
+<li>寡头体制：最高决策权不是掌握在一个人手里，而是掌握在小集团里，like 意大利等城邦国家</li>
+<li>独裁体制：权力集中在一个人身上，但这个人没有办法通过世袭的方式延续权力；封建统治不是独裁体制而是君主制</li>
+<li>极权体制：冷战时期流行的概念，不仅是独裁，而且政治权利渗透到整个社会生活中去，全方位地操纵社会</li>
+</ul>
+</li>
+</ul>
+<p>民主体制</p>
+<ul>
+<li>民主的含义：民众统治；民有，民治，民享（林肯），</li>
+<li>民主体制基于的原则
+<ol>
+<li>个人都是他自身利益的最好判断者，每一个人都参与政府决策当中</li>
+<li>由公民来选择对多数人负责的领袖</li>
+<li>投票权为全民投票权，选举是自由的、公平的，并且是周期性的选举</li>
+<li>政府必须要承认个人所拥有的权利，包括言论、出版、集会、组织</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>民主已经成为当今时代政治合法性的基本标准</p>
+</blockquote>
+<p>民主体制的扩张</p>
+<ul>
+<li>今天，70% 的国家是民主体制，14% 是立宪君主制，16% 属于其他</li>
+<li>民主体制在全球扩散的原因（1980 年之后）
+<ul>
+<li>全球化：全球化带来了跨国文化接触，激励很多国家的民主运动</li>
+<li>促进民主化进程：欧盟、联合国扮演越来越重要的角色，给非民主化的国家施加压力/激励措施，推进其民主化的政治体制改革</li>
+<li>世界资本主义扩张：资本主义企业更愿意和民主的政府和国家从事经济活动</li>
+<li>社会主义阵营存在问题</li>
+</ul>
+</li>
+</ul>
+<p>社会主义阵营的问题</p>
+<ul>
+<li>
+<p>共产主义阵营、社会主义的发展没有解决好民主的问题</p>
+<p>社会主义希望能发展出一套不同形式的参与式民主（人民当家做主、巴黎公社、人民公社、工厂民主-鞍钢宪法），但根本上没有解决民主的问题（政治体制），没有探索一套制度化的方式限制权力（群众运动的方式无法形成制度化），没有进行很好的民主教育</p>
+</li>
+<li>
+<p>没有社会的社会主义</p>
+<p>国家扮演中心性角色，追求发展战略，最后为百姓服务；怎么让社会发育成一种力量让其自身有能力让政党不变质；没有社会的社会主义，政党一旦变质就没有制约力量限制，就会产生最腐败的官僚、政体和权力阶层</p>
+</li>
+</ul>
+<p>民主制存在的问题（代议民主制）</p>
+<ul>
+<li>有全民投票权，但投票率逐渐下降——政治体制/选举无法解决问题，公民对政治体制的信心一直在下降</li>
+<li>寡头铁律：宪法、选举，科层制的特点决定了最终是极少数顶层人决策，而且会根据他们的利益调整政策的方向（《权力精英》：美国由 6k 人的世代延续的政治军事集团统治），难以达成实质性的民主，很难实行参与民主</li>
+<li>《bowling alone》：美国的社会团结在下降，广泛的公民式社会、公民参与在下降</li>
+</ul>
+<p>形式上的代议制民主越来越完善，但离实质性的民主越来越远了</p>
+<p>中国模式</p>
+<ul>
+<li>只看到了经济增长，对增长背后的正义问题（增长正义）视而不见</li>
+<li>对西方民主的批评，不能简单效仿西方民主是毫无疑问的，但人民和政治之间的关系是我们需要思考的</li>
+</ul>
+<h1 id="婚姻家庭"><a class="markdownIt-Anchor" href="#婚姻家庭"></a> 婚姻家庭</h1>
+<p>家庭的含义</p>
+<ul>
+<li>
+<p>什么是家庭？</p>
+<p>我们目前已经习以为常的家庭形态：一夫一妻制婚姻，平权关系，年轻夫妇单独或者与未婚子女居住、父母与子女之间的亲情</p>
+<p>在人类历史中，家庭以极其不同的面貌出现，但不管哪一种形式，如果只从繁衍后代的本能，母爱的本能，夫妻之间以及父母子女之间的亲情联系上，或者这几种因素联合起来解释，无法得到完全的解释</p>
+<p>我们经常将家庭理解成一种亲族关系，包括血缘关系、联姻和嫡亲关系，从其概念本身看，亲族关系囊括<code>生物性</code>和<code>社会性</code>两个方面，进一步分析，社会性更为突出；血缘关系本身看起来是生物性的，从定义上来说有时遗传意义的血缘可以丝毫不介入（收养）</p>
+<ul>
+<li>亲族体系“只存在于人的意识”</li>
+<li>五福制度</li>
+</ul>
+</li>
+<li>
+<p>家庭是有共同血缘、婚姻或者收养有着密切关系的人组成的<u>相对稳定的单位</u>。其成员生活在一起，并形成一个统一的经济体，成人负有抚养后代的责任（生育制度）</p>
+</li>
+</ul>
+<p>家庭的功能</p>
+<ul>
+<li>普遍的功能
+<ol>
+<li>人口繁衍：维持社会的新陈代谢、社会继替</li>
+<li>调适性关系：规定有一种合乎习俗的方式来满足性需求</li>
+<li>生产与消费功能：生产型的功能逐渐衰弱；是一个很重要的经济单位</li>
+<li>儿童的社会化：儿童 → 合格的社会成员</li>
+</ol>
+</li>
+<li>其他的功能（不普遍）
+<ol>
+<li>将人置于一个社会中的社会结构中间：家庭给人带来社会地位（财产、声望）、财产继承</li>
+<li>表达性功能：满足人沟通的需要、发展亲密关系的需要</li>
+</ol>
+</li>
+</ul>
+<p>家庭的类型</p>
+<ul>
+<li>核心家庭：一个家庭只有一对婚姻（及其子女），往往是小家庭，人数较少</li>
+<li>主干家庭：有一对以上的婚姻，存在代际关系（两代或以上），如夫妻爷爷奶奶</li>
+<li>联合家庭：有一对以上的婚姻，不存在代际关系（同一代），如兄弟俩不分家</li>
+<li>其他家庭：单亲家庭等</li>
+</ul>
+<blockquote>
+<p>还有其他分类法则（继嗣法则、居住法则及权威类型等）做出分类</p>
+</blockquote>
+<p>扩展家庭到核心家庭的发展</p>
+<ul>
+<li>工业化促进了扩展家庭到核心家庭的演变：扩展家庭，大聚居 → 工业化 → 城市建立工厂 → 劳动力流动 → 离开祖辈建立家庭 → 核心家庭的形成</li>
+<li>核心家庭承担了比扩展家庭更重的职能（后来会被社会机构取代部分职能）</li>
+<li>从扩展家庭到核心家庭的演变是历史的趋势</li>
+</ul>
+<p>西方历史的家庭演变</p>
+<ul>
+<li>17-19 世纪美国家庭平均规模为 4.75 人，1990 年代是 3.04 人</li>
+<li>家庭脆弱性：早期欧洲，婴儿死亡率高，临产妇女死亡率高，平均婚姻长度不到 12 年。超过一半的孩子在成人之前会失去至少双亲之一</li>
+<li>儿童往往不到 10 岁就离家，去给其他人当家童或去工厂工作，工作时间长达 14 小时，家庭生活非常少</li>
+</ul>
+<p>1500-1800 年欧洲的家庭发展形态</p>
+<ul>
+<li>16 世纪紧密嵌入到社区中的核心家庭：小家庭与整个社区维持着密切的关系（亲属、邻居），家庭机构和社区没有明确的边界；是一种目标不定的低调克制缺乏情感权威主义的制度</li>
+<li>17 世纪初到 18 世纪初的过渡形态：亲属和社区之间的联系逐渐疏远，核心家庭逐渐成为分离性的实体，越来越强调夫妻之爱，亲子之爱的重要性；同时父权的力量有所增长（与工业化有关）</li>
+<li>18 世纪开始逐渐发展出我们最熟悉的家庭制度类型：由密切的情感纽带链维系起来的群体，高度的隐私，高度强调抚养孩子的重要性；典型标志是<code>情感性的个人主义</code>的兴起（性、情感的亲密性 ）；家庭越来越围绕着消费而不是生产；浪漫爱的兴起</li>
+</ul>
+<p>中国家庭婚姻模式的转变</p>
+<ul>
+<li>
+<p>古代的门第婚姻：讲究门当户对，以双方家长的认可和约定为建立婚姻关系的重点，婚恋双方个人意志的需求和情感被忽略</p>
+<p>古代婚礼传达一种信息：对于大家庭的责任来说，香火绵延是最被强调的，对单个婚姻作为大家庭家族秩序中的一个环节的强调，夫妻关系被忽视</p>
+</li>
+<li>
+<p>清末男女开始公开社交，开创了两性新局面：受到西方、工业化的影响，传统男女观念受到挑战</p>
+<p>五四运动时期，新青年提倡男女社交公开，在男女平等的基础上建立友谊、发展恋爱关系、建立婚姻</p>
+<ul>
+<li>私情的狂热化、情感激烈化：风气将开未开，以往缺乏交流的经验，是带有时代背景的</li>
+<li>潘光旦在中国家庭问题中的调查，1930：本人做主家长同意的婚姻占比 80.6%</li>
+<li>自由恋爱自由结婚成为风尚，无爱之婚姻无可忍！</li>
+</ul>
+</li>
+<li>
+<p>现代的婚姻：将双方的情感的充分满足作为目标，强调浪漫爱</p>
+</li>
+</ul>
+<p>现代婚姻带来的问题</p>
+<ul>
+<li>追求浪漫爱某种意义上带来了婚姻和家庭危机：婚姻不稳定、离婚；不结婚（单身/同居）</li>
+<li>博斯维尔：前现代欧洲婚姻常先共同经营、共同抚养子嗣，共享生活经历，在此过程中逐渐培养住彼此之间的爱情，几乎所有流传下来的亡故配偶的墓志铭都流露初深情的依恋；与此相反，以爱情开始的婚姻，中间通常也是抚养孩子，但最后通常事关财产，爱情再也不再出场</li>
+<li>传统的婚姻制度有很多问题，对妇女情感和身心的有很大伤害，但在现象上表现出一种稳定，今天的时代强调个体的选择，这样的追求往往使得婚姻越来越难以稳定，对爱的体会是完全主观的体会，是纯粹的个体的评价（与其说在追求爱不如说在追求自我），要怎么保证这样的爱能够使一个人成为另一个人一辈子的照顾者、心理医生、…？</li>
+</ul>
+<blockquote>
+<p>人类在爱的纠缠中创造了历史</p>
+</blockquote>
+<h1 id="城市与社区"><a class="markdownIt-Anchor" href="#城市与社区"></a> 城市与社区</h1>
+<h2 id="城市"><a class="markdownIt-Anchor" href="#城市"></a> 城市</h2>
+<p>城市 Urbanism</p>
+<pre><code>社会学角度的城市定义：&lt;u&gt;规模很大&lt;/u&gt;，&lt;u&gt;人口稠密&lt;/u&gt;，由&lt;u&gt;社会差异很大&lt;/u&gt;的个人组成的永久性聚落
+</code></pre>
+<p>芝加哥学派对城市的看法</p>
+<ul>
+<li>
+<p>芝加哥学派1920～1940</p>
+</li>
+<li>
+<p>城市现象</p>
+<p>城市生态学 Robert Park：借用自然界里的生态学概念（动植物 &amp; 环境）来理解城市与人的关系：区域环境、竞争、侵入、继替、筛选机制，有<code>功能主义</code>的视角</p>
+<p>芝加哥学派对城市布局的解释：城市的居民会在城市的重新定位中做出适当的调整，并在此过程中发展出不同的街区。工业往往集中在方便获取原材料和最靠近供给线的地方，随着人口的增多，新的行业会发展起来、福利设施的发展会变得更有吸引力、引来更多的竞争</p>
+</li>
+<li>
+<p>同心圆理论</p>
+<p>在城市不断扩张的同时，形成了不同质量的居住带，依次向外为：市中心为商业中心区 → 过渡带 → 工人住宅带 → 良好住宅带 → 通勤带。</p>
+</li>
+<li>
+<p>都市风格</p>
+<p>把城市作为一种生活方式（城市制造出来的生活方式），创造出了<code>陌生人</code>的世界，传统的聚落是熟悉的人的世界，新兴的城市与传统村落根本不同即，人与人之间的接触是短暂的、局部的，只是实现其他目的的手段，而不是令人满意的关系本身（城市人际关系的工具化）</p>
+<p>斐迪南·滕尼斯</p>
+<ul>
+<li>社区（礼俗社会），是一种共同体的生活，是熟人的世界，关系就是本身，交往就是本身，<u>人身性</u>的接触</li>
+<li>社会（法理社会），人是因为特殊的目的才发生联系，<code>非人身性</code>的接触，社会关系是工具性的。共同体的衰落</li>
+</ul>
+<p>涂尔干</p>
+<ul>
+<li>机械团结：以人与人的相似性为基础，遵循共同的礼俗，历史造就了人的相似性，人在长久的交往互动中走到一起</li>
+<li>有机团结：以差异为前提，同时相互依赖，以新的社会分工为基础。道德性的遗憾，伦理性的遗憾（乌托邦的想法）</li>
+</ul>
+</li>
+<li>
+<p>辩证地看现代城市和传统城市</p>
+<p>我们会做很多努力去创造人身性的联系（亲朋好友、聚会），urban villagers 都市村民（唐人街、意大利人社区、街角社会、北京的浙江村）</p>
+</li>
+</ul>
+<p>马克思主义城市理论</p>
+<ul>
+<li>
+<p>芝加哥学派倾向于将城市中的布局、城市发展看作是自然的过程，低估了有意识的设计和规划在城市组织架构中的作用，忽视外界政治和经济的影响。马克思强调<code>政治和经济变迁</code>对城市发展的影响</p>
+</li>
+<li>
+<p>大卫哈维《希望的空间》，<code>冲突理论</code>的视角</p>
+<p>借鉴马克思的观念，强调都市风格是由工业资本主义扩张所带来的创生环境（create environment）的一个方面。他指出在现代的城市风格中空间是被不断重构的，是运用现代技术创造的环境，人为制造出来的空间（区别于城市生态学）。</p>
+<p>资本是空间重构背后的力量，空间的重构仅仅关注商业价值，不关心对于既有的街区、社会和环境的影响，关心的是新的空间塑造带来的更大的利润回报。空间背后的政治经济学意味非常浓厚。</p>
+</li>
+<li>
+<p>曼纽尔·卡斯特</p>
+<p>认为城市环境是更广大的社会力量的符号和空间的象征（eg: 建设摩天大楼一方面期待它带来利润，另一方面这个巨大建筑物本身也是通过技术和自信，象征了金钱在城市中的力量，是上升期中的法团资本主义大教堂）</p>
+<p>卡斯特不仅把城市看作是一个独特的地点，也就是城市区域，而且把它看作是<code>集体消费过程</code>的一个组成部分，这又成为工业资本主义的一个内在的方面</p>
+<ul>
+<li>集体消费：学校、公共交通、医疗设施、住房，是人们集体性消费现代工业产品的方式</li>
+</ul>
+</li>
+</ul>
+<p>城市发展历程</p>
+<ul>
+<li>
+<p>20 世纪以前城市像汪洋中的孤岛</p>
+<p>公元前 3500 年前，两河流域，出现最早的一批城市，巴比伦</p>
+<p>公元前 100 年，罗马；西汉（长安）</p>
+<p>200 年前全世界 97% 的人口居住在农村，20 世纪初 13.6% 的人居住在城市 → 城市像孤岛，英国是唯一完成城市化的国家（已有一百多年的工业化）</p>
+</li>
+<li>
+<p>20 世纪城市化在全球扩张</p>
+<p>1975 年，全球 39% 的人口居住在城市，1980 年末将近一半的人口居住在城市</p>
+</li>
+</ul>
+<h2 id="城市化"><a class="markdownIt-Anchor" href="#城市化"></a> 城市化</h2>
+<p>城市化</p>
+<ul>
+<li>随着社会生产力和国民经济的发展，特别是<code>工业化</code>的逐实现，国内人口从分散的农村向城市聚集，是农业人口转变为非农业人口的历史过程</li>
+<li>工业化推动城市化（前提是人口自由流动）</li>
+</ul>
+<p>中国城市化的发展</p>
+<ul>
+<li>中国传统城市发展，城&amp;市的区别
+<ul>
+<li>城：东京、汴梁等；有城墙的，政治军事中心，由于人口规模大，会发展出“市集”</li>
+<li>市，市集：由于交通便利，大家来这里进行交易，由于人聚集，可能发展出“城”</li>
+</ul>
+</li>
+<li>19 世纪末城市化开始，到 1949 年城市化水平还是很低（10% 的城市人口），城市人口增长慢，1978 年 18%；期间中国工业化布局、国民经济体系开始逐渐健全，到 1978 年中国已经是工业化国家；城市人口发展缓慢是行政力量控制的结果（<code>户籍制度</code>：农村户口和城市人口）</li>
+</ul>
+<p>中国城市化发展历程</p>
+<ul>
+<li>
+<p>1957 年以前快速发展工业化，缺乏劳动力，鼓励农民进城</p>
+</li>
+<li>
+<p>1958 年之后：重点发展重工业、军工业，限制城市化</p>
+<p>1959-1961 三年自然灾害；1958 年大跃进，大量项目下马，进城的人口遣散回农村，城市人口下降，出台户籍制度，限制城乡之间人口自由流动</p>
+<p>限制城市化来发展工业化：重点发展现代重工业、军工业、机器工业，劳动力需求低，需要通过农村获取大量资金（统购统销政策，获取剩余价值），在有限资本的情况下快速推进工业化</p>
+<p>1958 年之后的城乡分割政策，60 年代后期上山下乡（逆城市化）</p>
+</li>
+<li>
+<p>1979 之后：控制大城市规模，合理发展中等城市和积极发展小城市，城镇化水平稳步提升</p>
+<p>80 年代：费孝通《小城镇大问题》，指出 49 年之后的政策限制了自由交易活动（一些城市衰落了）只有<u>城</u>的作用，削弱了<u>市</u>的作用，此时城市强调政治军事中心的“城”一面；需要发展小城镇</p>
+<p>改革开放之后吸引外资，主要集中在劳动力密集型的轻工业，大量需要劳动力，农民进城成为工人</p>
+<p><u>户籍制度</u>没有取消，但<code>服务的目标</code>有改变；前三十年服务于工业化（国富），后三十年服务于国家经济增长，最重要的是服务于资本增值的需要（资本最大化），维持农民工的身份对资本是最有利的（劳动力价格低：农民工的生产和再生产是分离的，生产在城市（打工），再生产一部分城市（日常生活），很大一块在农村（娶妻、生育、生病），导致劳动力价格的底线比城市工人的底线更低，劳动力价格就更低）</p>
+</li>
+<li>
+<p>2000 年：城市化率突然 +6% → 统计口径的变化（学统计学的）</p>
+<p><code>伪城市化</code>：又称为不完全城市化，指受中国城乡分割及户口制度的约束，大量的农村产业工人虽然居住在城市并被计算为城市人口，但其并不能同等享受到城市的各类公共服务，其收入水平、消费模式无法等同于一般城市人员</p>
+<p><code>新生代农民工</code> ：年龄 18 到 25 岁，以“三高一低”为标准：受教育程度高，职业期望高，物质和精神享受要求高，工作耐受力低；再不改变城市规划、政策，会对这些人造成个人问题，进一步造成社会问题</p>
+<p>大城市和超大城市有特别大的发展，小城市在衰落（与原本的发展目标背道而驰）</p>
+<ul>
+<li>
+<p>珠三角的城市发展问题：珠三角很多人口聚集点从人口规模来说已经是城市规模了，但在建制上仍然是镇/乡/村；经济力量使得人口规模早就达到城市水平，但没有赋予城市的权力 → 一系列的东西无法发展如：由国家提供的公共设施、教育、卫生医疗设施等</p>
+<p>问题的责任在政府，本来的财政消费应该用于提供集体性消费（民生）+ 中国政府财政收入非常丰厚 → 钱都去哪了 → 更多的财政收入用于公务员支出、部门的人员和活动经费 → 城市被抑制是符合资本利益的</p>
+</li>
+</ul>
+<p>城市本身的城市化和居民的城市化：追求城市面貌，对于常住人口日常性的需求的投入是严重不足的</p>
+</li>
+<li>
+<p>2022 年：城市化率 65%</p>
+</li>
+</ul>
+<h1 id="劳动与经济生活"><a class="markdownIt-Anchor" href="#劳动与经济生活"></a> 劳动与经济生活</h1>
+<p>劳动概念</p>
+<ul>
+<li>劳动与报酬工作的差异：从以前的自然劳动演化出了有报酬的工作；</li>
+<li>就业：就业是指具有劳动能力的公民在法定劳动年龄内，依法从事某种有报酬或劳动收入的社会活动</li>
+<li>就业基本内容
+<ol>
+<li>针对劳动年龄内具有劳动能力的人</li>
+<li>劳动物业是指从事一定职业，从事劳动和工作并取得相应报酬的活动：往往指的是有社会意义并被社会承认的职业（反例1：性工作者、地下经济、毒品交易，反例 2：家务劳动）</li>
+</ol>
+</li>
+</ul>
+<p>经济</p>
+<ul>
+<li>
+<p>经济解决人要怎么在社会中谋生的问题，它是提供商品和服务的生产力分配的制度（eg 资本主义市场经济），不同的制度各有优点和局限性</p>
+</li>
+<li>
+<p>三种经济制度</p>
+<ol>
+<li>
+<p>互惠经济</p>
+<p>传统农业社会，劳动者以土地为生，生产粮食和农业作物进行初级的交换/物物交换，人们需求通过市场和相互帮助相结合来满足（劳动力、产品交换）</p>
+</li>
+<li>
+<p>再分配经济</p>
+<p>社会主义的经济；通过国家中央政府组织、调控整个社会经济；计划经济</p>
+<p><code>社会主义特征</code>：公有制、合作、计划经济、没有自由的市场</p>
+</li>
+<li>
+<p>市场经济</p>
+<p>资本主义的市场经济</p>
+<p><code>资本主义特征</code>：私有制、利润、竞争、自由市场</p>
+</li>
+</ol>
+</li>
+<li>
+<p>通向美好社会的障碍：短缺 &amp; 分配</p>
+<p>资本主义的历史贡献：解决短缺的问题。资产阶级创造了极高的生产力（工业革命取代了传统的农业生产），物品极大丰富，财富增长速度非常快</p>
+<p>但以<code>剥削</code>为代价，对无产阶级剩余价值的榨取，<code>异化</code>了劳动（劳动不是目的本身而是一种手段），大多数人没有从生产力提高中获得收益，劳动产品不被多数人所分享</p>
+</li>
+</ul>
+<p>劳动的社会组织</p>
+<ul>
+<li>
+<p>高度复杂的社会分工</p>
+<p>分工提高生产效率，但人容易被分工体系本身所控制，劳动过程和劳动产品的联系越来越微弱</p>
+</li>
+<li>
+<p>在分工的基础上，劳动如何组织？</p>
+<ul>
+<li>
+<p>泰勒制/科学管理：科学管理思想，对工业过程进行详细的研究，分解成简单的操作，可以精确计时和组织，使工业产出最大化</p>
+<p><code>技术都是政治性的</code>：劳动场所的技术革新都带有很强烈的政治意味和政治后果</p>
+<p>泰勒制的政治后果：工人对于生产过程的知识和控制降低了，<u>劳动的去技能化</u></p>
+</li>
+<li>
+<p>福特制：在泰勒制的基础上，福特汽车引入专门的生产线/流水线，工作任务高度分解，满足<u>大规模生产</u>的要求；</p>
+<p>大规模市场的培育紧密关联的大规模的生产体系（大规模需求与大规模生产的匹配）</p>
+<p>稳定的劳资关系和高度的工会化（较高的薪资水平和稳定的雇佣）</p>
+</li>
+<li>
+<p>后福特制：<u>弹性生产</u>/资本的灵活积累；外包、供应链、代工厂</p>
+<p>正规化/非正式化：灵活就业、劳务派遣、临时工等，没有正规的劳务关系</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>劳动就业的意义</p>
+<ul>
+<li>
+<p>工作的意义：为了生存（生存的必需）；为了喜欢（劳动者主体的选择）</p>
+<p>大部分人是两面都有，偏重程度不同</p>
+</li>
+<li>
+<p>金钱、社会认同</p>
+<p>一方面，工作是今天的社会成员的确立自己社会位置的方式，是建立社会认同的渠道，劳动是人本质性的体现</p>
+<p>另外一方面（异化劳动-马克思），劳动的去技能化把人变得像工具。当劳动是有意义的，这意味着劳动主体是独特的，不可替代的，劳动产品是人自我实现的一部分；今天去技能化的劳动和人的自我实现是相对抗的，使我们更非人化（理性化的困境）</p>
+</li>
+</ul>
+<p>失业</p>
+<ul>
+<li>
+<p>传统社会自然就业，不存在失业的概念；</p>
+</li>
+<li>
+<p>失业的类型</p>
+<ol>
+<li>
+<p>正常性失业：即使不存在劳动力缺口也会产生失业</p>
+<p>失业率不超过 5% 即属于可控的失业率水平</p>
+</li>
+<li>
+<p>隐形失业：具有劳动能力并在职但工作量不足，不能通过工作获得社会认可的正常收入，虽有工作岗位但未能充分发挥作用的失业，或在自然经济环境里被掩盖的失业</p>
+</li>
+<li>
+<p>结构性失业：由于经济方面调整造成的失业（产业结构调整）</p>
+</li>
+</ol>
+</li>
+<li>
+<p>失业也不完全是技术问题，背后也有很强的政治性，保持一定程度的失业率也是资本在和劳工博弈时很重要的筹码（你不干有的是人干）</p>
+<p>但失业率过高会带来社会问题，导致社会动荡</p>
 </li>
 </ul>
 ]]></content>
