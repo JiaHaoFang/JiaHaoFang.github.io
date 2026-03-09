@@ -291,6 +291,29 @@
       "realName": "社会学概论（二）",
       "relativePath": "/社会学概论（二）.md",
       "docPath": "./source/_posts"
+    },
+    {
+      "id": "1ff24191-cd14-802b-9c46-c98e5ba7b64f",
+      "doc_id": "1ff24191-cd14-802b-9c46-c98e5ba7b64f",
+      "updated": 1773079020000,
+      "properties": {
+        "categories": "Humanities",
+        "tags": [
+          "Psychology",
+          "Sociology"
+        ],
+        "status": "已发布",
+        "description": "《社会心理学》第三编 社会关系（偏见、攻击、吸引与亲密）",
+        "latest edit": "2026-03-09T17:57:00.000Z",
+        "date": "2026-03-10 08:00:00",
+        "permalink": "social-psychology-3/",
+        "title": "社会心理学（三）",
+        "urlname": "1ff24191-cd14-802b-9c46-c98e5ba7b64f",
+        "updated": "2026-03-10 01:57:00"
+      },
+      "realName": "社会心理学（三）",
+      "relativePath": "/社会心理学（三）.md",
+      "docPath": "./source/_posts"
     }
   ],
   "catalog": [
@@ -313,7 +336,6 @@
         "type": "database_id",
         "database_id": "1c724191-cd14-809d-a910-fde6198cd7de"
       },
-      "archived": false,
       "in_trash": false,
       "is_locked": false,
       "properties": {
@@ -331,7 +353,8 @@
         "updated": "2025-08-25 12:42:00"
       },
       "url": "https://www.notion.so/1c824191cd1480008b53f785ab0e5faa",
-      "public_url": "https://excellent-moonstone-c91.notion.site/1c824191cd1480008b53f785ab0e5faa"
+      "public_url": "https://excellent-moonstone-c91.notion.site/1c824191cd1480008b53f785ab0e5faa",
+      "archived": false
     },
     {
       "object": "page",
@@ -352,7 +375,6 @@
         "type": "database_id",
         "database_id": "1c724191-cd14-809d-a910-fde6198cd7de"
       },
-      "archived": false,
       "in_trash": false,
       "is_locked": false,
       "properties": {
@@ -370,7 +392,8 @@
         "updated": "2025-08-13 21:53:00"
       },
       "url": "https://www.notion.so/Hexo-1c824191cd14805ca745fdf1f4f8ecd9",
-      "public_url": "https://excellent-moonstone-c91.notion.site/Hexo-1c824191cd14805ca745fdf1f4f8ecd9"
+      "public_url": "https://excellent-moonstone-c91.notion.site/Hexo-1c824191cd14805ca745fdf1f4f8ecd9",
+      "archived": false
     },
     {
       "object": "page",
@@ -391,7 +414,6 @@
         "type": "database_id",
         "database_id": "1c724191-cd14-809d-a910-fde6198cd7de"
       },
-      "archived": false,
       "in_trash": false,
       "is_locked": false,
       "properties": {
@@ -409,7 +431,8 @@
         "updated": "2025-05-26 18:02:00"
       },
       "url": "https://www.notion.so/1c824191cd148070b5ffdeb1b47f904e",
-      "public_url": "https://excellent-moonstone-c91.notion.site/1c824191cd148070b5ffdeb1b47f904e"
+      "public_url": "https://excellent-moonstone-c91.notion.site/1c824191cd148070b5ffdeb1b47f904e",
+      "archived": false
     },
     {
       "object": "page",
@@ -430,7 +453,6 @@
         "type": "database_id",
         "database_id": "1c724191-cd14-809d-a910-fde6198cd7de"
       },
-      "archived": false,
       "in_trash": false,
       "is_locked": false,
       "properties": {
@@ -448,7 +470,8 @@
         "updated": "2025-05-26 18:02:00"
       },
       "url": "https://www.notion.so/1c824191cd14807d8371e8c0fbd2c416",
-      "public_url": "https://excellent-moonstone-c91.notion.site/1c824191cd14807d8371e8c0fbd2c416"
+      "public_url": "https://excellent-moonstone-c91.notion.site/1c824191cd14807d8371e8c0fbd2c416",
+      "archived": false
     },
     {
       "object": "page",
@@ -469,7 +492,6 @@
         "type": "database_id",
         "database_id": "1c724191-cd14-809d-a910-fde6198cd7de"
       },
-      "archived": false,
       "in_trash": false,
       "is_locked": false,
       "properties": {
@@ -488,7 +510,8 @@
         "updated": "2025-08-13 21:53:00"
       },
       "url": "https://www.notion.so/iOS-1c824191cd1480968654ce5869028b0f",
-      "public_url": "https://excellent-moonstone-c91.notion.site/iOS-1c824191cd1480968654ce5869028b0f"
+      "public_url": "https://excellent-moonstone-c91.notion.site/iOS-1c824191cd1480968654ce5869028b0f",
+      "archived": false
     },
     {
       "object": "page",
@@ -509,7 +532,6 @@
         "type": "database_id",
         "database_id": "1c724191-cd14-809d-a910-fde6198cd7de"
       },
-      "archived": false,
       "in_trash": false,
       "is_locked": false,
       "properties": {
@@ -527,7 +549,8 @@
         "updated": "2025-08-13 21:53:00"
       },
       "url": "https://www.notion.so/iOS-1c824191cd1480bc8904fcd2405aa86e",
-      "public_url": "https://excellent-moonstone-c91.notion.site/iOS-1c824191cd1480bc8904fcd2405aa86e"
+      "public_url": "https://excellent-moonstone-c91.notion.site/iOS-1c824191cd1480bc8904fcd2405aa86e",
+      "archived": false
     },
     {
       "object": "page",
@@ -548,7 +571,6 @@
         "type": "database_id",
         "database_id": "1c724191-cd14-809d-a910-fde6198cd7de"
       },
-      "archived": false,
       "in_trash": false,
       "is_locked": false,
       "properties": {
@@ -568,7 +590,8 @@
         "updated": "2025-08-13 21:53:00"
       },
       "url": "https://www.notion.so/Notion-Hexo-1c824191cd1480de997dd5804b90b61f",
-      "public_url": "https://excellent-moonstone-c91.notion.site/Notion-Hexo-1c824191cd1480de997dd5804b90b61f"
+      "public_url": "https://excellent-moonstone-c91.notion.site/Notion-Hexo-1c824191cd1480de997dd5804b90b61f",
+      "archived": false
     },
     {
       "object": "page",
@@ -589,7 +612,6 @@
         "type": "database_id",
         "database_id": "1c724191-cd14-809d-a910-fde6198cd7de"
       },
-      "archived": false,
       "in_trash": false,
       "is_locked": false,
       "properties": {
@@ -607,7 +629,8 @@
         "updated": "2025-08-13 21:53:00"
       },
       "url": "https://www.notion.so/iOS-1c824191cd1480f1a0a9fe3e818db109",
-      "public_url": "https://excellent-moonstone-c91.notion.site/iOS-1c824191cd1480f1a0a9fe3e818db109"
+      "public_url": "https://excellent-moonstone-c91.notion.site/iOS-1c824191cd1480f1a0a9fe3e818db109",
+      "archived": false
     },
     {
       "object": "page",
@@ -628,7 +651,6 @@
         "type": "database_id",
         "database_id": "1c724191-cd14-809d-a910-fde6198cd7de"
       },
-      "archived": false,
       "in_trash": false,
       "is_locked": false,
       "properties": {
@@ -647,7 +669,8 @@
         "updated": "2025-08-13 21:47:00"
       },
       "url": "https://www.notion.so/1c924191cd14808b80fbfd09948fb231",
-      "public_url": "https://excellent-moonstone-c91.notion.site/1c924191cd14808b80fbfd09948fb231"
+      "public_url": "https://excellent-moonstone-c91.notion.site/1c924191cd14808b80fbfd09948fb231",
+      "archived": false
     },
     {
       "object": "page",
@@ -668,7 +691,6 @@
         "type": "database_id",
         "database_id": "1c724191-cd14-809d-a910-fde6198cd7de"
       },
-      "archived": false,
       "in_trash": false,
       "is_locked": false,
       "properties": {
@@ -687,7 +709,8 @@
         "updated": "2025-08-13 21:53:00"
       },
       "url": "https://www.notion.so/iOS-1c924191cd1480c1b72dcb85ace6fc56",
-      "public_url": "https://excellent-moonstone-c91.notion.site/iOS-1c924191cd1480c1b72dcb85ace6fc56"
+      "public_url": "https://excellent-moonstone-c91.notion.site/iOS-1c924191cd1480c1b72dcb85ace6fc56",
+      "archived": false
     },
     {
       "object": "page",
@@ -708,7 +731,6 @@
         "type": "database_id",
         "database_id": "1c724191-cd14-809d-a910-fde6198cd7de"
       },
-      "archived": false,
       "in_trash": false,
       "is_locked": false,
       "properties": {
@@ -727,7 +749,8 @@
         "updated": "2025-06-12 00:45:00"
       },
       "url": "https://www.notion.so/1d524191cd1480f8ac04d76fd2295795",
-      "public_url": "https://excellent-moonstone-c91.notion.site/1d524191cd1480f8ac04d76fd2295795"
+      "public_url": "https://excellent-moonstone-c91.notion.site/1d524191cd1480f8ac04d76fd2295795",
+      "archived": false
     },
     {
       "object": "page",
@@ -748,7 +771,6 @@
         "type": "database_id",
         "database_id": "1c724191-cd14-809d-a910-fde6198cd7de"
       },
-      "archived": false,
       "in_trash": false,
       "is_locked": false,
       "properties": {
@@ -766,7 +788,48 @@
         "updated": "2025-06-12 00:36:00"
       },
       "url": "https://www.notion.so/1dc24191cd1480e0b2f3de34f4c5287e",
-      "public_url": "https://excellent-moonstone-c91.notion.site/1dc24191cd1480e0b2f3de34f4c5287e"
+      "public_url": "https://excellent-moonstone-c91.notion.site/1dc24191cd1480e0b2f3de34f4c5287e",
+      "archived": false
+    },
+    {
+      "object": "page",
+      "id": "1ff24191-cd14-802b-9c46-c98e5ba7b64f",
+      "created_time": "2025-05-26T13:24:00.000Z",
+      "last_edited_time": "2026-03-09T17:57:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "f9e52dea-3218-4b01-ab60-006834c17e09"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "f9e52dea-3218-4b01-ab60-006834c17e09"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "1c724191-cd14-809d-a910-fde6198cd7de"
+      },
+      "in_trash": false,
+      "is_locked": false,
+      "properties": {
+        "categories": "Humanities",
+        "tags": [
+          "Psychology",
+          "Sociology"
+        ],
+        "status": "已发布",
+        "description": "《社会心理学》第三编 社会关系（偏见、攻击、吸引与亲密）",
+        "latest edit": "2026-03-09T17:57:00.000Z",
+        "date": "2026-03-10 08:00:00",
+        "permalink": "social-psychology-3/",
+        "title": "社会心理学（三）",
+        "urlname": "1ff24191-cd14-802b-9c46-c98e5ba7b64f",
+        "updated": "2026-03-10 01:57:00"
+      },
+      "url": "https://www.notion.so/1ff24191cd14802b9c46c98e5ba7b64f",
+      "public_url": "https://excellent-moonstone-c91.notion.site/1ff24191cd14802b9c46c98e5ba7b64f",
+      "archived": false
     },
     {
       "object": "page",
@@ -787,7 +850,6 @@
         "type": "database_id",
         "database_id": "1c724191-cd14-809d-a910-fde6198cd7de"
       },
-      "archived": false,
       "in_trash": false,
       "is_locked": false,
       "properties": {
@@ -805,7 +867,8 @@
         "updated": "2025-11-10 00:37:00"
       },
       "url": "https://www.notion.so/24524191cd1480f58924dde5fa20ced0",
-      "public_url": "https://excellent-moonstone-c91.notion.site/24524191cd1480f58924dde5fa20ced0"
+      "public_url": "https://excellent-moonstone-c91.notion.site/24524191cd1480f58924dde5fa20ced0",
+      "archived": false
     }
   ]
 }
